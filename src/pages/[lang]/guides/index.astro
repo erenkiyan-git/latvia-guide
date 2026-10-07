@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { Card } from '../../../components/ui/Card';
 import { getCollection } from 'astro:content';
 import { getActiveLanguages } from '../../../i18n/utils';
 import { useTranslations } from '../../../i18n/utils';
 import type { Lang } from '../../../config';
+import { ShieldCheck, FileWarning, ArrowRight } from 'lucide-react';
 
 export function getStaticPaths() {
   const langs = getActiveLanguages();
@@ -37,132 +39,72 @@ const formatSectionName = (name: string) => {
 ---
 
 <BaseLayout title={t('nav.guides')} description="All guides for foreigners in Latvia." lang={lang}>
-  <div class="container">
-    <div class="header-section">
-      <h1>{t('nav.guides')}</h1>
-      <p class="subtitle">Browse all our practical guides by category.</p>
-    </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    
+    <header class="mb-16 text-center border-b border-zinc-800 pb-10">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">{t('nav.guides')}</h1>
+      <p class="text-xl text-zinc-400">Browse all our practical guides by category.</p>
+    </header>
 
-    <div class="sections-container">
+    <div class="space-y-20">
       {Object.entries(sections).length > 0 ? (
         Object.entries(sections).map(([section, guides]) => (
-          <section class="guide-section">
-            <h2 class="section-title">
-              <a href={`/${lang}/guides/${section}/`} class="section-link">{formatSectionName(section)}</a>
-            </h2>
-            <div class="guides-grid">
+          <section>
+            <div class="flex items-center justify-between mb-8 border-b border-zinc-800/50 pb-4">
+              <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                <a href={`/${lang}/guides/${section}/`} class="hover:text-primary-500 transition-colors">
+                  {formatSectionName(section)}
+                </a>
+              </h2>
+              <a href={`/${lang}/guides/${section}/`} class="hidden sm:flex items-center text-sm font-semibold text-primary-500 hover:text-primary-400 transition-colors">
+                View all <ArrowRight class="w-4 h-4 ml-1" />
+              </a>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {guides.map(guide => {
                 const [, ...slugParts] = guide.id.split('/');
                 const slug = slugParts.join('/');
+                
                 return (
-                  <a href={`/${lang}/guides/${slug}/`} class="guide-card">
-                    <h3>{guide.data.title}</h3>
-                    <p>{guide.data.description}</p>
-                    {guide.data.badge === 'official' && <span class="card-badge">Official</span>}
+                  <a href={`/${lang}/guides/${slug}/`} class="block group h-full">
+                    <Card hoverable className="h-full flex flex-col p-6 sm:p-8 bg-zinc-900 border-zinc-800 group-hover:bg-zinc-800/50">
+                      <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary-400 transition-colors pr-8 relative">
+                        {guide.data.title}
+                        
+                        {guide.data.badge === 'official' && (
+                          <div class="absolute right-0 top-1 text-emerald-500" title="Official Source">
+                            <ShieldCheck class="w-5 h-5" />
+                          </div>
+                        )}
+                        {guide.data.badge === 'verified' && (
+                          <div class="absolute right-0 top-1 text-sky-500" title="Community Verified">
+                            <ShieldCheck class="w-5 h-5" />
+                          </div>
+                        )}
+                        {guide.data.badge === 'draft' && (
+                          <div class="absolute right-0 top-1 text-amber-500" title="Draft">
+                            <FileWarning class="w-5 h-5" />
+                          </div>
+                        )}
+                      </h3>
+                      <p class="text-zinc-400 text-sm leading-relaxed flex-grow">{guide.data.description}</p>
+                    </Card>
                   </a>
                 );
               })}
             </div>
+            
+            <a href={`/${lang}/guides/${section}/`} class="sm:hidden mt-6 flex justify-center items-center py-3 w-full border border-zinc-800 rounded-xl text-sm font-semibold text-zinc-300 hover:bg-zinc-900 hover:text-white transition-colors">
+              View all {formatSectionName(section)} guides
+            </a>
           </section>
         ))
       ) : (
-        <div class="empty-state">
-          <p>Guides are being written and will appear here soon.</p>
+        <div class="text-center py-16 bg-zinc-900/50 rounded-2xl border border-zinc-800/50">
+          <p class="text-zinc-400 text-lg">Guides are being written and will appear here soon.</p>
         </div>
       )}
     </div>
   </div>
 </BaseLayout>
-
-<style>
-  .header-section {
-    padding: var(--spacing-8) 0;
-    text-align: center;
-    border-bottom: 1px solid var(--color-border);
-    margin-bottom: var(--spacing-8);
-  }
-
-  .header-section h1 {
-    font-size: 2.5rem;
-    color: var(--color-primary-dark);
-  }
-
-  .guide-section {
-    margin-bottom: var(--spacing-12);
-  }
-
-  .section-title {
-    margin-bottom: var(--spacing-6);
-  }
-
-  .section-link {
-    color: var(--color-text);
-  }
-
-  .section-link:hover {
-    color: var(--color-primary);
-  }
-
-  .guides-grid {
-    display: grid;
-    gap: var(--spacing-4);
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 768px) {
-    .guides-grid {
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
-  }
-
-  .guide-card {
-    display: block;
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-6);
-    color: var(--color-text);
-    transition: all 0.2s ease;
-    position: relative;
-  }
-
-  .guide-card:hover {
-    text-decoration: none;
-    border-color: var(--color-primary-light);
-    box-shadow: var(--shadow-sm);
-    transform: translateY(-2px);
-  }
-
-  .guide-card h3 {
-    margin-bottom: var(--spacing-2);
-    color: var(--color-primary-dark);
-    font-size: 1.25rem;
-  }
-
-  .guide-card p {
-    color: var(--color-text-muted);
-    font-size: 0.875rem;
-    margin-bottom: 0;
-  }
-
-  .card-badge {
-    position: absolute;
-    top: var(--spacing-2);
-    right: var(--spacing-2);
-    background-color: var(--color-success-bg);
-    color: var(--color-success);
-    font-size: 0.7rem;
-    padding: 2px 8px;
-    border-radius: var(--radius-full);
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-
-  .empty-state {
-    text-align: center;
-    padding: var(--spacing-12);
-    background-color: var(--color-bg);
-    border-radius: var(--radius-lg);
-    color: var(--color-text-muted);
-  }
-</style>
