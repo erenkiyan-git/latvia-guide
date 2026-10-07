@@ -3,6 +3,8 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getActiveLanguages } from '../../../i18n/utils';
 import { useTranslations } from '../../../i18n/utils';
 import type { Lang } from '../../../config';
+import { Map, MapPin, Building, Cross, Bus } from 'lucide-react';
+import { Button } from '../../../components/ui/Button';
 
 export function getStaticPaths() {
   const langs = getActiveLanguages();
@@ -19,110 +21,60 @@ const pageDesc = lang === 'tr' ? 'Letonya\'daki temel kurumların, hastanelerin 
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
-  <div class="container map-container">
-    <div class="header-section">
-      <h1>{pageTitle}</h1>
-      <p class="subtitle">{pageDesc}</p>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">{pageTitle}</h1>
+      <p class="text-xl text-zinc-400">{pageDesc}</p>
     </div>
 
-    <div class="map-placeholder">
-      <div class="icon">🗺️</div>
-      <h2>{lang === 'tr' ? 'Harita Çok Yakında (V2)' : 'Interactive Map Coming Soon (V2)'}</h2>
-      <p>
-        {lang === 'tr' 
-          ? 'Şu anda Riga\'daki tüm önemli yerlerin (PMLP ofisleri, ana hastaneler, üniversiteler ve toplu taşıma merkezleri) yer aldığı, çevrimdışı uyumlu özel bir harita üzerinde çalışıyoruz.'
-          : 'We are currently building a custom, offline-friendly map featuring all the most important locations in Riga (PMLP offices, major hospitals, universities, and transit hubs).'
-        }
-      </p>
+    <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 sm:p-16 text-center shadow-2xl relative overflow-hidden">
+      <!-- Decorative background pattern -->
+      <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#9ca3af 1px, transparent 1px); background-size: 24px 24px;"></div>
       
-      <div class="coming-soon-list">
-        <h3>{lang === 'tr' ? 'Haritada neler olacak?' : 'What will be on the map?'}</h3>
-        <ul>
-          <li>📍 {lang === 'tr' ? 'Göçmenlik Büroları (PMLP)' : 'Immigration Offices (PMLP)'}</li>
-          <li>🏥 {lang === 'tr' ? 'Nöbetçi Eczaneler ve Acil Servisler' : '24/7 Pharmacies & Emergency Rooms'}</li>
-          <li>🏫 {lang === 'tr' ? 'Üniversite Kampüsleri' : 'University Campuses'}</li>
-          <li>🚌 {lang === 'tr' ? 'Bilet Satış Noktaları (e-talons)' : 'Transport Ticket Machines'}</li>
-        </ul>
+      <div class="relative z-10">
+        <div class="w-24 h-24 bg-zinc-950 rounded-full flex items-center justify-center mx-auto mb-8 border border-zinc-800 shadow-inner">
+          <Map class="w-12 h-12 text-primary-500" />
+        </div>
+        
+        <h2 class="text-3xl font-bold text-white mb-6">
+          {lang === 'tr' ? 'Harita Çok Yakında (V2)' : 'Interactive Map Coming Soon (V2)'}
+        </h2>
+        
+        <p class="text-lg text-zinc-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+          {lang === 'tr' 
+            ? 'Şu anda Riga\'daki tüm önemli yerlerin (PMLP ofisleri, ana hastaneler, üniversiteler ve toplu taşıma merkezleri) yer aldığı, çevrimdışı uyumlu özel bir harita üzerinde çalışıyoruz.'
+            : 'We are currently building a custom, offline-friendly map featuring all the most important locations in Riga (PMLP offices, major hospitals, universities, and transit hubs).'
+          }
+        </p>
+        
+        <div class="bg-zinc-950/50 border border-zinc-800 rounded-2xl p-6 sm:p-8 text-left max-w-xl mx-auto mb-10">
+          <h3 class="text-xl font-bold text-white mb-6 text-center">
+            {lang === 'tr' ? 'Haritada neler olacak?' : 'What will be on the map?'}
+          </h3>
+          <ul class="space-y-4">
+            <li class="flex items-center text-zinc-300">
+              <Building class="w-6 h-6 text-primary-500 mr-4" />
+              <span class="text-lg">{lang === 'tr' ? 'Göçmenlik Büroları (PMLP)' : 'Immigration Offices (PMLP)'}</span>
+            </li>
+            <li class="flex items-center text-zinc-300">
+              <Cross class="w-6 h-6 text-rose-500 mr-4" />
+              <span class="text-lg">{lang === 'tr' ? 'Nöbetçi Eczaneler ve Acil Servisler' : '24/7 Pharmacies & Emergency Rooms'}</span>
+            </li>
+            <li class="flex items-center text-zinc-300">
+              <MapPin class="w-6 h-6 text-sky-500 mr-4" />
+              <span class="text-lg">{lang === 'tr' ? 'Üniversite Kampüsleri' : 'University Campuses'}</span>
+            </li>
+            <li class="flex items-center text-zinc-300">
+              <Bus class="w-6 h-6 text-amber-500 mr-4" />
+              <span class="text-lg">{lang === 'tr' ? 'Bilet Satış Noktaları (e-talons)' : 'Transport Ticket Machines'}</span>
+            </li>
+          </ul>
+        </div>
+        
+        <Button href={`/${lang}/guides/`} size="lg" className="w-full sm:w-auto text-lg px-8">
+          {lang === 'tr' ? 'Rehberleri Okumaya Devam Et' : 'Continue Reading Guides'}
+        </Button>
       </div>
-      
-      <a href={`/${lang}/guides/`} class="btn">{lang === 'tr' ? 'Rehberleri Okumaya Devam Et' : 'Continue Reading Guides'}</a>
     </div>
   </div>
 </BaseLayout>
-
-<style>
-  .map-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding-bottom: var(--spacing-16);
-  }
-
-  .header-section {
-    text-align: center;
-    padding: var(--spacing-8) 0;
-    margin-bottom: var(--spacing-8);
-  }
-
-  .header-section h1 {
-    color: var(--color-primary-dark);
-  }
-
-  .map-placeholder {
-    background-color: var(--color-surface);
-    border: 2px dashed var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-12) var(--spacing-6);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .icon {
-    font-size: 5rem;
-    margin-bottom: var(--spacing-4);
-    opacity: 0.8;
-  }
-  
-  .map-placeholder h2 {
-    color: var(--color-primary-dark);
-    margin-bottom: var(--spacing-4);
-  }
-  
-  .map-placeholder p {
-    max-width: 600px;
-    color: var(--color-text-muted);
-    font-size: 1.125rem;
-    margin-bottom: var(--spacing-8);
-  }
-  
-  .coming-soon-list {
-    background-color: var(--color-bg);
-    padding: var(--spacing-6) var(--spacing-8);
-    border-radius: var(--radius-md);
-    text-align: left;
-    margin-bottom: var(--spacing-8);
-    width: 100%;
-    max-width: 500px;
-  }
-  
-  .coming-soon-list h3 {
-    margin-top: 0;
-    margin-bottom: var(--spacing-4);
-    font-size: 1.125rem;
-  }
-  
-  .coming-soon-list ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-3);
-  }
-  
-  .coming-soon-list li {
-    font-size: 1rem;
-    color: var(--color-text);
-  }
-</style>

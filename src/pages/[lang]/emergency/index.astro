@@ -3,6 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getActiveLanguages } from '../../../i18n/utils';
 import { useTranslations } from '../../../i18n/utils';
 import type { Lang } from '../../../config';
+import { PhoneCall, ShieldAlert, HeartPulse, Shield } from 'lucide-react';
 
 export function getStaticPaths() {
   const langs = getActiveLanguages();
@@ -19,149 +20,50 @@ const pageDesc = lang === 'tr' ? 'Letonya\'daki hayati tehlike veya acil durumla
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
-  <div class="emergency-container">
-    <div class="header-section">
-      <h1>{pageTitle}</h1>
-      <p class="subtitle">{pageDesc}</p>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-rose-500 tracking-tight mb-4">{pageTitle}</h1>
+      <p class="text-xl text-zinc-400">{pageDesc}</p>
     </div>
 
-    <div class="main-emergency">
-      <div class="emergency-card giant-card">
-        <div class="icon">🚨</div>
-        <h2>112</h2>
-        <h3>{lang === 'tr' ? 'Genel Acil Durum' : 'General Emergency'}</h3>
-        <p>{lang === 'tr' ? 'Ambulans, Polis, İtfaiye' : 'Ambulance, Police, Fire'}</p>
-        <p class="lang-note">{lang === 'tr' ? 'Operatörler Letonca, Rusça ve İngilizce konuşmaktadır.' : 'Operators speak Latvian, Russian, and English.'}</p>
-        <a href="tel:112" class="call-btn">{lang === 'tr' ? 'Şimdi Ara' : 'Call Now'}</a>
+    <div class="mb-8">
+      <div class="bg-rose-950/20 border-2 border-rose-900 rounded-3xl p-8 sm:p-12 text-center shadow-xl shadow-rose-900/10 flex flex-col items-center">
+        <div class="w-20 h-20 bg-rose-500/20 rounded-full flex items-center justify-center mb-6">
+          <ShieldAlert class="w-10 h-10 text-rose-500" />
+        </div>
+        <h2 class="text-7xl font-black text-rose-500 mb-2 tracking-tighter">112</h2>
+        <h3 class="text-2xl font-bold text-white mb-2">{lang === 'tr' ? 'Genel Acil Durum' : 'General Emergency'}</h3>
+        <p class="text-lg text-rose-200 mb-6 font-medium">{lang === 'tr' ? 'Ambulans, Polis, İtfaiye' : 'Ambulance, Police, Fire'}</p>
+        <p class="text-sm text-zinc-400 mb-8 max-w-md mx-auto">{lang === 'tr' ? 'Operatörler Letonca, Rusça ve İngilizce konuşmaktadır.' : 'Operators speak Latvian, Russian, and English.'}</p>
+        <a href="tel:112" class="inline-flex items-center justify-center w-full sm:w-auto bg-rose-600 hover:bg-rose-500 text-white font-bold text-xl py-4 px-12 rounded-full transition-all shadow-lg hover:shadow-rose-500/25 hover:-translate-y-1">
+          <PhoneCall class="w-6 h-6 mr-3" />
+          {lang === 'tr' ? 'Hemen Ara' : 'Call Now'}
+        </a>
       </div>
     </div>
 
-    <div class="secondary-emergencies">
-      <div class="emergency-card">
-        <div class="icon">🩺</div>
-        <h2>66016001</h2>
-        <h3>{lang === 'tr' ? 'Aile Hekimi Danışma Hattı' : 'Family Doctor Advisory'}</h3>
-        <p>{lang === 'tr' ? 'Hayati tehlike arz etmeyen tıbbi tavsiyeler için (akşamları ve hafta sonları).' : 'For non-life-threatening medical advice (evenings and weekends).'}</p>
-        <a href="tel:66016001" class="call-btn secondary">{lang === 'tr' ? 'Ara' : 'Call'}</a>
+    <div class="grid sm:grid-cols-2 gap-6">
+      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 text-center flex flex-col items-center">
+        <HeartPulse class="w-10 h-10 text-primary-500 mb-4" />
+        <h2 class="text-4xl font-extrabold text-white mb-2">66016001</h2>
+        <h3 class="text-lg font-bold text-zinc-200 mb-2">{lang === 'tr' ? 'Aile Hekimi Danışma Hattı' : 'Family Doctor Advisory'}</h3>
+        <p class="text-sm text-zinc-400 mb-8 flex-grow">{lang === 'tr' ? 'Hayati tehlike arz etmeyen tıbbi tavsiyeler için (akşamları ve hafta sonları).' : 'For non-life-threatening medical advice (evenings and weekends).'}</p>
+        <a href="tel:66016001" class="inline-flex items-center justify-center w-full bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-3 px-6 rounded-xl transition-all">
+          <PhoneCall class="w-5 h-5 mr-2 text-zinc-400" />
+          {lang === 'tr' ? 'Ara' : 'Call'}
+        </a>
       </div>
 
-      <div class="emergency-card">
-        <div class="icon">👮</div>
-        <h2>110</h2>
-        <h3>{lang === 'tr' ? 'Doğrudan Polis' : 'Direct Police'}</h3>
-        <p>{lang === 'tr' ? 'Doğrudan Devlet Polisine ulaşmak için (112 üzerinden de mümkündür).' : 'To reach the State Police directly (also possible via 112).'}</p>
-        <a href="tel:110" class="call-btn secondary">{lang === 'tr' ? 'Ara' : 'Call'}</a>
+      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 text-center flex flex-col items-center">
+        <Shield class="w-10 h-10 text-sky-500 mb-4" />
+        <h2 class="text-4xl font-extrabold text-white mb-2">110</h2>
+        <h3 class="text-lg font-bold text-zinc-200 mb-2">{lang === 'tr' ? 'Doğrudan Polis' : 'Direct Police'}</h3>
+        <p class="text-sm text-zinc-400 mb-8 flex-grow">{lang === 'tr' ? 'Doğrudan Devlet Polisine ulaşmak için (112 üzerinden de mümkündür).' : 'To reach the State Police directly (also possible via 112).'}</p>
+        <a href="tel:110" class="inline-flex items-center justify-center w-full bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-3 px-6 rounded-xl transition-all">
+          <PhoneCall class="w-5 h-5 mr-2 text-zinc-400" />
+          {lang === 'tr' ? 'Ara' : 'Call'}
+        </a>
       </div>
     </div>
   </div>
 </BaseLayout>
-
-<style>
-  .emergency-container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .header-section {
-    text-align: center;
-    padding: var(--spacing-8) 0;
-    margin-bottom: var(--spacing-8);
-  }
-
-  .header-section h1 {
-    color: var(--color-error);
-    font-size: 2.5rem;
-  }
-
-  .main-emergency {
-    margin-bottom: var(--spacing-8);
-  }
-
-  .secondary-emergencies {
-    display: grid;
-    gap: var(--spacing-6);
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 768px) {
-    .secondary-emergencies {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .emergency-card {
-    background-color: var(--color-surface);
-    border: 2px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-8);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .emergency-card h2 {
-    font-size: 2.5rem;
-    color: var(--color-error);
-    margin: var(--spacing-2) 0;
-    letter-spacing: 2px;
-  }
-
-  .emergency-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: var(--spacing-2);
-  }
-
-  .emergency-card p {
-    color: var(--color-text-muted);
-    margin-bottom: var(--spacing-6);
-    flex-grow: 1;
-  }
-
-  .icon {
-    font-size: 3rem;
-  }
-
-  .giant-card {
-    border-color: var(--color-error);
-    background-color: var(--color-error-bg);
-  }
-
-  .giant-card h2 {
-    font-size: 4rem;
-  }
-  
-  .lang-note {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--color-error);
-  }
-
-  .call-btn {
-    display: inline-block;
-    width: 100%;
-    background-color: var(--color-error);
-    color: white;
-    font-weight: 700;
-    font-size: 1.25rem;
-    padding: var(--spacing-4);
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-
-  .call-btn:hover {
-    background-color: #b91c1c;
-    text-decoration: none;
-  }
-
-  .call-btn.secondary {
-    background-color: var(--color-primary);
-    font-size: 1.125rem;
-  }
-
-  .call-btn.secondary:hover {
-    background-color: var(--color-primary-dark);
-  }
-</style>

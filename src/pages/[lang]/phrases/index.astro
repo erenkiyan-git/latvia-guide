@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { PhrasesList as ReactPhrasesList } from '../../../components/PhrasesList';
 import { getActiveLanguages } from '../../../i18n/utils';
 import { useTranslations } from '../../../i18n/utils';
 import type { Lang } from '../../../config';
@@ -17,165 +18,15 @@ const t = useTranslations(lang);
 
 const pageTitle = lang === 'tr' ? 'Temel Letonca İfadeler' : 'Basic Latvian Phrases';
 const pageDesc = lang === 'tr' ? 'Günlük durumlar için hızlı, kopyalanabilir ifadeler ve okunuşları.' : 'Quick, copyable phrases and pronunciations for daily situations.';
-
-const formatSituation = (cat: string) => cat.charAt(0).toUpperCase() + cat.slice(1);
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
-  <div class="container">
-    <div class="header-section">
-      <h1>{pageTitle}</h1>
-      <p class="subtitle">{pageDesc}</p>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-16">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">{pageTitle}</h1>
+      <p class="text-xl text-zinc-400 max-w-2xl mx-auto">{pageDesc}</p>
     </div>
 
-    <div class="phrases-container">
-      {phrasesData.map((group: any) => (
-        <section class="phrase-group">
-          <h2>{formatSituation(group.situation)}</h2>
-          <div class="phrases-grid">
-            {group.phrases.map((phrase: any) => (
-              <div class="phrase-card">
-                <div class="phrase-content">
-                  <h3 class="latvian-text">{phrase.latvian}</h3>
-                  <p class="pronunciation">🗣️ {phrase.pronunciation}</p>
-                  <p class="translation">{phrase.translations[lang] || phrase.translations['en']}</p>
-                </div>
-                <button class="copy-btn" data-text={phrase.latvian} aria-label="Copy to clipboard">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
-      ))}
-    </div>
+    <ReactPhrasesList client:load data={phrasesData} lang={lang} />
   </div>
 </BaseLayout>
-
-<style>
-  .header-section {
-    text-align: center;
-    padding: var(--spacing-8) 0;
-    margin-bottom: var(--spacing-8);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .header-section h1 {
-    color: var(--color-primary-dark);
-  }
-  
-  .phrase-group {
-    margin-bottom: var(--spacing-12);
-  }
-  
-  .phrase-group h2 {
-    color: var(--color-primary);
-    border-bottom: 2px solid var(--color-primary-light);
-    padding-bottom: var(--spacing-2);
-    margin-bottom: var(--spacing-6);
-  }
-
-  .phrases-grid {
-    display: grid;
-    gap: var(--spacing-4);
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 768px) {
-    .phrases-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .phrase-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--spacing-6);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    transition: all 0.2s ease;
-  }
-
-  .phrase-card:hover {
-    border-color: var(--color-primary-light);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .phrase-content {
-    flex-grow: 1;
-  }
-
-  .latvian-text {
-    margin: 0 0 var(--spacing-1) 0;
-    font-size: 1.25rem;
-    color: var(--color-primary-dark);
-    font-weight: 700;
-  }
-
-  .pronunciation {
-    color: var(--color-text-muted);
-    font-size: 0.875rem;
-    margin-bottom: var(--spacing-2);
-    font-style: italic;
-  }
-  
-  .translation {
-    color: var(--color-text);
-    font-size: 1rem;
-    margin: 0;
-    font-weight: 500;
-  }
-
-  .copy-btn {
-    background: none;
-    border: none;
-    color: var(--color-primary);
-    cursor: pointer;
-    padding: var(--spacing-2);
-    border-radius: var(--radius-sm);
-    transition: all 0.2s ease;
-  }
-
-  .copy-btn:hover {
-    background-color: var(--color-primary-light);
-  }
-  
-  .copy-btn.copied {
-    color: var(--color-success);
-  }
-</style>
-
-<script>
-  function setupCopyButtons() {
-    const buttons = document.querySelectorAll('.copy-btn');
-    
-    buttons.forEach(btn => {
-      // Remove old listeners
-      const newBtn = btn.cloneNode(true) as HTMLButtonElement;
-      btn.parentNode?.replaceChild(newBtn, btn);
-      
-      newBtn.addEventListener('click', async () => {
-        const text = newBtn.getAttribute('data-text');
-        if (text) {
-          try {
-            await navigator.clipboard.writeText(text);
-            newBtn.classList.add('copied');
-            newBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-            
-            setTimeout(() => {
-              newBtn.classList.remove('copied');
-              newBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
-            }, 2000);
-          } catch (err) {
-            console.error('Failed to copy', err);
-          }
-        }
-      });
-    });
-  }
-
-  setupCopyButtons();
-  document.addEventListener('astro:page-load', setupCopyButtons);
-</script>

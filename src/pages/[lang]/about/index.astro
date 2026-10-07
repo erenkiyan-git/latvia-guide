@@ -3,6 +3,9 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getActiveLanguages } from '../../../i18n/utils';
 import { useTranslations } from '../../../i18n/utils';
 import type { Lang } from '../../../config';
+import { TrustBadge } from '../../../components/ui/TrustBadge';
+import { Button } from '../../../components/ui/Button';
+import { ShieldCheck, ShieldAlert, FileWarning, Search, Eye, AlertTriangle } from 'lucide-react';
 
 export function getStaticPaths() {
   const langs = getActiveLanguages();
@@ -19,15 +22,19 @@ const pageDesc = lang === 'tr' ? 'Latvia Guide nasıl çalışır ve bilgileri n
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
-  <div class="container about-container">
-    <div class="header-section">
-      <h1>{pageTitle}</h1>
-      <p class="subtitle">{pageDesc}</p>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-16">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">{pageTitle}</h1>
+      <p class="text-xl text-zinc-400 max-w-2xl mx-auto">{pageDesc}</p>
     </div>
 
-    <div class="content-section">
+    <div class="prose prose-invert prose-zinc max-w-none 
+      prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight
+      prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-8 prose-h2:border-b prose-h2:border-zinc-800 prose-h2:pb-4
+      prose-p:text-zinc-300 prose-p:leading-relaxed prose-p:mb-6 prose-p:text-lg">
+      
       <h2>{lang === 'tr' ? 'Misyonumuz' : 'Our Mission'}</h2>
-      <p>
+      <p class="lead text-xl text-zinc-300">
         {lang === 'tr' 
           ? 'Letonya\'ya taşınmak zor olabilir. Yüzlerce farklı resmi web sitesi, değişen yasalar ve her yerde eski bilgiler var. Amacımız basit: Letonya\'daki yabancılar, uluslararası öğrenciler ve çalışanlar için en güvenilir, güncel ve pratik rehberi oluşturmak.'
           : 'Moving to Latvia can be overwhelming. There are hundreds of different official websites, changing laws, and outdated information everywhere. Our mission is simple: to create the most reliable, up-to-date, and practical guide for foreigners, international students, and workers in Latvia.'
@@ -42,157 +49,64 @@ const pageDesc = lang === 'tr' ? 'Latvia Guide nasıl çalışır ve bilgileri n
         }
       </p>
       
-      <ul class="trust-list">
-        <li><strong>{lang === 'tr' ? 'Resmi Kaynaklar:' : 'Official Sources:'}</strong> {lang === 'tr' ? 'Her rehberdeki her önemli iddia (PMLP, VID vb.) doğrudan resmi hükümet bağlantılarına dayandırılır.' : 'Every major claim in our guides is backed by direct links to official government sources (PMLP, VID, etc.).'}</li>
-        <li><strong>{lang === 'tr' ? 'Son Kontrol Tarihi:' : 'Last Checked Date:'}</strong> {lang === 'tr' ? 'Tüm rehberlerimiz, bilginin bir insan tarafından en son ne zaman resmi olarak doğrulandığını gösteren bir "Son kontrol" tarihi içerir.' : 'All our guides include a "Last checked" date, so you know exactly when a human last verified the information.'}</li>
-        <li><strong>{lang === 'tr' ? 'Yapay Zeka Halüsinasyonu Yok:' : 'No AI Hallucinations:'}</strong> {lang === 'tr' ? 'Doğrulanmamış AI üretimi bilgilerin platformumuza girmesine izin vermiyoruz.' : 'We do not allow unverified AI-generated information to enter our platform.'}</li>
-      </ul>
+      <div class="grid sm:grid-cols-3 gap-6 my-10 not-prose">
+        <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+          <Search class="w-8 h-8 text-primary-500 mb-4" />
+          <h3 class="text-white font-bold text-lg mb-2">{lang === 'tr' ? 'Resmi Kaynaklar' : 'Official Sources'}</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed">{lang === 'tr' ? 'Her rehberdeki her önemli iddia (PMLP, VID vb.) doğrudan resmi hükümet bağlantılarına dayandırılır.' : 'Every major claim in our guides is backed by direct links to official government sources.'}</p>
+        </div>
+        <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+          <Eye class="w-8 h-8 text-primary-500 mb-4" />
+          <h3 class="text-white font-bold text-lg mb-2">{lang === 'tr' ? 'Son Kontrol Tarihi' : 'Human Verified'}</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed">{lang === 'tr' ? 'Tüm rehberlerimiz, bilginin bir insan tarafından en son ne zaman resmi olarak doğrulandığını gösteren bir "Son kontrol" tarihi içerir.' : 'All our guides include a "Last checked" date, so you know exactly when a human last verified the information.'}</p>
+        </div>
+        <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+          <AlertTriangle class="w-8 h-8 text-primary-500 mb-4" />
+          <h3 class="text-white font-bold text-lg mb-2">{lang === 'tr' ? 'Yapay Zeka Halüsinasyonu Yok' : 'No Hallucinations'}</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed">{lang === 'tr' ? 'Doğrulanmamış AI üretimi bilgilerin platformumuza girmesine izin vermiyoruz.' : 'We do not allow unverified AI-generated information to enter our platform.'}</p>
+        </div>
+      </div>
 
       <h2>{lang === 'tr' ? 'Rozet Sistemimiz' : 'Our Badge System'}</h2>
-      <div class="badges-explainer">
-        <div class="badge-row">
-          <span class="trust-badge badge-official">Official</span>
-          <p>{lang === 'tr' ? 'Bu bilgi, Letonya hükümetinin resmi belgelerine veya kurumlarına dayanmaktadır.' : 'This information is based strictly on official Latvian government documentation or institutions.'}</p>
+      
+      <div class="space-y-6 my-10 not-prose">
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
+          <div class="flex-shrink-0">
+            <TrustBadge type="official" />
+          </div>
+          <p class="text-zinc-300 text-sm sm:text-base leading-relaxed m-0">
+            {lang === 'tr' ? 'Bu bilgi, Letonya hükümetinin resmi belgelerine veya kurumlarına dayanmaktadır.' : 'This information is based strictly on official Latvian government documentation or institutions.'}
+          </p>
         </div>
-        <div class="badge-row">
-          <span class="trust-badge badge-verified">Verified</span>
-          <p>{lang === 'tr' ? 'Bu bilgi, Letonya\'da yaşayan yerel uzmanlar veya yabancılar tarafından pratik olarak doğrulanmıştır (örneğin, ev arama ipuçları).' : 'This information has been practically verified by local experts or expats living in Latvia (e.g., apartment hunting tips).'}</p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
+          <div class="flex-shrink-0">
+            <TrustBadge type="verified" />
+          </div>
+          <p class="text-zinc-300 text-sm sm:text-base leading-relaxed m-0">
+            {lang === 'tr' ? 'Bu bilgi, Letonya\'da yaşayan yerel uzmanlar veya yabancılar tarafından pratik olarak doğrulanmıştır (örneğin, ev arama ipuçları).' : 'This information has been practically verified by local experts or expats living in Latvia (e.g., apartment hunting tips).'}
+          </p>
         </div>
-        <div class="badge-row">
-          <span class="trust-badge badge-draft">Draft</span>
-          <p>{lang === 'tr' ? 'Bu içerik henüz uzmanlarımız tarafından tam olarak doğrulanmamıştır. Lütfen resmi kaynakları kendiniz kontrol edin.' : 'This content has not yet been fully verified by our experts. Please double-check official sources yourself.'}</p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
+          <div class="flex-shrink-0">
+            <TrustBadge type="draft" />
+          </div>
+          <p class="text-zinc-300 text-sm sm:text-base leading-relaxed m-0">
+            {lang === 'tr' ? 'Bu içerik henüz uzmanlarımız tarafından tam olarak doğrulanmamıştır. Lütfen resmi kaynakları kendiniz kontrol edin.' : 'This content has not yet been fully verified by our experts. Please double-check official sources yourself.'}
+          </p>
         </div>
       </div>
       
-      <div class="feedback-box">
-        <h3>{lang === 'tr' ? 'Bir Hata mı Gördünüz?' : 'Spotted an Error?'}</h3>
-        <p>{lang === 'tr' ? 'Kurallar sürekli değişir. Eski bir bilgi bulursanız, lütfen bize bildirin.' : 'Rules change constantly. If you find outdated information, please let us know.'}</p>
-        <a href="mailto:hello@latviaguide.com" class="btn">{lang === 'tr' ? 'Bize Ulaşın' : 'Contact Us'}</a>
+      <div class="mt-16 bg-gradient-to-br from-primary-950 to-zinc-900 border border-primary-900/50 p-10 rounded-3xl text-center not-prose">
+        <h3 class="text-2xl font-bold text-white mb-4">{lang === 'tr' ? 'Bir Hata mı Gördünüz?' : 'Spotted an Error?'}</h3>
+        <p class="text-zinc-400 text-lg mb-8 max-w-lg mx-auto">
+          {lang === 'tr' ? 'Kurallar sürekli değişir. Eski bir bilgi bulursanız, lütfen bize bildirin.' : 'Rules change constantly. If you find outdated information, please let us know.'}
+        </p>
+        <Button href="mailto:hello@latviaguide.example.com" size="lg" className="px-8">
+          {lang === 'tr' ? 'Bize Ulaşın' : 'Contact Us'}
+        </Button>
       </div>
     </div>
   </div>
 </BaseLayout>
-
-<style>
-  .about-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding-bottom: var(--spacing-16);
-  }
-
-  .header-section {
-    text-align: center;
-    padding: var(--spacing-8) 0;
-    margin-bottom: var(--spacing-8);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .header-section h1 {
-    color: var(--color-primary-dark);
-  }
-
-  .content-section h2 {
-    color: var(--color-primary);
-    margin-top: var(--spacing-12);
-    margin-bottom: var(--spacing-4);
-  }
-  
-  .content-section p {
-    font-size: 1.125rem;
-    line-height: 1.7;
-    color: var(--color-text);
-    margin-bottom: var(--spacing-4);
-  }
-  
-  .trust-list {
-    margin: var(--spacing-6) 0;
-    padding-left: var(--spacing-6);
-  }
-  
-  .trust-list li {
-    font-size: 1.125rem;
-    margin-bottom: var(--spacing-4);
-    line-height: 1.6;
-  }
-  
-  .badges-explainer {
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-6);
-    margin-top: var(--spacing-6);
-  }
-  
-  .badge-row {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-2);
-    margin-bottom: var(--spacing-6);
-    padding-bottom: var(--spacing-6);
-    border-bottom: 1px solid var(--color-border);
-  }
-  
-  .badge-row:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-  }
-  
-  @media (min-width: 600px) {
-    .badge-row {
-      flex-direction: row;
-      align-items: flex-start;
-      gap: var(--spacing-6);
-    }
-  }
-  
-  .badge-row p {
-    margin: 0;
-    font-size: 1rem;
-  }
-  
-  .trust-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-1);
-    padding: var(--spacing-1) var(--spacing-3);
-    border-radius: var(--radius-full);
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  .badge-official {
-    background-color: var(--color-success-bg);
-    color: var(--color-success);
-    border: 1px solid var(--color-success);
-  }
-  .badge-verified {
-    background-color: var(--color-primary-light);
-    color: var(--color-primary-dark);
-    border: 1px solid var(--color-primary);
-  }
-  .badge-draft {
-    background-color: var(--color-warning-bg);
-    color: var(--color-warning-text);
-    border: 1px solid var(--color-warning-border);
-  }
-  
-  .feedback-box {
-    margin-top: var(--spacing-12);
-    padding: var(--spacing-8);
-    background-color: var(--color-primary-light);
-    border-radius: var(--radius-lg);
-    text-align: center;
-  }
-  
-  .feedback-box h3 {
-    color: var(--color-primary-dark);
-    margin-bottom: var(--spacing-2);
-  }
-  
-  .feedback-box p {
-    color: var(--color-primary-dark);
-    margin-bottom: var(--spacing-6);
-  }
-</style>
