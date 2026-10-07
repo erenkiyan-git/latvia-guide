@@ -1,6 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SearchBox from '../../components/SearchBox.astro';
+import { ProblemGrid } from '../../components/home/ProblemGrid';
+import { ChecklistPreview } from '../../components/home/ChecklistPreview';
+import { TrustSection } from '../../components/home/TrustSection';
+import { Tag } from '../../components/ui/Tag';
 import { getActiveLanguages } from '../../i18n/utils';
 import { useTranslations } from '../../i18n/utils';
 import type { Lang } from '../../config';
@@ -14,310 +18,102 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: Lang };
 const t = useTranslations(lang);
+
+// Generate translations object for ProblemGrid
+const problemTranslations = {
+  'home.problem.arrived': t('home.problem.arrived'),
+  'home.problem.housing': t('home.problem.housing'),
+  'home.problem.doctor': t('home.problem.doctor'),
+  'home.problem.job': t('home.problem.job'),
+  'home.problem.student': t('home.problem.student'),
+  'home.problem.permit': t('home.problem.permit'),
+  'home.problem.transport': t('home.problem.transport'),
+  'home.problem.emergency': t('home.problem.emergency'),
+};
 ---
 
 <BaseLayout title={t('hero.title')} description={t('hero.subtitle')} lang={lang}>
-  <div class="container">
-    <div class="hero">
-      <h1>{t('hero.title')}</h1>
-      <p class="subtitle">{t('hero.subtitle')}</p>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    {/* Hero Section */}
+    <section class="py-20 md:py-32 text-center relative">
+      {/* Decorative background glow */}
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-64 bg-primary-900/20 blur-[100px] rounded-full pointer-events-none"></div>
       
-      <div class="search-box">
-        <SearchBox />
-      </div>
-    </div>
-
-    <!-- What do you need help with? -->
-    <section class="section">
-      <h2 class="section-title">What do you need help with?</h2>
-      <div class="grid problem-grid">
-        <a href={`/${lang}/guides/new-to-latvia/`} class="problem-card">
-          <span class="emoji">🛬</span>
-          <span>{t('home.problem.arrived')}</span>
-        </a>
-        <a href={`/${lang}/guides/housing/`} class="problem-card">
-          <span class="emoji">🏠</span>
-          <span>{t('home.problem.housing')}</span>
-        </a>
-        <a href={`/${lang}/guides/healthcare/`} class="problem-card">
-          <span class="emoji">🩺</span>
-          <span>{t('home.problem.doctor')}</span>
-        </a>
-        <a href={`/${lang}/guides/work/`} class="problem-card">
-          <span class="emoji">💼</span>
-          <span>{t('home.problem.job')}</span>
-        </a>
-        <a href={`/${lang}/guides/students/`} class="problem-card">
-          <span class="emoji">🎓</span>
-          <span>{t('home.problem.student')}</span>
-        </a>
-        <a href={`/${lang}/guides/documents/`} class="problem-card">
-          <span class="emoji">📄</span>
-          <span>{t('home.problem.permit')}</span>
-        </a>
-        <a href={`/${lang}/guides/transport/`} class="problem-card">
-          <span class="emoji">🚌</span>
-          <span>{t('home.problem.transport')}</span>
-        </a>
-        <a href={`/${lang}/emergency/`} class="problem-card emergency-card">
-          <span class="emoji">🚨</span>
-          <span>{t('home.problem.emergency')}</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Who are you? -->
-    <section class="section who-section">
-      <h2 class="section-title">{t('home.who.title')}</h2>
-      <div class="tags-container">
-        <a href={`/${lang}/guides/students/`} class="tag">{t('home.who.student')}</a>
-        <a href={`/${lang}/guides/work/`} class="tag">{t('home.who.worker')}</a>
-        <a href={`/${lang}/guides/travel/`} class="tag">{t('home.who.tourist')}</a>
-        <a href={`/${lang}/guides/new-to-latvia/`} class="tag">{t('home.who.resident')}</a>
-        <a href={`/${lang}/guides/work/`} class="tag">{t('home.who.nomad')}</a>
-      </div>
-    </section>
-
-    <!-- 30-Day Checklist Preview -->
-    <section class="section checklist-preview">
-      <div class="checklist-card">
-        <h3>New to Latvia Checklist</h3>
-        <p>A step-by-step guide for your first 30 days.</p>
-        <div class="progress-bar-placeholder">
-          <div class="progress-fill" style="width: 15%"></div>
-        </div>
-        <a href={`/${lang}/checklist/`} class="btn">View Checklist</a>
-      </div>
-    </section>
-
-    <!-- Trust Section -->
-    <section class="section trust-section">
-      <div class="trust-content">
-        <h2>{t('home.trust.title')}</h2>
-        <p>{t('home.trust.desc')}</p>
-        <div class="badges-demo">
-          <span class="trust-badge badge-official">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Official
-          </span>
-          <span class="trust-badge badge-verified">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> Verified
-          </span>
+      <div class="relative z-10 max-w-3xl mx-auto">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight leading-tight">
+          {t('hero.title')}
+        </h1>
+        <p class="text-lg sm:text-xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+          {t('hero.subtitle')}
+        </p>
+        
+        <div class="max-w-xl mx-auto">
+          <SearchBox />
         </div>
       </div>
     </section>
+
+    {/* What do you need help with? */}
+    <section class="py-16">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-white mb-4">What do you need help with?</h2>
+        <p class="text-zinc-400">Select a topic to find guides and practical information.</p>
+      </div>
+      <ProblemGrid lang={lang} translations={problemTranslations} />
+    </section>
+
+    {/* Who are you? */}
+    <section class="py-16 text-center">
+      <h2 class="text-2xl font-bold text-white mb-8">{t('home.who.title')}</h2>
+      <div class="flex flex-wrap justify-center gap-3">
+        <Tag href={`/${lang}/guides/students/`}>{t('home.who.student')}</Tag>
+        <Tag href={`/${lang}/guides/work/`}>{t('home.who.worker')}</Tag>
+        <Tag href={`/${lang}/guides/travel/`}>{t('home.who.tourist')}</Tag>
+        <Tag href={`/${lang}/guides/new-to-latvia/`}>{t('home.who.resident')}</Tag>
+        <Tag href={`/${lang}/guides/work/`}>{t('home.who.nomad')}</Tag>
+      </div>
+    </section>
+
+    {/* 30-Day Checklist Preview */}
+    <section class="py-16">
+      <ChecklistPreview 
+        lang={lang} 
+        title="New to Latvia Checklist" 
+        subtitle="A step-by-step guide for your first 30 days." 
+        buttonText="View Checklist" 
+      />
+    </section>
+
+    {/* Trust Section */}
+    <section class="py-16 mb-10">
+      <TrustSection title={t('home.trust.title')} description={t('home.trust.desc')} />
+    </section>
+
   </div>
 </BaseLayout>
 
-<style>
-  .hero {
-    text-align: center;
-    padding: var(--spacing-12) 0 var(--spacing-8);
-  }
-  
-  .hero h1 {
-    font-size: 2.5rem;
-    color: var(--color-primary-dark);
-    margin-bottom: var(--spacing-4);
-  }
-  
-  .subtitle {
-    font-size: 1.25rem;
-    color: var(--color-text-muted);
-    max-width: 600px;
-    margin: 0 auto var(--spacing-8);
-  }
-  
-  .search-box {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
+<style is:global>
+  /* Ensure SearchBox is styled appropriately for dark theme until we convert it to React */
   .search-input {
     width: 100%;
-    padding: var(--spacing-4) var(--spacing-6);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-full);
+    padding: 1rem 1.5rem;
+    border-radius: 9999px;
+    background-color: #18181b; /* zinc-900 */
+    border: 1px solid #27272a; /* zinc-800 */
+    color: white;
     font-size: 1.125rem;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .search-input:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px var(--color-primary-light);
-  }
-
-  .section {
-    margin-bottom: var(--spacing-16);
-  }
-
-  .section-title {
-    text-align: center;
-    margin-bottom: var(--spacing-8);
-  }
-
-  .grid {
-    display: grid;
-    gap: var(--spacing-4);
-  }
-
-  .problem-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 768px) {
-    .problem-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-    
-    .hero h1 {
-      font-size: 3.5rem;
-    }
-  }
-
-  .problem-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--spacing-2);
-    padding: var(--spacing-6) var(--spacing-4);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    color: var(--color-text);
-    font-weight: 600;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
     transition: all 0.2s ease;
   }
-
-  .problem-card:hover {
-    text-decoration: none;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--color-primary-light);
-  }
-
-  .emergency-card {
-    border-color: var(--color-error);
-    background-color: var(--color-error-bg);
-    color: var(--color-error);
-  }
-
-  .emergency-card:hover {
-    border-color: var(--color-error);
-  }
-
-  .emoji {
-    font-size: 2rem;
-  }
-
-  .who-section {
-    text-align: center;
-  }
-
-  .tags-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--spacing-3);
-  }
-
-  .tag {
-    padding: var(--spacing-2) var(--spacing-4);
-    background-color: var(--color-primary-light);
-    color: var(--color-primary-dark);
-    border-radius: var(--radius-full);
-    font-weight: 500;
-    font-size: 0.875rem;
-  }
-
-  .tag:hover {
-    background-color: var(--color-primary);
-    color: white;
-    text-decoration: none;
-  }
-
-  .checklist-preview {
-    max-width: 600px;
-    margin: 0 auto var(--spacing-16);
-  }
-
-  .checklist-card {
-    background: linear-gradient(to right bottom, var(--color-primary-dark), var(--color-primary));
-    color: white;
-    padding: var(--spacing-8);
-    border-radius: var(--radius-lg);
-    text-align: center;
-    box-shadow: var(--shadow-md);
-  }
-
-  .checklist-card h3 {
-    color: white;
-    margin-bottom: var(--spacing-2);
+  
+  .search-input:focus {
+    outline: none;
+    border-color: var(--color-primary-600);
+    box-shadow: 0 0 0 3px rgba(158, 48, 57, 0.3); /* primary-700 w/ opacity */
   }
   
-  .checklist-card p {
-    color: var(--color-primary-light);
-  }
-
-  .progress-bar-placeholder {
-    height: 8px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-full);
-    margin: var(--spacing-6) 0;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background-color: var(--color-success);
-  }
-
-  .checklist-card .btn {
-    background-color: white;
-    color: var(--color-primary-dark);
-  }
-
-  .trust-section {
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-8);
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .trust-content p {
-    color: var(--color-text-muted);
-    margin-bottom: var(--spacing-6);
-  }
-
-  .badges-demo {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-4);
-  }
-  
-  /* Trust badges duplicated from component for the demo */
-  .trust-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-1);
-    padding: var(--spacing-1) var(--spacing-3);
-    border-radius: var(--radius-full);
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-  .badge-official {
-    background-color: var(--color-success-bg);
-    color: var(--color-success);
-    border: 1px solid var(--color-success);
-  }
-  .badge-verified {
-    background-color: var(--color-primary-light);
-    color: var(--color-primary-dark);
-    border: 1px solid var(--color-primary);
+  .search-input::placeholder {
+    color: #a1a1aa; /* zinc-400 */
   }
 </style>

@@ -7,20 +7,20 @@ interface ComparisonTableProps {
 
 export function ComparisonTable({ headers, rows }: ComparisonTableProps) {
   return (
-    <div className="my-8 overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+    <div className="my-8 overflow-x-auto rounded-xl border border-zinc-800 shadow-sm">
       <table className="w-full text-left text-sm whitespace-nowrap sm:whitespace-normal">
-        <thead className="bg-slate-50 border-b border-slate-200 text-slate-700 font-semibold">
+        <thead className="bg-zinc-900 border-b border-zinc-800 text-zinc-300 font-semibold">
           <tr>
             {headers.map((header, idx) => (
               <th key={idx} className="px-6 py-4">{header}</th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-100 bg-white">
+        <tbody className="divide-y divide-zinc-800 bg-zinc-950">
           {rows.map((row, rowIdx) => (
-            <tr key={rowIdx} className="hover:bg-slate-50 transition-colors">
+            <tr key={rowIdx} className="hover:bg-zinc-900 transition-colors">
               {row.map((cell, cellIdx) => (
-                <td key={cellIdx} className={`px-6 py-4 text-slate-600 ${cellIdx === 0 ? 'font-medium text-slate-900' : ''}`}>
+                <td key={cellIdx} className={`px-6 py-4 text-zinc-400 ${cellIdx === 0 ? 'font-medium text-zinc-200' : ''}`}>
                   {cell}
                 </td>
               ))}

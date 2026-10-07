@@ -8,17 +8,17 @@ interface TrustBadgeProps {
 export function TrustBadge({ type }: TrustBadgeProps) {
   const configs = {
     official: {
-      color: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+      color: 'bg-emerald-950/50 text-emerald-400 border-emerald-900',
       icon: <ShieldCheck className="w-3.5 h-3.5 mr-1" />,
       label: 'Official'
     },
     verified: {
-      color: 'bg-sky-50 text-sky-700 border-sky-200',
+      color: 'bg-sky-950/50 text-sky-400 border-sky-900',
       icon: <ShieldCheck className="w-3.5 h-3.5 mr-1" />,
       label: 'Verified'
     },
     draft: {
-      color: 'bg-amber-50 text-amber-700 border-amber-200',
+      color: 'bg-amber-950/50 text-amber-400 border-amber-900',
       icon: <FileWarning className="w-3.5 h-3.5 mr-1" />,
       label: 'Draft'
     }

@@ -7,13 +7,11 @@ interface SourceBoxProps {
 }
 
 export function SourceBox({ url, label = 'Official source' }: SourceBoxProps) {
-  // Try to extract a clean domain name
   let domain = url;
   try {
     const urlObj = new URL(url);
     domain = urlObj.hostname.replace('www.', '');
   } catch (e) {
-    // leave as is
   }
 
   return (
@@ -21,11 +19,11 @@ export function SourceBox({ url, label = 'Official source' }: SourceBoxProps) {
       href={url} 
       target="_blank" 
       rel="noopener noreferrer" 
-      className="inline-flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+      className="inline-flex items-center gap-2 px-3 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200 hover:border-zinc-700 transition-colors"
     >
-      <span className="font-semibold">{label}:</span>
-      <span className="underline decoration-slate-300 underline-offset-2">{domain}</span>
-      <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+      <span className="font-semibold text-zinc-300">{label}:</span>
+      <span className="underline decoration-zinc-700 underline-offset-2">{domain}</span>
+      <ExternalLink className="w-3.5 h-3.5 text-zinc-500" />
     </a>
   );
 }
