@@ -1,0 +1,126 @@
+---
+import { LANGUAGES } from '../config';
+import { getLangFromUrl, getActiveLanguages } from '../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const activeLangs = getActiveLanguages();
+---
+
+<div class="lang-switcher">
+  <button class="lang-btn" aria-expanded="false" aria-controls="lang-menu">
+    {LANGUAGES[currentLang].label}
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M6 9l6 6 6-6"/>
+    </svg>
+  </button>
+  
+  <ul id="lang-menu" class="lang-menu" hidden>
+    {activeLangs.map((lang) => (
+      <li>
+        <a 
+          href={`/${lang}/`} 
+          class={`lang-option ${lang === currentLang ? 'is-active' : ''}`}
+          lang={lang}
+        >
+          {LANGUAGES[lang as keyof typeof LANGUAGES].label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .lang-switcher {
+    position: relative;
+  }
+  
+  .lang-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    padding: var(--spacing-1) var(--spacing-2);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--color-text);
+  }
+  
+  .lang-btn:hover {
+    background-color: var(--color-bg);
+  }
+  
+  .lang-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: var(--spacing-1);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    list-style: none;
+    min-width: 120px;
+    z-index: 10;
+  }
+  
+  .lang-menu[hidden] {
+    display: none;
+  }
+  
+  .lang-option {
+    display: block;
+    padding: var(--spacing-2) var(--spacing-4);
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.875rem;
+  }
+  
+  .lang-option:hover {
+    background-color: var(--color-bg);
+    color: var(--color-primary);
+  }
+  
+  .lang-option.is-active {
+    font-weight: bold;
+    color: var(--color-primary-dark);
+    background-color: var(--color-primary-light);
+  }
+</style>
+
+<script>
+  function setupLangSwitcher() {
+    const btn = document.querySelector('.lang-btn');
+    const menu = document.getElementById('lang-menu');
+    
+    if (btn && menu) {
+      // Clean up previous listeners
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode?.replaceChild(newBtn, btn);
+      
+      newBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const expanded = newBtn.getAttribute('aria-expanded') === 'true';
+        newBtn.setAttribute('aria-expanded', !expanded ? 'true' : 'false');
+        
+        if (expanded) {
+          menu.setAttribute('hidden', '');
+        } else {
+          menu.removeAttribute('hidden');
+        }
+      });
+      
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!menu.hasAttribute('hidden')) {
+          newBtn.setAttribute('aria-expanded', 'false');
+          menu.setAttribute('hidden', '');
+        }
+      });
+    }
+  }
+  
+  setupLangSwitcher();
+  document.addEventListener('astro:page-load', setupLangSwitcher);
+</script>

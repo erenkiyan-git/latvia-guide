@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getActiveLanguages } from '../../../i18n/utils';
+import { useTranslations } from '../../../i18n/utils';
+import type { Lang } from '../../../config';
+
+export function getStaticPaths() {
+  const langs = getActiveLanguages();
+  return langs.map(lang => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+
+const pageTitle = lang === 'tr' ? 'Faydalı Yerler Haritası' : 'Map of Useful Places';
+const pageDesc = lang === 'tr' ? 'Letonya\'daki temel kurumların, hastanelerin ve kampüslerin interaktif haritası.' : 'Interactive map of essential institutions, hospitals, and campuses in Latvia.';
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
+  <div class="container map-container">
+    <div class="header-section">
+      <h1>{pageTitle}</h1>
+      <p class="subtitle">{pageDesc}</p>
+    </div>
+
+    <div class="map-placeholder">
+      <div class="icon">🗺️</div>
+      <h2>{lang === 'tr' ? 'Harita Çok Yakında (V2)' : 'Interactive Map Coming Soon (V2)'}</h2>
+      <p>
+        {lang === 'tr' 
+          ? 'Şu anda Riga\'daki tüm önemli yerlerin (PMLP ofisleri, ana hastaneler, üniversiteler ve toplu taşıma merkezleri) yer aldığı, çevrimdışı uyumlu özel bir harita üzerinde çalışıyoruz.'
+          : 'We are currently building a custom, offline-friendly map featuring all the most important locations in Riga (PMLP offices, major hospitals, universities, and transit hubs).'
+        }
+      </p>
+      
+      <div class="coming-soon-list">
+        <h3>{lang === 'tr' ? 'Haritada neler olacak?' : 'What will be on the map?'}</h3>
+        <ul>
+          <li>📍 {lang === 'tr' ? 'Göçmenlik Büroları (PMLP)' : 'Immigration Offices (PMLP)'}</li>
+          <li>🏥 {lang === 'tr' ? 'Nöbetçi Eczaneler ve Acil Servisler' : '24/7 Pharmacies & Emergency Rooms'}</li>
+          <li>🏫 {lang === 'tr' ? 'Üniversite Kampüsleri' : 'University Campuses'}</li>
+          <li>🚌 {lang === 'tr' ? 'Bilet Satış Noktaları (e-talons)' : 'Transport Ticket Machines'}</li>
+        </ul>
+      </div>
+      
+      <a href={`/${lang}/guides/`} class="btn">{lang === 'tr' ? 'Rehberleri Okumaya Devam Et' : 'Continue Reading Guides'}</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .map-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: var(--spacing-16);
+  }
+
+  .header-section {
+    text-align: center;
+    padding: var(--spacing-8) 0;
+    margin-bottom: var(--spacing-8);
+  }
+
+  .header-section h1 {
+    color: var(--color-primary-dark);
+  }
+
+  .map-placeholder {
+    background-color: var(--color-surface);
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-12) var(--spacing-6);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .icon {
+    font-size: 5rem;
+    margin-bottom: var(--spacing-4);
+    opacity: 0.8;
+  }
+  
+  .map-placeholder h2 {
+    color: var(--color-primary-dark);
+    margin-bottom: var(--spacing-4);
+  }
+  
+  .map-placeholder p {
+    max-width: 600px;
+    color: var(--color-text-muted);
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-8);
+  }
+  
+  .coming-soon-list {
+    background-color: var(--color-bg);
+    padding: var(--spacing-6) var(--spacing-8);
+    border-radius: var(--radius-md);
+    text-align: left;
+    margin-bottom: var(--spacing-8);
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .coming-soon-list h3 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-4);
+    font-size: 1.125rem;
+  }
+  
+  .coming-soon-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+  }
+  
+  .coming-soon-list li {
+    font-size: 1rem;
+    color: var(--color-text);
+  }
+</style>

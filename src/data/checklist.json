@@ -1,0 +1,126 @@
+{
+  "en": [
+    {
+      "id": "group_24h",
+      "title": "First 24 Hours",
+      "items": [
+        {
+          "id": "sim_card",
+          "title": "Get a local SIM card",
+          "description": "Buy a pre-paid SIM card from Narvesen to get internet access.",
+          "link": "/en/guides/new-to-latvia/first-24-hours/"
+        },
+        {
+          "id": "cash",
+          "title": "Withdraw some cash",
+          "description": "Get €20-€50 for emergencies and small shops.",
+          "link": "/en/guides/new-to-latvia/first-24-hours/"
+        }
+      ]
+    },
+    {
+      "id": "group_week",
+      "title": "First Week",
+      "items": [
+        {
+          "id": "transport_card",
+          "title": "Get public transport card (e-talons)",
+          "description": "Buy an e-talons or download the Rīgas Satiksme app.",
+          "link": "/en/guides/transport/riga-public-transport/"
+        },
+        {
+          "id": "housing",
+          "title": "Secure long-term housing",
+          "description": "Sign a contract for your apartment. Do not pay before seeing it.",
+          "link": "/en/guides/housing/where-to-search/"
+        }
+      ]
+    },
+    {
+      "id": "group_month",
+      "title": "First Month",
+      "items": [
+        {
+          "id": "bank_account",
+          "title": "Open a bank account",
+          "description": "Set up a digital bank (Revolut/Wise) or local bank.",
+          "link": "/en/guides/daily-life/banking/"
+        },
+        {
+          "id": "student_isic",
+          "title": "Get your ISIC Card",
+          "description": "If you are a student, get your ISIC for discounts.",
+          "link": "/en/guides/students/isic-card/"
+        },
+        {
+          "id": "residence_permit",
+          "title": "Register at PMLP (if applicable)",
+          "description": "Pick up your residence permit card or register as an EU citizen.",
+          "link": "/en/guides/documents/residence-permit-types/"
+        }
+      ]
+    }
+  ],
+  "tr": [
+    {
+      "id": "group_24h",
+      "title": "İlk 24 Saat",
+      "items": [
+        {
+          "id": "sim_card",
+          "title": "Yerel bir SIM kart alın",
+          "description": "İnternet erişimi için Narvesen'den ön ödemeli bir SIM kart satın alın.",
+          "link": "/tr/guides/new-to-latvia/first-24-hours/"
+        },
+        {
+          "id": "cash",
+          "title": "Biraz nakit çekin",
+          "description": "Acil durumlar ve küçük dükkanlar için 20-50 € edinin.",
+          "link": "/tr/guides/new-to-latvia/first-24-hours/"
+        }
+      ]
+    },
+    {
+      "id": "group_week",
+      "title": "İlk Hafta",
+      "items": [
+        {
+          "id": "transport_card",
+          "title": "Toplu taşıma kartı (e-talons) alın",
+          "description": "Bir e-talons satın alın veya Rīgas Satiksme uygulamasını indirin.",
+          "link": "/tr/guides/transport/riga-public-transport/"
+        },
+        {
+          "id": "housing",
+          "title": "Uzun vadeli konut kiralayın",
+          "description": "Daireniz için sözleşme imzalayın. Görmeden ödeme yapmayın.",
+          "link": "/tr/guides/housing/where-to-search/"
+        }
+      ]
+    },
+    {
+      "id": "group_month",
+      "title": "İlk Ay",
+      "items": [
+        {
+          "id": "bank_account",
+          "title": "Banka hesabı açın",
+          "description": "Dijital bir banka (Revolut/Wise) veya yerel bir banka kurun.",
+          "link": "/tr/guides/daily-life/banking/"
+        },
+        {
+          "id": "student_isic",
+          "title": "ISIC Kartınızı alın",
+          "description": "Öğrenciyseniz indirimler için ISIC'inizi alın.",
+          "link": "/tr/guides/students/isic-card/"
+        },
+        {
+          "id": "residence_permit",
+          "title": "PMLP'ye kayıt olun (gerekirse)",
+          "description": "Oturma izni kartınızı alın veya AB vatandaşı olarak kayıt olun.",
+          "link": "/tr/guides/documents/residence-permit-types/"
+        }
+      ]
+    }
+  ]
+}

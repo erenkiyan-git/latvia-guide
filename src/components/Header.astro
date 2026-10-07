@@ -1,0 +1,139 @@
+---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<header class="header">
+  <div class="container header-inner">
+    <a href={`/${lang}/`} class="logo">Latvia Guide</a>
+    
+    <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="menu-icon-line-1" d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="menu-icon-line-2" d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="menu-icon-line-3" d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <nav class="main-nav" aria-label="Main Navigation">
+      <ul class="nav-list">
+        <li><a href={`/${lang}/`} class="nav-link">{t('nav.home')}</a></li>
+        <li><a href={`/${lang}/guides/`} class="nav-link">{t('nav.guides')}</a></li>
+        <li><a href={`/${lang}/map/`} class="nav-link">{t('nav.map')}</a></li>
+        <li><a href={`/${lang}/useful-websites/`} class="nav-link">{t('nav.websites')}</a></li>
+        <li class="language-selector-container">
+          <LanguageSwitcher />
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem; /* 64px */
+  }
+
+  .logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+  }
+
+  .logo:hover {
+    text-decoration: none;
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .main-nav {
+      display: block;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+    }
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-6);
+    align-items: center;
+  }
+
+  .nav-link {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .nav-link:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .mobile-menu-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: var(--spacing-2);
+  }
+
+  /* Mobile menu active state */
+  .main-nav.is-open {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--spacing-4);
+    box-shadow: var(--shadow-md);
+  }
+
+  .main-nav.is-open .nav-list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-4);
+  }
+</style>
+
+<script>
+  const setupMobileMenu = () => {
+    const btn = document.querySelector('.mobile-menu-btn');
+    const nav = document.querySelector('.main-nav');
+    
+    if (btn && nav) {
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode?.replaceChild(newBtn, btn);
+      
+      newBtn.addEventListener('click', () => {
+        const isExpanded = newBtn.getAttribute('aria-expanded') === 'true';
+        newBtn.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
+        nav.classList.toggle('is-open');
+      });
+    }
+  };
+
+  setupMobileMenu();
+  document.addEventListener('astro:page-load', setupMobileMenu);
+</script>

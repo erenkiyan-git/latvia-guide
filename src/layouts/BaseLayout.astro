@@ -1,0 +1,75 @@
+---
+import '../styles/index.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: string;
+}
+
+const { title, description = 'A practical, trustworthy guide for foreigners in Latvia.', lang = 'en' } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title} | Latvia Guide</title>
+    <meta name="title" content={`${title} | Latvia Guide`} />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={`${title} | Latvia Guide`} />
+    <meta property="og:description" content={description} />
+    <!-- Placeholder for actual social image -->
+    <meta property="og:image" content="https://latviaguide.com/social-card.jpg" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={`${title} | Latvia Guide`} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content="https://latviaguide.com/social-card.jpg" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    
+    <!-- Analytics Placeholder -->
+    <script is:inline>
+      // window.dataLayer = window.dataLayer || [];
+      // function gtag(){dataLayer.push(arguments);}
+      // gtag('js', new Date());
+      // gtag('config', 'G-XXXXXXXXXX');
+    </script>
+  </head>
+  <body>
+    <div class="site-wrapper">
+      <Header />
+      <main class="main-content">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>
+
+<style>
+  .site-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: var(--spacing-8) 0;
+  }
+</style>

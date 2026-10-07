@@ -1,0 +1,300 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div class="search-container" id="search-container">
+  <div class="search-input-wrapper">
+    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input 
+      type="text" 
+      id="search-input" 
+      class="search-input" 
+      placeholder={t('hero.search')} 
+      autocomplete="off"
+      aria-label="Search guides"
+      aria-expanded="false"
+      aria-controls="search-results"
+    />
+  </div>
+  
+  <div id="search-results" class="search-results" hidden>
+    <div id="search-results-content"></div>
+    <div id="search-no-results" class="no-results" hidden>
+      No results found. Try a different word.
+    </div>
+  </div>
+</div>
+
+<style>
+  .search-container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .search-input-wrapper {
+    position: relative;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: var(--spacing-4);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+  }
+
+  .search-input {
+    width: 100%;
+    padding: var(--spacing-4) var(--spacing-6) var(--spacing-4) 3rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-size: 1.125rem;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+  }
+
+  .search-results {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+
+  .search-results[hidden] {
+    display: none;
+  }
+
+  .no-results {
+    padding: var(--spacing-6);
+    text-align: center;
+    color: var(--color-text-muted);
+  }
+
+  /* Global styles for injected results */
+  :global(.search-result-item) {
+    display: block;
+    padding: var(--spacing-3) var(--spacing-4);
+    border-bottom: 1px solid var(--color-border);
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  :global(.search-result-item:last-child) {
+    border-bottom: none;
+  }
+
+  :global(.search-result-item:hover), :global(.search-result-item[aria-selected="true"]) {
+    background-color: var(--color-primary-light);
+    text-decoration: none;
+  }
+
+  :global(.search-result-title) {
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    margin-bottom: 2px;
+  }
+
+  :global(.search-result-desc) {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  :global(.search-result-section) {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-top: 4px;
+    display: block;
+  }
+</style>
+
+<script is:inline define:vars={{ lang }}>
+  (function() {
+    let indexData = null;
+    let isLoading = false;
+    
+    function initSearch() {
+      const input = document.getElementById('search-input');
+      const resultsContainer = document.getElementById('search-results');
+      const resultsContent = document.getElementById('search-results-content');
+      const noResults = document.getElementById('search-no-results');
+      
+      if (!input || !resultsContainer || !resultsContent || !noResults) return;
+
+      // Ensure fresh elements on view transition
+      const newInput = input.cloneNode(true);
+      input.parentNode.replaceChild(newInput, input);
+
+      const loadIndex = async () => {
+        if (indexData || isLoading) return;
+        isLoading = true;
+        try {
+          const res = await fetch(`/${lang}/search-index.json`);
+          indexData = await res.json();
+        } catch (e) {
+          console.error("Failed to load search index", e);
+        }
+        isLoading = false;
+      };
+
+      const expandSearchQuery = (query) => {
+        const words = query.toLowerCase().trim().split(/\s+/);
+        let expandedWords = [...words];
+        
+        if (indexData && indexData.synonyms) {
+          words.forEach(word => {
+            Object.entries(indexData.synonyms).forEach(([mainWord, syns]) => {
+              if (mainWord === word || syns.includes(word)) {
+                expandedWords.push(mainWord, ...syns);
+              }
+            });
+          });
+        }
+        return [...new Set(expandedWords)];
+      };
+
+      const scoreResult = (item, expandedQueryTerms) => {
+        let score = 0;
+        expandedQueryTerms.forEach(term => {
+          if (item.title.toLowerCase().includes(term)) score += 10;
+          if (item.section.toLowerCase().includes(term)) score += 5;
+          if (item.searchableText.includes(term)) score += 1;
+        });
+        return score;
+      };
+
+      let selectedIndex = -1;
+
+      const renderResults = (results) => {
+        resultsContent.innerHTML = '';
+        selectedIndex = -1;
+        
+        if (results.length === 0) {
+          noResults.removeAttribute('hidden');
+        } else {
+          noResults.setAttribute('hidden', '');
+          results.forEach((res, i) => {
+            const a = document.createElement('a');
+            a.href = res.url;
+            a.className = 'search-result-item';
+            a.id = `search-result-${i}`;
+            a.setAttribute('role', 'option');
+            a.setAttribute('aria-selected', 'false');
+            
+            a.innerHTML = `
+              <div class="search-result-title">${res.title}</div>
+              <div class="search-result-desc">${res.description}</div>
+              <span class="search-result-section">${res.section.replace(/-/g, ' ')}</span>
+            `;
+            resultsContent.appendChild(a);
+          });
+        }
+        resultsContainer.removeAttribute('hidden');
+        newInput.setAttribute('aria-expanded', 'true');
+      };
+
+      const handleSearch = (e) => {
+        const val = e.target.value.trim();
+        if (val.length < 2) {
+          resultsContainer.setAttribute('hidden', '');
+          newInput.setAttribute('aria-expanded', 'false');
+          return;
+        }
+
+        if (!indexData) {
+          loadIndex().then(() => {
+            if (indexData) performSearch(val);
+          });
+        } else {
+          performSearch(val);
+        }
+      };
+
+      const performSearch = (val) => {
+        const queryTerms = expandSearchQuery(val);
+        const scored = indexData.index.map(item => ({
+          item,
+          score: scoreResult(item, queryTerms)
+        })).filter(r => r.score > 0);
+        
+        scored.sort((a, b) => b.score - a.score);
+        renderResults(scored.map(r => r.item).slice(0, 10)); // Top 10
+      };
+
+      // Event Listeners
+      newInput.addEventListener('focus', loadIndex);
+      newInput.addEventListener('input', handleSearch);
+      
+      // Keyboard navigation
+      newInput.addEventListener('keydown', (e) => {
+        const items = resultsContent.querySelectorAll('.search-result-item');
+        if (items.length === 0 || resultsContainer.hasAttribute('hidden')) return;
+
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          selectedIndex = (selectedIndex + 1) % items.length;
+          updateSelection(items);
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+          updateSelection(items);
+        } else if (e.key === 'Enter') {
+          if (selectedIndex >= 0) {
+            e.preventDefault();
+            items[selectedIndex].click();
+          }
+        }
+      });
+
+      const updateSelection = (items) => {
+        items.forEach((item, idx) => {
+          if (idx === selectedIndex) {
+            item.setAttribute('aria-selected', 'true');
+            item.scrollIntoView({ block: 'nearest' });
+          } else {
+            item.setAttribute('aria-selected', 'false');
+          }
+        });
+      };
+
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        const container = document.getElementById('search-container');
+        if (container && !container.contains(e.target)) {
+          resultsContainer.setAttribute('hidden', '');
+          newInput.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    setupSearch = initSearch;
+  })();
+
+  setupSearch();
+  document.addEventListener('astro:page-load', setupSearch);
+</script>

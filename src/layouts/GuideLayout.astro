@@ -1,0 +1,107 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TrustBadge from '../components/TrustBadge.astro';
+import SourceBox from '../components/SourceBox.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  guide: CollectionEntry<'guides'>;
+}
+
+const { guide } = Astro.props;
+const { title, description, badge, officialSource, lastChecked, verified } = guide.data;
+---
+
+<BaseLayout title={title} description={description} lang={guide.id.split('/')[0]}>
+  <article class="guide-container container">
+    <div class="guide-header">
+      <div class="guide-meta">
+        <TrustBadge type={badge} />
+      </div>
+      <h1 class="guide-title">{title}</h1>
+      <p class="guide-description">{description}</p>
+    </div>
+
+    <SourceBox url={officialSource} date={lastChecked} verified={verified} />
+
+    <div class="guide-content">
+      <slot />
+    </div>
+
+    <div class="guide-footer">
+      <a href={`mailto:hello@latviaguide.example.com?subject=Error in guide: ${title}`} class="report-error">
+        Spot an error? Tell us
+      </a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .guide-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: var(--spacing-8);
+  }
+
+  .guide-header {
+    margin-bottom: var(--spacing-8);
+  }
+
+  .guide-meta {
+    margin-bottom: var(--spacing-4);
+  }
+
+  .guide-title {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-2);
+    color: var(--color-primary-dark);
+  }
+
+  .guide-description {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+  }
+
+  .guide-content {
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  .guide-content :global(h2) {
+    margin-top: var(--spacing-12);
+    margin-bottom: var(--spacing-4);
+    padding-bottom: var(--spacing-2);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .guide-content :global(h3) {
+    margin-top: var(--spacing-8);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .guide-content :global(ul), .guide-content :global(ol) {
+    margin-bottom: var(--spacing-6);
+    padding-left: var(--spacing-6);
+  }
+
+  .guide-content :global(li) {
+    margin-bottom: var(--spacing-2);
+  }
+
+  .guide-footer {
+    margin-top: var(--spacing-12);
+    padding-top: var(--spacing-6);
+    border-top: 1px solid var(--color-border);
+    text-align: right;
+  }
+
+  .report-error {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    text-decoration: underline;
+  }
+
+  .report-error:hover {
+    color: var(--color-primary);
+  }
+</style>

@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getActiveLanguages } from '../../../i18n/utils';
+import { useTranslations } from '../../../i18n/utils';
+import type { Lang } from '../../../config';
+
+export function getStaticPaths() {
+  const langs = getActiveLanguages();
+  return langs.map(lang => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+
+const pageTitle = lang === 'tr' ? 'Acil Durum İletişim Numaraları' : 'Emergency Contacts';
+const pageDesc = lang === 'tr' ? 'Letonya\'daki hayati tehlike veya acil durumlar için resmi numaralar.' : 'Official numbers for life-threatening or urgent situations in Latvia.';
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
+  <div class="emergency-container">
+    <div class="header-section">
+      <h1>{pageTitle}</h1>
+      <p class="subtitle">{pageDesc}</p>
+    </div>
+
+    <div class="main-emergency">
+      <div class="emergency-card giant-card">
+        <div class="icon">🚨</div>
+        <h2>112</h2>
+        <h3>{lang === 'tr' ? 'Genel Acil Durum' : 'General Emergency'}</h3>
+        <p>{lang === 'tr' ? 'Ambulans, Polis, İtfaiye' : 'Ambulance, Police, Fire'}</p>
+        <p class="lang-note">{lang === 'tr' ? 'Operatörler Letonca, Rusça ve İngilizce konuşmaktadır.' : 'Operators speak Latvian, Russian, and English.'}</p>
+        <a href="tel:112" class="call-btn">{lang === 'tr' ? 'Şimdi Ara' : 'Call Now'}</a>
+      </div>
+    </div>
+
+    <div class="secondary-emergencies">
+      <div class="emergency-card">
+        <div class="icon">🩺</div>
+        <h2>66016001</h2>
+        <h3>{lang === 'tr' ? 'Aile Hekimi Danışma Hattı' : 'Family Doctor Advisory'}</h3>
+        <p>{lang === 'tr' ? 'Hayati tehlike arz etmeyen tıbbi tavsiyeler için (akşamları ve hafta sonları).' : 'For non-life-threatening medical advice (evenings and weekends).'}</p>
+        <a href="tel:66016001" class="call-btn secondary">{lang === 'tr' ? 'Ara' : 'Call'}</a>
+      </div>
+
+      <div class="emergency-card">
+        <div class="icon">👮</div>
+        <h2>110</h2>
+        <h3>{lang === 'tr' ? 'Doğrudan Polis' : 'Direct Police'}</h3>
+        <p>{lang === 'tr' ? 'Doğrudan Devlet Polisine ulaşmak için (112 üzerinden de mümkündür).' : 'To reach the State Police directly (also possible via 112).'}</p>
+        <a href="tel:110" class="call-btn secondary">{lang === 'tr' ? 'Ara' : 'Call'}</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .emergency-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .header-section {
+    text-align: center;
+    padding: var(--spacing-8) 0;
+    margin-bottom: var(--spacing-8);
+  }
+
+  .header-section h1 {
+    color: var(--color-error);
+    font-size: 2.5rem;
+  }
+
+  .main-emergency {
+    margin-bottom: var(--spacing-8);
+  }
+
+  .secondary-emergencies {
+    display: grid;
+    gap: var(--spacing-6);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .secondary-emergencies {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .emergency-card {
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .emergency-card h2 {
+    font-size: 2.5rem;
+    color: var(--color-error);
+    margin: var(--spacing-2) 0;
+    letter-spacing: 2px;
+  }
+
+  .emergency-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-2);
+  }
+
+  .emergency-card p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-6);
+    flex-grow: 1;
+  }
+
+  .icon {
+    font-size: 3rem;
+  }
+
+  .giant-card {
+    border-color: var(--color-error);
+    background-color: var(--color-error-bg);
+  }
+
+  .giant-card h2 {
+    font-size: 4rem;
+  }
+  
+  .lang-note {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-error);
+  }
+
+  .call-btn {
+    display: inline-block;
+    width: 100%;
+    background-color: var(--color-error);
+    color: white;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: var(--spacing-4);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .call-btn:hover {
+    background-color: #b91c1c;
+    text-decoration: none;
+  }
+
+  .call-btn.secondary {
+    background-color: var(--color-primary);
+    font-size: 1.125rem;
+  }
+
+  .call-btn.secondary:hover {
+    background-color: var(--color-primary-dark);
+  }
+</style>

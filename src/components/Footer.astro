@@ -1,0 +1,121 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const currentYear = new Date().getFullYear();
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>Latvia Guide</h3>
+        <p class="footer-desc">{t('hero.subtitle')}</p>
+      </div>
+      <div class="footer-col">
+        <h4>Links</h4>
+        <ul>
+          <li><a href={`/${lang}/about/`}>About & Trust</a></li>
+          <li><a href={`/${lang}/guides/`}>{t('nav.guides')}</a></li>
+          <li><a href={`/${lang}/checklist/`}>{lang === 'tr' ? '30 Günlük Kontrol Listesi' : '30-Day Checklist'}</a></li>
+          <li><a href={`/${lang}/calculators/salary/`}>{lang === 'tr' ? 'Net Maaş Hesaplayıcı' : 'Net Salary Calculator'}</a></li>
+          <li><a href={`/${lang}/calculators/living-costs/`}>{lang === 'tr' ? 'Yaşam Maliyeti Hesaplayıcı' : 'Living Costs Calculator'}</a></li>
+          <li><a href={`/${lang}/useful-websites/`}>{lang === 'tr' ? 'Faydalı Web Siteleri' : 'Useful Websites'}</a></li>
+          <li><a href={`/${lang}/phrases/`}>{lang === 'tr' ? 'Letonca İfadeler' : 'Latvian Phrases'}</a></li>
+          <li><a href={`/${lang}/emergency/`} class="emergency-link">{lang === 'tr' ? 'Acil Durum' : 'Emergency Contacts'}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="disclaimer">
+        <strong>Disclaimer:</strong> {t('footer.disclaimer')}
+      </p>
+      <p class="copyright">&copy; {currentYear} Latvia Guide. Built for foreigners, by foreigners.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: var(--spacing-12) 0 var(--spacing-6);
+    margin-top: auto;
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-8);
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  .footer-col h3 {
+    color: var(--color-primary-dark);
+    margin-bottom: var(--spacing-2);
+  }
+
+  .footer-col h4 {
+    margin-bottom: var(--spacing-4);
+    font-size: 1rem;
+  }
+
+  .footer-desc {
+    color: var(--color-text-muted);
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+
+  .footer-col a {
+    color: var(--color-text-muted);
+  }
+
+  .footer-col a:hover {
+    color: var(--color-primary);
+  }
+
+  .footer-col a.emergency-link {
+    color: var(--color-error);
+    font-weight: 600;
+  }
+
+  .footer-col a.emergency-link:hover {
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--spacing-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .disclaimer {
+    background-color: var(--color-bg);
+    padding: var(--spacing-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-warning-bg);
+    color: var(--color-text);
+  }
+</style>

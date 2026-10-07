@@ -1,0 +1,264 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { getActiveLanguages } from '../../../../i18n/utils';
+import { useTranslations } from '../../../../i18n/utils';
+import type { Lang } from '../../../../config';
+import WarningBox from '../../../../components/WarningBox.astro';
+
+export function getStaticPaths() {
+  const langs = getActiveLanguages();
+  return langs.map(lang => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+
+const pageTitle = lang === 'tr' ? 'Yaşam Maliyeti Hesaplayıcı' : 'Living Costs Calculator';
+const pageDesc = lang === 'tr' ? 'Riga\'daki tahmini aylık harcamalarınızı planlayın.' : 'Plan your estimated monthly expenses in Riga.';
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
+  <div class="container calculator-container">
+    <div class="header-section">
+      <h1>{pageTitle}</h1>
+      <p class="subtitle">{pageDesc}</p>
+    </div>
+
+    <WarningBox>
+      {lang === 'tr' 
+        ? 'DİKKAT: Bu hesaplayıcı, kullanıcı girişine dayalı kaba bir tahmindir. Fiyatlar enflasyon, konum (şehir merkezi veya banliyö) ve yaşam tarzına bağlı olarak büyük ölçüde değişir.'
+        : 'DISCLAIMER: This calculator provides a rough estimate based on user input. Prices vary wildly depending on inflation, location (city center vs suburbs), and lifestyle.'}
+    </WarningBox>
+
+    <div class="calculator-card">
+      
+      <!-- Housing -->
+      <div class="slider-group">
+        <div class="slider-header">
+          <label for="cost-housing">{lang === 'tr' ? '🏠 Konut (Kira)' : '🏠 Housing (Rent)'}</label>
+          <span class="value-display"><span id="val-housing">450</span> €</span>
+        </div>
+        <input type="range" id="cost-housing" class="slider" min="200" max="1500" step="50" value="450" />
+        <div class="slider-hints">
+          <span>{lang === 'tr' ? 'Paylaşımlı Oda' : 'Shared room'}</span>
+          <span>{lang === 'tr' ? 'Lüks Daire' : 'Luxury apartment'}</span>
+        </div>
+      </div>
+
+      <!-- Utilities -->
+      <div class="slider-group">
+        <div class="slider-header">
+          <label for="cost-utils">{lang === 'tr' ? '⚡ Faturalar (Elektrik, Su, Isınma)' : '⚡ Utilities (Electricity, Heating, Water)'}</label>
+          <span class="value-display"><span id="val-utils">150</span> €</span>
+        </div>
+        <input type="range" id="cost-utils" class="slider" min="50" max="400" step="10" value="150" />
+        <div class="slider-hints">
+          <span>{lang === 'tr' ? 'Yaz Aylarında' : 'Summer (No heating)'}</span>
+          <span>{lang === 'tr' ? 'Kış (Soğuk/Eski bina)' : 'Winter (Old building)'}</span>
+        </div>
+      </div>
+
+      <!-- Food -->
+      <div class="slider-group">
+        <div class="slider-header">
+          <label for="cost-food">{lang === 'tr' ? '🛒 Market ve Yiyecek' : '🛒 Groceries & Food'}</label>
+          <span class="value-display"><span id="val-food">300</span> €</span>
+        </div>
+        <input type="range" id="cost-food" class="slider" min="150" max="800" step="25" value="300" />
+      </div>
+
+      <!-- Transport -->
+      <div class="slider-group">
+        <div class="slider-header">
+          <label for="cost-transport">{lang === 'tr' ? '🚌 Ulaşım (Aylık Bilet vs.)' : '🚌 Transport'}</label>
+          <span class="value-display"><span id="val-transport">30</span> €</span>
+        </div>
+        <input type="range" id="cost-transport" class="slider" min="0" max="200" step="10" value="30" />
+      </div>
+
+      <!-- Entertainment -->
+      <div class="slider-group">
+        <div class="slider-header">
+          <label for="cost-fun">{lang === 'tr' ? '🎉 Eğlence ve Diğer' : '🎉 Entertainment & Misc'}</label>
+          <span class="value-display"><span id="val-fun">150</span> €</span>
+        </div>
+        <input type="range" id="cost-fun" class="slider" min="50" max="1000" step="50" value="150" />
+      </div>
+
+      <div class="results-section">
+        <div class="result-row total-row">
+          <span>{lang === 'tr' ? 'Tahmini Toplam Maliyet' : 'Estimated Total Monthly Cost'}</span>
+          <span id="res-total" class="amount text-primary giant">€1080</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .calculator-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .header-section {
+    text-align: center;
+    padding: var(--spacing-8) 0;
+    margin-bottom: var(--spacing-6);
+  }
+
+  .header-section h1 {
+    color: var(--color-primary-dark);
+  }
+
+  .calculator-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+    box-shadow: var(--shadow-md);
+    margin-top: var(--spacing-6);
+    margin-bottom: var(--spacing-16);
+  }
+
+  .slider-group {
+    margin-bottom: var(--spacing-8);
+  }
+
+  .slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-2);
+  }
+
+  .slider-header label {
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: 1.125rem;
+  }
+
+  .value-display {
+    font-weight: 700;
+    font-family: monospace;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    padding: 2px 8px;
+    border-radius: var(--radius-md);
+  }
+
+  /* Custom Slider Styling */
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--color-border);
+    outline: none;
+    margin: var(--spacing-3) 0;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.1s;
+  }
+
+  .slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+  }
+
+  .slider-hints {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .results-section {
+    margin-top: var(--spacing-8);
+    padding-top: var(--spacing-6);
+    border-top: 2px dashed var(--color-border);
+  }
+
+  .result-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) 0;
+    font-size: 1.125rem;
+  }
+
+  .total-row {
+    font-weight: 700;
+  }
+  
+  .total-row span:first-child {
+    color: var(--color-text-muted);
+  }
+
+  .amount.giant {
+    font-size: 3.5rem;
+    font-family: monospace;
+    color: var(--color-primary-dark);
+  }
+</style>
+
+<script>
+  function setupLivingCosts() {
+    const ids = ['housing', 'utils', 'food', 'transport', 'fun'];
+    const totalEl = document.getElementById('res-total');
+    
+    if (!totalEl) return;
+
+    // We clone elements to ensure no duplicate event listeners on view transition
+    const sliders: HTMLInputElement[] = [];
+    const valDisplays: HTMLElement[] = [];
+
+    ids.forEach(id => {
+      const origInput = document.getElementById(`cost-${id}`) as HTMLInputElement;
+      if (origInput) {
+        const newInput = origInput.cloneNode(true) as HTMLInputElement;
+        origInput.parentNode?.replaceChild(newInput, origInput);
+        sliders.push(newInput);
+      }
+      
+      const valDisp = document.getElementById(`val-${id}`);
+      if (valDisp) valDisplays.push(valDisp);
+    });
+
+    const calculate = () => {
+      let total = 0;
+      
+      sliders.forEach((slider, i) => {
+        const val = parseInt(slider.value) || 0;
+        total += val;
+        if (valDisplays[i]) {
+          valDisplays[i].innerText = val.toString();
+        }
+      });
+      
+      totalEl.innerText = `€${total}`;
+    };
+
+    sliders.forEach(slider => {
+      slider.addEventListener('input', calculate);
+    });
+    
+    // Initial calc
+    calculate();
+  }
+
+  setupLivingCosts();
+  document.addEventListener('astro:page-load', setupLivingCosts);
+</script>

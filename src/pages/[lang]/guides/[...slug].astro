@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from 'astro:content';
+import GuideLayout from '../../../layouts/GuideLayout.astro';
+import { getActiveLanguages } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  const activeLangs = getActiveLanguages();
+  
+  // Filter for active languages and map to routes
+  return guides
+    .filter(guide => {
+      const lang = guide.id.split('/')[0];
+      return activeLangs.includes(lang);
+    })
+    .map(guide => {
+      const [lang, ...slugParts] = guide.id.split('/');
+      const slug = slugParts.join('/');
+      return {
+        params: { lang, slug },
+        props: { guide },
+      };
+    });
+}
+
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+---
+
+<GuideLayout guide={guide}>
+  <Content />
+</GuideLayout>

@@ -1,0 +1,17 @@
+{
+  "nav.home": "Sākums",
+  "nav.guides": "Ceļveži",
+  "nav.map": "Karte",
+  "nav.websites": "Noderīgas lapas",
+  "nav.phrases": "Frāzes",
+  "nav.emergency": "Ārkārtas palīdzība",
+  "nav.calculators": "Kalkulatori",
+  "hero.title": "Laipni lūdzam Latvijā",
+  "hero.subtitle": "Praktisks, uzticams ceļvedis ārzemniekiem Latvijā.",
+  "hero.search": "Kāda palīdzība jums nepieciešama?",
+  "badge.official": "Oficiāli",
+  "badge.verified": "Pārbaudīts",
+  "badge.draft": "Melnraksts - vēl nav pārbaudīts",
+  "footer.disclaimer": "Šis ir informatīvs ceļvedis, nevis juridiska, nodokļu vai medicīniska konsultācija. Noteikumi mainās. Vienmēr pārbaudiet oficiālos avotus.",
+  "fallback.notice": "Šī lapa vēl nav pieejama jūsu valodā. Tiek rādīta versija angļu valodā."
+}

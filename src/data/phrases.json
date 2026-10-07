@@ -1,0 +1,81 @@
+[
+  {
+    "situation": "basics",
+    "phrases": [
+      {
+        "latvian": "Labdien!",
+        "pronunciation": "Lahb-dyen",
+        "translations": {
+          "en": "Good afternoon / Hello",
+          "tr": "İyi günler / Merhaba"
+        }
+      },
+      {
+        "latvian": "Paldies",
+        "pronunciation": "Pahl-dyes",
+        "translations": {
+          "en": "Thank you",
+          "tr": "Teşekkür ederim"
+        }
+      },
+      {
+        "latvian": "Lūdzu",
+        "pronunciation": "Loo-dzu",
+        "translations": {
+          "en": "Please / You're welcome",
+          "tr": "Lütfen / Rica ederim"
+        }
+      },
+      {
+        "latvian": "Jā / Nē",
+        "pronunciation": "Yah / Neh",
+        "translations": {
+          "en": "Yes / No",
+          "tr": "Evet / Hayır"
+        }
+      }
+    ]
+  },
+  {
+    "situation": "shopping",
+    "phrases": [
+      {
+        "latvian": "Vai jums ir maisiņš?",
+        "pronunciation": "Vay yooms ir my-singh",
+        "translations": {
+          "en": "Do you have a bag?",
+          "tr": "Poşetiniz var mı?"
+        }
+      },
+      {
+        "latvian": "Cik tas maksā?",
+        "pronunciation": "Tsik tahs mahk-sah",
+        "translations": {
+          "en": "How much does this cost?",
+          "tr": "Bu ne kadar?"
+        }
+      }
+    ]
+  },
+  {
+    "situation": "help",
+    "phrases": [
+      {
+        "latvian": "Vai jūs runājat angliski?",
+        "pronunciation": "Vay yoos roo-nah-yaht ahn-glis-ki",
+        "translations": {
+          "en": "Do you speak English?",
+          "tr": "İngilizce konuşuyor musunuz?"
+        }
+      },
+      {
+        "latvian": "Es nesaprotu.",
+        "pronunciation": "Es ne-sah-pro-too",
+        "translations": {
+          "en": "I don't understand.",
+          "tr": "Anlamıyorum."
+        }
+      }
+    ]
+  }
+]

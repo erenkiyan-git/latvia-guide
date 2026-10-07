@@ -1,0 +1,198 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getActiveLanguages } from '../../../i18n/utils';
+import { useTranslations } from '../../../i18n/utils';
+import type { Lang } from '../../../config';
+
+export function getStaticPaths() {
+  const langs = getActiveLanguages();
+  return langs.map(lang => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+
+const pageTitle = lang === 'tr' ? 'Hakkımızda & Bilgi Güveni' : 'About & Information Trust';
+const pageDesc = lang === 'tr' ? 'Latvia Guide nasıl çalışır ve bilgileri nasıl doğruluyoruz.' : 'How Latvia Guide works and how we verify our information.';
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
+  <div class="container about-container">
+    <div class="header-section">
+      <h1>{pageTitle}</h1>
+      <p class="subtitle">{pageDesc}</p>
+    </div>
+
+    <div class="content-section">
+      <h2>{lang === 'tr' ? 'Misyonumuz' : 'Our Mission'}</h2>
+      <p>
+        {lang === 'tr' 
+          ? 'Letonya\'ya taşınmak zor olabilir. Yüzlerce farklı resmi web sitesi, değişen yasalar ve her yerde eski bilgiler var. Amacımız basit: Letonya\'daki yabancılar, uluslararası öğrenciler ve çalışanlar için en güvenilir, güncel ve pratik rehberi oluşturmak.'
+          : 'Moving to Latvia can be overwhelming. There are hundreds of different official websites, changing laws, and outdated information everywhere. Our mission is simple: to create the most reliable, up-to-date, and practical guide for foreigners, international students, and workers in Latvia.'
+        }
+      </p>
+
+      <h2>{lang === 'tr' ? 'Bilgilere Neden Güvenmelisiniz?' : 'Why Trust Our Information?'}</h2>
+      <p>
+        {lang === 'tr' 
+          ? 'İnternetteki çoğu blogun aksine, asla vergi oranlarını, vize kurallarını veya para cezalarını tahmin etmiyoruz veya uydurmuyoruz. Katı bir editoryal sürecimiz var:'
+          : 'Unlike most blogs on the internet, we never guess or invent tax rates, visa rules, or fines. We have a strict editorial process:'
+        }
+      </p>
+      
+      <ul class="trust-list">
+        <li><strong>{lang === 'tr' ? 'Resmi Kaynaklar:' : 'Official Sources:'}</strong> {lang === 'tr' ? 'Her rehberdeki her önemli iddia (PMLP, VID vb.) doğrudan resmi hükümet bağlantılarına dayandırılır.' : 'Every major claim in our guides is backed by direct links to official government sources (PMLP, VID, etc.).'}</li>
+        <li><strong>{lang === 'tr' ? 'Son Kontrol Tarihi:' : 'Last Checked Date:'}</strong> {lang === 'tr' ? 'Tüm rehberlerimiz, bilginin bir insan tarafından en son ne zaman resmi olarak doğrulandığını gösteren bir "Son kontrol" tarihi içerir.' : 'All our guides include a "Last checked" date, so you know exactly when a human last verified the information.'}</li>
+        <li><strong>{lang === 'tr' ? 'Yapay Zeka Halüsinasyonu Yok:' : 'No AI Hallucinations:'}</strong> {lang === 'tr' ? 'Doğrulanmamış AI üretimi bilgilerin platformumuza girmesine izin vermiyoruz.' : 'We do not allow unverified AI-generated information to enter our platform.'}</li>
+      </ul>
+
+      <h2>{lang === 'tr' ? 'Rozet Sistemimiz' : 'Our Badge System'}</h2>
+      <div class="badges-explainer">
+        <div class="badge-row">
+          <span class="trust-badge badge-official">Official</span>
+          <p>{lang === 'tr' ? 'Bu bilgi, Letonya hükümetinin resmi belgelerine veya kurumlarına dayanmaktadır.' : 'This information is based strictly on official Latvian government documentation or institutions.'}</p>
+        </div>
+        <div class="badge-row">
+          <span class="trust-badge badge-verified">Verified</span>
+          <p>{lang === 'tr' ? 'Bu bilgi, Letonya\'da yaşayan yerel uzmanlar veya yabancılar tarafından pratik olarak doğrulanmıştır (örneğin, ev arama ipuçları).' : 'This information has been practically verified by local experts or expats living in Latvia (e.g., apartment hunting tips).'}</p>
+        </div>
+        <div class="badge-row">
+          <span class="trust-badge badge-draft">Draft</span>
+          <p>{lang === 'tr' ? 'Bu içerik henüz uzmanlarımız tarafından tam olarak doğrulanmamıştır. Lütfen resmi kaynakları kendiniz kontrol edin.' : 'This content has not yet been fully verified by our experts. Please double-check official sources yourself.'}</p>
+        </div>
+      </div>
+      
+      <div class="feedback-box">
+        <h3>{lang === 'tr' ? 'Bir Hata mı Gördünüz?' : 'Spotted an Error?'}</h3>
+        <p>{lang === 'tr' ? 'Kurallar sürekli değişir. Eski bir bilgi bulursanız, lütfen bize bildirin.' : 'Rules change constantly. If you find outdated information, please let us know.'}</p>
+        <a href="mailto:hello@latviaguide.com" class="btn">{lang === 'tr' ? 'Bize Ulaşın' : 'Contact Us'}</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: var(--spacing-16);
+  }
+
+  .header-section {
+    text-align: center;
+    padding: var(--spacing-8) 0;
+    margin-bottom: var(--spacing-8);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .header-section h1 {
+    color: var(--color-primary-dark);
+  }
+
+  .content-section h2 {
+    color: var(--color-primary);
+    margin-top: var(--spacing-12);
+    margin-bottom: var(--spacing-4);
+  }
+  
+  .content-section p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-4);
+  }
+  
+  .trust-list {
+    margin: var(--spacing-6) 0;
+    padding-left: var(--spacing-6);
+  }
+  
+  .trust-list li {
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-4);
+    line-height: 1.6;
+  }
+  
+  .badges-explainer {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-6);
+    margin-top: var(--spacing-6);
+  }
+  
+  .badge-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-6);
+    padding-bottom: var(--spacing-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .badge-row:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  
+  @media (min-width: 600px) {
+    .badge-row {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--spacing-6);
+    }
+  }
+  
+  .badge-row p {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .badge-official {
+    background-color: var(--color-success-bg);
+    color: var(--color-success);
+    border: 1px solid var(--color-success);
+  }
+  .badge-verified {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    border: 1px solid var(--color-primary);
+  }
+  .badge-draft {
+    background-color: var(--color-warning-bg);
+    color: var(--color-warning-text);
+    border: 1px solid var(--color-warning-border);
+  }
+  
+  .feedback-box {
+    margin-top: var(--spacing-12);
+    padding: var(--spacing-8);
+    background-color: var(--color-primary-light);
+    border-radius: var(--radius-lg);
+    text-align: center;
+  }
+  
+  .feedback-box h3 {
+    color: var(--color-primary-dark);
+    margin-bottom: var(--spacing-2);
+  }
+  
+  .feedback-box p {
+    color: var(--color-primary-dark);
+    margin-bottom: var(--spacing-6);
+  }
+</style>

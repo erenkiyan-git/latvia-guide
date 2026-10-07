@@ -1,0 +1,59 @@
+[
+  {
+    "category": "government",
+    "links": [
+      {
+        "title": "PMLP (Office of Citizenship and Migration Affairs)",
+        "url": "https://www.pmlp.gov.lv",
+        "description": "Official site for residence permits, visas, and ID cards.",
+        "isOfficial": true,
+        "languages": ["LV", "EN", "RU"]
+      },
+      {
+        "title": "Latvija.lv",
+        "url": "https://latvija.gov.lv",
+        "description": "The central portal for state services and e-services.",
+        "isOfficial": true,
+        "languages": ["LV", "EN"]
+      }
+    ]
+  },
+  {
+    "category": "transport",
+    "links": [
+      {
+        "title": "Rīgas Satiksme",
+        "url": "https://www.rigassatiksme.lv",
+        "description": "Riga city public transport routes, schedules, and tickets.",
+        "isOfficial": true,
+        "languages": ["LV", "EN"]
+      },
+      {
+        "title": "Vivi (Trains)",
+        "url": "https://vivi.lv",
+        "description": "Domestic train schedules and ticket purchases.",
+        "isOfficial": true,
+        "languages": ["LV", "EN", "RU"]
+      }
+    ]
+  },
+  {
+    "category": "housing_jobs",
+    "links": [
+      {
+        "title": "SS.com",
+        "url": "https://www.ss.com",
+        "description": "The biggest classifieds site in Latvia for apartments and jobs.",
+        "isOfficial": false,
+        "languages": ["LV", "RU"]
+      },
+      {
+        "title": "CV.lv",
+        "url": "https://cv.lv",
+        "description": "The most popular job portal.",
+        "isOfficial": false,
+        "languages": ["LV", "EN", "RU"]
+      }
+    ]
+  }
+]

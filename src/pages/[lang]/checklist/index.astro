@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getActiveLanguages } from '../../../i18n/utils';
+import { useTranslations } from '../../../i18n/utils';
+import type { Lang } from '../../../config';
+import checklistData from '../../../data/checklist.json';
+
+export function getStaticPaths() {
+  const langs = getActiveLanguages();
+  return langs.map(lang => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+
+// @ts-ignore - indexing JSON safely
+const groups = checklistData[lang] || checklistData['en'];
+
+const pageTitle = lang === 'tr' ? 'Yeni Gelenler İçin 30 Günlük Kontrol Listesi' : 'New to Latvia: 30-Day Checklist';
+const pageDesc = lang === 'tr' ? 'Taşınmanızın ilk ayı için adım adım rehberiniz.' : 'Your step-by-step guide for the first month of your relocation.';
+const resetText = lang === 'tr' ? 'İlerlemeyi Sıfırla' : 'Reset Progress';
+const printText = lang === 'tr' ? 'Listeyi Yazdır' : 'Print Checklist';
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
+  <div class="container">
+    <div class="checklist-header no-print">
+      <h1>{pageTitle}</h1>
+      <p class="subtitle">{pageDesc}</p>
+      
+      <div class="progress-container">
+        <div class="progress-stats">
+          <span>Progress: <strong id="progress-text">0%</strong></span>
+          <span id="completed-count">0/0 completed</span>
+        </div>
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+        </div>
+      </div>
+      
+      <div class="actions">
+        <button id="reset-btn" class="btn btn-secondary">{resetText}</button>
+        <button onclick="window.print()" class="btn">{printText}</button>
+      </div>
+    </div>
+
+    <!-- Print only header -->
+    <div class="print-only">
+      <h1>{pageTitle}</h1>
+      <p>{pageDesc}</p>
+      <hr/>
+    </div>
+
+    <div class="checklist-content" id="checklist-container">
+      {groups.map((group: any) => (
+        <section class="checklist-group">
+          <h2>{group.title}</h2>
+          <div class="items-list">
+            {group.items.map((item: any) => (
+              <label class="checklist-item" for={item.id}>
+                <div class="checkbox-wrapper no-print">
+                  <input type="checkbox" id={item.id} class="task-checkbox" data-id={item.id} />
+                  <span class="custom-checkbox"></span>
+                </div>
+                
+                <!-- Print only checkbox box -->
+                <div class="print-checkbox print-only">[]</div>
+                
+                <div class="item-content">
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <a href={item.link} class="item-link no-print">Read guide &rarr;</a>
+                </div>
+              </label>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .checklist-header {
+    text-align: center;
+    padding: var(--spacing-8) 0;
+    margin-bottom: var(--spacing-8);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .checklist-header h1 {
+    color: var(--color-primary-dark);
+  }
+
+  .progress-container {
+    max-width: 600px;
+    margin: var(--spacing-6) auto;
+    text-align: left;
+  }
+
+  .progress-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-2);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  #progress-text {
+    color: var(--color-text);
+  }
+
+  .progress-bar {
+    height: 12px;
+    background-color: var(--color-border);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background-color: var(--color-success);
+    transition: width 0.3s ease;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-4);
+    margin-top: var(--spacing-6);
+  }
+
+  .checklist-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .checklist-group {
+    margin-bottom: var(--spacing-12);
+  }
+
+  .checklist-group h2 {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary-light);
+    padding-bottom: var(--spacing-2);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .items-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .checklist-item {
+    display: flex;
+    gap: var(--spacing-4);
+    padding: var(--spacing-4);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .checklist-item:hover {
+    border-color: var(--color-primary-light);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Checked state styling */
+  .checklist-item:has(.task-checkbox:checked) {
+    background-color: var(--color-bg);
+    opacity: 0.8;
+  }
+
+  .checklist-item:has(.task-checkbox:checked) h3 {
+    text-decoration: line-through;
+    color: var(--color-text-muted);
+  }
+
+  .checkbox-wrapper {
+    position: relative;
+    padding-top: 2px;
+  }
+
+  .task-checkbox {
+    opacity: 0;
+    position: absolute;
+  }
+
+  .custom-checkbox {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--color-border);
+    border-radius: 4px;
+    background-color: white;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .task-checkbox:focus + .custom-checkbox {
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+  }
+
+  .task-checkbox:checked + .custom-checkbox {
+    background-color: var(--color-success);
+    border-color: var(--color-success);
+  }
+
+  .task-checkbox:checked + .custom-checkbox::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .item-content h3 {
+    margin-bottom: var(--spacing-1);
+    font-size: 1.125rem;
+    transition: color 0.2s ease;
+  }
+
+  .item-content p {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-2);
+  }
+
+  .item-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .print-only {
+    display: none;
+  }
+
+  /* Print Styles */
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    .print-only {
+      display: block !important;
+    }
+    
+    body {
+      background-color: white;
+    }
+    
+    .checklist-item {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      border-radius: 0;
+      padding: var(--spacing-2) 0;
+      break-inside: avoid;
+    }
+    
+    .print-checkbox {
+      font-family: monospace;
+      font-size: 1.5rem;
+      margin-right: var(--spacing-4);
+      display: inline-block !important;
+    }
+    
+    .item-content p {
+      margin-bottom: 0;
+    }
+  }
+</style>
+
+<script>
+  function setupChecklist() {
+    const checkboxes = document.querySelectorAll('.task-checkbox') as NodeListOf<HTMLInputElement>;
+    const progressText = document.getElementById('progress-text');
+    const completedCount = document.getElementById('completed-count');
+    const progressFill = document.getElementById('progress-fill');
+    const resetBtn = document.getElementById('reset-btn');
+    const total = checkboxes.length;
+    
+    const STORAGE_KEY = 'latviaguide_checklist';
+
+    // Load state
+    let savedState: Record<string, boolean> = {};
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        savedState = JSON.parse(stored);
+      }
+    } catch (e) {
+      console.warn('Could not read from localStorage', e);
+    }
+
+    const updateProgress = () => {
+      let completed = 0;
+      checkboxes.forEach(cb => {
+        if (cb.checked) completed++;
+      });
+      
+      const percentage = total === 0 ? 0 : Math.round((completed / total) * 100);
+      
+      if (progressText) progressText.innerText = `${percentage}%`;
+      if (completedCount) completedCount.innerText = `${completed}/${total} completed`;
+      if (progressFill) progressFill.style.width = `${percentage}%`;
+    };
+
+    // Initialize boxes
+    checkboxes.forEach(cb => {
+      const id = cb.getAttribute('data-id');
+      if (id && savedState[id]) {
+        cb.checked = true;
+      }
+      
+      // Remove old listeners to prevent duplicates on view transition
+      const newCb = cb.cloneNode(true) as HTMLInputElement;
+      cb.parentNode?.replaceChild(newCb, cb);
+      
+      newCb.addEventListener('change', (e) => {
+        const target = e.target as HTMLInputElement;
+        const targetId = target.getAttribute('data-id');
+        
+        if (targetId) {
+          savedState[targetId] = target.checked;
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(savedState));
+          } catch (err) {
+            console.warn('Could not save to localStorage', err);
+          }
+        }
+        
+        updateProgress();
+      });
+    });
+
+    if (resetBtn) {
+      const newResetBtn = resetBtn.cloneNode(true) as HTMLButtonElement;
+      resetBtn.parentNode?.replaceChild(newResetBtn, resetBtn);
+      
+      newResetBtn.addEventListener('click', () => {
+        if (confirm('Are you sure you want to reset all your progress?')) {
+          savedState = {};
+          try {
+            localStorage.removeItem(STORAGE_KEY);
+          } catch (err) {}
+          
+          document.querySelectorAll('.task-checkbox').forEach((cb: any) => {
+            cb.checked = false;
+          });
+          
+          updateProgress();
+        }
+      });
+    }
+
+    // Run initial progress check
+    // We need to re-select checkboxes because we cloned them above
+    const currentCheckboxes = document.querySelectorAll('.task-checkbox') as NodeListOf<HTMLInputElement>;
+    let completed = 0;
+    currentCheckboxes.forEach(cb => {
+      if (cb.checked) completed++;
+    });
+    
+    const percentage = total === 0 ? 0 : Math.round((completed / total) * 100);
+    
+    if (progressText) progressText.innerText = `${percentage}%`;
+    if (completedCount) completedCount.innerText = `${completed}/${total} completed`;
+    if (progressFill) progressFill.style.width = `${percentage}%`;
+  }
+
+  setupChecklist();
+  document.addEventListener('astro:page-load', setupChecklist);
+</script>

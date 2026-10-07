@@ -1,0 +1,224 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { getActiveLanguages } from '../../../../i18n/utils';
+import { useTranslations } from '../../../../i18n/utils';
+import type { Lang } from '../../../../config';
+import WarningBox from '../../../../components/WarningBox.astro';
+
+export function getStaticPaths() {
+  const langs = getActiveLanguages();
+  return langs.map(lang => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+
+const pageTitle = lang === 'tr' ? 'Net Maaş Hesaplayıcı (Tahmini)' : 'Net Salary Calculator (Estimate)';
+const pageDesc = lang === 'tr' ? 'Letonya vergi kesintileri sonrası aylık net maaşınızı hesaplayın.' : 'Calculate your estimated monthly net salary after Latvian tax deductions.';
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
+  <div class="container calculator-container">
+    <div class="header-section">
+      <h1>{pageTitle}</h1>
+      <p class="subtitle">{pageDesc}</p>
+    </div>
+
+    <WarningBox>
+      {lang === 'tr' 
+        ? 'DİKKAT: Bu sadece bir tahmindir. Letonya vergi sistemi (bağımlı kişiler, engellilik durumu, yıllık gelir üzerinden değişen vergisiz asgari tutar) karmaşıktır. Resmi kesin hesaplamalar için Letonya Devlet Gelir İdaresi (VID) ile görüşün.'
+        : 'DISCLAIMER: This is a simplified estimate. The Latvian tax system is complex and depends on your specific VID (State Revenue Service) non-taxable minimum, registered dependents, and other factors. For exact numbers, consult VID or your employer.'}
+    </WarningBox>
+
+    <div class="calculator-card">
+      <div class="input-group">
+        <label for="gross-salary">{lang === 'tr' ? 'Aylık Brüt Maaş (Bruto) - €' : 'Monthly Gross Salary (Bruto) - €'}</label>
+        <input type="number" id="gross-salary" class="calc-input" placeholder="e.g. 1500" min="0" step="10" />
+      </div>
+
+      <div class="input-group">
+        <label for="dependents">{lang === 'tr' ? 'Kayıtlı Bakmakla Yükümlü Olunan Kişi Sayısı (Çocuklar vb.)' : 'Registered Dependents (Children, etc.)'}</label>
+        <input type="number" id="dependents" class="calc-input" value="0" min="0" max="10" step="1" />
+      </div>
+
+      <div class="results-section">
+        <h3>{lang === 'tr' ? 'Tahmini Kesintiler' : 'Estimated Deductions'}</h3>
+        <div class="result-row">
+          <span>{lang === 'tr' ? 'Sosyal Güvenlik (10.5%)' : 'Social Tax (VSAOI 10.5%)'}</span>
+          <span id="res-social" class="amount text-error">€0.00</span>
+        </div>
+        <div class="result-row">
+          <span>{lang === 'tr' ? 'Gelir Vergisi (IIN 20-23%)' : 'Income Tax (IIN 20-23%)'}</span>
+          <span id="res-income" class="amount text-error">€0.00</span>
+        </div>
+        
+        <div class="result-row total-row">
+          <span>{lang === 'tr' ? 'Net Maaşınız (Neto)' : 'Your Net Salary (Neto)'}</span>
+          <span id="res-net" class="amount text-success giant">€0.00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .calculator-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .header-section {
+    text-align: center;
+    padding: var(--spacing-8) 0;
+    margin-bottom: var(--spacing-6);
+  }
+
+  .header-section h1 {
+    color: var(--color-primary-dark);
+  }
+
+  .calculator-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+    box-shadow: var(--shadow-md);
+    margin-top: var(--spacing-6);
+    margin-bottom: var(--spacing-16);
+  }
+
+  .input-group {
+    margin-bottom: var(--spacing-6);
+  }
+
+  .input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--spacing-2);
+    color: var(--color-text);
+  }
+
+  .calc-input {
+    width: 100%;
+    padding: var(--spacing-3) var(--spacing-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-primary-dark);
+  }
+
+  .calc-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+  }
+
+  .results-section {
+    margin-top: var(--spacing-8);
+    padding-top: var(--spacing-6);
+    border-top: 2px dashed var(--color-border);
+  }
+
+  .results-section h3 {
+    margin-bottom: var(--spacing-4);
+    color: var(--color-text-muted);
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-2) 0;
+    font-size: 1.125rem;
+  }
+
+  .amount {
+    font-weight: 700;
+    font-family: monospace;
+    font-size: 1.25rem;
+  }
+
+  .text-error {
+    color: var(--color-error);
+  }
+
+  .text-success {
+    color: var(--color-success);
+  }
+
+  .total-row {
+    margin-top: var(--spacing-4);
+    padding-top: var(--spacing-4);
+    border-top: 1px solid var(--color-border);
+    font-weight: 700;
+  }
+
+  .amount.giant {
+    font-size: 2.5rem;
+  }
+</style>
+
+<script>
+  function setupSalaryCalculator() {
+    const grossInput = document.getElementById('gross-salary') as HTMLInputElement;
+    const depInput = document.getElementById('dependents') as HTMLInputElement;
+    
+    const resSocial = document.getElementById('res-social');
+    const resIncome = document.getElementById('res-income');
+    const resNet = document.getElementById('res-net');
+    
+    if (!grossInput || !depInput || !resSocial || !resIncome || !resNet) return;
+
+    // To prevent duplicate event listeners on view transition, we clone the inputs
+    const newGross = grossInput.cloneNode(true) as HTMLInputElement;
+    grossInput.parentNode?.replaceChild(newGross, grossInput);
+    
+    const newDep = depInput.cloneNode(true) as HTMLInputElement;
+    depInput.parentNode?.replaceChild(newDep, depInput);
+
+    const formatCurr = (val: number) => `€${Math.max(0, val).toFixed(2)}`;
+
+    const calculate = () => {
+      const gross = parseFloat(newGross.value) || 0;
+      const dependents = parseInt(newDep.value) || 0;
+      
+      // 1. Social Tax (VSAOI): 10.5% for employees
+      const socialTax = gross * 0.105;
+      
+      // 2. Dependents allowance (€250 per dependent)
+      const depAllowance = dependents * 250;
+      
+      // 3. Taxable base
+      // Note: We are ignoring the dynamic non-taxable minimum for this simple estimate.
+      let taxableBase = gross - socialTax - depAllowance;
+      if (taxableBase < 0) taxableBase = 0;
+      
+      // 4. Income Tax (IIN)
+      // 20% up to €1667, 23% from €1667 to €6500 (approximate 2024 brackets)
+      let incomeTax = 0;
+      if (taxableBase <= 1667) {
+        incomeTax = taxableBase * 0.20;
+      } else {
+        incomeTax = (1667 * 0.20) + ((taxableBase - 1667) * 0.23);
+      }
+      
+      // 5. Net Salary
+      let net = gross - socialTax - incomeTax;
+      if (net < 0) net = 0;
+      
+      // Update DOM
+      resSocial.innerText = `-${formatCurr(socialTax)}`;
+      resIncome.innerText = `-${formatCurr(incomeTax)}`;
+      resNet.innerText = formatCurr(net);
+    };
+
+    newGross.addEventListener('input', calculate);
+    newDep.addEventListener('input', calculate);
+  }
+
+  setupSalaryCalculator();
+  document.addEventListener('astro:page-load', setupSalaryCalculator);
+</script>

@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getActiveLanguages } from '../../../i18n/utils';
+import { useTranslations } from '../../../i18n/utils';
+import type { Lang } from '../../../config';
+import linksData from '../../../data/links.json';
+
+export function getStaticPaths() {
+  const langs = getActiveLanguages();
+  return langs.map(lang => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+
+const pageTitle = lang === 'tr' ? 'Faydalı Web Siteleri' : 'Useful Websites';
+const pageDesc = lang === 'tr' ? 'Letonya\'daki temel hizmetler ve portallar için en iyi bağlantılar.' : 'The most important links to essential services and portals in Latvia.';
+
+const formatCategory = (cat: string) => cat.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
+  <div class="container">
+    <div class="header-section">
+      <h1>{pageTitle}</h1>
+      <p class="subtitle">{pageDesc}</p>
+      
+      <div class="filter-controls">
+        <label class="filter-label">
+          <input type="checkbox" id="official-only-toggle" />
+          {lang === 'tr' ? 'Sadece Resmi Kaynakları Göster' : 'Show Official Sources Only'}
+        </label>
+      </div>
+    </div>
+
+    <div class="links-container">
+      {linksData.map((categoryGroup: any) => (
+        <section class="link-category" data-category={categoryGroup.category}>
+          <h2>{formatCategory(categoryGroup.category)}</h2>
+          <div class="links-grid">
+            {categoryGroup.links.map((link: any) => (
+              <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-card" data-official={link.isOfficial}>
+                <div class="link-header">
+                  <h3>{link.title}</h3>
+                  {link.isOfficial && <span class="badge official">Official</span>}
+                </div>
+                <p>{link.description}</p>
+                <div class="lang-tags">
+                  {link.languages.map((l: string) => (
+                    <span class="lang-tag">{l}</span>
+                  ))}
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .header-section {
+    text-align: center;
+    padding: var(--spacing-8) 0;
+    margin-bottom: var(--spacing-8);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .header-section h1 {
+    color: var(--color-primary-dark);
+  }
+  
+  .filter-controls {
+    margin-top: var(--spacing-6);
+  }
+  
+  .filter-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    cursor: pointer;
+    font-weight: 500;
+    padding: var(--spacing-2) var(--spacing-4);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    transition: all 0.2s ease;
+  }
+  
+  .filter-label:hover {
+    border-color: var(--color-primary);
+  }
+
+  .link-category {
+    margin-bottom: var(--spacing-12);
+  }
+  
+  .link-category h2 {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary-light);
+    padding-bottom: var(--spacing-2);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .links-grid {
+    display: grid;
+    gap: var(--spacing-4);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .links-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .link-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-6);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .link-card:hover {
+    border-color: var(--color-primary-light);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  .link-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-2);
+    gap: var(--spacing-2);
+  }
+
+  .link-card h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    color: var(--color-primary-dark);
+  }
+
+  .link-card p {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-4);
+    flex-grow: 1;
+  }
+
+  .badge.official {
+    background-color: var(--color-success-bg);
+    color: var(--color-success);
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .lang-tags {
+    display: flex;
+    gap: var(--spacing-2);
+  }
+  
+  .lang-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    background-color: var(--color-bg);
+    color: var(--color-text-muted);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+  }
+  
+  /* Filter state */
+  :global(.filtering-official) .link-card[data-official="false"] {
+    display: none;
+  }
+  
+  :global(.filtering-official) .link-category:has(.link-card[data-official="true"]) {
+    display: block;
+  }
+  
+  :global(.filtering-official) .link-category:not(:has(.link-card[data-official="true"])) {
+    display: none;
+  }
+</style>
+
+<script>
+  function setupFilters() {
+    const toggle = document.getElementById('official-only-toggle') as HTMLInputElement;
+    const container = document.querySelector('.links-container');
+    
+    if (toggle && container) {
+      // Remove old listeners on transition
+      const newToggle = toggle.cloneNode(true) as HTMLInputElement;
+      toggle.parentNode?.replaceChild(newToggle, toggle);
+      
+      newToggle.addEventListener('change', (e) => {
+        const target = e.target as HTMLInputElement;
+        if (target.checked) {
+          container.classList.add('filtering-official');
+        } else {
+          container.classList.remove('filtering-official');
+        }
+      });
+    }
+  }
+
+  setupFilters();
+  document.addEventListener('astro:page-load', setupFilters);
+</script>

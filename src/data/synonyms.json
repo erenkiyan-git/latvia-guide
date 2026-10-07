@@ -1,0 +1,16 @@
+{
+  "en": {
+    "bank": ["account", "atm", "money transfer", "credit card", "debit card", "finance"],
+    "flat": ["housing", "rent", "apartment", "room", "landlord", "lease"],
+    "doctor": ["hospital", "medical", "health", "clinic", "medicine", "pharmacy", "sick"],
+    "transport": ["bus", "tram", "train", "ticket", "airport", "taxi"],
+    "job": ["work", "employment", "salary", "cv", "resume", "interview"]
+  },
+  "tr": {
+    "banka": ["hesap", "atm", "para transferi", "kredi kartı", "banka kartı", "finans"],
+    "daire": ["konut", "kira", "apartman", "oda", "ev sahibi", "sözleşme"],
+    "doktor": ["hastane", "tıbbi", "sağlık", "klinik", "ilaç", "eczane", "hasta"],
+    "ulaşım": ["otobüs", "tramvay", "tren", "bilet", "havalimanı", "taksi"],
+    "iş": ["çalışma", "istihdam", "maaş", "özgeçmiş", "cv", "mülakat"]
+  }
+}
