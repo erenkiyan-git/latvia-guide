@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Button } from '../components/ui/Button';
+import { Card } from '../components/ui/Card';
+import { TrustBadge } from '../components/ui/TrustBadge';
+import { SourceBox } from '../components/ui/SourceBox';
+import { WarningBox } from '../components/ui/WarningBox';
+import { InfoBox } from '../components/ui/InfoBox';
+import { StepList, Step } from '../components/ui/StepList';
+import { ComparisonTable } from '../components/ui/ComparisonTable';
+import { Breadcrumbs } from '../components/ui/Breadcrumbs';
+import { LinkList } from '../components/ui/LinkList';
+import { Tag } from '../components/ui/Tag';
+---
+
+<BaseLayout title="Design System" description="Internal UI component reference" lang="en">
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <div class="mb-12 border-b border-slate-200 pb-8">
+      <h1 class="text-3xl font-bold text-slate-900 mb-2">Design System</h1>
+      <p class="text-slate-500">Internal reference for UI components.</p>
+    </div>
+
+    <!-- Buttons -->
+    <section class="mb-16">
+      <h2 class="text-xl font-bold text-slate-800 mb-6">Buttons</h2>
+      <div class="flex flex-wrap gap-4 items-center">
+        <Button variant="primary">Primary Button</Button>
+        <Button variant="secondary">Secondary Button</Button>
+        <Button variant="outline">Outline Button</Button>
+        <Button variant="ghost">Ghost Button</Button>
+      </div>
+    </section>
+
+    <!-- Badges & Tags -->
+    <section class="mb-16">
+      <h2 class="text-xl font-bold text-slate-800 mb-6">Badges & Tags</h2>
+      <div class="flex flex-wrap gap-4 items-center mb-6">
+        <TrustBadge type="official" />
+        <TrustBadge type="verified" />
+        <TrustBadge type="draft" />
+      </div>
+      <div class="flex flex-wrap gap-4 items-center">
+        <Tag>Student</Tag>
+        <Tag active>Worker</Tag>
+        <Tag>Digital Nomad</Tag>
+      </div>
+    </section>
+
+    <!-- Callouts -->
+    <section class="mb-16">
+      <h2 class="text-xl font-bold text-slate-800 mb-6">Callouts</h2>
+      <SourceBox url="https://www.pmlp.gov.lv/en" label="Official source" />
+      <div class="mt-6">
+        <WarningBox title="Important Warning">
+          Never pay a deposit before seeing the apartment in person and signing a physical contract.
+        </WarningBox>
+      </div>
+      <div class="mt-6">
+        <InfoBox title="Helpful Tip">
+          You can use the Rīgas Satiksme app to buy bus tickets on your phone instantly.
+        </InfoBox>
+      </div>
+    </section>
+
+    <!-- Cards & Lists -->
+    <section class="mb-16">
+      <h2 class="text-xl font-bold text-slate-800 mb-6">Cards & Lists</h2>
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <Card hoverable className="p-6">
+          <h3 class="font-bold text-lg mb-2">Hoverable Card</h3>
+          <p class="text-slate-600">This card elevates slightly on hover, indicating it's clickable.</p>
+        </Card>
+        <Card className="p-6">
+          <h3 class="font-bold text-lg mb-2">Static Card</h3>
+          <p class="text-slate-600">A plain container for content that doesn't need to be interacted with.</p>
+        </Card>
+      </div>
+
+      <h3 class="font-bold text-slate-700 mb-4 mt-8">Link List</h3>
+      <LinkList items={[
+        { label: 'Register your address', href: '#', description: 'Within 30 days of arrival' },
+        { label: 'Apply for e-signature', href: '#', description: 'Makes digital life easier' }
+      ]} />
+    </section>
+
+    <!-- Complex Components -->
+    <section class="mb-16">
+      <h2 class="text-xl font-bold text-slate-800 mb-6">Complex Components</h2>
+      
+      <h3 class="font-bold text-slate-700 mb-4">Breadcrumbs</h3>
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/' },
+        { label: 'Guides', href: '/guides' },
+        { label: 'Finding a Job' }
+      ]} />
+
+      <h3 class="font-bold text-slate-700 mb-4 mt-8">Step List</h3>
+      <StepList>
+        <Step number="1" title="Get your documents ready">
+          Gather your passport, employment contract, and rental agreement.
+        </Step>
+        <Step number="2" title="Visit PMLP">
+          Book an appointment and submit your application in person.
+        </Step>
+        <Step number="3" title="Wait for approval">
+          Processing usually takes between 5 and 30 days depending on the fee paid.
+        </Step>
+      </StepList>
+
+      <h3 class="font-bold text-slate-700 mb-4 mt-8">Comparison Table</h3>
+      <ComparisonTable 
+        headers={['Service', 'Cost', 'Time']}
+        rows={[
+          ['Standard Processing', '€100', '30 days'],
+          ['Expedited Processing', '€200', '10 days'],
+          ['Urgent Processing', '€400', '5 days']
+        ]}
+      />
+    </section>
+  </div>
+</BaseLayout>
