@@ -1,7 +1,10 @@
 ---
-import '../styles/index.css';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import '@fontsource/inter';
+import '../styles/global.css';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { getActiveLanguages, useTranslations } from '../i18n/utils';
+import { LANGUAGES } from '../config';
 
 interface Props {
   title: string;
@@ -10,6 +13,31 @@ interface Props {
 }
 
 const { title, description = 'A practical, trustworthy guide for foreigners in Latvia.', lang = 'en' } = Astro.props;
+
+const activeLangs = getActiveLanguages();
+const t = useTranslations(lang as any);
+
+const langLabels = Object.fromEntries(
+  Object.entries(LANGUAGES).map(([key, val]) => [key, val.label])
+);
+
+const navLinks = [
+  { href: `/${lang}/`, label: t('nav.home') },
+  { href: `/${lang}/guides/`, label: t('nav.guides') },
+  { href: `/${lang}/map/`, label: t('nav.map') },
+  { href: `/${lang}/useful-websites/`, label: t('nav.websites') }
+];
+
+const footerLinks = [
+  { href: `/${lang}/about/`, label: 'About & Trust' },
+  { href: `/${lang}/guides/`, label: t('nav.guides') },
+  { href: `/${lang}/checklist/`, label: lang === 'tr' ? '30 Günlük Kontrol Listesi' : '30-Day Checklist' },
+  { href: `/${lang}/calculators/salary/`, label: lang === 'tr' ? 'Net Maaş Hesaplayıcı' : 'Net Salary Calculator' },
+  { href: `/${lang}/calculators/living-costs/`, label: lang === 'tr' ? 'Yaşam Maliyeti Hesaplayıcı' : 'Living Costs Calculator' },
+  { href: `/${lang}/useful-websites/`, label: lang === 'tr' ? 'Faydalı Web Siteleri' : 'Useful Websites' },
+  { href: `/${lang}/phrases/`, label: lang === 'tr' ? 'Letonca İfadeler' : 'Latvian Phrases' },
+  { href: `/${lang}/emergency/`, label: lang === 'tr' ? 'Acil Durum' : 'Emergency Contacts', isEmergency: true }
+];
 ---
 
 <!doctype html>
@@ -50,26 +78,25 @@ const { title, description = 'A practical, trustworthy guide for foreigners in L
       // gtag('config', 'G-XXXXXXXXXX');
     </script>
   </head>
-  <body>
-    <div class="site-wrapper">
-      <Header />
-      <main class="main-content">
-        <slot />
-      </main>
-      <Footer />
-    </div>
+  <body className="flex flex-col min-h-screen bg-slate-50 text-slate-800 selection:bg-primary-200 selection:text-primary-900">
+    <Header 
+      client:load 
+      currentLang={lang} 
+      activeLangs={activeLangs} 
+      langLabels={langLabels} 
+      navLinks={navLinks} 
+      logoText="Latvia Guide" 
+    />
+    
+    <main className="flex-1 py-8">
+      <slot />
+    </main>
+    
+    <Footer 
+      currentLang={lang} 
+      subtitle={t('hero.subtitle')} 
+      disclaimer={t('footer.disclaimer')} 
+      links={footerLinks} 
+    />
   </body>
 </html>
-
-<style>
-  .site-wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-  .main-content {
-    flex: 1;
-    padding: var(--spacing-8) 0;
-  }
-</style>
