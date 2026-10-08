@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": "pharmacy-meness",
+    "category": "hospital",
+    "name": "Mēness Aptieka",
+    "description": {
+      "en": "Find the nearest 24/7 or regular pharmacy in the Mēness Aptieka network.",
+      "tr": "Mēness Aptieka ağında size en yakın 7/24 veya normal eczaneyi bulun."
+    },
+    "url": "https://www.menessaptieka.lv/aptiekas"
+  },
+  {
+    "id": "bank-swedbank",
+    "category": "immigration",
+    "name": "Swedbank Branches & ATMs",
+    "description": {
+      "en": "Find Swedbank branch offices and cash deposit/withdrawal ATMs.",
+      "tr": "Swedbank şubelerini ve para yatırma/çekme ATM'lerini bulun."
+    },
+    "url": "https://www.swedbank.lv/private/home/more/branches"
+  }
+]

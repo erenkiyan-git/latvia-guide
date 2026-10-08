@@ -77,3 +77,63 @@ Every verified fact in the guides must have a corresponding entry here.
 - **URL:** https://www.autoosta.lv/?lang=en
 - **Fact Verified:** Coach terminal address and phone number
 - **Used in Guide:** Map (transport-coach-station)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** University of Latvia
+- **URL:** https://www.lu.lv/en/about-us/contact-us/
+- **Fact Verified:** Main building address
+- **Used in Guide:** Map (uni-lu)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Riga Technical University
+- **URL:** https://www.rtu.lv/en/university/for-visitors
+- **Fact Verified:** RTU Ķīpsala campus address
+- **Used in Guide:** Map (uni-rtu)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Rīga Stradiņš University
+- **URL:** https://www.rsu.lv/en/contacts
+- **Fact Verified:** RSU main campus address
+- **Used in Guide:** Map (uni-rsu)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Turiba University
+- **URL:** https://www.turiba.lv/en/contacts
+- **Fact Verified:** Turiba campus address
+- **Used in Guide:** Map (uni-turiba)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** CSDD
+- **URL:** https://www.csdd.lv/en/
+- **Fact Verified:** Main customer service center address
+- **Used in Guide:** Map (gov-csdd)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Riga Castle (National History Museum of Latvia)
+- **URL:** https://lnvm.lv/en/
+- **Fact Verified:** Riga Castle address
+- **Used in Guide:** Map (attr-riga-castle)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Freedom Monument
+- **URL:** https://www.liveriga.com/en/968-freedom-monument
+- **Fact Verified:** Freedom monument location
+- **Used in Guide:** Map (attr-freedom-monument)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** House of the Black Heads
+- **URL:** https://melngalvjunams.lv/en
+- **Fact Verified:** House of the Black Heads location
+- **Used in Guide:** Map (attr-black-heads)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Mēness Aptieka Locator
+- **URL:** https://www.menessaptieka.lv/aptiekas
+- **Fact Verified:** Exists, is a pharmacy locator
+- **Used in Guide:** Locator (pharmacy-meness)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Swedbank Branches
+- **URL:** https://www.swedbank.lv/private/home/more/branches
+- **Fact Verified:** Exists, is a branch locator
+- **Used in Guide:** Locator (bank-swedbank)

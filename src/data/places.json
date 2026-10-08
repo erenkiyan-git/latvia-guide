@@ -111,5 +111,182 @@
     "osmUrl": "https://www.openstreetmap.org/way/38482095",
     "lastChecked": "2026-10",
     "verified": true
+  },
+  {
+    "id": "uni-lu",
+    "category": "university",
+    "name": {
+      "en": "University of Latvia (Main Building)",
+      "tr": "Letonya Üniversitesi (Ana Bina)"
+    },
+    "address": "Raiņa bulvāris 19",
+    "city": "Rīga",
+    "lat": 56.950759,
+    "lng": 24.116276,
+    "officialUrl": "https://www.lu.lv/en/about-us/contact-us/",
+    "phone": "+371 67034444",
+    "notes": {
+      "en": "Main administrative building and some faculties of the largest university in Latvia.",
+      "tr": "Letonya'nın en büyük üniversitesinin ana idari binası ve bazı fakülteleri."
+    },
+    "tags": ["university", "study", "lu"],
+    "sourceUrl": "https://www.lu.lv/en/about-us/contact-us/",
+    "osmUrl": "https://www.openstreetmap.org/relation/1297961",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "uni-rtu",
+    "category": "university",
+    "name": {
+      "en": "Riga Technical University (RTU Ķīpsala)",
+      "tr": "Riga Teknik Üniversitesi (RTU Ķīpsala)"
+    },
+    "address": "Ķīpsalas iela 6A",
+    "city": "Rīga",
+    "lat": 56.952642,
+    "lng": 24.080680,
+    "officialUrl": "https://www.rtu.lv/en/university/for-visitors",
+    "notes": {
+      "en": "Main engineering campus on Ķīpsala island.",
+      "tr": "Ķīpsala adasındaki ana mühendislik kampüsü."
+    },
+    "tags": ["university", "study", "engineering", "rtu"],
+    "sourceUrl": "https://www.rtu.lv/en/university/for-visitors",
+    "osmUrl": "https://www.openstreetmap.org/way/221635286",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "uni-rsu",
+    "category": "university",
+    "name": {
+      "en": "Rīga Stradiņš University (RSU)",
+      "tr": "Rīga Stradiņš Üniversitesi (RSU)"
+    },
+    "address": "Dzirciema iela 16",
+    "city": "Rīga",
+    "lat": 56.953708,
+    "lng": 24.055148,
+    "officialUrl": "https://www.rsu.lv/en/contacts",
+    "notes": {
+      "en": "Main campus. The leading medical and healthcare university in Latvia, very popular with international students.",
+      "tr": "Ana kampüs. Letonya'nın önde gelen tıp ve sağlık üniversitesi, uluslararası öğrenciler arasında çok popüler."
+    },
+    "tags": ["university", "study", "medicine", "rsu"],
+    "sourceUrl": "https://www.rsu.lv/en/contacts",
+    "osmUrl": "https://www.openstreetmap.org/way/380059745",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "uni-turiba",
+    "category": "university",
+    "name": {
+      "en": "Turība University",
+      "tr": "Turība Üniversitesi"
+    },
+    "address": "Graudu iela 68",
+    "city": "Rīga",
+    "lat": 56.910529,
+    "lng": 24.080043,
+    "officialUrl": "https://www.turiba.lv/en/contacts",
+    "notes": {
+      "en": "One of the largest private business universities in Latvia. Has its own train station.",
+      "tr": "Letonya'nın en büyük özel işletme üniversitelerinden biri. Kendi tren istasyonu var."
+    },
+    "tags": ["university", "study", "business", "turiba"],
+    "sourceUrl": "https://www.turiba.lv/en/contacts",
+    "osmUrl": "https://www.openstreetmap.org/way/385118270",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "gov-csdd",
+    "category": "immigration",
+    "name": {
+      "en": "CSDD (Road Traffic Safety Directorate)",
+      "tr": "CSDD (Yol Trafik Güvenliği Müdürlüğü)"
+    },
+    "address": "Bauskas iela 86",
+    "city": "Rīga",
+    "lat": 56.915155,
+    "lng": 24.113491,
+    "officialUrl": "https://www.csdd.lv/en/",
+    "notes": {
+      "en": "Main customer service center for driving licenses, vehicle registration and roadworthiness tests.",
+      "tr": "Ehliyet, araç tescili ve araç muayenesi için ana müşteri hizmetleri merkezi."
+    },
+    "tags": ["driving", "license", "car", "government", "csdd"],
+    "sourceUrl": "https://www.csdd.lv/en/",
+    "osmUrl": "https://www.openstreetmap.org/node/7180135207",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "attr-riga-castle",
+    "category": "attraction",
+    "name": {
+      "en": "Riga Castle",
+      "tr": "Riga Kalesi"
+    },
+    "address": "Pils laukums 3",
+    "city": "Rīga",
+    "lat": 56.951051,
+    "lng": 24.100973,
+    "officialUrl": "https://lnvm.lv/en/",
+    "notes": {
+      "en": "Residence of the President of Latvia and home to the National History Museum.",
+      "tr": "Letonya Cumhurbaşkanlığı konutu ve Ulusal Tarih Müzesi'ne ev sahipliği yapıyor."
+    },
+    "tags": ["tourism", "castle", "history", "museum", "president"],
+    "sourceUrl": "https://lnvm.lv/en/",
+    "osmUrl": "https://www.openstreetmap.org/relation/1393926",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "attr-freedom-monument",
+    "category": "attraction",
+    "name": {
+      "en": "Freedom Monument",
+      "tr": "Özgürlük Anıtı"
+    },
+    "address": "Brīvības laukums",
+    "city": "Rīga",
+    "lat": 56.951509,
+    "lng": 24.113378,
+    "officialUrl": "https://www.liveriga.com/en/968-freedom-monument",
+    "notes": {
+      "en": "The most important symbol of Latvia's independence. Guard of Honor changes here.",
+      "tr": "Letonya'nın bağımsızlığının en önemli sembolü. Şeref Kıtası değişimi burada yapılıyor."
+    },
+    "tags": ["tourism", "monument", "milda", "freedom"],
+    "sourceUrl": "https://www.liveriga.com/en/968-freedom-monument",
+    "osmUrl": "https://www.openstreetmap.org/way/87182656",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "attr-black-heads",
+    "category": "attraction",
+    "name": {
+      "en": "House of the Black Heads",
+      "tr": "Karakafalılar Evi"
+    },
+    "address": "Rātslaukums 7",
+    "city": "Rīga",
+    "lat": 56.947155,
+    "lng": 24.106789,
+    "officialUrl": "https://melngalvjunams.lv/en",
+    "notes": {
+      "en": "Iconic building in the Town Hall Square, originally built in 1334 for a guild of unmarried merchants.",
+      "tr": "Belediye Binası Meydanı'ndaki ikonik bina, orijinal olarak 1334'te bekar tüccarlar loncası için inşa edilmiştir."
+    },
+    "tags": ["tourism", "museum", "history", "architecture", "old-town"],
+    "sourceUrl": "https://melngalvjunams.lv/en",
+    "osmUrl": "https://www.openstreetmap.org/way/87495471",
+    "lastChecked": "2026-10",
+    "verified": true
   }
 ]
