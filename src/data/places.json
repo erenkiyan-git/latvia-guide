@@ -300,14 +300,14 @@
     "city": "Rīga",
     "lat": 56.956164,
     "lng": 24.111854,
-    "officialUrl": "http://riga.emb.mfa.gov.tr/Mission",
+    "officialUrl": "https://riga.emb.mfa.gov.tr/Mission",
     "phone": "+371 67821600",
     "notes": {
       "en": "Turkish diplomatic mission in Latvia. Consular services available by appointment.",
       "tr": "Letonya'daki Türk diplomatik misyonu. Konsolosluk işlemleri randevu ile yapılmaktadır."
     },
     "tags": ["embassy", "diplomatic", "turkey", "türkiye"],
-    "sourceUrl": "http://riga.emb.mfa.gov.tr/Mission",
+    "sourceUrl": "https://riga.emb.mfa.gov.tr/Mission",
     "osmUrl": "https://www.openstreetmap.org/node/1937653115",
     "lastChecked": "2026-10",
     "verified": true
