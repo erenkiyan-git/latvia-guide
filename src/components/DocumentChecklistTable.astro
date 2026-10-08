@@ -1,0 +1,20 @@
+---
+interface Props {
+  headers?: string[];
+}
+const { headers = ["Document", "Who issues it", "Original/copy", "Translation needed?", "Apostille/legalisation?", "Validity / notes", "Type"] } = Astro.props;
+---
+<div class="overflow-x-auto my-6">
+  <table class="min-w-full divide-y divide-gray-300 border border-gray-300">
+    <thead class="bg-gray-50">
+      <tr>
+        {headers.map(header => (
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">{header}</th>
+        ))}
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200 bg-white">
+      <slot />
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,52 @@
+---
+title: "eID, e-Signature and e-Address"
+description: "How the Latvian digital state works and how to set up your electronic identity."
+section: "documents"
+badge: "verified"
+verified: true
+lastChecked: "October 2026"
+reviewIntervalMonths: 6
+audience: "all"
+officialSource: 
+  - "https://www.eparaksts.lv/en"
+  - "https://latvija.gov.lv"
+---
+
+import QuickAnswer from '../../../../components/QuickAnswer.astro';
+import FAQ from '../../../../components/FAQ.astro';
+import OfficialSourceList from '../../../../components/OfficialSourceList.astro';
+import WarningBox from '../../../../components/WarningBox.astro';
+
+<QuickAnswer>
+Latvia is highly digital. Your Residence Permit card contains a chip that allows you to sign documents legally (eParaksts). You can also use the eParaksts mobile app or Smart-ID to access government services on Latvija.lv.
+</QuickAnswer>
+
+## The Three Pillars of Digital Latvia
+
+### 1. eID Card and eParaksts (e-Signature)
+When you receive your Latvian Residence Permit card, it functions as a smart card (eID). You will receive an envelope with PIN codes. 
+If you buy a cheap USB smart-card reader for your computer, you can insert your Residence Permit, type in your PIN, and legally sign PDF documents (like rental contracts or employment agreements) from home. This electronic signature has the exact same legal weight as a physical signature in Latvia.
+
+### 2. eParaksts Mobile
+Because carrying a card reader is annoying, the government provides a free app called "eParaksts mobile". You use your physical card once to register for the app, and after that, you can sign documents and log into government sites just using your phone.
+
+### 3. Latvija.gov.lv and e-Address
+[Latvija.gov.lv](https://latvija.gov.lv) is the central portal for all state services (declaring your address, checking taxes, paying fines). 
+You can activate an "e-Address" (e-adrese) on this portal. It acts as a secure digital mailbox. Once activated, the government will stop sending you physical letters and will only communicate with you via this secure digital inbox.
+
+<WarningBox>
+**Do not lose your PIN envelope.** If you lose the envelope with PIN1 and PIN2 that came with your Residence Permit, you cannot easily recover it. You will have to go back to PMLP and request new PINs.
+</WarningBox>
+
+## Smart-ID
+"Smart-ID" is a private app created by Baltic banks. It is the most common way people log into their online banking. If you get a "Qualified Smart-ID" account (which requires visiting a bank branch with your passport/ID), it can also be used to log into government portals, just like eParaksts.
+
+<FAQ title="I am an EU citizen with a paper certificate. Can I use e-Signature?">
+Yes. EU citizens who receive a paper Registration Certificate can apply for a specific plastic "Foreigner's eID card" (Ārzemnieka eID karte) at PMLP simply to get access to these digital tools.
+</FAQ>
+
+<OfficialSourceList links={[
+  { title: "eParaksts Official Website", url: "https://www.eparaksts.lv/en" },
+  { title: "Latvija.lv - State Services", url: "https://latvija.gov.lv" },
+  { title: "PMLP - Foreigner's eID card", url: "https://www.pmlp.gov.lv/en/foreigners-eid-card-0" }
+]} />

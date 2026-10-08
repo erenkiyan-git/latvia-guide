@@ -1,0 +1,21 @@
+---
+interface Props {
+  links: { url: string; title: string; }[];
+}
+const { links } = Astro.props;
+---
+<div class="bg-gray-50 border border-gray-200 rounded-lg p-4 my-6">
+  <h3 class="text-base font-semibold text-gray-900 mb-3 mt-0">Official Sources</h3>
+  <ul class="space-y-2 m-0 pl-0 list-none">
+    {links.map(link => (
+      <li class="flex items-start">
+        <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+        <a href={link.url} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 hover:underline break-all">
+          {link.title}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
