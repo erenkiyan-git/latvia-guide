@@ -288,5 +288,139 @@
     "osmUrl": "https://www.openstreetmap.org/way/87495471",
     "lastChecked": "2026-10",
     "verified": true
+  },
+  {
+    "id": "embassy-turkey",
+    "category": "immigration",
+    "name": {
+      "en": "Embassy of the Republic of Turkey",
+      "tr": "Türkiye Cumhuriyeti Büyükelçiliği"
+    },
+    "address": "Andreja Pumpura iela 2",
+    "city": "Rīga",
+    "lat": 56.956164,
+    "lng": 24.111854,
+    "officialUrl": "http://riga.emb.mfa.gov.tr/Mission",
+    "phone": "+371 67821600",
+    "notes": {
+      "en": "Turkish diplomatic mission in Latvia. Consular services available by appointment.",
+      "tr": "Letonya'daki Türk diplomatik misyonu. Konsolosluk işlemleri randevu ile yapılmaktadır."
+    },
+    "tags": ["embassy", "diplomatic", "turkey", "türkiye"],
+    "sourceUrl": "http://riga.emb.mfa.gov.tr/Mission",
+    "osmUrl": "https://www.openstreetmap.org/node/1937653115",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "embassy-ukraine",
+    "category": "immigration",
+    "name": {
+      "en": "Embassy of Ukraine",
+      "tr": "Ukrayna Büyükelçiliği"
+    },
+    "address": "Kalpaka bulvāris 3",
+    "city": "Rīga",
+    "lat": 56.957959,
+    "lng": 24.106841,
+    "officialUrl": "https://latvia.mfa.gov.ua/en",
+    "phone": "+371 67332956",
+    "notes": {
+      "en": "Ukrainian diplomatic mission in Latvia.",
+      "tr": "Letonya'daki Ukrayna diplomatik misyonu."
+    },
+    "tags": ["embassy", "diplomatic", "ukraine"],
+    "sourceUrl": "https://latvia.mfa.gov.ua/en",
+    "osmUrl": "https://www.openstreetmap.org/node/1000699147",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "embassy-uzbekistan",
+    "category": "immigration",
+    "name": {
+      "en": "Embassy of Uzbekistan",
+      "tr": "Özbekistan Büyükelçiliği"
+    },
+    "address": "Elizabetes iela 11",
+    "city": "Rīga",
+    "lat": 56.959063,
+    "lng": 24.102450,
+    "officialUrl": "https://latvia.mfa.uz/en/",
+    "notes": {
+      "en": "Uzbek diplomatic mission in Latvia.",
+      "tr": "Letonya'daki Özbek diplomatik misyonu."
+    },
+    "tags": ["embassy", "diplomatic", "uzbekistan"],
+    "sourceUrl": "https://latvia.mfa.uz/en/",
+    "osmUrl": "https://www.openstreetmap.org/node/1215236346",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "embassy-germany",
+    "category": "immigration",
+    "name": {
+      "en": "Embassy of Germany",
+      "tr": "Almanya Büyükelçiliği"
+    },
+    "address": "Raiņa bulvāris 13",
+    "city": "Rīga",
+    "lat": 56.951538,
+    "lng": 24.114635,
+    "officialUrl": "https://riga.diplo.de/lv-lv",
+    "notes": {
+      "en": "German diplomatic mission in Latvia.",
+      "tr": "Letonya'daki Alman diplomatik misyonu."
+    },
+    "tags": ["embassy", "diplomatic", "germany"],
+    "sourceUrl": "https://riga.diplo.de/lv-lv",
+    "osmUrl": "https://www.openstreetmap.org/node/470042257",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "embassy-usa",
+    "category": "immigration",
+    "name": {
+      "en": "US Embassy",
+      "tr": "ABD Büyükelçiliği"
+    },
+    "address": "Samnera Velsa iela 1",
+    "city": "Rīga",
+    "lat": 56.930806,
+    "lng": 24.028702,
+    "officialUrl": "https://lv.usembassy.gov/",
+    "notes": {
+      "en": "US diplomatic mission in Latvia.",
+      "tr": "Letonya'daki ABD diplomatik misyonu."
+    },
+    "tags": ["embassy", "diplomatic", "usa", "america"],
+    "sourceUrl": "https://lv.usembassy.gov/",
+    "osmUrl": "https://www.openstreetmap.org/node/1736524350",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "embassy-uk",
+    "category": "immigration",
+    "name": {
+      "en": "British Embassy",
+      "tr": "İngiltere Büyükelçiliği"
+    },
+    "address": "Jura Alunāna iela 5",
+    "city": "Rīga",
+    "lat": 56.956588,
+    "lng": 24.109946,
+    "officialUrl": "https://www.gov.uk/world/organisations/british-embassy-riga",
+    "notes": {
+      "en": "British diplomatic mission in Latvia.",
+      "tr": "Letonya'daki İngiliz diplomatik misyonu."
+    },
+    "tags": ["embassy", "diplomatic", "uk", "british", "england"],
+    "sourceUrl": "https://www.gov.uk/world/organisations/british-embassy-riga",
+    "osmUrl": "https://www.openstreetmap.org/node/501609061",
+    "lastChecked": "2026-10",
+    "verified": true
   }
 ]
