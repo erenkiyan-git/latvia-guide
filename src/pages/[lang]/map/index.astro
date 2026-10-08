@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { getActiveLanguages } from '../../../i18n/utils';
-import { useTranslations } from '../../../i18n/utils';
+import { getActiveLanguages, useTranslations } from '../../../i18n/utils';
 import type { Lang } from '../../../config';
-import { Map, MapPin, Building, Cross, Bus } from 'lucide-react';
-import { Button } from '../../../components/ui/Button';
+import { Map as MapIcon, WifiOff, ExternalLink } from 'lucide-react';
+import InteractiveMap from '../../../components/ui/InteractiveMap';
+import { getLocators } from '../../../lib/places';
 
 export function getStaticPaths() {
   const langs = getActiveLanguages();
@@ -16,65 +16,102 @@ export function getStaticPaths() {
 const { lang } = Astro.params as { lang: Lang };
 const t = useTranslations(lang);
 
-const pageTitle = lang === 'tr' ? 'Faydalı Yerler Haritası' : 'Map of Useful Places';
-const pageDesc = lang === 'tr' ? 'Letonya\'daki temel kurumların, hastanelerin ve kampüslerin interaktif haritası.' : 'Interactive map of essential institutions, hospitals, and campuses in Latvia.';
+const pageTitle = t('map.title');
+const pageDesc = t('map.intro');
+const locators = getLocators();
+
+// Pick helper for Astro side
+function p(val: any, l: string) {
+  if (!val) return '';
+  return val[l] || val.en;
+}
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="text-center mb-12">
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">{pageTitle}</h1>
-      <p class="text-xl text-zinc-400">{pageDesc}</p>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    
+    <div class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3 flex items-center">
+        <MapIcon class="w-8 h-8 text-primary-500 mr-3 hidden sm:block" />
+        {pageTitle}
+      </h1>
+      <p class="text-lg text-zinc-400 max-w-3xl">
+        {pageDesc}
+      </p>
+      <p class="text-sm text-zinc-500 mt-2 flex items-start sm:items-center">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-2 mt-1 sm:mt-0 shrink-0"></span>
+        {t('map.changeNote')}
+      </p>
     </div>
 
-    <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 sm:p-16 text-center shadow-2xl relative overflow-hidden">
-      <!-- Decorative background pattern -->
-      <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#9ca3af 1px, transparent 1px); background-size: 24px 24px;"></div>
+    {/* The Interactive Map (React) */}
+    <div class="mb-12">
+      <noscript>
+        <div class="bg-zinc-900 border border-amber-900/50 rounded-xl p-6 mb-6 text-amber-200">
+          <p class="font-medium mb-2">{t('map.noJs')}</p>
+        </div>
+      </noscript>
       
-      <div class="relative z-10">
-        <div class="w-24 h-24 bg-zinc-950 rounded-full flex items-center justify-center mx-auto mb-8 border border-zinc-800 shadow-inner">
-          <Map class="w-12 h-12 text-primary-500" />
-        </div>
+      <InteractiveMap client:only="react" lang={lang} t={t} />
+      
+      {/* Fallback list for no-JS and SEO. Hidden if JS loads successfully. */}
+      <div id="no-js-list" class="mt-8 space-y-4">
+        {/* We keep it simple in HTML, the React component replaces this visually if JS runs */}
+      </div>
+      
+      {/* Script to inject Leaflet so it's not in the main bundle, and hide the fallback list */}
+      <script is:inline>
+        document.getElementById('no-js-list').style.display = 'none';
         
-        <h2 class="text-3xl font-bold text-white mb-6">
-          {lang === 'tr' ? 'Harita Çok Yakında (V2)' : 'Interactive Map Coming Soon (V2)'}
-        </h2>
-        
-        <p class="text-lg text-zinc-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-          {lang === 'tr' 
-            ? 'Şu anda Riga\'daki tüm önemli yerlerin (PMLP ofisleri, ana hastaneler, üniversiteler ve toplu taşıma merkezleri) yer aldığı, çevrimdışı uyumlu özel bir harita üzerinde çalışıyoruz.'
-            : 'We are currently building a custom, offline-friendly map featuring all the most important locations in Riga (PMLP offices, major hospitals, universities, and transit hubs).'
-          }
-        </p>
-        
-        <div class="bg-zinc-950/50 border border-zinc-800 rounded-2xl p-6 sm:p-8 text-left max-w-xl mx-auto mb-10">
-          <h3 class="text-xl font-bold text-white mb-6 text-center">
-            {lang === 'tr' ? 'Haritada neler olacak?' : 'What will be on the map?'}
-          </h3>
-          <ul class="space-y-4">
-            <li class="flex items-center text-zinc-300">
-              <Building class="w-6 h-6 text-primary-500 mr-4" />
-              <span class="text-lg">{lang === 'tr' ? 'Göçmenlik Büroları (PMLP)' : 'Immigration Offices (PMLP)'}</span>
-            </li>
-            <li class="flex items-center text-zinc-300">
-              <Cross class="w-6 h-6 text-rose-500 mr-4" />
-              <span class="text-lg">{lang === 'tr' ? 'Nöbetçi Eczaneler ve Acil Servisler' : '24/7 Pharmacies & Emergency Rooms'}</span>
-            </li>
-            <li class="flex items-center text-zinc-300">
-              <MapPin class="w-6 h-6 text-sky-500 mr-4" />
-              <span class="text-lg">{lang === 'tr' ? 'Üniversite Kampüsleri' : 'University Campuses'}</span>
-            </li>
-            <li class="flex items-center text-zinc-300">
-              <Bus class="w-6 h-6 text-amber-500 mr-4" />
-              <span class="text-lg">{lang === 'tr' ? 'Bilet Satış Noktaları (e-talons)' : 'Transport Ticket Machines'}</span>
-            </li>
-          </ul>
-        </div>
-        
-        <Button href={`/${lang}/guides/`} size="lg" className="w-full sm:w-auto text-lg px-8">
-          {lang === 'tr' ? 'Rehberleri Okumaya Devam Et' : 'Continue Reading Guides'}
-        </Button>
+        // Load Leaflet JS and CSS on demand
+        if (!window.L) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+          document.head.appendChild(link);
+
+          const script = document.createElement('script');
+          script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+          document.head.appendChild(script);
+        }
+      </script>
+    </div>
+
+    {/* Offline tip */}
+    <div class="bg-zinc-900/50 border border-zinc-800 rounded-xl p-5 mb-12 flex items-start">
+      <WifiOff class="w-5 h-5 text-zinc-500 mr-3 shrink-0 mt-0.5" />
+      <div>
+        <h3 class="text-white font-medium text-sm mb-1">{t('map.offlineTitle')}</h3>
+        <p class="text-zinc-400 text-sm leading-relaxed">{t('map.offlineTip')}</p>
       </div>
     </div>
+
+    {/* Locators section */}
+    {locators.length > 0 && (
+      <div>
+        <h2 class="text-2xl font-bold text-white mb-3">{t('map.locatorsTitle')}</h2>
+        <p class="text-zinc-400 mb-6 max-w-2xl">{t('map.locatorsIntro')}</p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {locators.map(loc => (
+            <a 
+              href={loc.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block bg-zinc-900 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 hover:bg-zinc-800/50 transition-colors group"
+            >
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-semibold px-2 py-1 rounded-md text-zinc-400 bg-zinc-950 border border-zinc-800">
+                  {t(`map.cat.${loc.category}`)}
+                </span>
+                <ExternalLink class="w-4 h-4 text-zinc-600 group-hover:text-primary-400 transition-colors" />
+              </div>
+              <h3 class="text-lg font-bold text-white mb-1 group-hover:text-primary-400 transition-colors">{loc.name}</h3>
+              <p class="text-sm text-zinc-400">{p(loc.description, lang)}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
   </div>
 </BaseLayout>

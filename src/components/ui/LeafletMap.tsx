@@ -3,7 +3,7 @@ import type { Place } from '../../lib/places';
 import { CATEGORIES } from '../../lib/places';
 // We only import types here; the actual L is loaded from the global window object.
 import type * as L from 'leaflet';
-import { MapOff } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
 
 interface Props {
   places: Place[];
@@ -108,7 +108,7 @@ export default function LeafletMap({ places, userLoc, t }: Props) {
   if (error) {
     return (
       <div className="w-full h-full bg-zinc-900 border-l border-zinc-800 flex flex-col items-center justify-center p-8 text-center">
-        <MapOff className="w-12 h-12 text-zinc-600 mb-4" />
+        <AlertTriangle className="w-12 h-12 text-zinc-600 mb-4" />
         <p className="text-zinc-400 max-w-sm">{t('map.loadError')}</p>
       </div>
     );
