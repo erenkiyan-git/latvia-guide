@@ -1,1 +1,115 @@
-[]
+[
+  {
+    "id": "hosp-stradini",
+    "category": "hospital",
+    "name": {
+      "en": "Paula Stradiņa Clinical University Hospital",
+      "tr": "Paula Stradiņa Klinik Üniversite Hastanesi"
+    },
+    "address": "Pilsoņu iela 13",
+    "city": "Rīga",
+    "lat": 56.931068,
+    "lng": 24.065094,
+    "officialUrl": "https://www.stradini.lv/en/content/contacts",
+    "phone": "+371 67069280",
+    "notes": {
+      "en": "Major university hospital with an emergency department. Complex consists of multiple buildings.",
+      "tr": "Acil servisi olan büyük üniversite hastanesi. Kompleks birden fazla binadan oluşmaktadır."
+    },
+    "tags": ["emergency", "hospital", "stradini"],
+    "sourceUrl": "https://www.stradini.lv/en/content/contacts",
+    "osmUrl": "https://www.openstreetmap.org/relation/17588998",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "hosp-bkus",
+    "category": "hospital",
+    "name": {
+      "en": "Children's Clinical University Hospital (BKUS)",
+      "tr": "Çocuk Klinik Üniversite Hastanesi (BKUS)"
+    },
+    "address": "Vienības gatve 45",
+    "city": "Rīga",
+    "lat": 56.922356,
+    "lng": 24.085862,
+    "officialUrl": "https://www.bkus.lv/en/contacts",
+    "phone": "+371 67064461",
+    "notes": {
+      "en": "Main children's hospital in Latvia with 24/7 pediatric emergency care.",
+      "tr": "Letonya'nın ana çocuk hastanesi, 7/24 pediatrik acil bakım."
+    },
+    "tags": ["emergency", "hospital", "children", "pediatric", "bkus"],
+    "sourceUrl": "https://www.bkus.lv/en/contacts",
+    "osmUrl": "https://www.openstreetmap.org/relation/1376546",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "transport-airport",
+    "category": "transport",
+    "name": {
+      "en": "Riga Airport (RIX)",
+      "tr": "Riga Havalimanı (RIX)"
+    },
+    "address": "Mārupes novads",
+    "city": "Rīga",
+    "lat": 56.922317,
+    "lng": 23.972681,
+    "officialUrl": "https://www.riga-airport.com",
+    "notes": {
+      "en": "Main international airport for Latvia. Connected to city centre by Bus 22.",
+      "tr": "Letonya'nın ana uluslararası havalimanı. 22 numaralı otobüs ile şehir merkezine bağlanır."
+    },
+    "tags": ["airport", "flight", "rix"],
+    "sourceUrl": "https://www.riga-airport.com",
+    "osmUrl": "https://www.openstreetmap.org/relation/147154",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "transport-central-station",
+    "category": "transport",
+    "name": {
+      "en": "Riga Central Railway Station",
+      "tr": "Riga Merkez Tren İstasyonu"
+    },
+    "address": "Stacijas laukums 2",
+    "city": "Rīga",
+    "lat": 56.946819,
+    "lng": 24.119723,
+    "officialUrl": "https://www.pv.lv/en",
+    "notes": {
+      "en": "Main hub for domestic and international passenger trains (Vivi).",
+      "tr": "Yurtiçi ve yurtdışı yolcu trenleri (Vivi) için ana merkez."
+    },
+    "tags": ["train", "railway", "station", "vivi"],
+    "sourceUrl": "https://www.pv.lv/en",
+    "osmUrl": "https://www.openstreetmap.org/way/136510075",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "transport-coach-station",
+    "category": "transport",
+    "name": {
+      "en": "Riga International Coach Terminal",
+      "tr": "Riga Uluslararası Otobüs Terminali"
+    },
+    "address": "Prāgas iela 1",
+    "city": "Rīga",
+    "lat": 56.944990,
+    "lng": 24.114696,
+    "officialUrl": "https://www.autoosta.lv/?lang=en",
+    "phone": "+371 90000009",
+    "notes": {
+      "en": "Main bus station for regional, intercity and international buses (Lux Express, Ecolines, etc).",
+      "tr": "Bölgesel, şehirlerarası ve uluslararası otobüsler (Lux Express, Ecolines vb.) için ana otobüs durağı."
+    },
+    "tags": ["bus", "coach", "intercity", "autoosta"],
+    "sourceUrl": "https://www.autoosta.lv/?lang=en",
+    "osmUrl": "https://www.openstreetmap.org/way/38482095",
+    "lastChecked": "2026-10",
+    "verified": true
+  }
+]

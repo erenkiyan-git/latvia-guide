@@ -47,3 +47,33 @@ Every verified fact in the guides must have a corresponding entry here.
 - **Fact Verified:** Biometrics (fingerprints and face scan) are required. Children under 12 are exempt from fingerprints.
 - **Used in Guide:** biometrics.mdx
 - **Used in Guide:** card-collection.mdx
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Paula Stradiņa Clinical University Hospital
+- **URL:** https://www.stradini.lv/en/content/contacts
+- **Fact Verified:** Hospital address and phone number
+- **Used in Guide:** Map (hosp-stradini)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Children's Clinical University Hospital
+- **URL:** https://www.bkus.lv/en/contacts
+- **Fact Verified:** Hospital address and phone number
+- **Used in Guide:** Map (hosp-bkus)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Riga Airport
+- **URL:** https://www.riga-airport.com
+- **Fact Verified:** Airport location (Mārupes novads)
+- **Used in Guide:** Map (transport-airport)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Vivi (Passenger Train)
+- **URL:** https://www.pv.lv/en
+- **Fact Verified:** Central station operation
+- **Used in Guide:** Map (transport-central-station)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Riga International Coach Terminal
+- **URL:** https://www.autoosta.lv/?lang=en
+- **Fact Verified:** Coach terminal address and phone number
+- **Used in Guide:** Map (transport-coach-station)
