@@ -5,8 +5,8 @@ A practical, trustworthy, mobile-first information website for foreigners in Lat
 ## Project Architecture
 - **Framework**: [Astro](https://astro.build/) (Static Site Generation)
 - **Content**: Markdown/MDX with Astro Content Collections
-- **Styling**: Vanilla CSS with CSS Variables (No Tailwind)
-- **JavaScript**: Vanilla JS (No React/Vue overhead)
+- **Styling**: Tailwind CSS 4 (design tokens in `src/styles/global.css`)
+- **JavaScript**: React "islands" only where interaction is needed
 - **i18n**: Sub-path routing (e.g., `/en/`, `/tr/`) based on static JSON dictionaries.
 
 ## Core Features
@@ -27,7 +27,18 @@ npm run build
 
 # Preview the built production site locally
 npm run preview
+
+# Check the places data and write PLACES_REPORT.md
+npm run check-places
 ```
+
+## Map of Useful Places
+
+Page: `/en/map/` and `/tr/map/`. Data: `src/data/places.json` (places) and `src/data/place-locators.json` (links to official "find a branch" pages). Only places with `verified: true`, a `sourceUrl` and a `SOURCES.md` entry are shown. How to add a place: see `CONTENT_GUIDE.md`.
+
+### Added dependencies (and why)
+- **leaflet** — the free, open-source map library the founder approved; installed via npm so nothing loads from a third-party CDN.
+- **@types/leaflet** (development only) — type descriptions so the editor catches mistakes in map code; it is not shipped to visitors.
 
 ## Folder Structure
 * `src/content/guides/` - Markdown articles organized by language.
