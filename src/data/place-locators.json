@@ -7,7 +7,8 @@
       "en": "Find the nearest 24/7 or regular pharmacy in the Mēness Aptieka network.",
       "tr": "Mēness Aptieka ağında size en yakın 7/24 veya normal eczaneyi bulun."
     },
-    "url": "https://www.menessaptieka.lv/aptiekas"
+    "url": "https://www.menessaptieka.lv/aptiekas",
+    "lastChecked": "2026-10"
   },
   {
     "id": "bank-swedbank",
@@ -17,6 +18,7 @@
       "en": "Find Swedbank branch offices and cash deposit/withdrawal ATMs.",
       "tr": "Swedbank şubelerini ve para yatırma/çekme ATM'lerini bulun."
     },
-    "url": "https://www.swedbank.lv/private/home/more/branches"
+    "url": "https://www.swedbank.lv/private/home/more/branches",
+    "lastChecked": "2026-10"
   }
 ]
