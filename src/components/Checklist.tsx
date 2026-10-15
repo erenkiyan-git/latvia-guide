@@ -65,7 +65,7 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
   };
 
   if (!isLoaded) {
-    return <div className="animate-pulse h-96 bg-white rounded-xl"></div>;
+    return <div className="animate-pulse h-96 bg-surface rounded-xl"></div>;
   }
 
   return (
@@ -75,7 +75,7 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">{pageTitle}</h1>
         <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">{pageDesc}</p>
         
-        <div className="max-w-2xl mx-auto bg-white border border-slate-300 rounded-2xl p-6 sm:p-8 mb-8 text-left shadow-lg shadow-slate-200">
+        <div className="max-w-2xl mx-auto bg-surface border border-slate-300 rounded-2xl p-6 sm:p-8 mb-8 text-left shadow-lg shadow-slate-200">
           <div className="flex justify-between text-sm font-medium mb-3">
             <span className="text-slate-700">Progress: <strong className="text-slate-900 ml-1 text-base">{progressPercentage}%</strong></span>
             <span className="text-slate-500">{completedItems} / {totalItems} completed</span>
@@ -124,7 +124,7 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
                       print:border-none print:border-b print:border-gray-200 print:rounded-none print:p-2 print:gap-3
                       ${isChecked 
                         ? 'bg-emerald-50 border-emerald-200 print:opacity-100' 
-                        : 'bg-white border-slate-300 hover:border-primary-700 hover:bg-slate-100/80 hover:shadow-lg hover:shadow-slate-200 print:bg-transparent print:border-gray-300'
+                        : 'bg-surface border-slate-300 hover:border-primary-700 hover:bg-slate-100/80 hover:shadow-lg hover:shadow-slate-200 print:bg-transparent print:border-gray-300'
                       }
                     `}
                   >
@@ -139,7 +139,7 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
                         w-6 h-6 rounded-md border-2 transition-colors flex items-center justify-center
                         peer-focus-visible:ring-2 peer-focus-visible:ring-primary-500 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-white
                         ${isChecked 
-                          ? 'bg-emerald-600 border-emerald-600 text-white' 
+                          ? 'bg-emerald-500 border-emerald-500 text-white' 
                           : 'bg-slate-50 border-slate-300 group-hover:border-primary-600 text-transparent'
                         }
                       `}>

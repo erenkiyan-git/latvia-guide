@@ -1,50 +1,187 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/*
+  THEME: "Riga Noir" — soft cyberpunk
+  Palette: black · graphite · Latvian carmine · white.
+  Low-saturation, low-glare. Existing utility classes (slate-*, emerald-*, ...)
+  are remapped here so the whole UI follows the dark theme from a single place.
+*/
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  
-  /* Primary Carmine (Authentic Latvian Red) */
-  --color-primary-50: #fdf2f3;
-  --color-primary-100: #fae1e3;
-  --color-primary-200: #f5c8cb;
-  --color-primary-300: #eca2a8;
-  --color-primary-400: #df6f78;
-  --color-primary-500: #ce424e;
-  --color-primary-600: #9e3039;
-  --color-primary-700: #7f232b;
-  --color-primary-800: #5d1d23;
-  --color-primary-900: #4a1519;
-  
-  /* Accent Orange (for warnings/highlights) */
-  --color-accent-500: #f97316; /* orange-500 */
-  --color-accent-600: #ea580c; /* orange-600 */
-  
-  /* Semantic colors (Light mode variants) */
-  --color-official-bg: #d1fae5; /* emerald-100 */
-  --color-official-text: #065f46; /* emerald-800 */
-  --color-official-border: #6ee7b7; /* emerald-300 */
-  
-  --color-verified-bg: #dbeafe; /* blue-100 */
-  --color-verified-text: #1e40af; /* blue-800 */
-  --color-verified-border: #93c5fd; /* blue-300 */
-  
-  --color-warning-bg: #ffedd5; /* orange-100 */
-  --color-warning-text: #9a3412; /* orange-800 */
-  --color-warning-border: #fdba74; /* orange-300 */
-  
-  --color-draft-bg: #e2e8f0; /* slate-200 */
-  --color-draft-text: #334155; /* slate-700 */
-  --color-draft-border: #94a3b8; /* slate-400 */
-  
-  --color-info-bg: #e0f2fe; /* sky-100 */
-  --color-info-text: #075985; /* sky-800 */
-  --color-info-border: #7dd3fc; /* sky-300 */
+  --font-mono: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  /* Sharper, more "tech" corners */
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+  --radius-2xl: 8px;
+  --radius-3xl: 10px;
+
+  /* Surfaces */
+  --color-base: #0b0c0f;
+  --color-surface: #13151a;
+
+  /* Graphite scale (inverted: low = dark surfaces, high = light text) */
+  --color-slate-50: #0f1115;
+  --color-slate-100: #171a1f;
+  --color-slate-200: #21252c;
+  --color-slate-300: #2d323b;
+  --color-slate-400: #4b525d;
+  --color-slate-500: #8a919c;
+  --color-slate-600: #a6acb6;
+  --color-slate-700: #bfc4cc;
+  --color-slate-800: #d8dce2;
+  --color-slate-900: #eef0f3;
+  --color-slate-950: #ffffff;
+
+  /* Primary Carmine (Latvian red), tuned for dark backgrounds */
+  --color-primary-50: #221215;
+  --color-primary-100: #2c1519;
+  --color-primary-200: #4a1d23;
+  --color-primary-300: #f4b3b9;
+  --color-primary-400: #e8808a;
+  --color-primary-500: #d4505b;
+  --color-primary-600: #c4343f;
+  --color-primary-700: #eb949c;
+  --color-primary-800: #f1b0b6;
+  --color-primary-900: #f8d3d6;
+  --color-primary-950: #1a0d10;
+
+  --color-accent-500: #f97316;
+  --color-accent-600: #ea580c;
+
+  /* Status hues, muted for dark mode (50-300 = tinted dark, 600-900 = readable light) */
+  --color-emerald-50: #0e1f19;  --color-emerald-100: #11291f; --color-emerald-200: #1b4435; --color-emerald-300: #25664e;
+  --color-emerald-400: #3fbf96; --color-emerald-500: #10b981; --color-emerald-600: #4cd4a6; --color-emerald-700: #7ee2bf;
+  --color-emerald-800: #a8ecd2; --color-emerald-900: #cdf5e6; --color-emerald-950: #0a1713;
+
+  --color-amber-50: #231b0d;  --color-amber-100: #2d2210; --color-amber-200: #4d3a14; --color-amber-300: #6e5318;
+  --color-amber-400: #d9a52b; --color-amber-500: #f59e0b; --color-amber-600: #f0b840; --color-amber-700: #f5cb73;
+  --color-amber-800: #f8dc9f; --color-amber-900: #fbebc4; --color-amber-950: #fff4d6;
+
+  --color-sky-50: #0d1a24;  --color-sky-100: #10222f; --color-sky-200: #1a3d54; --color-sky-300: #246085;
+  --color-sky-400: #4aa8dc; --color-sky-500: #0ea5e9; --color-sky-600: #55b9e8; --color-sky-700: #85cdf0;
+  --color-sky-800: #aedcf5; --color-sky-900: #d3ecfa; --color-sky-950: #0a121a;
+
+  --color-rose-50: #251116;  --color-rose-100: #301419; --color-rose-200: #5a1f29; --color-rose-300: #82303c;
+  --color-rose-400: #e0626f; --color-rose-500: #f43f5e; --color-rose-600: #ef6b7c; --color-rose-700: #f59aa6;
+  --color-rose-800: #f8bcc4; --color-rose-900: #fbdde1; --color-rose-950: #1a0b0e;
+
+  --color-blue-50: #0e1626;  --color-blue-100: #121d33; --color-blue-200: #1d3159; --color-blue-300: #2c4a8a;
+  --color-blue-400: #5b8def; --color-blue-500: #3b82f6; --color-blue-600: #6b9bf5; --color-blue-700: #93b6f8;
+  --color-blue-800: #b5cdfa; --color-blue-900: #d6e3fc; --color-blue-950: #0a0f1c;
+
+  /* Semantic */
+  --color-official-bg: #11291f;
+  --color-official-text: #a8ecd2;
+  --color-official-border: #1b4435;
+  --color-verified-bg: #10222f;
+  --color-verified-text: #aedcf5;
+  --color-verified-border: #1a3d54;
+  --color-warning-bg: #2d2210;
+  --color-warning-text: #f8dc9f;
+  --color-warning-border: #4d3a14;
+  --color-draft-bg: #21252c;
+  --color-draft-text: #bfc4cc;
+  --color-draft-border: #4b525d;
+  --color-info-bg: #10222f;
+  --color-info-text: #aedcf5;
+  --color-info-border: #1a3d54;
 }
 
 @layer base {
-  body {
-    background-color: #EDEFF2;
-    @apply text-slate-800 antialiased selection:bg-primary-200 selection:text-primary-900;
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
   }
+
+  body {
+    background-color: var(--color-base);
+    @apply text-slate-700 antialiased selection:bg-primary-200 selection:text-primary-900;
+  }
+
+  /* Faint tech grid + carmine haze behind everything (very low contrast, no glare) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      radial-gradient(ellipse 70% 45% at 50% -10%, rgba(196, 52, 63, 0.13), transparent 70%),
+      linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+    background-size: auto, 44px 44px, 44px 44px;
+  }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--color-base); }
+  ::-webkit-scrollbar-thumb { background: var(--color-slate-300); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-primary-600); }
+
+  input, textarea, select { color-scheme: dark; }
+}
+
+@layer components {
+  /* Cyberpunk "HUD" label: mono, uppercase, wide tracking */
+  .hud-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-primary-400);
+  }
+
+  /* Card with corner brackets */
+  .hud-card {
+    position: relative;
+    background: var(--color-surface);
+    border: 1px solid var(--color-slate-300);
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+  }
+  .hud-card::before,
+  .hud-card::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: var(--color-primary-600);
+    opacity: .55;
+    transition: opacity .2s ease, width .2s ease, height .2s ease;
+    pointer-events: none;
+  }
+  .hud-card::before { top: -1px; left: -1px; border-top: 2px solid; border-left: 2px solid; }
+  .hud-card::after { bottom: -1px; right: -1px; border-bottom: 2px solid; border-right: 2px solid; }
+  .hud-card.hud-hover:hover,
+  a:hover > .hud-card.hud-hover,
+  a:focus-visible > .hud-card.hud-hover {
+    border-color: rgba(196, 52, 63, 0.55);
+    box-shadow: 0 0 0 1px rgba(196, 52, 63, 0.25), 0 10px 30px -14px rgba(196, 52, 63, 0.45);
+    transform: translateY(-1px);
+  }
+  .hud-card.hud-hover:hover::before, .hud-card.hud-hover:hover::after,
+  a:hover > .hud-card.hud-hover::before, a:hover > .hud-card.hud-hover::after {
+    opacity: 1; width: 16px; height: 16px;
+  }
+
+  /* Thin glowing divider */
+  .hud-rule {
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-primary-600), rgba(196, 52, 63, 0) 70%);
+  }
+}
+
+/* Leaflet map: dark, desaturated tiles that match the theme */
+.leaflet-container { background: var(--color-base); }
+.leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.88) contrast(0.9) saturate(0.35); }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--color-surface); color: var(--color-slate-700); }
+
+/* Prose tweaks for dark */
+.guide-content pre { background: var(--color-slate-100); border: 1px solid var(--color-slate-300); }
+.guide-content code { color: var(--color-primary-300); }
+
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  body::before { display: none; }
 }

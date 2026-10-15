@@ -45,10 +45,10 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-300 shadow-sm">
+    <header className="sticky top-0 z-50 bg-surface/90 backdrop-blur-md border-b border-slate-300 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href={`/${currentLang}/`} className="text-xl font-bold text-slate-900 tracking-tight hover:text-primary-600 transition-colors">
-          {logoText}
+        <a href={`/${currentLang}/`} className="text-xl font-bold text-slate-900 tracking-tight hover:text-primary-400 transition-colors">
+          <span className="inline-block w-2 h-2 bg-primary-600 mr-2 align-middle shadow-[0_0_8px_rgba(196,52,63,0.9)]"></span>{logoText}
         </a>
 
         {/* Desktop Nav */}
@@ -56,7 +56,7 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
           <ul className="flex items-center gap-6">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className="text-slate-600 hover:text-primary-600 font-medium transition-colors">
+                <a href={link.href} className="text-slate-600 hover:text-primary-400 font-medium transition-colors">
                   {link.label}
                 </a>
               </li>
@@ -75,7 +75,7 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
             </button>
 
             {isLangOpen && (
-              <ul className="absolute right-0 mt-2 w-32 bg-white rounded-xl border border-slate-200 py-1 z-50 shadow-xl overflow-hidden">
+              <ul className="absolute right-0 mt-2 w-32 bg-surface rounded-xl border border-slate-200 py-1 z-50 shadow-xl overflow-hidden">
                 {activeLangs.map((lang) => (
                   <li key={lang}>
                     <a
@@ -108,13 +108,13 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
 
       {/* Mobile Nav */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white absolute w-full shadow-xl">
+        <div className="md:hidden border-t border-slate-200 bg-surface absolute w-full shadow-xl">
           <div className="px-4 pt-2 pb-4 space-y-1">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:text-primary-600 hover:bg-slate-50 transition-colors"
+                className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:text-primary-400 hover:bg-slate-50 transition-colors"
               >
                 {link.label}
               </a>

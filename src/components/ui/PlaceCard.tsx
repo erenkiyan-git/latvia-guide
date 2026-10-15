@@ -24,7 +24,7 @@ export default function PlaceCard({ place, lang, dict }: Props) {
   
   return (
     <div 
-      className="bg-white border border-slate-300 rounded-xl p-5 mb-4 hover:border-slate-400 hover:shadow-md transition-all shadow-sm"
+      className="bg-surface border border-slate-300 rounded-xl p-5 mb-4 hover:border-slate-400 hover:shadow-md transition-all shadow-sm"
       id={`place-${place.id}`}
     >
       <div className="flex items-start justify-between mb-3">
@@ -46,7 +46,7 @@ export default function PlaceCard({ place, lang, dict }: Props) {
         {place.phone && (
           <div className="flex items-start text-slate-700">
             <Phone className="w-5 h-5 text-slate-500 mr-3 shrink-0 mt-0.5" />
-            <a href={`tel:${place.phone.replace(/\s/g, '')}`} className="hover:text-primary-600 transition-colors font-medium">
+            <a href={`tel:${place.phone.replace(/\s/g, '')}`} className="hover:text-primary-400 transition-colors font-medium">
               {place.phone}
             </a>
           </div>
@@ -77,13 +77,13 @@ export default function PlaceCard({ place, lang, dict }: Props) {
           {dict['map.officialWebsite']}
         </a>
         
-        <span className="text-slate-300 hidden sm:inline">•</span>
+        <span className="text-slate-500 hidden sm:inline">•</span>
 
         <a 
           href={`https://www.openstreetmap.org/directions?route=%3B${place.lat}%2C${place.lng}#map=17/${place.lat}/${place.lng}`}
           target="_blank" 
           rel="noopener noreferrer"
-          className="inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors"
+          className="inline-flex items-center text-sm font-medium text-primary-400 hover:text-primary-700 transition-colors"
         >
           <Navigation className="w-4 h-4 mr-1.5" />
           {dict['map.directions']}

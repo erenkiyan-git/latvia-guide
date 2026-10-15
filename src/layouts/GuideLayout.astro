@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import GuidesSidebar from '../components/GuidesSidebar.astro';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
 import { TrustBadge } from '../components/ui/TrustBadge';
 import { SourceBox } from '../components/ui/SourceBox';
@@ -19,6 +20,7 @@ const { guide, isFallback = false, currentLang } = Astro.props;
 const { title, description, badge, officialSource, lastChecked, verified, section } = guide.data;
 const lang = currentLang || guide.id.split('/')[0];
 const t = useTranslations(lang as any);
+const guideSlug = guide.id.split('/').slice(1).join('/');
 
 const breadcrumbsItems = [
   { label: t('breadcrumbs.home'), href: `/${lang}/` },
@@ -29,7 +31,9 @@ const breadcrumbsItems = [
 ---
 
 <BaseLayout title={title} description={description} lang={lang}>
-  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 flex flex-col lg:flex-row gap-6 lg:gap-8">
+  <GuidesSidebar lang={lang} activeSection={section} activeSlug={guideSlug} />
+  <article class="flex-1 min-w-0 max-w-3xl">
     <Breadcrumbs items={breadcrumbsItems} />
 
     {isFallback && (
@@ -83,21 +87,22 @@ const breadcrumbsItems = [
       prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-2 prose-h2:border-b prose-h2:border-slate-300
       prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
       prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-6
-      prose-a:text-primary-600 prose-a:font-semibold prose-a:underline hover:prose-a:text-primary-700
+      prose-a:text-primary-400 prose-a:font-semibold prose-a:underline hover:prose-a:text-primary-300
       prose-strong:text-slate-900 prose-strong:font-semibold
       prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-6 prose-ul:text-slate-700
       prose-ol:list-decimal prose-ol:pl-6 prose-ol:mb-6 prose-ol:text-slate-700
       prose-li:mb-2 prose-li:marker:text-slate-500
-      prose-blockquote:border-l-4 prose-blockquote:border-l-primary-600 prose-blockquote:bg-white prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:rounded-r-xl prose-blockquote:text-slate-700 prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:shadow-sm
+      prose-blockquote:border-l-4 prose-blockquote:border-l-primary-600 prose-blockquote:bg-surface prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:rounded-r-xl prose-blockquote:text-slate-700 prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:shadow-sm
       ">
       <slot />
     </div>
 
     <footer class="mt-16 pt-8 border-t border-slate-300 text-right">
-      <a href={`mailto:${SITE.contactEmail}?subject=Error in guide: ${title}`} class="text-sm text-slate-500 hover:text-primary-600 hover:underline transition-colors">
+      <a href={`mailto:${SITE.contactEmail}?subject=Error in guide: ${title}`} class="text-sm text-slate-500 hover:text-primary-400 hover:underline transition-colors">
         {t('guide.spotError')}
       </a>
     </footer>
   </article>
+  </div>
 </BaseLayout>
 

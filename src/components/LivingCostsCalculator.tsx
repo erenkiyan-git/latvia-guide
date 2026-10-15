@@ -28,7 +28,7 @@ export function LivingCostsCalculator({ labels }: LivingCostsCalculatorProps) {
   };
 
   return (
-    <div className="bg-white border border-slate-300 rounded-2xl p-6 sm:p-10 shadow-xl shadow-slate-200 mt-8 mb-16">
+    <div className="bg-surface border border-slate-300 rounded-2xl p-6 sm:p-10 shadow-xl shadow-slate-200 mt-8 mb-16">
       <div className="space-y-10">
         
         {/* Housing */}

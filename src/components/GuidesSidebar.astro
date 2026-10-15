@@ -1,0 +1,99 @@
+---
+import { getCollection } from 'astro:content';
+import { getSectionName } from '../i18n/utils';
+import { DEFAULT_LANG } from '../config';
+import {
+  MapPin, FileText, Briefcase, Home, GraduationCap, Stethoscope, Bus, Coffee, Compass, LayoutGrid
+} from 'lucide-react';
+
+interface Props {
+  lang: string;
+  activeSection?: string;
+  activeSlug?: string;
+}
+
+const { lang, activeSection, activeSlug } = Astro.props;
+
+const SECTIONS = ['new-to-latvia', 'documents', 'work', 'housing', 'students', 'healthcare', 'transport', 'daily-life', 'travel'];
+const ICONS: Record<string, any> = {
+  'new-to-latvia': MapPin, documents: FileText, work: Briefcase, housing: Home, students: GraduationCap,
+  healthcare: Stethoscope, transport: Bus, 'daily-life': Coffee, travel: Compass
+};
+
+const all = await getCollection('guides');
+const byKey = new Map(all.map(g => [g.id, g]));
+const enGuides = all.filter(g => g.id.startsWith(`${DEFAULT_LANG}/`));
+
+// Resolve (native or EN fallback) guides per section
+const sections = SECTIONS.map(section => {
+  const items = enGuides.filter(g => g.data.section === section).map(en => {
+    const slug = en.id.split('/').slice(1).join('/');
+    const native = byKey.get(`${lang}/${slug}`);
+    const g = native ?? en;
+    return { slug, title: g.data.title, isFallback: !native && lang !== DEFAULT_LANG };
+  });
+  all.filter(g => g.id.startsWith(`${lang}/`) && g.data.section === section).forEach(g => {
+    const slug = g.id.split('/').slice(1).join('/');
+    if (!items.some(i => i.slug === slug)) items.push({ slug, title: g.data.title, isFallback: false });
+  });
+  items.sort((a, b) => a.title.localeCompare(b.title, lang));
+  return { section, name: getSectionName(section, lang as any), Icon: ICONS[section], items };
+}).filter(s => s.items.length > 0);
+
+const allLabel = lang === 'tr' ? 'Tüm Kategoriler' : 'All Categories';
+const menuLabel = lang === 'tr' ? 'Kategoriler' : 'Categories';
+const currentLabel = activeSection ? getSectionName(activeSection, lang as any) : allLabel;
+---
+
+<aside class="lg:sticky lg:top-24 lg:self-start lg:w-72 shrink-0" aria-label={menuLabel}>
+  <details class="group lg:hidden hud-card rounded-lg mb-2" open={false}>
+    <summary class="flex items-center justify-between px-4 py-3 cursor-pointer list-none select-none">
+      <span class="hud-label">{menuLabel}</span>
+      <span class="text-sm font-semibold text-slate-900">{currentLabel}</span>
+    </summary>
+    <div class="px-2 pb-3 border-t border-slate-300">
+      <nav class="pt-2 flex flex-col gap-0.5">
+        <a href={`/${lang}/guides/`} class={`flex items-center gap-3 px-3 py-2 rounded-md text-sm ${!activeSection ? 'bg-primary-50 text-primary-300' : 'text-slate-600 hover:bg-slate-100'}`}>
+          <LayoutGrid class="w-4 h-4" /> {allLabel}
+        </a>
+        {sections.map(({ section, name, Icon, items }) => (
+          <a href={`/${lang}/guides/${section}/`} class={`flex items-center gap-3 px-3 py-2 rounded-md text-sm ${activeSection === section ? 'bg-primary-50 text-primary-300' : 'text-slate-600 hover:bg-slate-100'}`}>
+            <Icon class="w-4 h-4" /> <span class="flex-1">{name}</span>
+            <span class="font-mono text-xs text-slate-500">{items.length}</span>
+          </a>
+        ))}
+      </nav>
+    </div>
+  </details>
+
+  <nav class="hidden lg:block hud-card rounded-lg p-3 max-h-[calc(100vh-7rem)] overflow-y-auto" aria-label={menuLabel}>
+    <p class="hud-label px-3 pt-1 pb-3">// {menuLabel}</p>
+    <a href={`/${lang}/guides/`} class={`flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors border-l-2 ${!activeSection ? 'border-primary-600 bg-primary-50 text-primary-300' : 'border-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900'}`}>
+      <LayoutGrid class="w-4 h-4 shrink-0" /> {allLabel}
+    </a>
+    <div class="my-2 hud-rule"></div>
+    {sections.map(({ section, name, Icon, items }) => {
+      const isActive = activeSection === section;
+      return (
+        <div class="mb-0.5">
+          <a href={`/${lang}/guides/${section}/`} class={`flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors border-l-2 ${isActive ? 'border-primary-600 bg-primary-50 text-primary-300' : 'border-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900'}`}>
+            <Icon class="w-4 h-4 shrink-0" />
+            <span class="flex-1">{name}</span>
+            <span class="font-mono text-xs text-slate-500">{items.length}</span>
+          </a>
+          {isActive && activeSlug && (
+            <ul class="ml-5 mt-1 mb-2 pl-3 border-l border-slate-300 space-y-0.5">
+              {items.map(item => (
+                <li>
+                  <a href={`/${lang}/guides/${item.slug}/`} class={`block px-2 py-1.5 rounded text-[13px] leading-snug transition-colors ${item.slug === activeSlug ? 'text-primary-300 font-semibold bg-primary-50/60' : 'text-slate-500 hover:text-slate-900'}`}>
+                    {item.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      );
+    })}
+  </nav>
+</aside>

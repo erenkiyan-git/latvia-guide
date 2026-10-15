@@ -50,7 +50,7 @@ export function NetSalaryCalculator({ labels }: NetSalaryCalculatorProps) {
   const { socialTax, incomeTax, net } = calculate();
 
   return (
-    <div className="bg-white border border-slate-300 rounded-2xl p-6 sm:p-10 shadow-xl shadow-slate-200 mt-8 mb-16">
+    <div className="bg-surface border border-slate-300 rounded-2xl p-6 sm:p-10 shadow-xl shadow-slate-200 mt-8 mb-16">
       <div className="space-y-6">
         <div>
           <label htmlFor="gross-salary" className="block text-slate-700 font-semibold mb-2">{labels.gross}</label>

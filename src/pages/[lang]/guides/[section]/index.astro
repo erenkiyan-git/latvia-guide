@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import { Breadcrumbs } from '../../../../components/ui/Breadcrumbs';
-import { Card } from '../../../../components/ui/Card';
+import GuidesSidebar from '../../../../components/GuidesSidebar.astro';
 import { getCollection } from 'astro:content';
 import { getActiveLanguages, useTranslations, getSectionName } from '../../../../i18n/utils';
 import { DEFAULT_LANG, type Lang } from '../../../../config';
-import { ShieldCheck, FileWarning, Globe } from 'lucide-react';
+import { ShieldCheck, FileWarning, Globe, Search } from 'lucide-react';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides');
@@ -71,64 +71,69 @@ const breadcrumbsItems = [
 ---
 
 <BaseLayout title={sectionTitle} description={t('section.guidesDesc')} lang={lang}>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-    <Breadcrumbs items={breadcrumbsItems} />
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+    <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
+      <GuidesSidebar lang={lang} activeSection={section} />
 
-    <header class="mb-12 pb-8 border-b border-slate-300">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">{sectionTitle}</h1>
-      <p class="text-slate-600 mt-4 text-lg">{t('section.selectGuide')}</p>
-    </header>
+      <div class="flex-1 min-w-0">
+        <Breadcrumbs items={breadcrumbsItems} />
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-      {sectionGuides.length > 0 ? (
-        sectionGuides.map(({ guide, isFallback, slug }: any) => {
-          return (
-            <a href={`/${lang}/guides/${slug}/`} class="block group h-full">
-              <Card hoverable className="h-full flex flex-col p-6 sm:p-8 bg-white border-slate-300 group-hover:bg-slate-100/50">
-                <div class="flex items-start justify-between gap-2 mb-3">
-                  <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary-600 transition-colors leading-tight">
-                    {guide.data.title}
-                  </h3>
-                  
-                  <div class="flex items-center gap-1 shrink-0 pt-0.5">
-                    {guide.data.badge === 'official' && (
-                      <span title="Official Source" class="text-emerald-600">
-                        <ShieldCheck class="w-5 h-5" />
-                      </span>
-                    )}
-                    {guide.data.badge === 'verified' && (
-                      <span title="Community Verified" class="text-sky-600">
-                        <ShieldCheck class="w-5 h-5" />
-                      </span>
-                    )}
-                    {guide.data.badge === 'draft' && (
-                      <span title="Draft" class="text-amber-600">
-                        <FileWarning class="w-5 h-5" />
-                      </span>
-                    )}
-                  </div>
-                </div>
+        <header class="mt-4 mb-6">
+          <p class="hud-label mb-2">// {String(sectionGuides.length).padStart(2, '0')} {lang === 'tr' ? 'rehber' : 'guides'}</p>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">{sectionTitle}</h1>
+          <p class="text-slate-600 mt-2">{t('section.selectGuide')}</p>
+          <div class="hud-rule mt-5"></div>
+        </header>
 
-                <p class="text-slate-600 text-sm leading-relaxed flex-grow mb-4">{guide.data.description}</p>
-
-                {isFallback && (
-                  <div class="pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
-                    <span class="inline-flex items-center gap-1 font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
-                      <Globe class="w-3 h-3" />
-                      {t('section.languageNotice')}
-                    </span>
-                  </div>
-                )}
-              </Card>
-            </a>
-          );
-        })
-      ) : (
-        <div class="col-span-full py-16 text-center bg-white/50 rounded-2xl border border-slate-300/50">
-          <p class="text-slate-600 text-lg">{t('section.empty')}</p>
+        <div class="relative mb-5">
+          <Search class="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+          <input id="guide-filter" type="search" autocomplete="off"
+            placeholder={lang === 'tr' ? 'Bu kategoride ara...' : 'Filter this category...'}
+            class="w-full bg-surface border border-slate-300 rounded-lg pl-10 pr-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-primary-500" />
         </div>
-      )}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="guide-list">
+          {sectionGuides.length > 0 ? (
+            sectionGuides.map(({ guide, isFallback, slug }: any) => (
+              <a href={`/${lang}/guides/${slug}/`} class="block group" data-filter={`${guide.data.title} ${guide.data.description}`.toLowerCase()}>
+                <div class="hud-card hud-hover rounded-lg p-4 h-full flex flex-col">
+                  <div class="flex items-start justify-between gap-2 mb-1.5">
+                    <h3 class="text-base font-bold text-slate-900 group-hover:text-primary-400 transition-colors leading-snug">{guide.data.title}</h3>
+                    <div class="shrink-0 pt-0.5">
+                      {guide.data.badge === 'official' && <span title="Official Source" class="text-emerald-600"><ShieldCheck class="w-4 h-4" /></span>}
+                      {guide.data.badge === 'verified' && <span title="Verified" class="text-sky-600"><ShieldCheck class="w-4 h-4" /></span>}
+                      {guide.data.badge === 'draft' && <span title="Draft" class="text-amber-600"><FileWarning class="w-4 h-4" /></span>}
+                    </div>
+                  </div>
+                  <p class="text-slate-500 text-sm leading-relaxed line-clamp-2 flex-grow">{guide.data.description}</p>
+                  {isFallback && (
+                    <span class="mt-3 self-start inline-flex items-center gap-1 text-xs font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                      <Globe class="w-3 h-3" /> {t('section.languageNotice')}
+                    </span>
+                  )}
+                </div>
+              </a>
+            ))
+          ) : (
+            <div class="col-span-full py-16 text-center hud-card rounded-lg">
+              <p class="text-slate-600 text-lg">{t('section.empty')}</p>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   </div>
 </BaseLayout>
 
+<script is:inline>
+  (function () {
+    var input = document.getElementById('guide-filter');
+    if (!input) return;
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase();
+      document.querySelectorAll('#guide-list [data-filter]').forEach(function (el) {
+        el.style.display = !q || el.getAttribute('data-filter').indexOf(q) !== -1 ? '' : 'none';
+      });
+    });
+  })();
+</script>

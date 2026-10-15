@@ -24,6 +24,7 @@ const pageDesc = lang === 'tr' ? 'Latvia Guide nasıl çalışır ve bilgileri n
 
 <BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <img src="/social-card.jpg" alt="Latvia Guide" class="w-full rounded-xl border border-slate-300 mb-10 opacity-95" loading="lazy" />
     <div class="text-center mb-16">
       <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">{pageTitle}</h1>
       <p class="text-xl text-slate-600 max-w-2xl mx-auto">{pageDesc}</p>
@@ -51,17 +52,17 @@ const pageDesc = lang === 'tr' ? 'Latvia Guide nasıl çalışır ve bilgileri n
       </p>
       
       <div class="grid sm:grid-cols-3 gap-6 my-10 not-prose">
-        <div class="bg-white border border-slate-300 p-6 rounded-2xl">
+        <div class="bg-surface border border-slate-300 p-6 rounded-2xl">
           <Search class="w-8 h-8 text-primary-500 mb-4" />
           <h3 class="text-slate-900 font-bold text-lg mb-2">{lang === 'tr' ? 'Resmi Kaynaklar' : 'Official Sources'}</h3>
           <p class="text-slate-600 text-sm leading-relaxed">{lang === 'tr' ? 'Her rehberdeki her önemli iddia (PMLP, VID vb.) doğrudan resmi hükümet bağlantılarına dayandırılır.' : 'Every major claim in our guides is backed by direct links to official government sources.'}</p>
         </div>
-        <div class="bg-white border border-slate-300 p-6 rounded-2xl">
+        <div class="bg-surface border border-slate-300 p-6 rounded-2xl">
           <Eye class="w-8 h-8 text-primary-500 mb-4" />
           <h3 class="text-slate-900 font-bold text-lg mb-2">{lang === 'tr' ? 'Son Kontrol Tarihi' : 'Human Verified'}</h3>
           <p class="text-slate-600 text-sm leading-relaxed">{lang === 'tr' ? 'Tüm rehberlerimiz, bilginin bir insan tarafından en son ne zaman resmi olarak doğrulandığını gösteren bir "Son kontrol" tarihi içerir.' : 'All our guides include a "Last checked" date, so you know exactly when a human last verified the information.'}</p>
         </div>
-        <div class="bg-white border border-slate-300 p-6 rounded-2xl">
+        <div class="bg-surface border border-slate-300 p-6 rounded-2xl">
           <AlertTriangle class="w-8 h-8 text-primary-500 mb-4" />
           <h3 class="text-slate-900 font-bold text-lg mb-2">{lang === 'tr' ? 'Yapay Zeka Halüsinasyonu Yok' : 'No Hallucinations'}</h3>
           <p class="text-slate-600 text-sm leading-relaxed">{lang === 'tr' ? 'Doğrulanmamış AI üretimi bilgilerin platformumuza girmesine izin vermiyoruz.' : 'We do not allow unverified AI-generated information to enter our platform.'}</p>
@@ -71,7 +72,7 @@ const pageDesc = lang === 'tr' ? 'Latvia Guide nasıl çalışır ve bilgileri n
       <h2>{lang === 'tr' ? 'Rozet Sistemimiz' : 'Our Badge System'}</h2>
       
       <div class="space-y-6 my-10 not-prose">
-        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-white p-6 rounded-2xl border border-slate-300">
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-surface p-6 rounded-2xl border border-slate-300">
           <div class="flex-shrink-0">
             <TrustBadge type="official" />
           </div>
@@ -80,7 +81,7 @@ const pageDesc = lang === 'tr' ? 'Latvia Guide nasıl çalışır ve bilgileri n
           </p>
         </div>
         
-        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-white p-6 rounded-2xl border border-slate-300">
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-surface p-6 rounded-2xl border border-slate-300">
           <div class="flex-shrink-0">
             <TrustBadge type="verified" />
           </div>
@@ -89,7 +90,7 @@ const pageDesc = lang === 'tr' ? 'Latvia Guide nasıl çalışır ve bilgileri n
           </p>
         </div>
         
-        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-white p-6 rounded-2xl border border-slate-300">
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-surface p-6 rounded-2xl border border-slate-300">
           <div class="flex-shrink-0">
             <TrustBadge type="draft" />
           </div>
@@ -99,7 +100,7 @@ const pageDesc = lang === 'tr' ? 'Latvia Guide nasıl çalışır ve bilgileri n
         </div>
       </div>
       
-      <div class="mt-16 bg-white border-2 border-primary-200 p-10 rounded-3xl text-center shadow-xs not-prose">
+      <div class="mt-16 bg-surface border-2 border-primary-200 p-10 rounded-3xl text-center shadow-xs not-prose">
         <h3 class="text-2xl font-bold text-slate-900 mb-4">{lang === 'tr' ? 'Bir Hata mı Gördünüz?' : 'Spotted an Error?'}</h3>
         <p class="text-slate-600 text-lg mb-8 max-w-lg mx-auto">
           {lang === 'tr' ? 'Kurallar sürekli değişir. Eski bir bilgi bulursanız, lütfen bize bildirin.' : 'Rules change constantly. If you find outdated information, please let us know.'}

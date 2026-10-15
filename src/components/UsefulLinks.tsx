@@ -28,7 +28,7 @@ export function UsefulLinks({ data, filterLabel }: UsefulLinksProps) {
   return (
     <div>
       <div className="flex justify-center mb-12">
-        <label className="flex items-center gap-3 cursor-pointer bg-white border border-slate-300 py-2 px-5 rounded-full hover:border-primary-600 transition-colors">
+        <label className="flex items-center gap-3 cursor-pointer bg-surface border border-slate-300 py-2 px-5 rounded-full hover:border-primary-600 transition-colors">
           <div className="relative">
             <input 
               type="checkbox" 
@@ -37,7 +37,7 @@ export function UsefulLinks({ data, filterLabel }: UsefulLinksProps) {
               onChange={(e) => setOfficialOnly(e.target.checked)}
             />
             <div className={`block w-10 h-6 rounded-full transition-colors ${officialOnly ? 'bg-primary-600' : 'bg-slate-200'}`}></div>
-            <div className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform ${officialOnly ? 'transform translate-x-4' : ''}`}></div>
+            <div className={`dot absolute left-1 top-1 bg-surface w-4 h-4 rounded-full transition-transform ${officialOnly ? 'transform translate-x-4' : ''}`}></div>
           </div>
           <span className="text-slate-700 font-medium select-none">{filterLabel}</span>
         </label>
@@ -61,7 +61,7 @@ export function UsefulLinks({ data, filterLabel }: UsefulLinksProps) {
                     href={link.url} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex flex-col p-6 bg-white border border-slate-300 rounded-xl hover:border-primary-600 hover:bg-slate-100/80 transition-all group shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                    className="flex flex-col p-6 bg-surface border border-slate-300 rounded-xl hover:border-primary-600 hover:bg-slate-100/80 transition-all group shadow-sm hover:shadow-md hover:-translate-y-0.5"
                   >
                     <div className="flex justify-between items-start mb-2 gap-2">
                       <h3 className="text-lg font-bold text-slate-900 group-hover:text-primary-400 transition-colors leading-tight">

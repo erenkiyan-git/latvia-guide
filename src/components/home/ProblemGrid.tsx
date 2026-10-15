@@ -40,9 +40,9 @@ export function ProblemGrid({ lang, translations }: ProblemGridProps) {
           <a 
             key={p.id}
             href={p.href} 
-            className="flex flex-col items-center justify-center text-center gap-3 p-6 bg-white border border-slate-300 rounded-2xl text-slate-700 font-semibold hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-200 hover:border-slate-400 transition-all group shadow-sm"
+            className="flex flex-col items-center justify-center text-center gap-3 p-6 bg-surface border border-slate-300 rounded-2xl text-slate-700 font-semibold hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-200 hover:border-slate-400 transition-all group shadow-sm"
           >
-            <Icon className="w-10 h-10 text-primary-600 group-hover:text-primary-700 group-hover:scale-110 transition-all" />
+            <Icon className="w-10 h-10 text-primary-400 group-hover:text-primary-700 group-hover:scale-110 transition-all" />
             <span className="group-hover:text-slate-900 transition-colors">{p.label}</span>
           </a>
         );

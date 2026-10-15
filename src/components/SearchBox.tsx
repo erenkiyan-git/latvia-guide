@@ -139,7 +139,7 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
           }}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="w-full bg-white border border-slate-300 text-slate-900 rounded-full py-4 pl-12 pr-6 text-lg placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all shadow-lg shadow-slate-200"
+          className="w-full bg-surface border border-slate-300 text-slate-900 rounded-full py-4 pl-12 pr-6 text-lg placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all shadow-lg shadow-slate-200"
           aria-expanded={isOpen}
           role="combobox"
           aria-controls="search-results"
@@ -156,7 +156,7 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
       {isOpen && (
         <div 
           id="search-results"
-          className="absolute z-50 w-full mt-2 bg-white border border-slate-300 rounded-2xl shadow-xl shadow-slate-200 overflow-hidden max-h-96 overflow-y-auto"
+          className="absolute z-50 w-full mt-2 bg-surface border border-slate-300 rounded-2xl shadow-xl shadow-slate-200 overflow-hidden max-h-96 overflow-y-auto"
           role="listbox"
         >
           {results.length > 0 ? (

@@ -70,10 +70,10 @@ export default function InteractiveMap({ lang, dict }: Props) {
   };
 
   return (
-    <div className="flex flex-col h-[800px] max-h-[85vh] bg-white border border-slate-200 rounded-2xl overflow-hidden relative shadow-lg">
+    <div className="flex flex-col h-[800px] max-h-[85vh] bg-surface border border-slate-200 rounded-2xl overflow-hidden relative shadow-lg">
       
       {/* Mobile view toggle */}
-      <div className="md:hidden absolute bottom-6 left-1/2 -translate-x-1/2 z-50 bg-white border border-slate-200 p-1 rounded-full flex shadow-xl">
+      <div className="md:hidden absolute bottom-6 left-1/2 -translate-x-1/2 z-50 bg-surface border border-slate-200 p-1 rounded-full flex shadow-xl">
         <button 
           onClick={() => setView('list')}
           className={`flex items-center px-6 py-2 rounded-full text-sm font-bold transition-colors ${view === 'list' ? 'bg-primary-600 text-white shadow-sm' : 'text-slate-500 hover:text-slate-900'}`}
@@ -95,7 +95,7 @@ export default function InteractiveMap({ lang, dict }: Props) {
         {/* Left pane: List (hidden on mobile if map is active) */}
         <div className={`w-full md:w-[40%] flex flex-col border-r border-slate-200 bg-slate-50/50 ${view === 'map' ? 'hidden md:flex' : 'flex'}`}>
           {/* Search/Filters header */}
-          <div className="p-4 border-b border-slate-200 bg-white shrink-0">
+          <div className="p-4 border-b border-slate-200 bg-surface shrink-0">
             <div className="relative mb-4">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-slate-400" />
@@ -113,7 +113,7 @@ export default function InteractiveMap({ lang, dict }: Props) {
               <SlidersHorizontal className="w-4 h-4 text-slate-400 shrink-0 hidden md:block" />
               <button
                 onClick={() => setActiveCat(null)}
-                className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors shrink-0 border ${activeCat === null ? 'bg-primary-50 text-primary-700 border-primary-200' : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'}`}
+                className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors shrink-0 border ${activeCat === null ? 'bg-primary-50 text-primary-700 border-primary-200' : 'bg-surface text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'}`}
               >
                 {dict['map.showAll']}
               </button>
@@ -126,9 +126,9 @@ export default function InteractiveMap({ lang, dict }: Props) {
                     onClick={() => setActiveCat(isActive ? null : c)}
                     className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors border shrink-0`}
                     style={{
-                      backgroundColor: isActive ? `${cat.color}15` : '#ffffff',
-                      borderColor: isActive ? cat.color : '#cbd5e1', /* slate-300 */
-                      color: isActive ? cat.color : '#475569' /* slate-600 */
+                      backgroundColor: isActive ? `${cat.color}15` : '#13151a',
+                      borderColor: isActive ? cat.color : '#2d323b', /* slate-300 */
+                      color: isActive ? cat.color : '#a6acb6' /* slate-600 */
                     }}
                   >
                     {dict[`map.cat.${c}`]}
@@ -142,7 +142,7 @@ export default function InteractiveMap({ lang, dict }: Props) {
               <button
                 onClick={handleNearMe}
                 disabled={locState === 'loading'}
-                className={`flex items-center transition-colors ${userLoc ? 'text-primary-600 font-medium' : 'text-slate-500 hover:text-slate-800'}`}
+                className={`flex items-center transition-colors ${userLoc ? 'text-primary-400 font-medium' : 'text-slate-500 hover:text-slate-800'}`}
               >
                 <MapPin className={`w-4 h-4 mr-1.5 ${locState === 'loading' ? 'animate-pulse' : ''}`} />
                 {locState === 'loading' ? dict['map.nearMeLocating'] : userLoc ? dict['map.nearMeActive'] : dict['map.nearMe']}
@@ -156,10 +156,10 @@ export default function InteractiveMap({ lang, dict }: Props) {
           {/* List content */}
           <div className="flex-1 overflow-y-auto p-4 custom-scrollbar bg-slate-50/50 pb-24 md:pb-4 space-y-4">
             {filtered.length === 0 ? (
-              <div className="text-center py-12 px-4 border border-slate-200 border-dashed rounded-xl bg-white">
-                <Search className="w-8 h-8 text-slate-300 mx-auto mb-3" />
+              <div className="text-center py-12 px-4 border border-slate-200 border-dashed rounded-xl bg-surface">
+                <Search className="w-8 h-8 text-slate-500 mx-auto mb-3" />
                 <p className="text-slate-500">{dict['map.noResults']}</p>
-                <button onClick={() => { setQuery(''); setActiveCat(null); }} className="mt-4 text-primary-600 hover:text-primary-700 font-medium">{dict['map.reset']}</button>
+                <button onClick={() => { setQuery(''); setActiveCat(null); }} className="mt-4 text-primary-400 hover:text-primary-700 font-medium">{dict['map.reset']}</button>
               </div>
             ) : (
               filtered.map(p => (

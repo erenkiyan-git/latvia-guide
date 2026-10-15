@@ -44,7 +44,7 @@ export function PhrasesList({ data, lang }: PhrasesListProps) {
               const isCopied = copiedText === phrase.latvian;
               
               return (
-                <div key={pIdx} className="flex justify-between items-center p-5 bg-white border border-slate-300 rounded-xl hover:border-slate-300 transition-colors">
+                <div key={pIdx} className="flex justify-between items-center p-5 bg-surface border border-slate-300 rounded-xl hover:border-slate-300 transition-colors">
                   <div className="flex-grow pr-4">
                     <h3 className="text-xl font-bold text-primary-400 mb-1 leading-tight">{phrase.latvian}</h3>
                     <p className="text-slate-500 text-sm mb-2 font-medium flex items-center gap-1.5">

@@ -18,7 +18,7 @@ export function LinkList({ items }: LinkListProps) {
         <li key={idx}>
           <a 
             href={item.href}
-            className="group flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl bg-white border border-slate-300 hover:border-primary-500/50 hover:bg-slate-100/50 transition-all"
+            className="group flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl bg-surface border border-slate-300 hover:border-primary-500/50 hover:bg-slate-100/50 transition-all"
           >
             <div>
               <span className="font-semibold text-slate-800 group-hover:text-primary-400 transition-colors block mb-1 sm:mb-0">

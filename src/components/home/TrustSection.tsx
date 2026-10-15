@@ -9,9 +9,9 @@ interface TrustSectionProps {
 
 export function TrustSection({ title, description }: TrustSectionProps) {
   return (
-    <div className="max-w-3xl mx-auto bg-white border border-slate-300 rounded-2xl p-8 sm:p-12 text-center shadow-lg shadow-slate-200">
+    <div className="max-w-3xl mx-auto bg-surface border border-slate-300 rounded-2xl p-8 sm:p-12 text-center shadow-lg shadow-slate-200">
       <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-slate-200 shadow-inner">
-        <ShieldCheck className="w-8 h-8 text-primary-600" />
+        <ShieldCheck className="w-8 h-8 text-primary-400" />
       </div>
       
       <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 tracking-tight">{title}</h2>
