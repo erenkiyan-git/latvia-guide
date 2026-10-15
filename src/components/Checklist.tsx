@@ -75,7 +75,7 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">{pageTitle}</h1>
         <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">{pageDesc}</p>
         
-        <div className="max-w-2xl mx-auto bg-surface border border-slate-300 rounded-2xl p-6 sm:p-8 mb-8 text-left shadow-lg shadow-slate-200">
+        <div className="max-w-2xl mx-auto bg-surface border border-slate-300 rounded-2xl p-5 sm:p-8 mb-8 text-left shadow-lg">
           <div className="flex justify-between text-sm font-medium mb-3">
             <span className="text-slate-700">Progress: <strong className="text-slate-900 ml-1 text-base">{progressPercentage}%</strong></span>
             <span className="text-slate-500">{completedItems} / {totalItems} completed</span>
@@ -120,11 +120,11 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
                   <label 
                     key={item.id} 
                     className={`
-                      group flex gap-4 p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden
+                      group flex gap-3.5 sm:gap-4 p-3.5 sm:p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden
                       print:border-none print:border-b print:border-gray-200 print:rounded-none print:p-2 print:gap-3
                       ${isChecked 
                         ? 'bg-emerald-50 border-emerald-200 print:opacity-100' 
-                        : 'bg-surface border-slate-300 hover:border-primary-700 hover:bg-slate-100/80 hover:shadow-lg hover:shadow-slate-200 print:bg-transparent print:border-gray-300'
+                        : 'bg-surface border-slate-300 hover:border-primary-700 hover:bg-slate-100/80 print:bg-transparent print:border-gray-300'
                       }
                     `}
                   >
@@ -152,8 +152,8 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
                       {isChecked && <div className="text-center leading-none mt-1">✓</div>}
                     </div>
 
-                    <div className="flex-grow pr-16 sm:pr-0">
-                      <h3 className={`text-lg font-bold mb-1 transition-colors print:text-black ${isChecked ? 'text-slate-500 line-through print:no-underline print:text-gray-700' : 'text-slate-800'}`}>
+                    <div className="flex-grow min-w-0">
+                      <h3 className={`text-base sm:text-lg font-bold mb-1 transition-colors print:text-black ${isChecked ? 'text-slate-500 line-through print:no-underline print:text-gray-700' : 'text-slate-800'}`}>
                         {item.title}
                       </h3>
                       <p className={`text-sm mb-3 print:text-gray-600 print:mb-0 ${isChecked ? 'text-slate-400' : 'text-slate-600'}`}>

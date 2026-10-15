@@ -67,15 +67,15 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
           <div className="relative" ref={langMenuRef}>
             <button
               onClick={() => setIsLangOpen(!isLangOpen)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-200 bg-slate-50 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:border-slate-300 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-300 bg-surface text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
               aria-expanded={isLangOpen}
             >
               {langLabels[currentLang]}
-              <ChevronDown className="w-4 h-4 text-slate-400" />
+              <ChevronDown className="w-4 h-4 text-slate-500" />
             </button>
 
             {isLangOpen && (
-              <ul className="absolute right-0 mt-2 w-32 bg-surface rounded-xl border border-slate-200 py-1 z-50 shadow-xl overflow-hidden">
+              <ul className="absolute right-0 mt-2 w-36 bg-surface/98 backdrop-blur-xl rounded-xl border border-slate-300 py-1.5 z-50 shadow-2xl overflow-hidden">
                 {activeLangs.map((lang) => (
                   <li key={lang}>
                     <a
@@ -83,8 +83,8 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
                       onClick={() => handleLangClick(lang)}
                       className={`block px-4 py-2 text-sm ${
                         lang === currentLang
-                          ? 'bg-primary-50 text-primary-700 font-semibold'
-                          : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                          ? 'bg-primary-950/80 text-primary-300 border-l-2 border-primary-500 font-semibold'
+                          : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
                       } transition-colors`}
                     >
                       {langLabels[lang]}
@@ -99,42 +99,44 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
+          className="md:hidden p-2.5 rounded-xl text-slate-400 hover:text-slate-100 hover:bg-slate-100/80 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
           aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
         >
-          {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {isMenuOpen ? <X className="w-6 h-6 text-primary-400" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
-      {/* Mobile Nav */}
+      {/* Mobile Nav Drawer */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-surface absolute w-full shadow-xl">
-          <div className="px-4 pt-2 pb-4 space-y-1">
+        <div className="md:hidden absolute top-full left-0 right-0 border-t border-b border-slate-300 bg-surface/98 backdrop-blur-2xl shadow-2xl z-50">
+          <div className="px-4 py-4 space-y-1">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="block px-3 py-2 rounded-lg text-base font-medium text-slate-600 hover:text-primary-400 hover:bg-slate-50 transition-colors"
+                className="flex items-center px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:text-primary-300 hover:bg-slate-100/80 active:bg-slate-200 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}
               </a>
             ))}
             
-            <div className="pt-4 pb-2 border-t border-slate-200 mt-2">
-              <p className="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
-                Language
+            <div className="pt-4 pb-2 border-t border-slate-300/70 mt-3">
+              <p className="px-4 text-[0.7rem] font-mono font-semibold text-slate-500 uppercase tracking-widest mb-2.5">
+                // {currentLang === 'tr' ? 'DİL SEÇİMİ' : 'LANGUAGE'}
               </p>
-              <div className="flex flex-col gap-1 px-2">
+              <div className="grid grid-cols-2 gap-2 px-1">
                 {activeLangs.map((lang) => (
                   <a
                     key={lang}
                     href={getSwitchUrl(lang)}
                     onClick={() => handleLangClick(lang)}
-                    className={`block px-3 py-2 rounded-lg text-base font-medium ${
+                    className={`flex items-center justify-center px-3 py-2.5 rounded-xl text-sm font-semibold border transition-all ${
                       lang === currentLang
-                        ? 'bg-primary-50 text-primary-700 font-semibold'
-                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
-                    } transition-colors`}
+                        ? 'bg-primary-950/80 text-primary-300 border-primary-500/70 shadow-sm'
+                        : 'bg-base/60 text-slate-600 border-slate-300 hover:border-slate-400 hover:text-slate-900'
+                    }`}
                   >
                     {langLabels[lang]}
                   </a>

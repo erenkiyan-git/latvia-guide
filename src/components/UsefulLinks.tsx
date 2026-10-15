@@ -165,7 +165,7 @@ export function UsefulLinks({ data, filterLabel, lang = 'en' }: UsefulLinksProps
         </div>
 
         {/* Category Pills Bar */}
-        <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-300/60">
+        <div className="flex flex-nowrap sm:flex-wrap overflow-x-auto gap-2 mt-4 pt-4 border-t border-slate-300/60 pb-2 sm:pb-0 hide-scrollbar -mx-1 px-1 sm:mx-0 sm:px-0">
           {categories.map((cat) => {
             const isActive = activeCategory === cat;
             const meta = CATEGORY_META[cat];
@@ -179,7 +179,7 @@ export function UsefulLinks({ data, filterLabel, lang = 'en' }: UsefulLinksProps
                 key={cat}
                 type="button"
                 onClick={() => setActiveCategory(cat)}
-                className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all ${
+                className={`inline-flex items-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all whitespace-nowrap shrink-0 ${
                   isActive
                     ? 'bg-primary-600 text-white shadow-md shadow-primary-950/40 border border-primary-500'
                     : 'bg-base/70 text-slate-700 border border-slate-300 hover:border-slate-400 hover:text-slate-900'

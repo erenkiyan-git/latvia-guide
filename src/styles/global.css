@@ -121,6 +121,11 @@
     scroll-behavior: smooth;
   }
 
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
   body {
     background-color: var(--color-base);
     @apply text-slate-700 antialiased selection:bg-primary-200 selection:text-primary-900;
@@ -195,6 +200,15 @@
     height: 1px;
     background: linear-gradient(90deg, var(--color-primary-600), rgba(196, 52, 63, 0) 70%);
   }
+
+  /* Utility to hide scrollbars on horizontal swipe bars */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 /* Leaflet map: dark, desaturated tiles that match the theme */
@@ -209,12 +223,15 @@
 /* Universal Table Styles for Guides (prevents white-box glitches and ensures high readability) */
 .guide-content table,
 .prose table {
+  display: block;
   width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border-collapse: separate;
   border-spacing: 0;
   border: 1px solid var(--color-slate-300);
   border-radius: 12px;
-  overflow: hidden;
   background-color: var(--color-surface) !important;
   margin: 1.75rem 0;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);

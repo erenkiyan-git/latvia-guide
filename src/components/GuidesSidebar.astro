@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import { getSectionName } from '../i18n/utils';
 import { DEFAULT_LANG } from '../config';
 import {
-  MapPin, FileText, Briefcase, Home, GraduationCap, Stethoscope, Bus, Coffee, Compass, LayoutGrid
+  MapPin, FileText, Briefcase, Home, GraduationCap, Stethoscope, Bus, Coffee, Compass, LayoutGrid, ChevronDown
 } from 'lucide-react';
 
 interface Props {
@@ -46,20 +46,23 @@ const currentLabel = activeSection ? getSectionName(activeSection, lang as any) 
 ---
 
 <aside class="lg:sticky lg:top-24 lg:self-start lg:w-72 shrink-0" aria-label={menuLabel}>
-  <details class="group lg:hidden hud-card rounded-lg mb-2" open={false}>
-    <summary class="flex items-center justify-between px-4 py-3 cursor-pointer list-none select-none">
-      <span class="hud-label">{menuLabel}</span>
-      <span class="text-sm font-semibold text-slate-900">{currentLabel}</span>
+  <details class="group lg:hidden hud-card rounded-lg mb-4" open={false}>
+    <summary class="flex items-center justify-between px-4 py-3.5 cursor-pointer list-none select-none">
+      <div class="flex items-center gap-2 min-w-0">
+        <span class="hud-label shrink-0">{menuLabel}:</span>
+        <span class="text-sm font-semibold text-slate-900 truncate">{currentLabel}</span>
+      </div>
+      <ChevronDown class="w-4 h-4 text-slate-500 group-open:rotate-180 transition-transform duration-200 shrink-0 ml-2" />
     </summary>
     <div class="px-2 pb-3 border-t border-slate-300">
-      <nav class="pt-2 flex flex-col gap-0.5">
-        <a href={`/${lang}/guides/`} class={`flex items-center gap-3 px-3 py-2 rounded-md text-sm ${!activeSection ? 'bg-primary-50 text-primary-300' : 'text-slate-600 hover:bg-slate-100'}`}>
-          <LayoutGrid class="w-4 h-4" /> {allLabel}
+      <nav class="pt-2 flex flex-col gap-1">
+        <a href={`/${lang}/guides/`} class={`flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors ${!activeSection ? 'bg-primary-950/80 text-primary-300 border border-primary-500/60' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}>
+          <LayoutGrid class="w-4 h-4 shrink-0" /> {allLabel}
         </a>
         {sections.map(({ section, name, Icon, items }) => (
-          <a href={`/${lang}/guides/${section}/`} class={`flex items-center gap-3 px-3 py-2 rounded-md text-sm ${activeSection === section ? 'bg-primary-50 text-primary-300' : 'text-slate-600 hover:bg-slate-100'}`}>
-            <Icon class="w-4 h-4" /> <span class="flex-1">{name}</span>
-            <span class="font-mono text-xs text-slate-500">{items.length}</span>
+          <a href={`/${lang}/guides/${section}/`} class={`flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors ${activeSection === section ? 'bg-primary-950/80 text-primary-300 border border-primary-500/60' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}>
+            <Icon class="w-4 h-4 shrink-0" /> <span class="flex-1 truncate">{name}</span>
+            <span class="font-mono text-xs text-slate-500 shrink-0">{items.length}</span>
           </a>
         ))}
       </nav>

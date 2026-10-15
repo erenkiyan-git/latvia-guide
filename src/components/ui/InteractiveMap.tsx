@@ -102,7 +102,7 @@ export default function InteractiveMap({ lang, dict }: Props) {
               </div>
               <input
                 type="text"
-                className="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-lg leading-5 bg-base text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 sm:text-sm transition-colors"
+                className="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-lg leading-5 bg-base text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-base sm:text-sm transition-colors"
                 placeholder={dict['map.searchPlaceholder']}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
@@ -113,7 +113,7 @@ export default function InteractiveMap({ lang, dict }: Props) {
               <SlidersHorizontal className="w-4 h-4 text-slate-400 shrink-0 hidden md:block" />
               <button
                 onClick={() => setActiveCat(null)}
-                className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors shrink-0 border ${activeCat === null ? 'bg-primary-600 text-white border-primary-500 shadow-sm' : 'bg-surface text-slate-400 border-slate-300 hover:border-slate-400 hover:text-slate-100'}`}
+                className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors shrink-0 border ${activeCat === null ? 'bg-primary-600 text-white border-primary-500 shadow-sm' : 'bg-surface text-slate-400 border-slate-300 hover:border-slate-400 hover:text-slate-900'}`}
               >
                 {dict['map.showAll']}
               </button>

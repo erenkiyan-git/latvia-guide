@@ -16,7 +16,7 @@ export default function Footer({ currentLang, subtitle, disclaimer, links }: Foo
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           
           <div className="md:col-span-2 space-y-4">
-            <h3 className="text-xl font-bold text-white tracking-tight">Latvia Guide</h3>
+            <h3 className="text-xl font-bold text-slate-900 tracking-tight">Latvia Guide</h3>
             <p className="text-slate-600 max-w-md">{subtitle}</p>
           </div>
           
@@ -29,8 +29,8 @@ export default function Footer({ currentLang, subtitle, disclaimer, links }: Foo
                     href={link.href}
                     className={`inline-block transition-colors ${
                       link.isEmergency 
-                        ? 'text-accent-500 font-semibold hover:text-accent-400 hover:underline' 
-                        : 'text-slate-600 hover:text-white'
+                        ? 'text-primary-400 font-semibold hover:text-primary-300 hover:underline' 
+                        : 'text-slate-600 hover:text-primary-400'
                     }`}
                   >
                     {link.label}
@@ -43,7 +43,7 @@ export default function Footer({ currentLang, subtitle, disclaimer, links }: Foo
         
         <div className="border-t border-slate-300 pt-8 flex flex-col gap-6 text-center text-sm text-slate-500">
           <div className="bg-surface p-4 rounded-xl border border-slate-300 text-slate-600 max-w-4xl mx-auto">
-            <strong className="font-semibold text-white mr-2">{currentLang === 'tr' ? 'Yasal Uyarı:' : 'Disclaimer:'}</strong> 
+            <strong className="font-semibold text-slate-900 mr-2">{currentLang === 'tr' ? 'Yasal Uyarı:' : 'Disclaimer:'}</strong> 
             {disclaimer}
           </div>
           <p>&copy; {currentYear} Latvia Guide. {currentLang === 'tr' ? 'Yabancılar tarafından, yabancılar için hazırlandı.' : 'Built for foreigners, by foreigners.'}</p>

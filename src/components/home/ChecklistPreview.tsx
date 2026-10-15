@@ -11,7 +11,7 @@ interface ChecklistPreviewProps {
 
 export function ChecklistPreview({ lang, title, subtitle, buttonText }: ChecklistPreviewProps) {
   return (
-    <div className="max-w-2xl mx-auto bg-surface border border-slate-300 rounded-2xl p-8 sm:p-10 shadow-lg text-center relative overflow-hidden">
+    <div className="max-w-2xl mx-auto bg-surface border border-slate-300 rounded-2xl p-5 sm:p-10 shadow-lg text-center relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-slate-50 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 rounded-full bg-slate-100 blur-3xl"></div>

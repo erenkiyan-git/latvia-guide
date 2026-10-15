@@ -176,7 +176,7 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
       {isOpen && (
         <div 
           id="search-results"
-          className="absolute z-50 left-0 right-0 mt-3 bg-surface/98 backdrop-blur-xl border border-primary-500/50 rounded-2xl shadow-2xl shadow-black/80 overflow-hidden max-h-[30rem] flex flex-col animate-in fade-in slide-in-from-top-2 duration-150"
+          className="absolute z-50 left-0 right-0 mt-3 bg-surface/98 backdrop-blur-xl border border-primary-500/50 rounded-2xl shadow-2xl shadow-black/80 overflow-hidden max-h-[70vh] sm:max-h-[30rem] flex flex-col animate-in fade-in slide-in-from-top-2 duration-150"
           role="listbox"
         >
           {/* Header toolbar */}

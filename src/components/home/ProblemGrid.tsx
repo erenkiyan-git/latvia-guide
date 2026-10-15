@@ -19,7 +19,7 @@ export function ProblemGrid({ lang, translations }: ProblemGridProps) {
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
       {problems.map((p) => {
         const Icon = p.icon;
         
@@ -28,10 +28,10 @@ export function ProblemGrid({ lang, translations }: ProblemGridProps) {
             <a 
               key={p.id}
               href={p.href} 
-              className="flex flex-col items-center justify-center text-center gap-3 p-6 bg-accent-50 border border-accent-200 rounded-2xl text-accent-700 font-semibold hover:-translate-y-1 hover:shadow-lg hover:shadow-accent-100 hover:border-accent-300 transition-all group shadow-sm"
+              className="flex flex-col items-center justify-center text-center gap-2 sm:gap-3 p-3.5 sm:p-5 md:p-6 bg-primary-950/40 border border-primary-500/50 rounded-2xl text-primary-300 font-semibold hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-900/40 hover:border-primary-400 transition-all group shadow-sm"
             >
-              <Icon className="w-10 h-10 text-accent-600 group-hover:scale-110 transition-transform" />
-              <span>{p.label}</span>
+              <Icon className="w-8 h-8 sm:w-10 sm:h-10 text-primary-400 group-hover:scale-110 transition-transform" />
+              <span className="text-xs sm:text-sm leading-snug">{p.label}</span>
             </a>
           );
         }
@@ -40,10 +40,10 @@ export function ProblemGrid({ lang, translations }: ProblemGridProps) {
           <a 
             key={p.id}
             href={p.href} 
-            className="flex flex-col items-center justify-center text-center gap-3 p-6 bg-surface border border-slate-300 rounded-2xl text-slate-700 font-semibold hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-200 hover:border-slate-400 transition-all group shadow-sm"
+            className="flex flex-col items-center justify-center text-center gap-2 sm:gap-3 p-3.5 sm:p-5 md:p-6 bg-surface border border-slate-300 rounded-2xl text-slate-700 font-semibold hover:-translate-y-1 hover:shadow-lg hover:border-primary-500/60 transition-all group shadow-sm"
           >
-            <Icon className="w-10 h-10 text-primary-400 group-hover:text-primary-700 group-hover:scale-110 transition-all" />
-            <span className="group-hover:text-slate-900 transition-colors">{p.label}</span>
+            <Icon className="w-8 h-8 sm:w-10 sm:h-10 text-primary-400 group-hover:text-primary-300 group-hover:scale-110 transition-all" />
+            <span className="text-xs sm:text-sm leading-snug group-hover:text-slate-900 transition-colors">{p.label}</span>
           </a>
         );
       })}
