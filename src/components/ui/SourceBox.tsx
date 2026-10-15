@@ -19,11 +19,11 @@ export function SourceBox({ url, label = 'Official source' }: SourceBoxProps) {
       href={url} 
       target="_blank" 
       rel="noopener noreferrer" 
-      className="inline-flex items-center gap-2 px-3 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200 hover:border-zinc-700 transition-colors"
+      className="inline-flex items-center gap-2 px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-700 hover:border-slate-300 transition-colors"
     >
-      <span className="font-semibold text-zinc-300">{label}:</span>
+      <span className="font-semibold text-slate-700">{label}:</span>
       <span className="underline decoration-zinc-700 underline-offset-2">{domain}</span>
-      <ExternalLink className="w-3.5 h-3.5 text-zinc-500" />
+      <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
     </a>
   );
 }

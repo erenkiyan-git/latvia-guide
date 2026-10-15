@@ -11,8 +11,8 @@ interface TagProps {
 export function Tag({ children, active = false, onClick, href }: TagProps) {
   const baseClasses = "inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium transition-colors cursor-pointer border";
   const activeClasses = active 
-    ? "bg-primary-700 text-white border-primary-600 shadow-sm" 
-    : "bg-zinc-900 text-zinc-300 border-zinc-700 hover:bg-zinc-800 hover:text-white";
+    ? "bg-primary-600 text-white border-primary-600 shadow-sm" 
+    : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50 hover:text-slate-900 hover:border-slate-400";
 
   const classes = `${baseClasses} ${activeClasses}`;
 

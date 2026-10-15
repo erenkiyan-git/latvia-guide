@@ -1,24 +1,55 @@
 ---
-title: "Riga Toplu Taşıma"
-description: "Riga'da otobüs, tramvay ve troleybüs nasıl kullanılır."
+title: "Riga Toplu Taşıma Rehberi"
+description: "Riga'da otobüs, tramvay, troleybüs kullanımı, 90 dakikalık biletler, e-talons ve Mobilly."
 section: "transport"
-badge: "draft"
-verified: false
+badge: "verified"
+verified: true
+lastChecked: "Ekim 2026"
+reviewIntervalMonths: 6
+audience: "all"
+officialSource: 
+  - "https://www.rigassatiksme.lv/en/"
 ---
 
+import QuickAnswer from '../../../../components/QuickAnswer.astro';
 import WarningBox from '../../../../components/WarningBox.astro';
+import FAQ from '../../../../components/FAQ.astro';
 
-Riga, Rīgas Satiksme tarafından işletilen iyi bağlantılı bir otobüs, tramvay ve troleybüs ağına sahiptir.
+<QuickAnswer>
+Riga'da toplu taşıma (tramvay, troleybüs, otobüs) **Rīgas Satiksme** tarafından işletilir. Şoförden nakit bilet satışı yoktur; biletler **Mobilly** mobil uygulaması üzerinden veya Narvesen/otomatlardan sarı **e-talons** kartı olarak alınır. Standart tek bilet **1.50 EUR** olup 90 dakika boyunca sınırsız aktarma hakkı verir.
+</QuickAnswer>
 
-## E-talons (Biletler)
-Seyahat etmeden önce bir bilete ihtiyacınız var. Artık şoförden bilet alamazsınız.
-* **Sarı e-talons:** Belirli sayıda biniş veya gün yüklenmiş karton bilet. Narvesen büfelerinden, Rimi süpermarketlerinden veya büyük duraklardaki bilet makinelerinden satın alın.
-* **Mavi e-talons:** Kişiselleştirilmiş plastik kart (fotoğraf ve başvuru gerektirir). Öğrenci veya yerleşik indiriminiz varsa faydalıdır.
-* **Mobil Uygulama:** Akıllı telefonunuzu kullanarak kod biletleri satın almak ve taramak için "Rīgas Satiksme" veya "Mobilly" uygulamasını indirebilirsiniz.
+## Güncel Bilet Türleri ve Ücretler
 
-## Nasıl binilir
-Araca bindiğinizde, e-talons kartınızı hemen sarı kart okuyucuya okutun veya uygulamanızı kullanarak QR kodunu tarayın.
+Rīgas Satiksme bilet sistemi süre bazlı çalışır:
+
+* **90 Dakikalık Aktarmalı Bilet (1.50 EUR):** İlk bindiğiniz anda geçerlilik süresi başlar. 90 dakika boyunca istediğiniz kadar tramvay, troleybüs veya otobüse aktarma yapabilirsiniz. 89. dakikada bindiğiniz bir araçta yolculuğunuzu son durağa kadar tamamlayabilirsiniz.
+* **24 Saatlik Bilet (5.00 EUR):** İlk okutulduğu andan itibaren 24 saat boyunca tüm hatlarda sınırsız biniş sağlar.
+* **3 Günlük Bilet (8.00 EUR)** / **5 Günlük Bilet (10.00 EUR):** Turistler ve kısa süreli ziyaretçiler için çok ekonomiktir.
+* **Aylık Sınırsız Bilet (30.00 EUR):** Bir takvim ayı boyunca tüm hatlarda sınırsız ulaşım sağlar.
+* **Öğrenci Aylık İndirimi (15.00 EUR):** Letonya'da geçerli bir üniversitede okuyan öğrenciler mavi e-talons kartlarına %50 indirim tanımlatarak ayda sadece 15 EUR öderler.
+
+---
+
+## Bilet Nasıl Alınır ve Kullanılır?
+
+### 1. Akıllı Telefonla (En Kolay Yol: Mobilly)
+* **Mobilly** uygulamasını indirin ve banka kartınızı tanımlayın.
+* Ulaşım sekmesinden "Rīgas Satiksme" kod biletini satın alın.
+* Araca bindiğiniz anda kapı girişlerindeki veya pencerelerdeki karekodu (QR kod) telefon kamerasıyla taratın.
+
+### 2. Sarı e-talons (Karton Bilet)
+* Narvesen büfelerinden, Rimi/Maxima süpermarket danışmalarından veya büyük duraklardaki bilet makinelerinden nakit veya kartla satın alın.
+* Araca bindiğiniz anda sarı kart okuma cihazına (validator) dokundurun; yeşil ışık yanmalı ve bip sesi duyulmalıdır.
+
+### 3. Mavi e-talons (Kişiselleştirilmiş Plastik Kart)
+* Uzun dönem oturum sahipleri veya öğrenciler için fotoğraflı plastik karttır.
+* Rīgas Satiksme müşteri merkezlerinden (örneğin Prāgas iela veya Brīvības iela) öğrenci belgesi veya ikametgah ile çıkarılır.
 
 <WarningBox>
-  Bilet müfettişleri biletleri kontrol etmek için rastgele araçlara binerler. Biletinizi biner binmez kaydetmediyseniz para cezasına çarptırılırsınız (15 €'dan başlar).
+**Bilet Kontrolü ve Cezalar (*Kontrole*):** Riga'da duraklarda rastgele araç durduran mavi reflektörlü üniformalı bilet kontrolörleri biner. Araca bindiğiniz anda biletinizi okutmadıysanız veya QR kodunu hemen okutmadıysanız mazeret kabul edilmez; anında **20 – 50 EUR** ceza kesilir.
 </WarningBox>
+
+<FAQ title="Havalimanından kalkan 22 numaralı otobüste de bu bilet geçerli mi?">
+Evet! Riga Havalimanı (RIX) ile şehir merkezini birbirine bağlayan 22 numaralı otobüs standart belediye otobüsüdür; 1.50 EUR'luk 90 dakikalık bilet veya aylık 30 EUR'luk kart bu hatta da aynen geçerlidir.
+</FAQ>

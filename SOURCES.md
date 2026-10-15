@@ -137,3 +137,39 @@ Every verified fact in the guides must have a corresponding entry here.
 - **URL:** https://www.swedbank.lv/private/home/more/branches
 - **Fact Verified:** Exists, is a branch locator
 - **Used in Guide:** Locator (bank-swedbank)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Embassy of Turkey in Riga
+- **URL:** http://riga.emb.mfa.gov.tr/Mission
+- **Fact Verified:** Embassy address and phone
+- **Used in Guide:** Map (embassy-turkey)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Embassy of Ukraine in Riga
+- **URL:** https://latvia.mfa.gov.ua/en
+- **Fact Verified:** Embassy address and phone
+- **Used in Guide:** Map (embassy-ukraine)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Embassy of Uzbekistan in Riga
+- **URL:** https://latvia.mfa.uz/en/
+- **Fact Verified:** Embassy address
+- **Used in Guide:** Map (embassy-uzbekistan)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** Embassy of Germany in Riga
+- **URL:** https://riga.diplo.de/lv-lv
+- **Fact Verified:** Embassy address
+- **Used in Guide:** Map (embassy-germany)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** US Embassy in Riga
+- **URL:** https://lv.usembassy.gov/
+- **Fact Verified:** Embassy address
+- **Used in Guide:** Map (embassy-usa)
+
+- **Date Accessed:** 2026-10-08
+- **Source Name:** British Embassy in Riga
+- **URL:** https://www.gov.uk/world/organisations/british-embassy-riga
+- **Fact Verified:** Embassy address
+- **Used in Guide:** Map (embassy-uk)

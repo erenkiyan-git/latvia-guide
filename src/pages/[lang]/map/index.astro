@@ -25,20 +25,35 @@ function p(val: any, l: string) {
   if (!val) return '';
   return val[l] || val.en;
 }
+
+const dict: Record<string, string> = {};
+const keys = [
+  'map.viewList', 'map.viewMap', 'map.searchPlaceholder', 'map.showAll',
+  'map.resultsCount', 'map.nearMeLocating', 'map.nearMeActive', 'map.nearMe',
+  'map.nearMeDenied', 'map.noResults', 'map.reset', 'map.officialWebsite',
+  'map.directions', 'map.officialSource', 'map.lastChecked', 'map.loadError',
+  'map.cat.hospital', 'map.cat.transport', 'map.cat.university',
+  'map.cat.immigration', 'map.cat.attraction', 'map.cat.pharmacy',
+  'map.cat.bank', 'map.cat.supermarket', 'map.cat.tickets', 'map.cat.government',
+  'map.cat.embassy'
+];
+keys.forEach(k => {
+  dict[k] = t(k);
+});
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     
     <div class="mb-8">
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3 flex items-center">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3 flex items-center">
         <MapIcon class="w-8 h-8 text-primary-500 mr-3 hidden sm:block" />
         {pageTitle}
       </h1>
-      <p class="text-lg text-zinc-400 max-w-3xl">
+      <p class="text-lg text-slate-600 max-w-3xl">
         {pageDesc}
       </p>
-      <p class="text-sm text-zinc-500 mt-2 flex items-start sm:items-center">
+      <p class="text-sm text-slate-500 mt-2 flex items-start sm:items-center">
         <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-2 mt-1 sm:mt-0 shrink-0"></span>
         {t('map.changeNote')}
       </p>
@@ -47,12 +62,12 @@ function p(val: any, l: string) {
     {/* The Interactive Map (React) */}
     <div class="mb-12">
       <noscript>
-        <div class="bg-zinc-900 border border-amber-900/50 rounded-xl p-6 mb-6 text-amber-200">
+        <div class="bg-white border border-amber-900/50 rounded-xl p-6 mb-6 text-amber-200">
           <p class="font-medium mb-2">{t('map.noJs')}</p>
         </div>
       </noscript>
       
-      <InteractiveMap client:only="react" lang={lang} t={t} />
+      <InteractiveMap client:only="react" lang={lang} dict={dict} />
       
       {/* Fallback list for no-JS and SEO. Hidden if JS loads successfully. */}
       <div id="no-js-list" class="mt-8 space-y-4">
@@ -78,19 +93,19 @@ function p(val: any, l: string) {
     </div>
 
     {/* Offline tip */}
-    <div class="bg-zinc-900/50 border border-zinc-800 rounded-xl p-5 mb-12 flex items-start">
-      <WifiOff class="w-5 h-5 text-zinc-500 mr-3 shrink-0 mt-0.5" />
+    <div class="bg-white/50 border border-slate-300 rounded-xl p-5 mb-12 flex items-start">
+      <WifiOff class="w-5 h-5 text-slate-500 mr-3 shrink-0 mt-0.5" />
       <div>
-        <h3 class="text-white font-medium text-sm mb-1">{t('map.offlineTitle')}</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed">{t('map.offlineTip')}</p>
+        <h3 class="text-slate-900 font-medium text-sm mb-1">{t('map.offlineTitle')}</h3>
+        <p class="text-slate-600 text-sm leading-relaxed">{t('map.offlineTip')}</p>
       </div>
     </div>
 
     {/* Locators section */}
     {locators.length > 0 && (
       <div>
-        <h2 class="text-2xl font-bold text-white mb-3">{t('map.locatorsTitle')}</h2>
-        <p class="text-zinc-400 mb-6 max-w-2xl">{t('map.locatorsIntro')}</p>
+        <h2 class="text-2xl font-bold text-slate-900 mb-3">{t('map.locatorsTitle')}</h2>
+        <p class="text-slate-600 mb-6 max-w-2xl">{t('map.locatorsIntro')}</p>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {locators.map(loc => (
@@ -98,16 +113,16 @@ function p(val: any, l: string) {
               href={loc.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="block bg-zinc-900 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 hover:bg-zinc-800/50 transition-colors group"
+              class="block bg-white border border-slate-300 rounded-xl p-5 hover:border-slate-300 hover:bg-slate-100/50 transition-colors group"
             >
               <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-semibold px-2 py-1 rounded-md text-zinc-400 bg-zinc-950 border border-zinc-800">
+                <span class="text-xs font-semibold px-2 py-1 rounded-md text-slate-600 bg-slate-50 border border-slate-300">
                   {t(`map.cat.${loc.category}`)}
                 </span>
-                <ExternalLink class="w-4 h-4 text-zinc-600 group-hover:text-primary-400 transition-colors" />
+                <ExternalLink class="w-4 h-4 text-slate-400 group-hover:text-primary-400 transition-colors" />
               </div>
-              <h3 class="text-lg font-bold text-white mb-1 group-hover:text-primary-400 transition-colors">{loc.name}</h3>
-              <p class="text-sm text-zinc-400">{p(loc.description, lang)}</p>
+              <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-primary-400 transition-colors">{loc.name}</h3>
+              <p class="text-sm text-slate-600">{p(loc.description, lang)}</p>
             </a>
           ))}
         </div>

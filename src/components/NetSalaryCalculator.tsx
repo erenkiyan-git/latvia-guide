@@ -50,16 +50,16 @@ export function NetSalaryCalculator({ labels }: NetSalaryCalculatorProps) {
   const { socialTax, incomeTax, net } = calculate();
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 sm:p-10 shadow-xl shadow-black/20 mt-8 mb-16">
+    <div className="bg-white border border-slate-300 rounded-2xl p-6 sm:p-10 shadow-xl shadow-slate-200 mt-8 mb-16">
       <div className="space-y-6">
         <div>
-          <label htmlFor="gross-salary" className="block text-zinc-300 font-semibold mb-2">{labels.gross}</label>
+          <label htmlFor="gross-salary" className="block text-slate-700 font-semibold mb-2">{labels.gross}</label>
           <input 
             type="number" 
             id="gross-salary" 
             value={gross}
             onChange={(e) => setGross(e.target.value === '' ? '' : Number(e.target.value))}
-            className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-xl py-3 px-4 text-xl font-medium placeholder-zinc-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all" 
+            className="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl py-3 px-4 text-xl font-medium placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all" 
             placeholder="e.g. 1500" 
             min="0" 
             step="10" 
@@ -67,13 +67,13 @@ export function NetSalaryCalculator({ labels }: NetSalaryCalculatorProps) {
         </div>
 
         <div>
-          <label htmlFor="dependents" className="block text-zinc-300 font-semibold mb-2">{labels.dependents}</label>
+          <label htmlFor="dependents" className="block text-slate-700 font-semibold mb-2">{labels.dependents}</label>
           <input 
             type="number" 
             id="dependents" 
             value={dependents}
             onChange={(e) => setDependents(Number(e.target.value))}
-            className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-xl py-3 px-4 text-xl font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all" 
+            className="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl py-3 px-4 text-xl font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all" 
             min="0" 
             max="10" 
             step="1" 
@@ -81,24 +81,24 @@ export function NetSalaryCalculator({ labels }: NetSalaryCalculatorProps) {
         </div>
       </div>
 
-      <div className="mt-10 pt-8 border-t border-zinc-800 border-dashed">
-        <h3 className="text-zinc-500 font-semibold mb-6 uppercase tracking-wider text-sm">{labels.estimatedDeductions}</h3>
+      <div className="mt-10 pt-8 border-t border-slate-300 border-dashed">
+        <h3 className="text-slate-500 font-semibold mb-6 uppercase tracking-wider text-sm">{labels.estimatedDeductions}</h3>
         
         <div className="space-y-4 mb-8 text-lg">
           <div className="flex justify-between items-center">
-            <span className="text-zinc-400">{labels.social}</span>
+            <span className="text-slate-600">{labels.social}</span>
             <span className="font-mono font-bold text-rose-500">-{formatCurr(socialTax)}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-zinc-400">{labels.income}</span>
+            <span className="text-slate-600">{labels.income}</span>
             <span className="font-mono font-bold text-rose-500">-{formatCurr(incomeTax)}</span>
           </div>
         </div>
         
-        <div className="pt-6 border-t border-zinc-800">
+        <div className="pt-6 border-t border-slate-300">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <span className="text-xl text-zinc-300 font-bold">{labels.net}</span>
-            <span className="font-mono text-4xl sm:text-5xl font-extrabold text-emerald-400 tracking-tight">{formatCurr(net)}</span>
+            <span className="text-xl text-slate-700 font-bold">{labels.net}</span>
+            <span className="font-mono text-4xl sm:text-5xl font-extrabold text-emerald-600 tracking-tight">{formatCurr(net)}</span>
           </div>
         </div>
       </div>

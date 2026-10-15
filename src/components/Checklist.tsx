@@ -65,22 +65,22 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
   };
 
   if (!isLoaded) {
-    return <div className="animate-pulse h-96 bg-zinc-900 rounded-xl"></div>;
+    return <div className="animate-pulse h-96 bg-white rounded-xl"></div>;
   }
 
   return (
     <div className="max-w-4xl mx-auto">
       {/* Header (Hidden when printing) */}
       <div className="text-center mb-12 print:hidden">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">{pageTitle}</h1>
-        <p className="text-xl text-zinc-400 mb-10 max-w-2xl mx-auto">{pageDesc}</p>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">{pageTitle}</h1>
+        <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">{pageDesc}</p>
         
-        <div className="max-w-2xl mx-auto bg-zinc-900 border border-zinc-800 rounded-2xl p-6 sm:p-8 mb-8 text-left shadow-lg shadow-black/20">
+        <div className="max-w-2xl mx-auto bg-white border border-slate-300 rounded-2xl p-6 sm:p-8 mb-8 text-left shadow-lg shadow-slate-200">
           <div className="flex justify-between text-sm font-medium mb-3">
-            <span className="text-zinc-300">Progress: <strong className="text-white ml-1 text-base">{progressPercentage}%</strong></span>
-            <span className="text-zinc-500">{completedItems} / {totalItems} completed</span>
+            <span className="text-slate-700">Progress: <strong className="text-slate-900 ml-1 text-base">{progressPercentage}%</strong></span>
+            <span className="text-slate-500">{completedItems} / {totalItems} completed</span>
           </div>
-          <div className="h-4 bg-zinc-950 rounded-full overflow-hidden border border-zinc-800/50 mb-6">
+          <div className="h-4 bg-slate-50 rounded-full overflow-hidden border border-slate-300/50 mb-6">
             <div 
               className="h-full bg-emerald-500 transition-all duration-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]"
               style={{ width: `${progressPercentage}%` }}
@@ -109,7 +109,7 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
       <div className="space-y-12">
         {groups.map((group) => (
           <section key={group.id} className="print:break-inside-avoid">
-            <h2 className="text-2xl font-bold text-primary-500 mb-6 border-b border-zinc-800 pb-3 print:text-black print:border-gray-300">
+            <h2 className="text-2xl font-bold text-primary-500 mb-6 border-b border-slate-300 pb-3 print:text-black print:border-gray-300">
               {group.title}
             </h2>
             <div className="space-y-4">
@@ -123,8 +123,8 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
                       group flex gap-4 p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden
                       print:border-none print:border-b print:border-gray-200 print:rounded-none print:p-2 print:gap-3
                       ${isChecked 
-                        ? 'bg-emerald-950/20 border-emerald-900/50 opacity-80 print:opacity-100' 
-                        : 'bg-zinc-900 border-zinc-800 hover:border-primary-700 hover:bg-zinc-800/80 hover:shadow-lg hover:shadow-black/20 print:bg-transparent print:border-gray-300'
+                        ? 'bg-emerald-50 border-emerald-200 print:opacity-100' 
+                        : 'bg-white border-slate-300 hover:border-primary-700 hover:bg-slate-100/80 hover:shadow-lg hover:shadow-slate-200 print:bg-transparent print:border-gray-300'
                       }
                     `}
                   >
@@ -137,10 +137,10 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
                       />
                       <div className={`
                         w-6 h-6 rounded-md border-2 transition-colors flex items-center justify-center
-                        peer-focus-visible:ring-2 peer-focus-visible:ring-primary-500 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-zinc-900
+                        peer-focus-visible:ring-2 peer-focus-visible:ring-primary-500 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-white
                         ${isChecked 
-                          ? 'bg-emerald-500 border-emerald-500 text-white' 
-                          : 'bg-zinc-950 border-zinc-700 group-hover:border-primary-600 text-transparent'
+                          ? 'bg-emerald-600 border-emerald-600 text-white' 
+                          : 'bg-slate-50 border-slate-300 group-hover:border-primary-600 text-transparent'
                         }
                       `}>
                         <Check className="w-4 h-4" />
@@ -153,10 +153,10 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
                     </div>
 
                     <div className="flex-grow pr-16 sm:pr-0">
-                      <h3 className={`text-lg font-bold mb-1 transition-colors print:text-black ${isChecked ? 'text-zinc-500 line-through print:no-underline print:text-gray-700' : 'text-zinc-100'}`}>
+                      <h3 className={`text-lg font-bold mb-1 transition-colors print:text-black ${isChecked ? 'text-slate-500 line-through print:no-underline print:text-gray-700' : 'text-slate-800'}`}>
                         {item.title}
                       </h3>
-                      <p className={`text-sm mb-3 print:text-gray-600 print:mb-0 ${isChecked ? 'text-zinc-600' : 'text-zinc-400'}`}>
+                      <p className={`text-sm mb-3 print:text-gray-600 print:mb-0 ${isChecked ? 'text-slate-400' : 'text-slate-600'}`}>
                         {item.description}
                       </p>
                       

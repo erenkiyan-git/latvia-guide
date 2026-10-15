@@ -28,27 +28,27 @@ export function LivingCostsCalculator({ labels }: LivingCostsCalculatorProps) {
   };
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 sm:p-10 shadow-xl shadow-black/20 mt-8 mb-16">
+    <div className="bg-white border border-slate-300 rounded-2xl p-6 sm:p-10 shadow-xl shadow-slate-200 mt-8 mb-16">
       <div className="space-y-10">
         
         {/* Housing */}
         <div>
           <div className="flex justify-between items-center mb-4">
-            <label className="font-semibold text-lg text-white">{labels.housing}</label>
-            <span className="bg-primary-900/40 text-primary-400 font-mono font-bold px-3 py-1 rounded-lg border border-primary-900/50">
+            <label className="font-semibold text-lg text-slate-900">{labels.housing}</label>
+            <span className="bg-primary-50 text-primary-700 font-mono font-bold px-3 py-1 rounded-lg border border-primary-200">
               {costs.housing} €
             </span>
           </div>
           <input 
             type="range" 
-            className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-primary-500" 
+            className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-primary-500" 
             min="200" 
             max="1500" 
             step="50" 
             value={costs.housing}
             onChange={(e) => updateCost('housing', Number(e.target.value))}
           />
-          <div className="flex justify-between text-xs text-zinc-500 mt-2 font-medium">
+          <div className="flex justify-between text-xs text-slate-500 mt-2 font-medium">
             <span>{labels.hints.housing[0]}</span>
             <span>{labels.hints.housing[1]}</span>
           </div>
@@ -57,21 +57,21 @@ export function LivingCostsCalculator({ labels }: LivingCostsCalculatorProps) {
         {/* Utilities */}
         <div>
           <div className="flex justify-between items-center mb-4">
-            <label className="font-semibold text-lg text-white">{labels.utilities}</label>
-            <span className="bg-primary-900/40 text-primary-400 font-mono font-bold px-3 py-1 rounded-lg border border-primary-900/50">
+            <label className="font-semibold text-lg text-slate-900">{labels.utilities}</label>
+            <span className="bg-primary-50 text-primary-700 font-mono font-bold px-3 py-1 rounded-lg border border-primary-200">
               {costs.utilities} €
             </span>
           </div>
           <input 
             type="range" 
-            className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-primary-500" 
+            className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-primary-500" 
             min="50" 
             max="400" 
             step="10" 
             value={costs.utilities}
             onChange={(e) => updateCost('utilities', Number(e.target.value))}
           />
-          <div className="flex justify-between text-xs text-zinc-500 mt-2 font-medium">
+          <div className="flex justify-between text-xs text-slate-500 mt-2 font-medium">
             <span>{labels.hints.utilities[0]}</span>
             <span>{labels.hints.utilities[1]}</span>
           </div>
@@ -80,14 +80,14 @@ export function LivingCostsCalculator({ labels }: LivingCostsCalculatorProps) {
         {/* Food */}
         <div>
           <div className="flex justify-between items-center mb-4">
-            <label className="font-semibold text-lg text-white">{labels.food}</label>
-            <span className="bg-primary-900/40 text-primary-400 font-mono font-bold px-3 py-1 rounded-lg border border-primary-900/50">
+            <label className="font-semibold text-lg text-slate-900">{labels.food}</label>
+            <span className="bg-primary-50 text-primary-700 font-mono font-bold px-3 py-1 rounded-lg border border-primary-200">
               {costs.food} €
             </span>
           </div>
           <input 
             type="range" 
-            className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-primary-500" 
+            className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-primary-500" 
             min="150" 
             max="800" 
             step="25" 
@@ -99,14 +99,14 @@ export function LivingCostsCalculator({ labels }: LivingCostsCalculatorProps) {
         {/* Transport */}
         <div>
           <div className="flex justify-between items-center mb-4">
-            <label className="font-semibold text-lg text-white">{labels.transport}</label>
-            <span className="bg-primary-900/40 text-primary-400 font-mono font-bold px-3 py-1 rounded-lg border border-primary-900/50">
+            <label className="font-semibold text-lg text-slate-900">{labels.transport}</label>
+            <span className="bg-primary-50 text-primary-700 font-mono font-bold px-3 py-1 rounded-lg border border-primary-200">
               {costs.transport} €
             </span>
           </div>
           <input 
             type="range" 
-            className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-primary-500" 
+            className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-primary-500" 
             min="0" 
             max="200" 
             step="10" 
@@ -118,14 +118,14 @@ export function LivingCostsCalculator({ labels }: LivingCostsCalculatorProps) {
         {/* Entertainment */}
         <div>
           <div className="flex justify-between items-center mb-4">
-            <label className="font-semibold text-lg text-white">{labels.entertainment}</label>
-            <span className="bg-primary-900/40 text-primary-400 font-mono font-bold px-3 py-1 rounded-lg border border-primary-900/50">
+            <label className="font-semibold text-lg text-slate-900">{labels.entertainment}</label>
+            <span className="bg-primary-50 text-primary-700 font-mono font-bold px-3 py-1 rounded-lg border border-primary-200">
               {costs.entertainment} €
             </span>
           </div>
           <input 
             type="range" 
-            className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-primary-500" 
+            className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-primary-500" 
             min="50" 
             max="1000" 
             step="50" 
@@ -136,8 +136,8 @@ export function LivingCostsCalculator({ labels }: LivingCostsCalculatorProps) {
 
       </div>
 
-      <div className="mt-10 pt-8 border-t border-zinc-800 border-dashed text-center">
-        <div className="text-zinc-400 font-bold mb-4">{labels.total}</div>
+      <div className="mt-10 pt-8 border-t border-slate-300 border-dashed text-center">
+        <div className="text-slate-600 font-bold mb-4">{labels.total}</div>
         <div className="font-mono text-5xl sm:text-6xl font-extrabold text-primary-500 tracking-tight">
           €{total}
         </div>

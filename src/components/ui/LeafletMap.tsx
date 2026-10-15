@@ -8,10 +8,10 @@ import { AlertTriangle } from 'lucide-react';
 interface Props {
   places: Place[];
   userLoc: {lat: number, lng: number} | null;
-  t: (key: any) => string;
+  dict: Record<string, string>;
 }
 
-export default function LeafletMap({ places, userLoc, t }: Props) {
+export default function LeafletMap({ places, userLoc, dict }: Props) {
   const mapRef = useRef<HTMLDivElement>(null);
   const lMap = useRef<L.Map | null>(null);
   const markersRef = useRef<Record<string, L.Marker>>({});
@@ -54,12 +54,15 @@ export default function LeafletMap({ places, userLoc, t }: Props) {
       places.forEach(p => {
         const cat = CATEGORIES[p.category] || CATEGORIES.immigration;
         
+        const catName = dict[`map.cat.${p.category}`] || p.category;
+        const html = `<div style="background-color: ${cat.color}; color: white; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; border: 2px solid white; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.2); display: inline-block;">${catName}</div>`;
+
         // Simple HTML marker matching our dark theme
         const icon = L.divIcon({
           className: 'custom-marker',
-          html: `<div style="background-color: ${cat.color}; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 4px rgba(0,0,0,0.5);"></div>`,
-          iconSize: [14, 14],
-          iconAnchor: [7, 7]
+          html: html,
+          iconSize: undefined,
+          iconAnchor: [0, 0] // Left-aligned
         });
 
         const marker = L.marker([p.lat, p.lng], { icon }).addTo(map);
@@ -107,12 +110,12 @@ export default function LeafletMap({ places, userLoc, t }: Props) {
 
   if (error) {
     return (
-      <div className="w-full h-full bg-zinc-900 border-l border-zinc-800 flex flex-col items-center justify-center p-8 text-center">
-        <AlertTriangle className="w-12 h-12 text-zinc-600 mb-4" />
-        <p className="text-zinc-400 max-w-sm">{t('map.loadError')}</p>
+      <div className="w-full h-full bg-slate-50 border-l border-slate-300 flex flex-col items-center justify-center p-8 text-center">
+        <AlertTriangle className="w-12 h-12 text-slate-400 mb-4" />
+        <p className="text-slate-500 max-w-sm">{dict['map.loadError']}</p>
       </div>
     );
   }
 
-  return <div ref={mapRef} className="w-full h-full z-0 bg-zinc-950" />;
+  return <div ref={mapRef} className="w-full h-full z-0 bg-slate-100" />;
 }

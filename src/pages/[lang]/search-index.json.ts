@@ -1,5 +1,6 @@
 import { getCollection } from 'astro:content';
 import { getActiveLanguages } from '../../i18n/utils';
+import { DEFAULT_LANG } from '../../config';
 import synonymsData from '../../data/synonyms.json';
 
 export async function getStaticPaths() {
@@ -11,10 +12,34 @@ export async function getStaticPaths() {
 
 export async function GET({ params }: { params: { lang: string } }) {
   const lang = params.lang;
-  
-  // Fetch guides
-  const guides = await getCollection('guides', (entry) => {
-    return entry.id.startsWith(`${lang}/`);
+  const allGuides = await getCollection('guides');
+
+  // Index guides by "lang:slug"
+  const guideMap = new Map();
+  allGuides.forEach(guide => {
+    const [guideLang, ...slugParts] = guide.id.split('/');
+    const slug = slugParts.join('/');
+    guideMap.set(`${guideLang}:${slug}`, guide);
+  });
+
+  const enGuides = allGuides.filter(g => g.id.startsWith(`${DEFAULT_LANG}/`));
+
+  // Build full list of guides for this language (native + fallback)
+  const resolvedGuides = enGuides.map(enGuide => {
+    const slug = enGuide.id.split('/').slice(1).join('/');
+    const nativeGuide = guideMap.get(`${lang}:${slug}`);
+    if (nativeGuide) {
+      return { guide: nativeGuide, isFallback: false, slug };
+    }
+    return { guide: enGuide, isFallback: lang !== DEFAULT_LANG, slug };
+  });
+
+  // Include any native guides that don't have an EN counterpart
+  allGuides.filter(g => g.id.startsWith(`${lang}/`)).forEach(nativeGuide => {
+    const slug = nativeGuide.id.split('/').slice(1).join('/');
+    if (!resolvedGuides.some(item => item.slug === slug)) {
+      resolvedGuides.push({ guide: nativeGuide, isFallback: false, slug });
+    }
   });
 
   // Get language specific synonyms
@@ -22,23 +47,17 @@ export async function GET({ params }: { params: { lang: string } }) {
   const synonyms = synonymsData[lang] || {};
 
   // Build index array
-  const index = guides.map(guide => {
-    const [, ...slugParts] = guide.id.split('/');
-    const slug = slugParts.join('/');
-    
+  const index = resolvedGuides.map(({ guide, isFallback, slug }) => {
     return {
       type: 'guide',
       url: `/${lang}/guides/${slug}/`,
       title: guide.data.title,
       description: guide.data.description,
       section: guide.data.section,
-      // We index the body text minimally if needed, but titles and descriptions are usually enough for a simple search.
-      // We add searchable text combining everything
-      searchableText: `${guide.data.title} ${guide.data.description} ${guide.data.section}`.toLowerCase()
+      isFallback,
+      searchableText: `${guide.data.title} ${guide.data.description} ${guide.data.section} ${(guide.data.tags || []).join(' ')} ${(guide.data.keywords || []).join(' ')}`.toLowerCase()
     };
   });
-
-  // Future-proofing: Here we could also append links from links.json and phrases from phrases.json to the index array.
 
   return new Response(JSON.stringify({ index, synonyms }), {
     status: 200,
@@ -47,3 +66,4 @@ export async function GET({ params }: { params: { lang: string } }) {
     }
   });
 }
+

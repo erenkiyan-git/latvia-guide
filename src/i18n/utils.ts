@@ -31,3 +31,12 @@ export function getActiveLanguages() {
     .filter(([_, config]) => config.active)
     .map(([code]) => code);
 }
+
+export function getSectionName(section: string, lang: keyof typeof LANGUAGES): string {
+  const t = useTranslations(lang);
+  const key = `section.${section}` as any;
+  const translated = t(key);
+  if (translated && translated !== key) return translated;
+  return section.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+}
+

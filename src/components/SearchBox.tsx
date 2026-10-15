@@ -127,7 +127,7 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
     <div className="relative w-full" ref={containerRef}>
       <div className="relative">
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-          <Search className="h-5 w-5 text-zinc-400" />
+          <Search className="h-5 w-5 text-slate-400" />
         </div>
         <input
           type="text"
@@ -139,7 +139,7 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
           }}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="w-full bg-zinc-900 border border-zinc-800 text-white rounded-full py-4 pl-12 pr-6 text-lg placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all shadow-lg shadow-black/20"
+          className="w-full bg-white border border-slate-300 text-slate-900 rounded-full py-4 pl-12 pr-6 text-lg placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all shadow-lg shadow-slate-200"
           aria-expanded={isOpen}
           role="combobox"
           aria-controls="search-results"
@@ -156,7 +156,7 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
       {isOpen && (
         <div 
           id="search-results"
-          className="absolute z-50 w-full mt-2 bg-zinc-900 border border-zinc-800 rounded-2xl shadow-xl shadow-black/50 overflow-hidden max-h-96 overflow-y-auto"
+          className="absolute z-50 w-full mt-2 bg-white border border-slate-300 rounded-2xl shadow-xl shadow-slate-200 overflow-hidden max-h-96 overflow-y-auto"
           role="listbox"
         >
           {results.length > 0 ? (
@@ -167,13 +167,13 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
                   href={result.url}
                   role="option"
                   aria-selected={idx === selectedIndex}
-                  className={`block px-5 py-3 hover:bg-zinc-800 transition-colors ${
-                    idx === selectedIndex ? 'bg-zinc-800' : ''
+                  className={`block px-5 py-3 hover:bg-slate-50 transition-colors ${
+                    idx === selectedIndex ? 'bg-slate-50' : ''
                   }`}
                   onMouseEnter={() => setSelectedIndex(idx)}
                 >
-                  <div className="font-bold text-white mb-1">{result.title}</div>
-                  <div className="text-sm text-zinc-400 truncate mb-1">{result.description}</div>
+                  <div className="font-bold text-slate-900 mb-1">{result.title}</div>
+                  <div className="text-sm text-slate-500 truncate mb-1">{result.description}</div>
                   <div className="text-xs font-semibold text-primary-500 uppercase tracking-wider">
                     {result.section.replace(/-/g, ' ')}
                   </div>
@@ -181,7 +181,7 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
               ))}
             </div>
           ) : (
-            <div className="px-6 py-8 text-center text-zinc-400">
+            <div className="px-6 py-8 text-center text-slate-500">
               No results found for "{query}". Try a different word.
             </div>
           )}

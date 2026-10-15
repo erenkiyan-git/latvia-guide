@@ -2,31 +2,61 @@
 import { getCollection, render } from 'astro:content';
 import GuideLayout from '../../../layouts/GuideLayout.astro';
 import { getActiveLanguages } from '../../../i18n/utils';
+import { DEFAULT_LANG } from '../../../config';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides');
   const activeLangs = getActiveLanguages();
   
-  // Filter for active languages and map to routes
-  return guides
-    .filter(guide => {
-      const lang = guide.id.split('/')[0];
-      return activeLangs.includes(lang);
-    })
-    .map(guide => {
-      const [lang, ...slugParts] = guide.id.split('/');
-      const slug = slugParts.join('/');
-      return {
-        params: { lang, slug },
-        props: { guide },
-      };
+  // Index guides by "lang:slug"
+  const guideMap = new Map();
+  guides.forEach(guide => {
+    const [guideLang, ...slugParts] = guide.id.split('/');
+    const slug = slugParts.join('/');
+    guideMap.set(`${guideLang}:${slug}`, guide);
+  });
+
+  const enGuides = guides.filter(g => g.id.startsWith(`${DEFAULT_LANG}/`));
+  const paths: any[] = [];
+
+  activeLangs.forEach(lang => {
+    enGuides.forEach(enGuide => {
+      const slug = enGuide.id.split('/').slice(1).join('/');
+      const nativeGuide = guideMap.get(`${lang}:${slug}`);
+      
+      if (nativeGuide) {
+        paths.push({
+          params: { lang, slug },
+          props: { guide: nativeGuide, isFallback: false, currentLang: lang },
+        });
+      } else {
+        paths.push({
+          params: { lang, slug },
+          props: { guide: enGuide, isFallback: true, currentLang: lang },
+        });
+      }
     });
+
+    // Include any native guides that don't have an EN counterpart
+    guides.filter(g => g.id.startsWith(`${lang}/`)).forEach(nativeGuide => {
+      const slug = nativeGuide.id.split('/').slice(1).join('/');
+      if (!paths.some(p => p.params.lang === lang && p.params.slug === slug)) {
+        paths.push({
+          params: { lang, slug },
+          props: { guide: nativeGuide, isFallback: false, currentLang: lang },
+        });
+      }
+    });
+  });
+
+  return paths;
 }
 
-const { guide } = Astro.props;
+const { guide, isFallback = false, currentLang } = Astro.props;
 const { Content } = await render(guide);
 ---
 
-<GuideLayout guide={guide}>
+<GuideLayout guide={guide} isFallback={isFallback} currentLang={currentLang}>
   <Content />
 </GuideLayout>
+

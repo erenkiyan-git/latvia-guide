@@ -3,6 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getActiveLanguages } from '../../../i18n/utils';
 import { useTranslations } from '../../../i18n/utils';
 import type { Lang } from '../../../config';
+import { SITE } from '../../../config';
 import { TrustBadge } from '../../../components/ui/TrustBadge';
 import { Button } from '../../../components/ui/Button';
 import { ShieldCheck, ShieldAlert, FileWarning, Search, Eye, AlertTriangle } from 'lucide-react';
@@ -24,17 +25,17 @@ const pageDesc = lang === 'tr' ? 'Latvia Guide nasıl çalışır ve bilgileri n
 <BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="text-center mb-16">
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">{pageTitle}</h1>
-      <p class="text-xl text-zinc-400 max-w-2xl mx-auto">{pageDesc}</p>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">{pageTitle}</h1>
+      <p class="text-xl text-slate-600 max-w-2xl mx-auto">{pageDesc}</p>
     </div>
 
-    <div class="prose prose-invert prose-zinc max-w-none 
-      prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight
-      prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-8 prose-h2:border-b prose-h2:border-zinc-800 prose-h2:pb-4
-      prose-p:text-zinc-300 prose-p:leading-relaxed prose-p:mb-6 prose-p:text-lg">
+    <div class="prose prose-slate max-w-none 
+      prose-headings:text-slate-900 prose-headings:font-bold prose-headings:tracking-tight
+      prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-8 prose-h2:border-b border-slate-300 prose-h2:pb-4
+      prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-6 prose-p:text-lg">
       
       <h2>{lang === 'tr' ? 'Misyonumuz' : 'Our Mission'}</h2>
-      <p class="lead text-xl text-zinc-300">
+      <p class="lead text-xl text-slate-700">
         {lang === 'tr' 
           ? 'Letonya\'ya taşınmak zor olabilir. Yüzlerce farklı resmi web sitesi, değişen yasalar ve her yerde eski bilgiler var. Amacımız basit: Letonya\'daki yabancılar, uluslararası öğrenciler ve çalışanlar için en güvenilir, güncel ve pratik rehberi oluşturmak.'
           : 'Moving to Latvia can be overwhelming. There are hundreds of different official websites, changing laws, and outdated information everywhere. Our mission is simple: to create the most reliable, up-to-date, and practical guide for foreigners, international students, and workers in Latvia.'
@@ -50,60 +51,60 @@ const pageDesc = lang === 'tr' ? 'Latvia Guide nasıl çalışır ve bilgileri n
       </p>
       
       <div class="grid sm:grid-cols-3 gap-6 my-10 not-prose">
-        <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+        <div class="bg-white border border-slate-300 p-6 rounded-2xl">
           <Search class="w-8 h-8 text-primary-500 mb-4" />
-          <h3 class="text-white font-bold text-lg mb-2">{lang === 'tr' ? 'Resmi Kaynaklar' : 'Official Sources'}</h3>
-          <p class="text-zinc-400 text-sm leading-relaxed">{lang === 'tr' ? 'Her rehberdeki her önemli iddia (PMLP, VID vb.) doğrudan resmi hükümet bağlantılarına dayandırılır.' : 'Every major claim in our guides is backed by direct links to official government sources.'}</p>
+          <h3 class="text-slate-900 font-bold text-lg mb-2">{lang === 'tr' ? 'Resmi Kaynaklar' : 'Official Sources'}</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">{lang === 'tr' ? 'Her rehberdeki her önemli iddia (PMLP, VID vb.) doğrudan resmi hükümet bağlantılarına dayandırılır.' : 'Every major claim in our guides is backed by direct links to official government sources.'}</p>
         </div>
-        <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+        <div class="bg-white border border-slate-300 p-6 rounded-2xl">
           <Eye class="w-8 h-8 text-primary-500 mb-4" />
-          <h3 class="text-white font-bold text-lg mb-2">{lang === 'tr' ? 'Son Kontrol Tarihi' : 'Human Verified'}</h3>
-          <p class="text-zinc-400 text-sm leading-relaxed">{lang === 'tr' ? 'Tüm rehberlerimiz, bilginin bir insan tarafından en son ne zaman resmi olarak doğrulandığını gösteren bir "Son kontrol" tarihi içerir.' : 'All our guides include a "Last checked" date, so you know exactly when a human last verified the information.'}</p>
+          <h3 class="text-slate-900 font-bold text-lg mb-2">{lang === 'tr' ? 'Son Kontrol Tarihi' : 'Human Verified'}</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">{lang === 'tr' ? 'Tüm rehberlerimiz, bilginin bir insan tarafından en son ne zaman resmi olarak doğrulandığını gösteren bir "Son kontrol" tarihi içerir.' : 'All our guides include a "Last checked" date, so you know exactly when a human last verified the information.'}</p>
         </div>
-        <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+        <div class="bg-white border border-slate-300 p-6 rounded-2xl">
           <AlertTriangle class="w-8 h-8 text-primary-500 mb-4" />
-          <h3 class="text-white font-bold text-lg mb-2">{lang === 'tr' ? 'Yapay Zeka Halüsinasyonu Yok' : 'No Hallucinations'}</h3>
-          <p class="text-zinc-400 text-sm leading-relaxed">{lang === 'tr' ? 'Doğrulanmamış AI üretimi bilgilerin platformumuza girmesine izin vermiyoruz.' : 'We do not allow unverified AI-generated information to enter our platform.'}</p>
+          <h3 class="text-slate-900 font-bold text-lg mb-2">{lang === 'tr' ? 'Yapay Zeka Halüsinasyonu Yok' : 'No Hallucinations'}</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">{lang === 'tr' ? 'Doğrulanmamış AI üretimi bilgilerin platformumuza girmesine izin vermiyoruz.' : 'We do not allow unverified AI-generated information to enter our platform.'}</p>
         </div>
       </div>
 
       <h2>{lang === 'tr' ? 'Rozet Sistemimiz' : 'Our Badge System'}</h2>
       
       <div class="space-y-6 my-10 not-prose">
-        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-white p-6 rounded-2xl border border-slate-300">
           <div class="flex-shrink-0">
             <TrustBadge type="official" />
           </div>
-          <p class="text-zinc-300 text-sm sm:text-base leading-relaxed m-0">
+          <p class="text-slate-700 text-sm sm:text-base leading-relaxed m-0">
             {lang === 'tr' ? 'Bu bilgi, Letonya hükümetinin resmi belgelerine veya kurumlarına dayanmaktadır.' : 'This information is based strictly on official Latvian government documentation or institutions.'}
           </p>
         </div>
         
-        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-white p-6 rounded-2xl border border-slate-300">
           <div class="flex-shrink-0">
             <TrustBadge type="verified" />
           </div>
-          <p class="text-zinc-300 text-sm sm:text-base leading-relaxed m-0">
+          <p class="text-slate-700 text-sm sm:text-base leading-relaxed m-0">
             {lang === 'tr' ? 'Bu bilgi, Letonya\'da yaşayan yerel uzmanlar veya yabancılar tarafından pratik olarak doğrulanmıştır (örneğin, ev arama ipuçları).' : 'This information has been practically verified by local experts or expats living in Latvia (e.g., apartment hunting tips).'}
           </p>
         </div>
         
-        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center bg-white p-6 rounded-2xl border border-slate-300">
           <div class="flex-shrink-0">
             <TrustBadge type="draft" />
           </div>
-          <p class="text-zinc-300 text-sm sm:text-base leading-relaxed m-0">
+          <p class="text-slate-700 text-sm sm:text-base leading-relaxed m-0">
             {lang === 'tr' ? 'Bu içerik henüz uzmanlarımız tarafından tam olarak doğrulanmamıştır. Lütfen resmi kaynakları kendiniz kontrol edin.' : 'This content has not yet been fully verified by our experts. Please double-check official sources yourself.'}
           </p>
         </div>
       </div>
       
-      <div class="mt-16 bg-gradient-to-br from-primary-950 to-zinc-900 border border-primary-900/50 p-10 rounded-3xl text-center not-prose">
-        <h3 class="text-2xl font-bold text-white mb-4">{lang === 'tr' ? 'Bir Hata mı Gördünüz?' : 'Spotted an Error?'}</h3>
-        <p class="text-zinc-400 text-lg mb-8 max-w-lg mx-auto">
+      <div class="mt-16 bg-white border-2 border-primary-200 p-10 rounded-3xl text-center shadow-xs not-prose">
+        <h3 class="text-2xl font-bold text-slate-900 mb-4">{lang === 'tr' ? 'Bir Hata mı Gördünüz?' : 'Spotted an Error?'}</h3>
+        <p class="text-slate-600 text-lg mb-8 max-w-lg mx-auto">
           {lang === 'tr' ? 'Kurallar sürekli değişir. Eski bir bilgi bulursanız, lütfen bize bildirin.' : 'Rules change constantly. If you find outdated information, please let us know.'}
         </p>
-        <Button href="mailto:hello@latviaguide.example.com" size="lg" className="px-8">
+        <Button href={`mailto:${SITE.contactEmail}`} size="lg" className="px-8">
           {lang === 'tr' ? 'Bize Ulaşın' : 'Contact Us'}
         </Button>
       </div>

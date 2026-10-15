@@ -28,7 +28,7 @@ export function UsefulLinks({ data, filterLabel }: UsefulLinksProps) {
   return (
     <div>
       <div className="flex justify-center mb-12">
-        <label className="flex items-center gap-3 cursor-pointer bg-zinc-900 border border-zinc-800 py-2 px-5 rounded-full hover:border-primary-600 transition-colors">
+        <label className="flex items-center gap-3 cursor-pointer bg-white border border-slate-300 py-2 px-5 rounded-full hover:border-primary-600 transition-colors">
           <div className="relative">
             <input 
               type="checkbox" 
@@ -36,10 +36,10 @@ export function UsefulLinks({ data, filterLabel }: UsefulLinksProps) {
               checked={officialOnly}
               onChange={(e) => setOfficialOnly(e.target.checked)}
             />
-            <div className={`block w-10 h-6 rounded-full transition-colors ${officialOnly ? 'bg-primary-600' : 'bg-zinc-700'}`}></div>
+            <div className={`block w-10 h-6 rounded-full transition-colors ${officialOnly ? 'bg-primary-600' : 'bg-slate-200'}`}></div>
             <div className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform ${officialOnly ? 'transform translate-x-4' : ''}`}></div>
           </div>
-          <span className="text-zinc-300 font-medium select-none">{filterLabel}</span>
+          <span className="text-slate-700 font-medium select-none">{filterLabel}</span>
         </label>
       </div>
 
@@ -51,7 +51,7 @@ export function UsefulLinks({ data, filterLabel }: UsefulLinksProps) {
 
           return (
             <section key={group.category}>
-              <h2 className="text-2xl font-bold text-white mb-6 border-b border-zinc-800 pb-2">
+              <h2 className="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-300 pb-2">
                 {formatCategory(group.category)}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -61,10 +61,10 @@ export function UsefulLinks({ data, filterLabel }: UsefulLinksProps) {
                     href={link.url} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex flex-col p-6 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-primary-600 hover:bg-zinc-800/80 transition-all group shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                    className="flex flex-col p-6 bg-white border border-slate-300 rounded-xl hover:border-primary-600 hover:bg-slate-100/80 transition-all group shadow-sm hover:shadow-md hover:-translate-y-0.5"
                   >
                     <div className="flex justify-between items-start mb-2 gap-2">
-                      <h3 className="text-lg font-bold text-white group-hover:text-primary-400 transition-colors leading-tight">
+                      <h3 className="text-lg font-bold text-slate-900 group-hover:text-primary-400 transition-colors leading-tight">
                         {link.title}
                       </h3>
                       {link.isOfficial && (
@@ -74,18 +74,18 @@ export function UsefulLinks({ data, filterLabel }: UsefulLinksProps) {
                         </span>
                       )}
                     </div>
-                    <p className="text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">
+                    <p className="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">
                       {link.description}
                     </p>
                     <div className="flex items-center justify-between mt-auto">
                       <div className="flex flex-wrap gap-1.5">
                         {link.languages.map(l => (
-                          <span key={l} className="text-[0.65rem] font-bold text-zinc-500 bg-zinc-950 px-2 py-0.5 rounded border border-zinc-800">
+                          <span key={l} className="text-[0.65rem] font-bold text-slate-500 bg-slate-50 px-2 py-0.5 rounded border border-slate-300">
                             {l}
                           </span>
                         ))}
                       </div>
-                      <ExternalLink className="w-4 h-4 text-zinc-500 group-hover:text-primary-500 transition-colors" />
+                      <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-primary-500 transition-colors" />
                     </div>
                   </a>
                 ))}

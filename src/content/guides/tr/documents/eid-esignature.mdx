@@ -1,0 +1,58 @@
+---
+title: "eID Kartı, e-İmza (eParaksts) ve e-Adres"
+description: "Letonya'nın dijital kamu altyapısı nasıl çalışır ve elektronik kimliğinizi nasıl aktif edersiniz?"
+section: "documents"
+badge: "verified"
+verified: true
+lastChecked: "Ekim 2026"
+reviewIntervalMonths: 6
+audience: "all"
+officialSource: 
+  - "https://www.eparaksts.lv/en"
+  - "https://latvija.gov.lv"
+---
+
+import QuickAnswer from '../../../../components/QuickAnswer.astro';
+import FAQ from '../../../../components/FAQ.astro';
+import OfficialSourceList from '../../../../components/OfficialSourceList.astro';
+import WarningBox from '../../../../components/WarningBox.astro';
+import StepList from '../../../../components/StepList.astro';
+import StepListItem from '../../../../components/StepListItem.astro';
+
+<QuickAnswer>
+Letonya dünyanın en gelişmiş dijital kamu altyapılarından birine sahiptir. PMLP'den aldığınız oturum izni kartı (eID) bir akıllı çipe sahiptir ve belgeleri yasal olarak imzalamanızı sağlar. Ayrıca akıllı telefonunuza eParaksts mobile veya Smart-ID yükleyerek tüm kamu işlemlerini evinizden halledebilirsiniz.
+</QuickAnswer>
+
+## Dijital Letonya'nın 3 Temel Direği
+
+### 1. eID Kartı ve eParaksts (Elektronik İmza)
+Oturum kartınızı (Uzturēšanās atļauja) teslim aldığınızda, memur size içinde **PIN1, PIN2 ve PUK** kodlarının bulunduğu kapalı bir zarf verir.
+* Bilgisayarınıza bağlayacağınız standart bir USB akıllı kart okuyucu (smart card reader) ile kartınızı takıp PIN kodunuzu girerek kira sözleşmelerini, iş kontratlarını ve resmi dilekçeleri evinizden hukuken geçerli olarak imzalayabilirsiniz.
+* Letonya kanunlarına göre **eParaksts ile atılan dijital imza, ıslak imza ile tamamen eşit hukuki geçerliliğe sahiptir.**
+
+### 2. eParaksts Mobile
+Her zaman yanınızda kart okuyucu taşımak zorunda kalmamanız için devletin sağladığı ücretsiz **"eParaksts mobile"** uygulaması bulunur.
+* eID kartınızı kullanarak bir defaya mahsus kimliğinizi doğruladıktan sonra, telefonunuz üzerinden PDF belgeleri saniyeler içinde imzalayabilir ve kamu portallarına şifresiz giriş yapabilirsiniz.
+
+### 3. Latvija.gov.lv ve e-Adrese (Resmi Dijital Posta Kutusu)
+[Latvija.gov.lv](https://latvija.gov.lv), Türkiye'deki e-Devlet kapısının Letonya muadilidir. Adres beyanından vergi sorgulamaya, sağlık kayıtlarından ceza ödemelerine kadar tüm kamu hizmetleri bu portaldadır.
+* Bu portal üzerinden **e-Adrese (Resmi Dijital Posta Kutusu)** aktive edebilirsiniz. Aktive ettiğinizde devlet kurumları size fiziki kağıt mektup göndermeyi durdurur; tüm resmi bildirimler güvenli dijital kutunuza düşer.
+
+<WarningBox title="PIN Zarfınızı Asla Kaybetmeyin!">
+Oturum kartınızla birlikte verilen PIN zarfını çok iyi saklayın. Bu kodları kaybederseniz internet üzerinden geri alamazsınız; şahsen tekrar PMLP ofisine giderek harç ödeyip yeni PIN talep etmeniz gerekir.
+</WarningBox>
+
+## Smart-ID Nedir?
+"Smart-ID", Baltık ülkelerindeki bankaların ve kamu kurumlarının kullandığı güvenli bir mobil kimlik doğrulama uygulamasıdır. 
+* Letonya'da bir bankada hesap açtığınızda şubede kimlik kartınızla **"Qualified Smart-ID"** oluşturulur.
+* Bu uygulama ile hem internet bankacılığınıza girebilir hem de latvija.gov.lv ve EDS (Vergi Dairesi) gibi tüm devlet sitelerine giriş yapabilirsiniz.
+
+<FAQ title="AB vatandaşıyım ve kağıt kayıt belgem var. Dijital kimlik alabilir miyim?">
+Evet. Letonya'da yaşayan AB vatandaşları veya oturum izni kartı olmayan yabancılar, yalnızca bu dijital imza ve kamu hizmetlerinden yararlanabilmek için PMLP'ye başvurarak "Yabancı eID Kartı" (Ārzemnieka eID karte) alabilirler.
+</FAQ>
+
+<OfficialSourceList links={[
+  { title: "eParaksts Resmi Portalı", url: "https://www.eparaksts.lv/en" },
+  { title: "Latvija.gov.lv Devlet Hizmetleri", url: "https://latvija.gov.lv" },
+  { title: "Smart-ID Resmi Bilgi Sayfası", url: "https://www.smart-id.com" }
+]} />

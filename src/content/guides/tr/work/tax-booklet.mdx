@@ -1,0 +1,73 @@
+---
+title: "Elektronik Vergi Karnesi ve Yıllık Vergi İadesi"
+description: "Algas nodokļu grāmatiņa tanımlama, VID EDS kullanımı ve sağlık/eğitim vergi iadeleri."
+section: "work"
+badge: "verified"
+verified: true
+lastChecked: "Ekim 2026"
+reviewIntervalMonths: 6
+audience: "worker"
+officialSource: 
+  - "https://www.vid.gov.lv/en"
+  - "https://eds.vid.gov.lv/"
+---
+
+import QuickAnswer from '../../../../components/QuickAnswer.astro';
+import StepList from '../../../../components/StepList.astro';
+import StepListItem from '../../../../components/StepListItem.astro';
+import WarningBox from '../../../../components/WarningBox.astro';
+import OfficialSourceList from '../../../../components/OfficialSourceList.astro';
+
+<QuickAnswer>
+İşe başladığınız ilk gün elektronik vergi karnenizi (**Algas nodokļa grāmatiņa**) VID EDS üzerinden işvereninize tanımlamalısınız. Tanımlamazsanız maaşınızdan vergisiz asgari tutar indirilmez ve en yüksek orandan kesinti yapılır. Ayrıca her Mart ayında sağlık ve eğitim harcamalarınız için devlette biriken vergilerinizi nakit iade alabilirsiniz.
+</QuickAnswer>
+
+## Elektronik Vergi Karnesi Nedir?
+
+Letonya'da fiziksel kağıt vergi karnesi yoktur. Her vergi mükellefinin Letonya Vergi Dairesi (**VID - Valsts ieņēmumu dienests**) sisteminde dijital bir karnesi bulunur. Bu karne devlete hangi işvereninizin ana işvereniniz olduğunu bildirir.
+
+<WarningBox>
+**Önemli Uyarı:** Vergi karnenizi işvereninize bağlamazsanız, şirket bordro muhasebesi yasa gereği gelir vergisi muafiyetinizi (neapliekamais minimums) uygulayamaz ve maaşınızdan gereğinden fazla gelir vergisi (IIN) kesilir!
+</WarningBox>
+
+## Adım Adım: Vergi Karnesini İşverene Gönderme
+
+<StepList>
+  <StepListItem title="1. VID EDS Sistemine Giriş Yapın">
+    [eds.vid.gov.lv](https://eds.vid.gov.lv/) adresine gidin. Latvija.gov.lv portalı üzerinden **Smart-ID**, **eParaksts mobile** veya banka kimliğinizle giriş yapın.
+  </StepListItem>
+  <StepListItem title="2. Algas nodokļu grāmatiņa Sekmesini Açın">
+    Ana menüden "Algas nodokļu grāmatiņa" (Maaş Vergi Karnesi) bölümüne tıklayın.
+  </StepListItem>
+  <StepListItem title="3. İşvereninizi Ekleyin (Iesniegt darba devējam)">
+    "Iesniegt darba devējam" (İşverene ibraz et) butonuna tıklayın. Listeden iş sözleşmesi yaptığınız şirketin adını veya vergi numarasını (reģistrācijas numurs) aratıp seçin ve iş başlangıç tarihinizi girerek onaylayın.
+  </StepListItem>
+  <StepListItem title="4. Varsa Bakmakla Yükümlü Olduğunuz Kişileri Ekleyin">
+    Çalışmayan eşiniz veya 18 yaşından küçük çocuklarınız varsa, "Apgādājamie" (Bakmakla yükümlü olunanlar) kısmına ekleyerek çocuk başına ek aylık vergi indirimi hakkı kazanırsınız.
+  </StepListItem>
+</StepList>
+
+---
+
+## Yıllık Gelir Beyannamesi ve Vergi İadesi (Gada Ienākumu Deklarācija)
+
+Letonya'da vergi yılı takvim yılı ile aynıdır (1 Ocak – 31 Aralık). Her yıl **1 Mart – 1 Haziran** tarihleri arasında VID EDS üzerinden yıllık gelir beyannamesi verilir.
+
+Sistem son derece otomatiktir; işvereninizin ödediği maaş ve kesilen vergiler zaten sistemde kayıtlıdır. Tek bir tıkla onaylayabilirsiniz.
+
+### Harcamalarınızdan Vergi İadesi Alın (Attaisnotie izdevumi)
+
+Letonya devleti, yıl içinde yaptığınız bazı meşru harcamaların gelir vergisini (yaklaşık %20) size doğrudan banka hesabınıza geri iade eder:
+* **Özel Sağlık ve Diş Tedavileri:** Özel klinik muayeneleri, diş dolgusu, diş teli/implant masrafları, MR/röntgen ücretleri (eczaneden alınan reçetesiz ilaçlar hariçtir).
+* **Eğitim Harcamaları:** Kendinizin veya çocuklarınızın üniversite harçları, akredite kurslar ve çocukların okul sonrası spor/hobi kulübü ödemeleri.
+
+### Vergi İadesi Nasıl Alınır?
+1. Akıllı telefonunuza resmi **"Attaisnotie izdevumi"** (VID) uygulamasını indirin.
+2. Yıl boyunca doktordan veya diş hekiminden aldığınız fatura/makbuzun (čeks) fotoğrafını çekip vergi numaranızla uygulamaya yükleyin.
+3. Mart ayında beyanname ekranını açtığınızda yüklediğiniz tüm bu faturalar otomatik olarak listelenir.
+4. Beyannameyi onayladıktan sonra en geç 3 ay içinde Letonya Vergi Dairesi fazla kesilen vergiyi IBAN hesabınıza transfer eder.
+
+<OfficialSourceList links={[
+  { title: "VID EDS Portalı", url: "https://eds.vid.gov.lv/" },
+  { title: "VID - Yıllık Gelir Beyannamesi Bilgisi", url: "https://www.vid.gov.lv/en/annual-income-declaration" }
+]} />

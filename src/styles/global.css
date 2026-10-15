@@ -4,41 +4,47 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   
-  /* Latvian Carmine Red */
+  /* Primary Carmine (Authentic Latvian Red) */
   --color-primary-50: #fdf2f3;
   --color-primary-100: #fae1e3;
   --color-primary-200: #f5c8cb;
   --color-primary-300: #eca2a8;
   --color-primary-400: #df6f78;
   --color-primary-500: #ce424e;
-  --color-primary-600: #b32a35; /* Similar to flag */
-  --color-primary-700: #9e3039; /* Exact Latvian Flag Red */
-  --color-primary-800: #852a32;
-  --color-primary-900: #70262c;
+  --color-primary-600: #9e3039;
+  --color-primary-700: #7f232b;
+  --color-primary-800: #5d1d23;
+  --color-primary-900: #4a1519;
   
-  --color-accent-500: #f59e0b; /* amber-500 */
-  --color-accent-600: #d97706; /* amber-600 */
+  /* Accent Orange (for warnings/highlights) */
+  --color-accent-500: #f97316; /* orange-500 */
+  --color-accent-600: #ea580c; /* orange-600 */
   
-  /* Dark mode semantic colors */
-  --color-official-bg: #064e3b; /* emerald-900 */
-  --color-official-text: #34d399; /* emerald-400 */
-  --color-official-border: #047857; /* emerald-700 */
+  /* Semantic colors (Light mode variants) */
+  --color-official-bg: #d1fae5; /* emerald-100 */
+  --color-official-text: #065f46; /* emerald-800 */
+  --color-official-border: #6ee7b7; /* emerald-300 */
   
-  --color-verified-bg: #0c4a6e; /* sky-900 */
-  --color-verified-text: #38bdf8; /* sky-400 */
-  --color-verified-border: #0369a1; /* sky-700 */
+  --color-verified-bg: #dbeafe; /* blue-100 */
+  --color-verified-text: #1e40af; /* blue-800 */
+  --color-verified-border: #93c5fd; /* blue-300 */
   
-  --color-warning-bg: #4c0519; /* rose-900 */
-  --color-warning-text: #fb7185; /* rose-400 */
-  --color-warning-border: #be123c; /* rose-700 */
+  --color-warning-bg: #ffedd5; /* orange-100 */
+  --color-warning-text: #9a3412; /* orange-800 */
+  --color-warning-border: #fdba74; /* orange-300 */
   
-  --color-draft-bg: #451a03; /* amber-900 */
-  --color-draft-text: #fbbf24; /* amber-400 */
-  --color-draft-border: #b45309; /* amber-700 */
+  --color-draft-bg: #e2e8f0; /* slate-200 */
+  --color-draft-text: #334155; /* slate-700 */
+  --color-draft-border: #94a3b8; /* slate-400 */
+  
+  --color-info-bg: #e0f2fe; /* sky-100 */
+  --color-info-text: #075985; /* sky-800 */
+  --color-info-border: #7dd3fc; /* sky-300 */
 }
 
 @layer base {
   body {
-    @apply bg-black text-zinc-300 antialiased selection:bg-primary-900 selection:text-white;
+    background-color: #EDEFF2;
+    @apply text-slate-800 antialiased selection:bg-primary-200 selection:text-primary-900;
   }
 }

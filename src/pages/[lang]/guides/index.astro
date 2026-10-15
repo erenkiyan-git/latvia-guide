@@ -2,10 +2,9 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { Card } from '../../../components/ui/Card';
 import { getCollection } from 'astro:content';
-import { getActiveLanguages } from '../../../i18n/utils';
-import { useTranslations } from '../../../i18n/utils';
-import type { Lang } from '../../../config';
-import { ShieldCheck, FileWarning, ArrowRight } from 'lucide-react';
+import { getActiveLanguages, useTranslations, getSectionName } from '../../../i18n/utils';
+import { DEFAULT_LANG, type Lang } from '../../../config';
+import { ShieldCheck, FileWarning, ArrowRight, Globe } from 'lucide-react';
 
 export function getStaticPaths() {
   const langs = getActiveLanguages();
@@ -17,94 +16,127 @@ export function getStaticPaths() {
 const { lang } = Astro.params as { lang: Lang };
 const t = useTranslations(lang);
 
-// Get all guides for the current language
-const allGuides = await getCollection('guides', (entry) => {
-  return entry.id.startsWith(`${lang}/`);
+const allGuides = await getCollection('guides');
+
+// Index guides by "lang:slug"
+const guideMap = new Map();
+allGuides.forEach(guide => {
+  const [guideLang, ...slugParts] = guide.id.split('/');
+  const slug = slugParts.join('/');
+  guideMap.set(`${guideLang}:${slug}`, guide);
 });
 
-// Group guides by section
-const sections = allGuides.reduce((acc, guide) => {
-  const section = guide.data.section;
-  if (!acc[section]) {
-    acc[section] = [];
-  }
-  acc[section].push(guide);
-  return acc;
-}, {} as Record<string, typeof allGuides>);
+const enGuides = allGuides.filter(g => g.id.startsWith(`${DEFAULT_LANG}/`));
+const standardSections = ['new-to-latvia', 'documents', 'work', 'housing', 'students', 'healthcare', 'transport', 'daily-life', 'travel'];
 
-// Capitalize helper
-const formatSectionName = (name: string) => {
-  return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-};
+// Build section entries with native or fallback guides
+const sections = standardSections.map(section => {
+  const sectionEnGuides = enGuides.filter(g => g.data.section === section);
+  
+  const sectionGuides = sectionEnGuides.map(enGuide => {
+    const slug = enGuide.id.split('/').slice(1).join('/');
+    const nativeGuide = guideMap.get(`${lang}:${slug}`);
+    if (nativeGuide) {
+      return { guide: nativeGuide, isFallback: false, slug };
+    }
+    return { guide: enGuide, isFallback: lang !== DEFAULT_LANG, slug };
+  });
+
+  // Native guides without EN counterpart
+  allGuides.filter(g => g.id.startsWith(`${lang}/`) && g.data.section === section).forEach(nativeGuide => {
+    const slug = nativeGuide.id.split('/').slice(1).join('/');
+    if (!sectionGuides.some(item => item.slug === slug)) {
+      sectionGuides.push({ guide: nativeGuide, isFallback: false, slug });
+    }
+  });
+
+  return {
+    section,
+    title: getSectionName(section, lang),
+    guides: sectionGuides
+  };
+}).filter(sec => sec.guides.length > 0);
 ---
 
-<BaseLayout title={t('nav.guides')} description="All guides for foreigners in Latvia." lang={lang}>
+<BaseLayout title={t('nav.guides')} description={t('guides.subtitle')} lang={lang}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
     
-    <header class="mb-16 text-center border-b border-zinc-800 pb-10">
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">{t('nav.guides')}</h1>
-      <p class="text-xl text-zinc-400">Browse all our practical guides by category.</p>
+    <header class="mb-16 text-center border-b border-slate-300 pb-10">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">{t('nav.guides')}</h1>
+      <p class="text-xl text-slate-600">{t('guides.subtitle')}</p>
     </header>
 
     <div class="space-y-20">
-      {Object.entries(sections).length > 0 ? (
-        Object.entries(sections).map(([section, guides]) => (
+      {sections.length > 0 ? (
+        sections.map(({ section, title, guides }) => (
           <section>
-            <div class="flex items-center justify-between mb-8 border-b border-zinc-800/50 pb-4">
-              <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                <a href={`/${lang}/guides/${section}/`} class="hover:text-primary-500 transition-colors">
-                  {formatSectionName(section)}
+            <div class="flex items-center justify-between mb-8 border-b border-slate-300/50 pb-4">
+              <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+                <a href={`/${lang}/guides/${section}/`} class="hover:text-primary-600 transition-colors">
+                  {title}
                 </a>
               </h2>
-              <a href={`/${lang}/guides/${section}/`} class="hidden sm:flex items-center text-sm font-semibold text-primary-500 hover:text-primary-400 transition-colors">
-                View all <ArrowRight class="w-4 h-4 ml-1" />
+              <a href={`/${lang}/guides/${section}/`} class="hidden sm:flex items-center text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors">
+                {t('section.viewAll')} <ArrowRight class="w-4 h-4 ml-1" />
               </a>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {guides.map(guide => {
-                const [, ...slugParts] = guide.id.split('/');
-                const slug = slugParts.join('/');
-                
+              {guides.map(({ guide, isFallback, slug }) => {
                 return (
                   <a href={`/${lang}/guides/${slug}/`} class="block group h-full">
-                    <Card hoverable className="h-full flex flex-col p-6 sm:p-8 bg-zinc-900 border-zinc-800 group-hover:bg-zinc-800/50">
-                      <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary-400 transition-colors pr-8 relative">
-                        {guide.data.title}
+                    <Card hoverable className="h-full flex flex-col p-6 sm:p-8 bg-white border-slate-300 group-hover:bg-slate-100/50">
+                      <div class="flex items-start justify-between gap-2 mb-3">
+                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary-600 transition-colors leading-tight">
+                          {guide.data.title}
+                        </h3>
                         
-                        {guide.data.badge === 'official' && (
-                          <div class="absolute right-0 top-1 text-emerald-500" title="Official Source">
-                            <ShieldCheck class="w-5 h-5" />
-                          </div>
-                        )}
-                        {guide.data.badge === 'verified' && (
-                          <div class="absolute right-0 top-1 text-sky-500" title="Community Verified">
-                            <ShieldCheck class="w-5 h-5" />
-                          </div>
-                        )}
-                        {guide.data.badge === 'draft' && (
-                          <div class="absolute right-0 top-1 text-amber-500" title="Draft">
-                            <FileWarning class="w-5 h-5" />
-                          </div>
-                        )}
-                      </h3>
-                      <p class="text-zinc-400 text-sm leading-relaxed flex-grow">{guide.data.description}</p>
+                        <div class="flex items-center gap-1 shrink-0 pt-0.5">
+                          {guide.data.badge === 'official' && (
+                            <span title="Official Source" class="text-emerald-600">
+                              <ShieldCheck class="w-5 h-5" />
+                            </span>
+                          )}
+                          {guide.data.badge === 'verified' && (
+                            <span title="Community Verified" class="text-sky-600">
+                              <ShieldCheck class="w-5 h-5" />
+                            </span>
+                          )}
+                          {guide.data.badge === 'draft' && (
+                            <span title="Draft" class="text-amber-600">
+                              <FileWarning class="w-5 h-5" />
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <p class="text-slate-600 text-sm leading-relaxed flex-grow mb-4">{guide.data.description}</p>
+
+                      {isFallback && (
+                        <div class="pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+                          <span class="inline-flex items-center gap-1 font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                            <Globe class="w-3 h-3" />
+                            {t('section.languageNotice')}
+                          </span>
+                        </div>
+                      )}
                     </Card>
                   </a>
                 );
               })}
             </div>
             
-            <a href={`/${lang}/guides/${section}/`} class="sm:hidden mt-6 flex justify-center items-center py-3 w-full border border-zinc-800 rounded-xl text-sm font-semibold text-zinc-300 hover:bg-zinc-900 hover:text-white transition-colors">
-              View all {formatSectionName(section)} guides
+            <a href={`/${lang}/guides/${section}/`} class="sm:hidden mt-6 flex justify-center items-center py-3 w-full border border-slate-300 rounded-xl text-sm font-semibold text-slate-700 hover:bg-white hover:text-slate-900 transition-colors">
+              {title} - {t('section.viewAll')}
             </a>
           </section>
         ))
       ) : (
-        <div class="text-center py-16 bg-zinc-900/50 rounded-2xl border border-zinc-800/50">
-          <p class="text-zinc-400 text-lg">Guides are being written and will appear here soon.</p>
+        <div class="text-center py-16 bg-white/50 rounded-2xl border border-slate-300/50">
+          <p class="text-slate-600 text-lg">{t('section.empty')}</p>
         </div>
       )}
     </div>
   </div>
 </BaseLayout>
+

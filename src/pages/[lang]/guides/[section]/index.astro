@@ -3,41 +3,54 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import { Breadcrumbs } from '../../../../components/ui/Breadcrumbs';
 import { Card } from '../../../../components/ui/Card';
 import { getCollection } from 'astro:content';
-import { getActiveLanguages } from '../../../../i18n/utils';
-import { useTranslations } from '../../../../i18n/utils';
-import type { Lang } from '../../../../config';
-import { ShieldCheck, FileWarning } from 'lucide-react';
+import { getActiveLanguages, useTranslations, getSectionName } from '../../../../i18n/utils';
+import { DEFAULT_LANG, type Lang } from '../../../../config';
+import { ShieldCheck, FileWarning, Globe } from 'lucide-react';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides');
   const activeLangs = getActiveLanguages();
   
-  const paths: any[] = [];
-  
-  activeLangs.forEach(lang => {
-    const langGuides = guides.filter(g => g.id.startsWith(`${lang}/`));
-    const sections = [...new Set(langGuides.map(g => g.data.section))];
-    
-    sections.forEach(section => {
-      paths.push({
-        params: { lang, section },
-        props: { 
-          sectionGuides: langGuides.filter(g => g.data.section === section)
-        }
-      });
-    });
+  // Index guides by "lang:slug"
+  const guideMap = new Map();
+  guides.forEach(guide => {
+    const [guideLang, ...slugParts] = guide.id.split('/');
+    const slug = slugParts.join('/');
+    guideMap.set(`${guideLang}:${slug}`, guide);
   });
-  
+
+  const enGuides = guides.filter(g => g.id.startsWith(`${DEFAULT_LANG}/`));
   const standardSections = ['new-to-latvia', 'students', 'work', 'housing', 'documents', 'transport', 'healthcare', 'daily-life', 'travel'];
-  
+
+  const paths: any[] = [];
+
   activeLangs.forEach(lang => {
     standardSections.forEach(section => {
-      if (!paths.find(p => p.params.lang === lang && p.params.section === section)) {
-        paths.push({
-          params: { lang, section },
-          props: { sectionGuides: [] }
-        });
-      }
+      // Find all English guides for this section
+      const sectionEnGuides = enGuides.filter(g => g.data.section === section);
+      
+      // For the current lang, resolve each guide (native or fallback)
+      const sectionGuides = sectionEnGuides.map(enGuide => {
+        const slug = enGuide.id.split('/').slice(1).join('/');
+        const nativeGuide = guideMap.get(`${lang}:${slug}`);
+        if (nativeGuide) {
+          return { guide: nativeGuide, isFallback: false, slug };
+        }
+        return { guide: enGuide, isFallback: lang !== DEFAULT_LANG, slug };
+      });
+
+      // Also include any native guides for this section that don't have an EN counterpart
+      guides.filter(g => g.id.startsWith(`${lang}/`) && g.data.section === section).forEach(nativeGuide => {
+        const slug = nativeGuide.id.split('/').slice(1).join('/');
+        if (!sectionGuides.some(item => item.slug === slug)) {
+          sectionGuides.push({ guide: nativeGuide, isFallback: false, slug });
+        }
+      });
+
+      paths.push({
+        params: { lang, section },
+        props: { sectionGuides }
+      });
     });
   });
 
@@ -48,64 +61,74 @@ const { lang, section } = Astro.params as { lang: Lang; section: string };
 const { sectionGuides } = Astro.props;
 const t = useTranslations(lang);
 
-const formatSectionName = (name: string) => {
-  return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-};
+const sectionTitle = getSectionName(section, lang);
 
 const breadcrumbsItems = [
-  { label: 'Home', href: `/${lang}/` },
-  { label: 'Guides', href: `/${lang}/guides/` },
-  { label: formatSectionName(section) }
+  { label: t('breadcrumbs.home'), href: `/${lang}/` },
+  { label: t('breadcrumbs.guides'), href: `/${lang}/guides/` },
+  { label: sectionTitle }
 ];
 ---
 
-<BaseLayout title={formatSectionName(section)} description={`Guides about ${formatSectionName(section).toLowerCase()} in Latvia.`} lang={lang}>
+<BaseLayout title={sectionTitle} description={t('section.guidesDesc')} lang={lang}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
     <Breadcrumbs items={breadcrumbsItems} />
 
-    <header class="mb-12 pb-8 border-b border-zinc-800">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">{formatSectionName(section)}</h1>
-      <p class="text-zinc-400 mt-4 text-lg">Select a guide to learn more.</p>
+    <header class="mb-12 pb-8 border-b border-slate-300">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">{sectionTitle}</h1>
+      <p class="text-slate-600 mt-4 text-lg">{t('section.selectGuide')}</p>
     </header>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
       {sectionGuides.length > 0 ? (
-        sectionGuides.map((guide: any) => {
-          const [, ...slugParts] = guide.id.split('/');
-          const slug = slugParts.join('/');
-          
+        sectionGuides.map(({ guide, isFallback, slug }: any) => {
           return (
             <a href={`/${lang}/guides/${slug}/`} class="block group h-full">
-              <Card hoverable className="h-full flex flex-col p-6 sm:p-8 bg-zinc-900 border-zinc-800 group-hover:bg-zinc-800/50">
-                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary-400 transition-colors pr-8 relative">
-                  {guide.data.title}
+              <Card hoverable className="h-full flex flex-col p-6 sm:p-8 bg-white border-slate-300 group-hover:bg-slate-100/50">
+                <div class="flex items-start justify-between gap-2 mb-3">
+                  <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary-600 transition-colors leading-tight">
+                    {guide.data.title}
+                  </h3>
                   
-                  {guide.data.badge === 'official' && (
-                    <div class="absolute right-0 top-1 text-emerald-500" title="Official Source">
-                      <ShieldCheck class="w-5 h-5" />
-                    </div>
-                  )}
-                  {guide.data.badge === 'verified' && (
-                    <div class="absolute right-0 top-1 text-sky-500" title="Community Verified">
-                      <ShieldCheck class="w-5 h-5" />
-                    </div>
-                  )}
-                  {guide.data.badge === 'draft' && (
-                    <div class="absolute right-0 top-1 text-amber-500" title="Draft">
-                      <FileWarning class="w-5 h-5" />
-                    </div>
-                  )}
-                </h3>
-                <p class="text-zinc-400 text-sm leading-relaxed flex-grow">{guide.data.description}</p>
+                  <div class="flex items-center gap-1 shrink-0 pt-0.5">
+                    {guide.data.badge === 'official' && (
+                      <span title="Official Source" class="text-emerald-600">
+                        <ShieldCheck class="w-5 h-5" />
+                      </span>
+                    )}
+                    {guide.data.badge === 'verified' && (
+                      <span title="Community Verified" class="text-sky-600">
+                        <ShieldCheck class="w-5 h-5" />
+                      </span>
+                    )}
+                    {guide.data.badge === 'draft' && (
+                      <span title="Draft" class="text-amber-600">
+                        <FileWarning class="w-5 h-5" />
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <p class="text-slate-600 text-sm leading-relaxed flex-grow mb-4">{guide.data.description}</p>
+
+                {isFallback && (
+                  <div class="pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+                    <span class="inline-flex items-center gap-1 font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                      <Globe class="w-3 h-3" />
+                      {t('section.languageNotice')}
+                    </span>
+                  </div>
+                )}
               </Card>
             </a>
           );
         })
       ) : (
-        <div class="col-span-full py-16 text-center bg-zinc-900/50 rounded-2xl border border-zinc-800/50">
-          <p class="text-zinc-400 text-lg">Guides for this section are being written and will appear here soon.</p>
+        <div class="col-span-full py-16 text-center bg-white/50 rounded-2xl border border-slate-300/50">
+          <p class="text-slate-600 text-lg">{t('section.empty')}</p>
         </div>
       )}
     </div>
   </div>
 </BaseLayout>
+

@@ -29,14 +29,14 @@ const navLinks = [
 ];
 
 const footerLinks = [
-  { href: `/${lang}/about/`, label: 'About & Trust' },
+  { href: `/${lang}/about/`, label: t('nav.about') },
   { href: `/${lang}/guides/`, label: t('nav.guides') },
-  { href: `/${lang}/checklist/`, label: lang === 'tr' ? '30 Günlük Kontrol Listesi' : '30-Day Checklist' },
-  { href: `/${lang}/calculators/salary/`, label: lang === 'tr' ? 'Net Maaş Hesaplayıcı' : 'Net Salary Calculator' },
-  { href: `/${lang}/calculators/living-costs/`, label: lang === 'tr' ? 'Yaşam Maliyeti Hesaplayıcı' : 'Living Costs Calculator' },
-  { href: `/${lang}/useful-websites/`, label: lang === 'tr' ? 'Faydalı Web Siteleri' : 'Useful Websites' },
-  { href: `/${lang}/phrases/`, label: lang === 'tr' ? 'Letonca İfadeler' : 'Latvian Phrases' },
-  { href: `/${lang}/emergency/`, label: lang === 'tr' ? 'Acil Durum' : 'Emergency Contacts', isEmergency: true }
+  { href: `/${lang}/checklist/`, label: t('footer.checklist') },
+  { href: `/${lang}/calculators/salary/`, label: t('footer.salary') },
+  { href: `/${lang}/calculators/living-costs/`, label: t('footer.livingCosts') },
+  { href: `/${lang}/useful-websites/`, label: t('footer.usefulWebsites') },
+  { href: `/${lang}/phrases/`, label: t('footer.phrases') },
+  { href: `/${lang}/emergency/`, label: t('footer.emergency'), isEmergency: true }
 ];
 ---
 

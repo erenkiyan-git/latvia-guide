@@ -24,8 +24,8 @@ const filterLabel = lang === 'tr' ? 'Sadece Resmi Kaynakları Göster' : 'Show O
 <BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="text-center mb-12">
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">{pageTitle}</h1>
-      <p class="text-xl text-zinc-400 max-w-2xl mx-auto">{pageDesc}</p>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">{pageTitle}</h1>
+      <p class="text-xl text-slate-600 max-w-2xl mx-auto">{pageDesc}</p>
     </div>
 
     <ReactUsefulLinks client:load data={linksData} filterLabel={filterLabel} />

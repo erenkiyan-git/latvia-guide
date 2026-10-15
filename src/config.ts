@@ -1,7 +1,7 @@
 export const SITE = {
   title: 'Latvia Guide',
   description: 'A practical, trustworthy guide for foreigners in Latvia.',
-  contactEmail: 'hello@latviaguide.example.com' // Placeholder
+  contactEmail: 'contact@latviaguide.com'
 };
 
 export const LANGUAGES = {
