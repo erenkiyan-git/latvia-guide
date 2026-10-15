@@ -58,11 +58,11 @@ const problemTranslations = {
         </span>
       </div>
 
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-100 mb-6 tracking-tight leading-tight drop-shadow-sm">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight drop-shadow-md">
         {t('hero.title')}
       </h1>
       
-      <p class="text-lg sm:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+      <p class="text-lg sm:text-xl text-slate-700 mb-10 max-w-2xl mx-auto leading-relaxed font-normal">
         {t('hero.subtitle')}
       </p>
       
@@ -75,14 +75,14 @@ const problemTranslations = {
       <div class="mt-14 sm:mt-16">
         <a 
           href="#help-section" 
-          class="inline-flex flex-col items-center gap-1.5 text-slate-400 hover:text-primary-400 transition-colors group cursor-pointer focus:outline-none"
+          class="inline-flex flex-col items-center gap-1.5 text-slate-600 hover:text-primary-300 transition-colors group cursor-pointer focus:outline-none"
           aria-label={lang === 'tr' ? 'Yardım konularına kaydır' : 'Scroll to help topics'}
         >
-          <span class="text-xs font-mono uppercase tracking-widest group-hover:tracking-wider transition-all">
+          <span class="text-xs font-mono uppercase tracking-widest text-slate-500 group-hover:text-primary-300 transition-all font-semibold">
             {lang === 'tr' ? 'Keşfet' : 'Explore'}
           </span>
-          <div class="w-8 h-8 rounded-full border border-slate-300 group-hover:border-primary-500 flex items-center justify-center bg-base/60 backdrop-blur group-hover:bg-primary-950/40 transition-all animate-bounce">
-            <svg class="w-4 h-4 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="w-8 h-8 rounded-full border border-slate-300 group-hover:border-primary-500 flex items-center justify-center bg-base/80 backdrop-blur group-hover:bg-primary-950/60 transition-all animate-bounce shadow-md">
+            <svg class="w-4 h-4 text-primary-400 group-hover:text-primary-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
             </svg>
           </div>
@@ -99,8 +99,8 @@ const problemTranslations = {
     {/* What do you need help with? */}
     <section id="help-section" class="py-12 sm:py-16 scroll-mt-24">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-slate-100 mb-4">{t('home.help.title')}</h2>
-        <p class="text-slate-400 text-lg">{t('home.help.subtitle')}</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">{t('home.help.title')}</h2>
+        <p class="text-slate-700 text-lg max-w-2xl mx-auto">{t('home.help.subtitle')}</p>
       </div>
       <ProblemGrid lang={lang} translations={problemTranslations} />
     </section>
@@ -110,7 +110,7 @@ const problemTranslations = {
 
     {/* Who are you? */}
     <section class="py-16 text-center border-t border-slate-300/60">
-      <h2 class="text-2xl font-bold text-slate-100 mb-8">{t('home.who.title')}</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-8">{t('home.who.title')}</h2>
       <div class="flex flex-wrap justify-center gap-3">
         <Tag href={`/${lang}/guides/students/`}>{t('home.who.student')}</Tag>
         <Tag href={`/${lang}/guides/work/`}>{t('home.who.worker')}</Tag>

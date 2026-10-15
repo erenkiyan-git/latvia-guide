@@ -1,20 +1,124 @@
 ---
 interface Props {
   headers?: string[];
+  title?: string;
 }
-const { headers = ["Document", "Who issues it", "Original/copy", "Translation needed?", "Apostille/legalisation?", "Validity / notes", "Type"] } = Astro.props;
+const { 
+  headers = ["Document", "Who issues it", "Original/copy", "Translation needed?", "Apostille/legalisation?", "Validity / notes", "Type"],
+  title = "Verified Document Checklist"
+} = Astro.props;
 ---
-<div class="overflow-x-auto my-6 hud-card rounded-lg border border-slate-300">
-  <table class="min-w-full divide-y divide-slate-300">
-    <thead class="bg-slate-100">
-      <tr>
-        {headers.map(header => (
-          <th scope="col" class="py-3 px-4 text-left text-xs font-mono tracking-wider uppercase text-slate-700">{header}</th>
-        ))}
-      </tr>
-    </thead>
-    <tbody class="divide-y divide-slate-300/60 bg-surface text-sm text-slate-700">
-      <slot />
-    </tbody>
-  </table>
+
+<div class="my-8 document-table-wrapper">
+  {/* Card Container */}
+  <div class="hud-card rounded-2xl border border-slate-300/80 bg-surface/95 shadow-2xl overflow-hidden">
+    
+    {/* Table Header Bar */}
+    <div class="px-5 py-3.5 bg-slate-100/90 border-b border-slate-300 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-primary-500 animate-pulse"></span>
+        <h4 class="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-slate-900 m-0">
+          // {title}
+        </h4>
+      </div>
+      <span class="text-[0.7rem] font-mono text-slate-500 uppercase tracking-widest hidden sm:inline-flex items-center gap-1">
+        <span>KAYDIRARAK İNCELEYİN</span>
+        <span>→</span>
+      </span>
+    </div>
+
+    {/* Scrollable Table Wrapper */}
+    <div class="overflow-x-auto custom-scrollbar">
+      <table class="w-full text-left border-collapse min-w-[700px]">
+        <thead>
+          <tr class="bg-slate-100/60 border-b-2 border-primary-500/40">
+            {headers.map((header, idx) => (
+              <th 
+                scope="col" 
+                class={`py-3.5 px-4 sm:px-5 text-xs font-mono font-bold uppercase tracking-wider text-primary-400 whitespace-nowrap ${
+                  idx === 0 ? 'min-w-[180px]' : idx === 5 ? 'min-w-[220px]' : 'min-w-[120px]'
+                }`}
+              >
+                {header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-300/40 text-sm text-slate-700">
+          <slot />
+        </tbody>
+      </table>
+    </div>
+
+    {/* Table Footer Bar */}
+    <div class="px-5 py-2.5 bg-base/60 border-t border-slate-300/60 flex items-center justify-between text-[0.7rem] font-mono text-slate-500">
+      <span class="flex items-center gap-1.5">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        <span>Doğrulanmış resmi kaynaklar temel alınmıştır</span>
+      </span>
+      <span>PMLP / Valsts pārvalde</span>
+    </div>
+  </div>
 </div>
+
+<style is:global>
+  /* Custom table styling for DocumentChecklistTable */
+  .document-table-wrapper tbody tr {
+    transition: background-color 0.15s ease;
+  }
+  .document-table-wrapper tbody tr:nth-child(even) {
+    background-color: rgba(23, 26, 31, 0.4);
+  }
+  .document-table-wrapper tbody tr:hover {
+    background-color: rgba(33, 37, 44, 0.75);
+  }
+  .document-table-wrapper tbody td {
+    padding: 1rem 1.25rem;
+    vertical-align: top;
+    line-height: 1.6;
+    color: var(--color-slate-700);
+    border-bottom: 1px solid rgba(45, 50, 59, 0.35);
+  }
+  /* First column bold and bright */
+  .document-table-wrapper tbody td:first-child {
+    font-weight: 700;
+    color: var(--color-slate-900);
+    white-space: normal;
+  }
+  /* Notes column */
+  .document-table-wrapper tbody td:nth-child(6) {
+    color: var(--color-slate-800);
+    line-height: 1.5;
+  }
+</style>
+
+<script>
+  // Enhance table cell keywords into crisp UI status badges
+  document.querySelectorAll('.document-table-wrapper tbody tr').forEach(row => {
+    row.querySelectorAll('td').forEach((td, idx) => {
+      const text = td.textContent?.trim();
+      if (!text) return;
+
+      // Type column: "Official requirement" / "Resmi Gereksinim"
+      if (text === 'Official requirement' || text === 'Resmi Gereksinim') {
+        td.innerHTML = `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-emerald-950/70 text-emerald-400 border border-emerald-800/60 shadow-sm"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>${text}</span>`;
+      } 
+      // Boolean columns: Yes / Evet
+      else if (text === 'Yes' || text === 'Evet') {
+        td.innerHTML = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono font-bold bg-amber-950/60 text-amber-300 border border-amber-800/60">${text}</span>`;
+      } 
+      // Boolean columns: No / Hayır
+      else if (text === 'No' || text === 'Hayır') {
+        td.innerHTML = `<span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-mono font-medium bg-slate-100 text-slate-500 border border-slate-300/80">${text}</span>`;
+      }
+      // "Free" / "Ücretsiz"
+      else if (text === 'Free' || text === 'Ücretsiz') {
+        td.innerHTML = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono font-bold bg-emerald-950/70 text-emerald-300 border border-emerald-800/60">${text}</span>`;
+      }
+      // "Original + Copy" / "Orijinal + Fotokopi"
+      else if (text === 'Original + Copy' || text === 'Orijinal + Fotokopi' || text === 'Original' || text === 'Orijinal') {
+        td.innerHTML = `<span class="text-slate-800 font-medium">${text}</span>`;
+      }
+    });
+  });
+</script>

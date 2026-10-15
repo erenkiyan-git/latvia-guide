@@ -13,60 +13,50 @@ officialSource:
 import QuickAnswer from '../../../../components/QuickAnswer.astro';
 import WarningBox from '../../../../components/WarningBox.astro';
 import OfficialSourceList from '../../../../components/OfficialSourceList.astro';
+import DocumentChecklistTable from '../../../../components/DocumentChecklistTable.astro';
 
 <QuickAnswer>
 Every official document in Latvia comes with a state fee. Fees vary widely based on how fast you want the document processed. You must always check the official PMLP website before paying, as amounts can change.
 </QuickAnswer>
 
-<WarningBox>
-**Disclaimer:** The amounts below are estimates to give you an idea of the costs. They might not reflect the exact current fees. Always check the official links provided before making any payments.
+<WarningBox title="Fee Estimates Disclaimer">
+The amounts below are estimates to give you an idea of the costs. They might not reflect the exact current fees. Always check the official links provided before making any payments.
 </WarningBox>
 
 ## Common State Fees
 
-<div class="overflow-x-auto my-6">
-  <table class="min-w-full divide-y divide-gray-300 border border-gray-300">
-    <thead class="bg-gray-50">
-      <tr>
-        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Service</th>
-        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Amount</th>
-        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Official Link</th>
-      </tr>
-    </thead>
-    <tbody class="divide-y divide-gray-200 bg-white">
-      <tr>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900">Schengen Visa (Type C)</td>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900">Check official source</td>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-blue-600"><a href="https://www.mfa.gov.lv/en/consular-information">MFA</a></td>
-      </tr>
-      <tr>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900">National Visa (Type D)</td>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900">Check official source</td>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-blue-600"><a href="https://www.pmlp.gov.lv/en">PMLP</a></td>
-      </tr>
-      <tr>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900">Residence Permit Application (Student/Work)</td>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900">Check official source</td>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-blue-600"><a href="https://www.pmlp.gov.lv/en">PMLP</a></td>
-      </tr>
-      <tr>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900">Residence Permit Card Issuance (Printing)</td>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900">Check official source</td>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-blue-600"><a href="https://www.pmlp.gov.lv/en">PMLP</a></td>
-      </tr>
-      <tr>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900">Address Declaration (In person at municipality)</td>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900">Check official source</td>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-blue-600"><a href="https://www.pmlp.gov.lv/en">PMLP</a></td>
-      </tr>
-      <tr>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900">Address Declaration (Online at latvija.lv)</td>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-green-600 font-semibold">Free</td>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-blue-600"><a href="https://latvija.gov.lv">Latvija.lv</a></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<DocumentChecklistTable headers={["Service", "Amount / Fee", "Official Source"]} title="Common State Fees & Charges">
+  <tr>
+    <td>Schengen Visa (Type C)</td>
+    <td>90 EUR (Standard processing)</td>
+    <td><a href="https://www.mfa.gov.lv/en/consular-information" target="_blank" rel="noopener">MFA Consular</a></td>
+  </tr>
+  <tr>
+    <td>National Visa (Type D)</td>
+    <td>Check official source</td>
+    <td><a href="https://www.pmlp.gov.lv/en" target="_blank" rel="noopener">PMLP Portal</a></td>
+  </tr>
+  <tr>
+    <td>Residence Permit Application (Student/Work)</td>
+    <td>Check official source</td>
+    <td><a href="https://www.pmlp.gov.lv/en" target="_blank" rel="noopener">PMLP Portal</a></td>
+  </tr>
+  <tr>
+    <td>Residence Permit Card Issuance (Printing)</td>
+    <td>Check official source</td>
+    <td><a href="https://www.pmlp.gov.lv/en" target="_blank" rel="noopener">PMLP Portal</a></td>
+  </tr>
+  <tr>
+    <td>Address Declaration (In person at municipality)</td>
+    <td>Check official source</td>
+    <td><a href="https://www.pmlp.gov.lv/en" target="_blank" rel="noopener">PMLP Portal</a></td>
+  </tr>
+  <tr>
+    <td>Address Declaration (Online at latvija.lv)</td>
+    <td>Free</td>
+    <td><a href="https://latvija.gov.lv" target="_blank" rel="noopener">Latvija.lv E-Service</a></td>
+  </tr>
+</DocumentChecklistTable>
 
 <OfficialSourceList links={[
   { title: "PMLP Home", url: "https://www.pmlp.gov.lv/en" }

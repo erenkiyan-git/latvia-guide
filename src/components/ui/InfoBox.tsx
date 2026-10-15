@@ -20,10 +20,12 @@ export function InfoBox({ children, title = 'Note' }: InfoBoxProps) {
             // {title}
           </h4>
         )}
-        <div className="text-slate-200 leading-relaxed text-sm sm:text-base">
+        <div className="text-slate-800 leading-relaxed text-sm sm:text-base">
           {children}
         </div>
       </div>
     </div>
   );
 }
+
+export default InfoBox;

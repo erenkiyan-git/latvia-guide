@@ -145,7 +145,7 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
           }}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="w-full bg-surface/95 backdrop-blur-md border-2 border-slate-300 text-slate-100 rounded-2xl py-4 sm:py-4.5 pl-12 sm:pl-14 pr-24 text-base sm:text-lg placeholder:text-slate-500 focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-500/20 transition-all shadow-2xl shadow-black/50"
+          className="w-full bg-surface/95 backdrop-blur-md border-2 border-slate-300 text-slate-900 rounded-2xl py-4 sm:py-4.5 pl-12 sm:pl-14 pr-24 text-base sm:text-lg placeholder:text-slate-500 focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-500/20 transition-all shadow-2xl shadow-black/50"
           aria-expanded={isOpen}
           role="combobox"
           aria-controls="search-results"
@@ -160,7 +160,7 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
             <button
               type="button"
               onClick={() => { setQuery(''); setIsOpen(false); }}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors"
+              className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition-colors"
               title={lang === 'tr' ? 'Temizle' : 'Clear'}
             >
               <X className="w-4 h-4" />
@@ -180,10 +180,10 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
           role="listbox"
         >
           {/* Header toolbar */}
-          <div className="px-4 py-2.5 bg-base/90 border-b border-slate-300/80 flex items-center justify-between text-xs font-mono text-slate-400">
+          <div className="px-4 py-2.5 bg-base/90 border-b border-slate-300/80 flex items-center justify-between text-xs font-mono text-slate-600">
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
-              <span>
+              <span className="font-semibold text-slate-700">
                 {results.length > 0
                   ? (lang === 'tr' ? `${results.length} DOĞRULANMIŞ REHBER BULUNDU` : `FOUND ${results.length} VERIFIED GUIDES`)
                   : (lang === 'tr' ? 'SONUÇ BULUNAMADI' : 'NO MATCHING GUIDES')}
@@ -210,8 +210,8 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
                     aria-selected={isSelected}
                     className={`block px-5 py-3.5 transition-all group ${
                       isSelected 
-                        ? 'bg-slate-800/90 border-l-4 border-l-primary-500 pl-4' 
-                        : 'hover:bg-slate-800/50 border-l-4 border-l-transparent'
+                        ? 'bg-slate-200/90 border-l-4 border-l-primary-500 pl-4' 
+                        : 'hover:bg-slate-200/60 border-l-4 border-l-transparent'
                     }`}
                     onMouseEnter={() => setSelectedIndex(idx)}
                   >
@@ -220,17 +220,17 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
                         <FileText className={`w-4 h-4 shrink-0 transition-colors ${
                           isSelected ? 'text-primary-400' : 'text-slate-500 group-hover:text-primary-400'
                         }`} />
-                        <h4 className="font-bold text-slate-100 text-base sm:text-lg group-hover:text-primary-300 transition-colors truncate">
+                        <h4 className="font-bold text-slate-900 text-base sm:text-lg group-hover:text-primary-300 transition-colors truncate">
                           {result.title}
                         </h4>
                       </div>
                       
-                      <span className="shrink-0 text-[0.65rem] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-primary-950/70 text-primary-400 border border-primary-800/50">
+                      <span className="shrink-0 text-[0.65rem] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-primary-950/70 text-primary-300 border border-primary-700/60">
                         {result.section.replace(/-/g, ' ')}
                       </span>
                     </div>
 
-                    <p className="text-sm text-slate-400 line-clamp-2 leading-relaxed ml-6 group-hover:text-slate-300 transition-colors">
+                    <p className="text-sm text-slate-700 line-clamp-2 leading-relaxed ml-6 group-hover:text-slate-800 transition-colors">
                       {result.description}
                     </p>
 
@@ -243,13 +243,13 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
               })
             ) : (
               <div className="px-6 py-10 text-center">
-                <Search className="w-10 h-10 text-slate-600 mx-auto mb-3" />
-                <p className="text-slate-300 text-base font-medium mb-1">
+                <Search className="w-10 h-10 text-slate-500 mx-auto mb-3" />
+                <p className="text-slate-900 text-base font-semibold mb-1">
                   {lang === 'tr' 
                     ? `"${query}" ile ilgili bir sonuç bulunamadı.` 
                     : `No results found for "${query}".`}
                 </p>
-                <p className="text-xs text-slate-500 max-w-sm mx-auto">
+                <p className="text-xs text-slate-600 max-w-sm mx-auto">
                   {lang === 'tr'
                     ? 'İpucu: "oturma izni", "pmlp", "ehliyet", "ev kiralama", "doktor" gibi kelimeleri deneyebilirsiniz.'
                     : 'Tip: Try searching for "permit", "pmlp", "license", "housing", or "doctor".'}

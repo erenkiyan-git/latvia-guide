@@ -225,10 +225,10 @@ export function LatvianCultureStrip({ lang = 'en' }: { lang?: string }) {
     <div className="my-12">
       <div className="text-center mb-6">
         <p className="hud-label mb-2">// BALTIC HERITAGE · LATVIEŠU SPĒKA ZĪMES</p>
-        <h3 className="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight">
+        <h3 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
           {lang === 'tr' ? "Letonya'nın Kadim Güç Sembolleri" : "Latvia's Ancient Sacred Signs"}
         </h3>
-        <p className="text-sm text-slate-400 max-w-xl mx-auto mt-1">
+        <p className="text-sm text-slate-700 max-w-xl mx-auto mt-1 leading-relaxed">
           {lang === 'tr'
             ? "Yüzyıllardır Leton geleneksel dokumalarında (Lielvārdes josta) ve kültüründe yaşatılan koruyucu ve rehber işaretler."
             : "Guiding cultural emblems woven into traditional Latvian textiles for centuries to bless travelers and homes."}
@@ -241,15 +241,15 @@ export function LatvianCultureStrip({ lang = 'en' }: { lang?: string }) {
           return (
             <div 
               key={item.name} 
-              className="hud-card hud-hover p-4 rounded-xl border border-slate-300 hover:border-primary-500/60 transition-all flex flex-col items-center text-center group"
+              className="hud-card hud-hover p-4.5 rounded-xl border border-slate-300 hover:border-primary-500/60 transition-all flex flex-col items-center text-center group"
             >
               <div className="w-12 h-12 rounded-xl bg-base flex items-center justify-center border border-primary-500/30 mb-3 group-hover:scale-110 group-hover:border-primary-500 transition-all shadow-sm">
                 <Icon size={24} className="text-primary-400 group-hover:text-primary-300 transition-colors" />
               </div>
-              <h4 className="font-mono font-bold text-sm text-slate-100 tracking-wider uppercase mb-1">
+              <h4 className="font-mono font-bold text-sm text-slate-900 tracking-wider uppercase mb-1.5">
                 {item.name}
               </h4>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-700 leading-relaxed">
                 {item.meaning}
               </p>
             </div>

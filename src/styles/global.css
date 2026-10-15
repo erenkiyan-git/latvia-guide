@@ -206,6 +206,91 @@
 .guide-content pre { background: var(--color-slate-100); border: 1px solid var(--color-slate-300); }
 .guide-content code { color: var(--color-primary-300); }
 
+/* Universal Table Styles for Guides (prevents white-box glitches and ensures high readability) */
+.guide-content table,
+.prose table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--color-slate-300);
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--color-surface) !important;
+  margin: 1.75rem 0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.guide-content thead,
+.prose thead {
+  background-color: var(--color-slate-100) !important;
+  border-bottom: 2px solid rgba(196, 52, 63, 0.5);
+}
+
+.guide-content th,
+.prose th {
+  padding: 0.875rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primary-400) !important;
+  text-align: left;
+  border-bottom: 1px solid var(--color-slate-300);
+}
+
+.guide-content tbody tr,
+.prose tbody tr {
+  border-bottom: 1px solid rgba(45, 50, 59, 0.6);
+  transition: background-color 0.15s ease;
+}
+
+.guide-content tbody tr:nth-child(even),
+.prose tbody tr:nth-child(even) {
+  background-color: rgba(23, 26, 31, 0.45) !important;
+}
+
+.guide-content tbody tr:hover,
+.prose tbody tr:hover {
+  background-color: rgba(33, 37, 44, 0.75) !important;
+}
+
+.guide-content td,
+.prose td {
+  padding: 1rem 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-slate-700) !important;
+  border-bottom: 1px solid rgba(45, 50, 59, 0.4);
+}
+
+.guide-content td strong,
+.prose td strong {
+  color: var(--color-slate-900) !important;
+}
+
+.guide-content td a,
+.prose td a {
+  color: var(--color-primary-400) !important;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.guide-content td a:hover,
+.prose td a:hover {
+  color: var(--color-primary-300) !important;
+}
+
+/* Force override any legacy bg-white / text-gray-* in tables */
+.guide-content table .bg-white,
+.guide-content table tbody.bg-white {
+  background-color: var(--color-surface) !important;
+}
+
+.guide-content table .text-gray-900 {
+  color: var(--color-slate-800) !important;
+}
+
 @media print {
   body { background: #fff !important; color: #000 !important; }
   body::before { display: none; }
