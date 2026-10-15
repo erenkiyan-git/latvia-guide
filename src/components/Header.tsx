@@ -24,6 +24,26 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const getSwitchUrl = (targetLang: string) => {
+    if (typeof window === 'undefined') return `/${targetLang}/`;
+    const pathname = window.location.pathname;
+    const currentPrefix = `/${currentLang}/`;
+    if (pathname.startsWith(currentPrefix)) {
+      return pathname.replace(currentPrefix, `/${targetLang}/`);
+    }
+    return `/${targetLang}/`;
+  };
+
+  const handleLangClick = (targetLang: string) => {
+    try {
+      localStorage.setItem('preferred_lang', targetLang);
+    } catch (e) {
+      // ignore in incognito or restricted mode
+    }
+    setIsLangOpen(false);
+    setIsMenuOpen(false);
+  };
+
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-300 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -59,7 +79,8 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
                 {activeLangs.map((lang) => (
                   <li key={lang}>
                     <a
-                      href={`/${lang}/`}
+                      href={getSwitchUrl(lang)}
+                      onClick={() => handleLangClick(lang)}
                       className={`block px-4 py-2 text-sm ${
                         lang === currentLang
                           ? 'bg-primary-50 text-primary-700 font-semibold'
@@ -107,10 +128,11 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
                 {activeLangs.map((lang) => (
                   <a
                     key={lang}
-                    href={`/${lang}/`}
+                    href={getSwitchUrl(lang)}
+                    onClick={() => handleLangClick(lang)}
                     className={`block px-3 py-2 rounded-lg text-base font-medium ${
                       lang === currentLang
-                        ? 'bg-primary-50 text-primary-700'
+                        ? 'bg-primary-50 text-primary-700 font-semibold'
                         : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                     } transition-colors`}
                   >
