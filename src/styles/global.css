@@ -35,6 +35,31 @@
   --color-slate-900: #eef0f3;
   --color-slate-950: #ffffff;
 
+  /* Gray aliases to prevent any white-box glitches from MDX or old classes */
+  --color-gray-50: #0f1115;
+  --color-gray-100: #171a1f;
+  --color-gray-200: #21252c;
+  --color-gray-300: #2d323b;
+  --color-gray-400: #4b525d;
+  --color-gray-500: #8a919c;
+  --color-gray-600: #a6acb6;
+  --color-gray-700: #bfc4cc;
+  --color-gray-800: #d8dce2;
+  --color-gray-900: #eef0f3;
+  --color-gray-950: #ffffff;
+
+  --color-zinc-50: #0f1115;
+  --color-zinc-100: #171a1f;
+  --color-zinc-200: #21252c;
+  --color-zinc-300: #2d323b;
+  --color-zinc-400: #4b525d;
+  --color-zinc-500: #8a919c;
+  --color-zinc-600: #a6acb6;
+  --color-zinc-700: #bfc4cc;
+  --color-zinc-800: #d8dce2;
+  --color-zinc-900: #eef0f3;
+  --color-zinc-950: #ffffff;
+
   /* Primary Carmine (Latvian red), tuned for dark backgrounds */
   --color-primary-50: #221215;
   --color-primary-100: #2c1519;

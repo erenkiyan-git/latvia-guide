@@ -173,3 +173,22 @@ Every verified fact in the guides must have a corresponding entry here.
 - **URL:** https://www.gov.uk/world/organisations/british-embassy-riga
 - **Fact Verified:** Embassy address
 - **Used in Guide:** Map (embassy-uk)
+
+- **Date Accessed:** 2026-10-15
+- **Source Name:** PMLP (Office of Citizenship and Migration Affairs)
+- **URL:** https://www.pmlp.gov.lv/en/branch/riga-1st-division
+- **Fact Verified:** Riga 1st Division address, phone and contacts
+- **Used in Guide:** Map (gov-pmlp-1)
+
+- **Date Accessed:** 2026-10-15
+- **Source Name:** PMLP (Office of Citizenship and Migration Affairs)
+- **URL:** https://www.pmlp.gov.lv/en/branch/riga-2nd-division
+- **Fact Verified:** Riga 2nd Division address, phone and contacts
+- **Used in Guide:** Map (gov-pmlp-2)
+
+- **Date Accessed:** 2026-10-15
+- **Source Name:** PMLP (Office of Citizenship and Migration Affairs)
+- **URL:** https://www.pmlp.gov.lv/en/branch/riga-3rd-division
+- **Fact Verified:** Riga 3rd Division address, phone and contacts
+- **Used in Guide:** Map (gov-pmlp-3)
+

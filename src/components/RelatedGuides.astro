@@ -4,13 +4,16 @@ interface Props {
 }
 const { guides } = Astro.props;
 ---
-<div class="my-8">
-  <h3 class="text-xl font-bold mb-4">Related Guides</h3>
+<div class="my-10">
+  <div class="flex items-center gap-2 mb-4">
+    <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
+    <h3 class="text-lg font-bold font-mono uppercase tracking-wider text-slate-200 m-0">// Related Guides</h3>
+  </div>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     {guides.map(guide => (
-      <a href={`./${guide.slug}`} class="block p-4 border border-gray-200 rounded-lg hover:border-blue-500 hover:shadow-sm transition-all">
-        <h4 class="font-semibold text-blue-700 m-0">{guide.title}</h4>
-        {guide.description && <p class="text-sm text-gray-600 mt-1 mb-0 line-clamp-2">{guide.description}</p>}
+      <a href={`./${guide.slug}`} class="hud-card hud-hover block p-5 rounded-xl border border-slate-300 hover:border-primary-500/70 transition-all group">
+        <h4 class="font-bold text-base text-slate-100 group-hover:text-primary-400 transition-colors m-0">{guide.title}</h4>
+        {guide.description && <p class="text-sm text-slate-400 mt-2 mb-0 line-clamp-2 leading-relaxed">{guide.description}</p>}
       </a>
     ))}
   </div>

@@ -7,12 +7,13 @@ const { headers } = Astro.props;
 const toc = headers.filter(h => h.depth === 2 || h.depth === 3);
 ---
 {toc.length > 0 && (
-  <div class="bg-gray-50 p-4 rounded-lg my-6 max-w-sm hidden md:block float-right ml-6 mb-6">
-    <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 mt-0">On this page</h3>
-    <ul class="space-y-2 m-0 pl-0 list-none text-sm">
+  <div class="hud-card rounded-lg p-4 my-6 max-w-sm hidden md:block float-right ml-6 mb-6 border border-slate-300">
+    <h3 class="hud-label text-slate-400 mb-3 mt-0">// ON THIS PAGE</h3>
+    <ul class="space-y-1.5 m-0 pl-0 list-none text-sm">
       {toc.map(header => (
-        <li class={`${header.depth === 3 ? 'ml-4' : ''}`}>
-          <a href={`#${header.slug}`} class="text-gray-600 hover:text-blue-600">
+        <li class={`${header.depth === 3 ? 'ml-3' : ''}`}>
+          <a href={`#${header.slug}`} class="text-slate-600 hover:text-primary-400 transition-colors flex items-center gap-1.5">
+            <span class="text-primary-500 font-mono text-xs">&rsaquo;</span>
             {header.text}
           </a>
         </li>

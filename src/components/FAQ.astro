@@ -4,14 +4,17 @@ interface Props {
 }
 const { title } = Astro.props;
 ---
-<details class="group bg-surface border border-gray-200 rounded-lg my-2 cursor-pointer transition-all duration-200">
-  <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-4 text-gray-900 group-hover:text-blue-600">
-    <span>{title}</span>
-    <span class="transition group-open:rotate-180">
-      <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+<details class="group hud-card rounded-lg my-3 cursor-pointer transition-all border border-slate-300">
+  <summary class="flex justify-between items-center font-semibold cursor-pointer list-none p-4 text-slate-900 group-hover:text-primary-400 transition-colors">
+    <span class="flex items-center gap-2">
+      <span class="text-primary-500 font-mono text-xs font-bold">?</span>
+      {title}
+    </span>
+    <span class="transition-transform duration-200 group-open:rotate-180 text-slate-500 group-hover:text-primary-400">
+      <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
     </span>
   </summary>
-  <div class="text-gray-600 px-4 pb-4 group-open:animate-fadeIn">
+  <div class="text-slate-700 px-4 pb-4 pt-2 border-t border-slate-200 text-sm leading-relaxed">
     <slot />
   </div>
 </details>

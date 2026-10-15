@@ -28,6 +28,6 @@ const filterLabel = lang === 'tr' ? 'Sadece Resmi Kaynakları Göster' : 'Show O
       <p class="text-xl text-slate-600 max-w-2xl mx-auto">{pageDesc}</p>
     </div>
 
-    <ReactUsefulLinks client:load data={linksData} filterLabel={filterLabel} />
+    <ReactUsefulLinks client:load data={linksData} filterLabel={filterLabel} lang={lang} />
   </div>
 </BaseLayout>

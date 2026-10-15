@@ -73,17 +73,17 @@ export default function InteractiveMap({ lang, dict }: Props) {
     <div className="flex flex-col h-[800px] max-h-[85vh] bg-surface border border-slate-200 rounded-2xl overflow-hidden relative shadow-lg">
       
       {/* Mobile view toggle */}
-      <div className="md:hidden absolute bottom-6 left-1/2 -translate-x-1/2 z-50 bg-surface border border-slate-200 p-1 rounded-full flex shadow-xl">
+      <div className="md:hidden absolute bottom-6 left-1/2 -translate-x-1/2 z-50 bg-surface/90 backdrop-blur border border-slate-300 p-1 rounded-full flex shadow-xl">
         <button 
           onClick={() => setView('list')}
-          className={`flex items-center px-6 py-2 rounded-full text-sm font-bold transition-colors ${view === 'list' ? 'bg-primary-600 text-white shadow-sm' : 'text-slate-500 hover:text-slate-900'}`}
+          className={`flex items-center px-6 py-2 rounded-full text-sm font-bold transition-colors ${view === 'list' ? 'bg-primary-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}
         >
           <List className="w-4 h-4 mr-2" />
           {dict['map.viewList']}
         </button>
         <button 
           onClick={() => setView('map')}
-          className={`flex items-center px-6 py-2 rounded-full text-sm font-bold transition-colors ${view === 'map' ? 'bg-primary-600 text-white shadow-sm' : 'text-slate-500 hover:text-slate-900'}`}
+          className={`flex items-center px-6 py-2 rounded-full text-sm font-bold transition-colors ${view === 'map' ? 'bg-primary-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}
         >
           <MapIcon className="w-4 h-4 mr-2" />
           {dict['map.viewMap']}
@@ -93,16 +93,16 @@ export default function InteractiveMap({ lang, dict }: Props) {
       <div className="flex flex-col md:flex-row h-full">
         
         {/* Left pane: List (hidden on mobile if map is active) */}
-        <div className={`w-full md:w-[40%] flex flex-col border-r border-slate-200 bg-slate-50/50 ${view === 'map' ? 'hidden md:flex' : 'flex'}`}>
+        <div className={`w-full md:w-[40%] flex flex-col border-r border-slate-300 bg-base/50 ${view === 'map' ? 'hidden md:flex' : 'flex'}`}>
           {/* Search/Filters header */}
-          <div className="p-4 border-b border-slate-200 bg-surface shrink-0">
+          <div className="p-4 border-b border-slate-300 bg-surface shrink-0">
             <div className="relative mb-4">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-slate-400" />
               </div>
               <input
                 type="text"
-                className="block w-full pl-10 pr-3 py-2.5 border border-slate-200 rounded-lg leading-5 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 sm:text-sm transition-colors"
+                className="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-lg leading-5 bg-base text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 sm:text-sm transition-colors"
                 placeholder={dict['map.searchPlaceholder']}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
@@ -113,7 +113,7 @@ export default function InteractiveMap({ lang, dict }: Props) {
               <SlidersHorizontal className="w-4 h-4 text-slate-400 shrink-0 hidden md:block" />
               <button
                 onClick={() => setActiveCat(null)}
-                className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors shrink-0 border ${activeCat === null ? 'bg-primary-50 text-primary-700 border-primary-200' : 'bg-surface text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'}`}
+                className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors shrink-0 border ${activeCat === null ? 'bg-primary-600 text-white border-primary-500 shadow-sm' : 'bg-surface text-slate-400 border-slate-300 hover:border-slate-400 hover:text-slate-100'}`}
               >
                 {dict['map.showAll']}
               </button>
@@ -126,9 +126,9 @@ export default function InteractiveMap({ lang, dict }: Props) {
                     onClick={() => setActiveCat(isActive ? null : c)}
                     className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors border shrink-0`}
                     style={{
-                      backgroundColor: isActive ? `${cat.color}15` : '#13151a',
-                      borderColor: isActive ? cat.color : '#2d323b', /* slate-300 */
-                      color: isActive ? cat.color : '#a6acb6' /* slate-600 */
+                      backgroundColor: isActive ? `${cat.color}25` : '#111622',
+                      borderColor: isActive ? cat.color : '#263043',
+                      color: isActive ? '#f8fafc' : '#94a3b8'
                     }}
                   >
                     {dict[`map.cat.${c}`]}
@@ -142,7 +142,7 @@ export default function InteractiveMap({ lang, dict }: Props) {
               <button
                 onClick={handleNearMe}
                 disabled={locState === 'loading'}
-                className={`flex items-center transition-colors ${userLoc ? 'text-primary-400 font-medium' : 'text-slate-500 hover:text-slate-800'}`}
+                className={`flex items-center transition-colors ${userLoc ? 'text-primary-400 font-medium' : 'text-slate-500 hover:text-slate-300'}`}
               >
                 <MapPin className={`w-4 h-4 mr-1.5 ${locState === 'loading' ? 'animate-pulse' : ''}`} />
                 {locState === 'loading' ? dict['map.nearMeLocating'] : userLoc ? dict['map.nearMeActive'] : dict['map.nearMe']}
@@ -154,18 +154,18 @@ export default function InteractiveMap({ lang, dict }: Props) {
           </div>
 
           {/* List content */}
-          <div className="flex-1 overflow-y-auto p-4 custom-scrollbar bg-slate-50/50 pb-24 md:pb-4 space-y-4">
+          <div className="flex-1 overflow-y-auto p-4 custom-scrollbar bg-base/30 pb-24 md:pb-4 space-y-4">
             {filtered.length === 0 ? (
-              <div className="text-center py-12 px-4 border border-slate-200 border-dashed rounded-xl bg-surface">
+              <div className="text-center py-12 px-4 border border-slate-300 border-dashed rounded-xl bg-surface">
                 <Search className="w-8 h-8 text-slate-500 mx-auto mb-3" />
-                <p className="text-slate-500">{dict['map.noResults']}</p>
-                <button onClick={() => { setQuery(''); setActiveCat(null); }} className="mt-4 text-primary-400 hover:text-primary-700 font-medium">{dict['map.reset']}</button>
+                <p className="text-slate-400">{dict['map.noResults']}</p>
+                <button onClick={() => { setQuery(''); setActiveCat(null); }} className="mt-4 text-primary-400 hover:text-primary-300 font-medium">{dict['map.reset']}</button>
               </div>
             ) : (
               filtered.map(p => (
                 <div key={p.id} className="relative">
                   {userLoc && (
-                    <div className="absolute top-5 right-5 z-10 text-xs font-bold text-primary-700 bg-primary-50 px-2 py-1 rounded border border-primary-200">
+                    <div className="absolute top-5 right-5 z-10 text-xs font-mono font-bold text-primary-300 bg-primary-950/80 px-2 py-1 rounded border border-primary-800/80">
                       {distanceKm(userLoc.lat, userLoc.lng, p.lat, p.lng).toFixed(1)} km
                     </div>
                   )}

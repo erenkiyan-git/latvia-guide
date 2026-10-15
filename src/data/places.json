@@ -224,6 +224,75 @@
     "verified": true
   },
   {
+    "id": "gov-pmlp-1",
+    "category": "immigration",
+    "name": {
+      "en": "PMLP Riga 1st Division (Čiekurkalns)",
+      "tr": "PMLP Riga 1. Şubesi (Čiekurkalns)"
+    },
+    "address": "Čiekurkalna 1. līnija 1 k-3",
+    "city": "Rīga",
+    "lat": 56.983258,
+    "lng": 24.156633,
+    "officialUrl": "https://www.pmlp.gov.lv/en/branch/riga-1st-division",
+    "phone": "+371 67209400",
+    "notes": {
+      "en": "Office of Citizenship and Migration Affairs. Main customer service division for residence permits, eID cards, and visas in northern Riga.",
+      "tr": "Vatandaşlık ve Göç İşleri Dairesi. Kuzey Riga'da oturma izinleri, eID kartları ve vizeler için ana müşteri hizmetleri şubesi."
+    },
+    "tags": ["pmlp", "immigration", "residence-permit", "eid", "visa", "passport", "government"],
+    "sourceUrl": "https://www.pmlp.gov.lv/en/branch/riga-1st-division",
+    "osmUrl": "https://www.openstreetmap.org/node/1642376903",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "gov-pmlp-2",
+    "category": "immigration",
+    "name": {
+      "en": "PMLP Riga 2nd Division (Centrs)",
+      "tr": "PMLP Riga 2. Şubesi (Merkez)"
+    },
+    "address": "Krišjāņa Valdemāra iela 26",
+    "city": "Rīga",
+    "lat": 56.958216,
+    "lng": 24.117251,
+    "officialUrl": "https://www.pmlp.gov.lv/en/branch/riga-2nd-division",
+    "phone": "+371 67209400",
+    "notes": {
+      "en": "Office of Citizenship and Migration Affairs. Central Riga branch for residence permits and identity documents.",
+      "tr": "Vatandaşlık ve Göç İşleri Dairesi. Oturma izni ve kimlik belgeleri için Riga Merkez şubesi."
+    },
+    "tags": ["pmlp", "immigration", "residence-permit", "eid", "visa", "passport", "government"],
+    "sourceUrl": "https://www.pmlp.gov.lv/en/branch/riga-2nd-division",
+    "osmUrl": "https://www.openstreetmap.org/node/7265902876",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
+    "id": "gov-pmlp-3",
+    "category": "immigration",
+    "name": {
+      "en": "PMLP Riga 3rd Division (Pārdaugava)",
+      "tr": "PMLP Riga 3. Şubesi (Pārdaugava)"
+    },
+    "address": "Eduarda Smiļģa iela 46",
+    "city": "Rīga",
+    "lat": 56.936194,
+    "lng": 24.077027,
+    "officialUrl": "https://www.pmlp.gov.lv/en/branch/riga-3rd-division",
+    "phone": "+371 67209400",
+    "notes": {
+      "en": "Office of Citizenship and Migration Affairs. Pārdaugava branch (left bank of Daugava river) for residence permits and ID documents.",
+      "tr": "Vatandaşlık ve Göç İşleri Dairesi. Daugava nehrinin batı yakasındaki (Pārdaugava) oturma izni ve kimlik şubesi."
+    },
+    "tags": ["pmlp", "immigration", "residence-permit", "eid", "visa", "passport", "government"],
+    "sourceUrl": "https://www.pmlp.gov.lv/en/branch/riga-3rd-division",
+    "osmUrl": "https://www.openstreetmap.org/node/12715242116",
+    "lastChecked": "2026-10",
+    "verified": true
+  },
+  {
     "id": "attr-riga-castle",
     "category": "attraction",
     "name": {

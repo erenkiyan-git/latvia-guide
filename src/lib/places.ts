@@ -122,9 +122,9 @@ export function osmLink(p: Place): string {
   return `https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lng}#map=18/${p.lat}/${p.lng}`;
 }
 
-/** OpenStreetMap directions to the verified point (user picks the start). */
+/** Google Maps directions to the verified point (user's current location will be start point). */
 export function directionsLink(p: Place): string {
-  return `https://www.openstreetmap.org/directions?route=%3B${p.lat}%2C${p.lng}#map=17/${p.lat}/${p.lng}`;
+  return `https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`;
 }
 
 /** Straight-line distance in km (haversine formula). */

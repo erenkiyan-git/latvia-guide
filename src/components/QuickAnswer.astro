@@ -1,11 +1,16 @@
 ---
 interface Props {
-  children: any;
+  children?: any;
 }
 ---
-<div class="bg-gray-100 p-4 rounded-lg my-6 border border-gray-200">
-  <h3 class="text-lg font-bold mb-2 text-gray-900 mt-0">Quick Answer</h3>
-  <div class="text-gray-800 m-0">
+<div class="hud-card hud-hover rounded-xl p-5 sm:p-6 my-6 border-l-4 border-l-primary-500 bg-surface/90 shadow-lg">
+  <div class="flex items-center gap-2 mb-2">
+    <span class="inline-block w-2 h-2 bg-primary-500 shadow-[0_0_8px_rgba(196,52,63,0.9)]"></span>
+    <h3 class="hud-label text-primary-400 font-bold m-0 tracking-wider">
+      // QUICK ANSWER
+    </h3>
+  </div>
+  <div class="text-slate-800 text-base leading-relaxed m-0 font-medium">
     <slot />
   </div>
 </div>

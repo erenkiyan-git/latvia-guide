@@ -37,25 +37,25 @@ const breadcrumbsItems = [
     <Breadcrumbs items={breadcrumbsItems} />
 
     {isFallback && (
-      <div class="my-6 bg-amber-50 border border-amber-200/80 rounded-2xl p-5 sm:p-6 text-amber-900 shadow-sm">
+      <div class="my-6 hud-card border-l-4 border-l-amber-500 border border-amber-900/40 bg-surface/90 rounded-2xl p-5 sm:p-6 shadow-xl">
         <div class="flex items-start gap-4">
-          <div class="p-2.5 bg-amber-100 rounded-xl text-amber-700 shrink-0 mt-0.5">
+          <div class="p-2.5 bg-amber-950/60 border border-amber-800/50 rounded-xl text-amber-400 shrink-0 mt-0.5">
             <Languages class="w-5 h-5" />
           </div>
           <div class="flex-grow">
             <div class="flex flex-wrap items-center gap-2 mb-1.5">
-              <span class="text-xs font-bold uppercase tracking-wider bg-amber-200/90 text-amber-900 px-2.5 py-0.5 rounded-full">
+              <span class="text-[0.65rem] font-mono font-bold uppercase tracking-wider bg-amber-950/80 text-amber-300 border border-amber-700/60 px-2.5 py-0.5 rounded-full">
                 {t('guide.fallbackBadge')}
               </span>
-              <h3 class="font-bold text-base text-amber-950">
+              <h3 class="font-bold text-base text-slate-100">
                 {t('guide.fallbackTitle')}
               </h3>
             </div>
-            <p class="text-sm text-amber-800 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               {t('guide.fallbackDesc')}
             </p>
             <div class="mt-2.5 text-xs">
-              <a href={`mailto:${SITE.contactEmail}?subject=Translation assistance for: ${title}`} class="text-amber-900 font-semibold underline hover:text-amber-700 transition-colors">
+              <a href={`mailto:${SITE.contactEmail}?subject=Translation assistance for: ${title}`} class="text-amber-400 font-semibold underline hover:text-amber-300 transition-colors">
                 {t('guide.fallbackAction')} &rarr;
               </a>
             </div>

@@ -80,10 +80,10 @@ export default function PlaceCard({ place, lang, dict }: Props) {
         <span className="text-slate-500 hidden sm:inline">•</span>
 
         <a 
-          href={`https://www.openstreetmap.org/directions?route=%3B${place.lat}%2C${place.lng}#map=17/${place.lat}/${place.lng}`}
+          href={`https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lng}`}
           target="_blank" 
           rel="noopener noreferrer"
-          className="inline-flex items-center text-sm font-medium text-primary-400 hover:text-primary-700 transition-colors"
+          className="inline-flex items-center text-sm font-medium text-primary-400 hover:text-primary-300 transition-colors"
         >
           <Navigation className="w-4 h-4 mr-1.5" />
           {dict['map.directions']}
