@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getActiveLanguages } from '../../../i18n/utils';
+import type { Lang } from '../../../config';
+import { FileText, AlertTriangle, ShieldCheck, Scale, ExternalLink } from 'lucide-react';
+
+export function getStaticPaths() {
+  const langs = getActiveLanguages();
+  return langs.map(lang => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const isTr = lang === 'tr';
+const pageTitle = isTr ? 'Kullanım Şartları' : 'Terms of Service';
+const pageDesc = isTr 
+  ? 'Latvia Guide kullanım şartları, editoryal bağımsızlık bildirimi ve yasal sorumluluk reddi.'
+  : 'Terms of service, editorial independence notice, and legal disclaimer for Latvia Guide.';
+const lastUpdated = isTr ? '16 Ekim 2026' : 'October 16, 2026';
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="mb-10 text-center sm:text-left">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-800 border border-sky-200 mb-4">
+        <FileText className="w-4 h-4 text-sky-600" />
+        <span>{isTr ? 'Açık & Şeffaf Şartlar' : 'Clear & Transparent Terms'}</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+        {pageTitle}
+      </h1>
+      <p class="text-slate-600 text-lg max-w-2xl">
+        {pageDesc}
+      </p>
+      <p class="text-xs text-slate-600 mt-3 font-mono">
+        {isTr ? 'Son güncelleme:' : 'Last updated:'} {lastUpdated}
+      </p>
+    </div>
+
+    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 sm:p-8 mb-10 text-amber-900">
+      <div class="flex items-start gap-3">
+        <AlertTriangle className="w-6 h-6 text-amber-700 shrink-0 mt-0.5" />
+        <div>
+          <h2 class="text-lg font-bold text-amber-950 mb-2">
+            {isTr ? 'Önemli Yasal Uyarı & Sorumluluk Reddi' : 'Important Disclaimer & Independent Notice'}
+          </h2>
+          <p class="text-sm leading-relaxed text-amber-900">
+            {isTr
+              ? 'Latvia Guide bir kamu kurumu DEĞİLDİR ve resmi bir devlet web sitesi değildir. Sitemizde yer alan içerikler yalnızca genel bilgilendirme amacıyla hazırlanmıştır; yasal, mali, vergi veya tıbbi tavsiye niteliği taşımaz. Letonya göçmenlik, vergi ve oturum kuralları sık sık güncellenmektedir. Önemli kararlar almadan önce daima resmi devlet kurumlarının (PMLP, VID, CSDD vb.) güncel duyurularını kontrol ediniz.'
+              : 'Latvia Guide is an independent editorial project and is NOT an official government website or authority. Content provided on this site is for general informational and orientation purposes only and does NOT constitute legal, financial, tax, or medical advice. Latvian regulations, state fees, and procedures change frequently. Always confirm your specific situation with official Latvian institutions (PMLP, VID, CSDD, etc.).'}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prose prose-slate max-w-none 
+      prose-headings:text-slate-900 prose-headings:font-bold prose-headings:tracking-tight
+      prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:border-b prose-h2:border-slate-300 prose-h2:pb-3
+      prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-4
+      prose-ul:text-slate-700 prose-li:my-1">
+
+      <h2>{isTr ? '1. Hizmetin Niteliği ve Bağımsızlık' : '1. Nature of the Service & Independence'}</h2>
+      <p>
+        {isTr
+          ? 'Latvia Guide (latviaguide.com), Letonya\'ya yeni gelen öğrenciler, çalışanlar, aileler ve göçebeler için bağımsız bir rehberdir. Amacımız, resmi devlet sitelerindeki karmaşık bürokratik prosedürleri anlaşılır adımlara bölmektir.'
+          : 'Latvia Guide (latviaguide.com) is an independent guide created for international students, workers, families, and residents moving to or living in Latvia. Our mission is to make bureaucratic processes easier to understand.'}
+      </p>
+      <p>
+        {isTr
+          ? 'Projemiz Letonya Cumhuriyeti hükümeti, PMLP, VID veya herhangi bir bakanlıkla kurumsal ya da ticari bir bağa sahip değildir.'
+          : 'This project is independent and is not affiliated with, authorized, maintained, or sponsored by the Republic of Latvia, PMLP, VID, or any state ministry.'}
+      </p>
+
+      <h2>{isTr ? '2. Resmi Bilgi ve Doğruluk Güvencesi' : '2. Official Sources and Accuracy'}</h2>
+      <p>
+        {isTr
+          ? 'Rehberlerimizde yer alan bilgileri resmi kaynaklarla (PMLP, VID, CSDD, Likumi.lv vb.) eşleştirerek doğrulamak için azami özen gösteriyoruz. Ancak mevzuatta veya harç tutarlarında yapılacak ani değişikliklerden dolayı sitemizdeki tüm bilgilerin her saniye %100 güncel kalacağı garanti edilemez.'
+          : 'We make every reasonable effort to cross-reference our guides against official Latvian government portals (PMLP, VID, CSDD, Likumi.lv). However, laws, deadlines, processing times, and state fees are subject to government changes. We cannot guarantee that all content is perpetually error-free or complete at any exact moment.'}
+      </p>
+      <p>
+        {isTr
+          ? 'Her rehberimizin üstünde veya altında yer alan "Resmi Kaynak" bağlantıları kullanılarak en son resmi gereklilikler teyit edilmelidir.'
+          : 'Readers must rely on the direct official source links embedded in each guide to verify the current legal requirements before taking action.'}
+      </p>
+
+      <h2>{isTr ? '3. Sorumluluk Sınırı' : '3. Limitation of Liability'}</h2>
+      <p>
+        {isTr
+          ? 'Latvia Guide, web sitesinde yer alan bilgilerin kullanımından ya da bu bilgilere güvenilerek alınan kararlardan (örneğin vize başvurularının reddedilmesi, kaçırılan randevular veya cezalar) doğabilecek doğrudan ya da dolaylı zararlardan sorumlu tutulamaz.'
+          : 'To the fullest extent permitted by law, Latvia Guide and its contributors shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use of, or inability to use, information provided on this website, including but not limited to missed deadlines, permit refusals, or fines.'}
+      </p>
+
+      <h2>{isTr ? '4. Fikri Mülkiyet' : '4. Intellectual Property'}</h2>
+      <p>
+        {isTr
+          ? 'Rehberlerin özgün metinleri, kontrol listesi yapısı ve editoryal derlemeler Latvia Guide\'a aittir. Letonya kanun metinleri ve kamuya açık resmi duyurular ise kamu malı olup Letonya Cumhuriyeti makamlarına aittir. İçeriklerimiz kaynak gösterilmeden ticari amaçla kopyalanamaz veya çoğaltılamaz.'
+          : 'The original explanatory text, design layout, checklists, and editorial compilations are protected by copyright. Official legal acts, laws, and public state notices belong to their respective authorities. You may not republish our guides wholesale for commercial gain without express attribution.'}
+      </p>
+
+      <h2>{isTr ? '5. Dış Bağlantılar' : '5. External Links'}</h2>
+      <p>
+        {isTr
+          ? 'Sitemizde faydalı resmi kurumlar, bankalar veya ulaşım şirketlerine ait harici bağlantılar bulunmaktadır. Bu harici web sitelerinin içeriğinden veya erişilebilirliğinden Latvia Guide sorumlu değildir.'
+          : 'Our site contains links to external websites (official registries, universities, transport providers). We have no control over the content, uptime, or privacy practices of these third-party websites.'}
+      </p>
+
+      <h2>{isTr ? '6. İletişim ve Geri Bildirim' : '6. Contact & Feedback'}</h2>
+      <p>
+        {isTr
+          ? 'Rehberlerde bir hata, değişen bir kural veya çalışmayan bir bağlantı fark ederseniz lütfen bize bildirin:'
+          : 'If you notice an error, outdated rule, or broken link, please let us know so we can inspect and update it:'}
+      </p>
+      <div class="flex items-center gap-3 p-4 bg-surface rounded-xl border border-slate-300 my-4 not-prose">
+        <Scale className="w-5 h-5 text-sky-600" />
+        <span class="text-slate-800 font-mono text-sm">legal@latviaguide.com</span>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

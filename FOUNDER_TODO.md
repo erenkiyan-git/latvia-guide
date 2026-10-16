@@ -28,14 +28,16 @@ This document lists all tasks that **only you (the founder)** can perform or app
 ---
 
 ## 3. Legal & Regulatory Review
-*Note: The technical team has drafted standard GDPR-compliant Privacy Policy, Terms & Disclaimer, and Cookie/LocalStorage notices based on the site's actual data footprint (no account creation, no first-party cookies, local storage for checklists, OpenStreetMap tiles).*
+*Note: The technical team has drafted plain-English and Turkish GDPR-compliant Privacy Policy, Terms & Disclaimer, and Cookie notices based on the site's actual data footprint (no account creation, no first-party cookies, local storage for checklists, OpenStreetMap tiles).*
+- [ ] **Configure Domain Email Inboxes / Forwarders:**
+  - Create `privacy@latviaguide.com` and `legal@latviaguide.com` (or set them as email forwards to your primary address).
+- [ ] **Fill Data Controller Details:**
+  - In `src/pages/[lang]/privacy/index.astro`, replace or supplement the contact email with your registered entity name, registration number, or registered address in Latvia if operating as a company or self-employed sole proprietor.
 - [ ] **Legal Review by a Qualified Professional:**
-  - Have a legal advisor or qualified professional in Latvia/EU review the draft texts:
-    - `/en/privacy/` & `/tr/privacy/`
-    - `/en/terms/` & `/tr/terms/`
-    - `/en/cookies/` & `/tr/cookies/`
-- [ ] **Fill Legal Controller Information:**
-  - Set the official data controller entity (your registered individual name, self-employed registration number, or company name and business address in Latvia/EU).
+  - Have a legal advisor in Latvia/EU review the published policies:
+    - Privacy Policy: `/en/privacy/` & `/tr/privacy/` (and alias `/tr/gizlilik/`)
+    - Cookies Policy: `/en/cookies/` & `/tr/cookies/` (and alias `/tr/cerezler/`)
+    - Terms of Service: `/en/terms/` & `/tr/terms/` (and alias `/tr/sartlar/`)
 
 ---
 

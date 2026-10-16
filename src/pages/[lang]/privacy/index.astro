@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getActiveLanguages } from '../../../i18n/utils';
+import type { Lang } from '../../../config';
+import { ShieldCheck, Database, HardDrive, Globe, Mail } from 'lucide-react';
+
+export function getStaticPaths() {
+  const langs = getActiveLanguages();
+  return langs.map(lang => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const isTr = lang === 'tr';
+const pageTitle = isTr ? 'Gizlilik Politikası' : 'Privacy Policy';
+const pageDesc = isTr 
+  ? 'Latvia Guide gizliliğinizi nasıl korur: %100 çerezsiz, izleme kodu yok ve tamamen yerel veri saklama.'
+  : 'How Latvia Guide protects your privacy: 100% cookieless, no trackers, and local-only storage.';
+const lastUpdated = isTr ? '16 Ekim 2026' : 'October 16, 2026';
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="mb-10 text-center sm:text-left">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 mb-4">
+        <ShieldCheck className="w-4 h-4 text-emerald-600" />
+        <span>{isTr ? 'Gizlilik Öncelikli · %100 Çerezsiz' : 'Privacy First · 100% Cookieless'}</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+        {pageTitle}
+      </h1>
+      <p class="text-slate-600 text-lg max-w-2xl">
+        {pageDesc}
+      </p>
+      <p class="text-xs text-slate-600 mt-3 font-mono">
+        {isTr ? 'Son güncelleme:' : 'Last updated:'} {lastUpdated}
+      </p>
+    </div>
+
+    <div class="bg-surface border border-slate-300 rounded-2xl p-6 sm:p-8 mb-10">
+      <h2 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+        <ShieldCheck className="w-5 h-5 text-primary-500" />
+        {isTr ? 'Özet: Verileriniz Size Aittir' : 'Summary: Your Data Belongs to You'}
+      </h2>
+      <p class="text-slate-700 leading-relaxed text-sm sm:text-base mb-4">
+        {isTr
+          ? 'Latvia Guide, yabancıların Letonya\'daki bürokrasiyi çözmelerine yardımcı olmak için tasarlanmış bağımsız bir rehberdir. Hizmetimizi kullanırken sizi izlemiyoruz, reklam profillemesi yapmıyoruz ve kişisel verilerinizi toplamıyoruz veya satmıyoruz.'
+          : 'Latvia Guide is an independent resource built to help foreigners navigate Latvian bureaucracy. We do not track you across the web, we do not profile you for ads, and we do not collect or sell your personal information.'}
+      </p>
+      <div class="grid sm:grid-cols-3 gap-4 pt-4 border-t border-slate-300 text-xs text-slate-600">
+        <div>
+          <strong class="block font-semibold text-slate-900 mb-1">{isTr ? 'Çerezler' : 'Cookies'}</strong>
+          <span>{isTr ? '0 çerez. Hiçbir izleme veya reklam çerezi kullanılmaz.' : 'Zero cookies. No tracking or marketing cookies used.'}</span>
+        </div>
+        <div>
+          <strong class="block font-semibold text-slate-900 mb-1">{isTr ? 'Kişisel Veri' : 'Personal Data'}</strong>
+          <span>{isTr ? 'Hesap yok, form yok, kişisel veri toplanmaz.' : 'No accounts, no forms, no personal data collected.'}</span>
+        </div>
+        <div>
+          <strong class="block font-semibold text-slate-900 mb-1">{isTr ? 'Sunucu Kaydı' : 'Server Logs'}</strong>
+          <span>{isTr ? 'İçerik arama ve kontrol listesi cihazınızda kalır.' : 'Checklists & search run entirely in your browser.'}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prose prose-slate max-w-none 
+      prose-headings:text-slate-900 prose-headings:font-bold prose-headings:tracking-tight
+      prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:border-b prose-h2:border-slate-300 prose-h2:pb-3
+      prose-h3:text-lg prose-h3:mt-6 prose-h3:mb-2
+      prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-4
+      prose-ul:text-slate-700 prose-li:my-1">
+
+      <h2>{isTr ? '1. Toplamadığımız Veriler' : '1. Information We Do Not Collect'}</h2>
+      <p>
+        {isTr 
+          ? 'Web sitemizi ziyaret ettiğinizde aşağıdaki veriler asla toplanmaz veya sunucularımıza kaydedilmez:'
+          : 'When you visit Latvia Guide, we do not collect or store the following on any server:'}
+      </p>
+      <ul>
+        <li>{isTr ? 'Ad, soyad, telefon numarası veya e-posta adresi' : 'Names, email addresses, or phone numbers'}</li>
+        <li>{isTr ? 'Pasaport, kimlik veya oturum izni bilgileri' : 'Passport, ID, or residence permit details'}</li>
+        <li>{isTr ? 'Maaş veya yaşam maliyeti hesaplayıcılarına girdiğiniz tutarlar' : 'Salary or cost figures entered into our calculators'}</li>
+        <li>{isTr ? 'İnternet gezintisi geçmişiniz veya diğer web sitelerindeki hareketleriniz' : 'Browsing history or cross-site tracking fingerprints'}</li>
+      </ul>
+
+      <h2>{isTr ? '2. Tarayıcınızda Yerel Olarak Saklanan Veriler (LocalStorage)' : '2. Data Stored Locally on Your Device (LocalStorage)'}</h2>
+      <p>
+        {isTr
+          ? 'Web sitemizin bazı özellikleri (örneğin 30 Günlük Kontrol Listesi), sayfayı yenilediğinizde veya tarayıcınızı kapattığınızda seçtiğiniz adımları hatırlamak için tarayıcınızın yerel depolama alanını (localStorage) kullanır.'
+          : 'Certain interactive features on Latvia Guide (such as the 30-Day Checklist) use your browser\'s standard local storage (localStorage) so you don\'t lose your progress when you refresh or close the page.'}
+      </p>
+      <ul>
+        <li>
+          <strong><code>latvia_guide_checklist</code>:</strong> {isTr ? 'Tamamladığınız kontrol listesi maddelerini hatırlar.' : 'Remembers which checklist tasks you have checked off.'}
+        </li>
+      </ul>
+      <p class="text-sm bg-slate-100 p-4 rounded-xl border border-slate-300">
+        <strong>{isTr ? 'Önemli Not:' : 'Important Note:'}</strong> {isTr
+          ? 'LocalStorage verileri yalnızca sizin cihazınızda kalır. Bu veriler sunucularımıza ASLA gönderilmez veya üçüncü taraflarla paylaşılmaz. İstediğiniz an kontrol listesi sayfasındaki "Sıfırla" butonuna basarak veya tarayıcı geçmişinizi temizleyerek bu verileri anında silebilirsiniz.'
+          : 'LocalStorage data remains strictly on your device. It is NEVER transmitted to our servers or any third parties. You can delete it at any time by clicking "Reset Checklist" or clearing your browser site data.'}
+      </p>
+
+      <h2>{isTr ? '3. Harici Servisler ve Harita Sağlayıcısı' : '3. External Services and Map Tiles'}</h2>
+      <p>
+        {isTr
+          ? 'Kullanışlı yerler haritasını (`/map/`) görüntülerken harita grafikleri OpenStreetMap üzerinden yüklenir.'
+          : 'When viewing our interactive places map (`/map/`), map tiles are loaded from OpenStreetMap.'}
+      </p>
+      <ul>
+        <li>
+          <strong>OpenStreetMap:</strong> {isTr
+            ? 'Harita kutuları OpenStreetMap vakfının sunucularından doğrudan tarayıcınıza aktarılır. Bu sırada standart HTTP bağlantı protokolleri gereği IP adresiniz OpenStreetMap sunucularına iletilir. Ayrıntılar için OpenStreetMap Gizlilik Politikasını inceleyebilirsiniz.'
+            : 'Map tiles are requested directly from OpenStreetMap Foundation servers. Like any web request, your IP address is visible to OpenStreetMap in accordance with their privacy policy.'}
+        </li>
+        <li>
+          <strong>{isTr ? 'Resmi Devlet Bağlantıları' : 'Official Government Links'}:</strong> {isTr
+            ? 'Rehberlerimizde verilen PMLP, VID, CSDD ve diğer resmi kurumlara ait harici bağlantılara tıkladığınızda ilgili kurumların kendi gizlilik kuralları geçerli olur.'
+            : 'When you click external links to Latvian government portals (e.g. PMLP, VID, CSDD), their respective privacy policies apply.'}
+        </li>
+      </ul>
+
+      <h2>{isTr ? '4. GDPR Kapsamındaki Haklarınız' : '4. Your Rights Under GDPR'}</h2>
+      <p>
+        {isTr
+          ? 'Avrupa Genel Veri Koruma Tüzüğü (GDPR) kapsamında kişisel verileriniz üzerinde silme, düzeltme ve erişim haklarına sahipsiniz. Latvia Guide sunucularında herhangi bir kişisel veri tutmadığımız için silinecek veya dışa aktarılacak bir profil kaydınız bulunmamaktadır. Kontrol listesi gibi yerel verileri dilediğiniz zaman kendi tarayıcınızdan silebilirsiniz.'
+          : 'Under the General Data Protection Regulation (GDPR), individuals have rights concerning their personal data. Because Latvia Guide does not collect, process, or store personal data on any server, there is no user profile or personal record to access, export, or erase. You retain total control over your local browser data.'}
+      </p>
+
+      <h2>{isTr ? '5. İletişim' : '5. Contact'}</h2>
+      <p>
+        {isTr
+          ? 'Gizlilik politikamız veya web sitemizle ilgili sorularınız için bizimle iletişime geçebilirsiniz:'
+          : 'If you have questions about our privacy practices, please contact us:'}
+      </p>
+      <div class="flex items-center gap-3 p-4 bg-surface rounded-xl border border-slate-300 my-4 not-prose">
+        <Mail className="w-5 h-5 text-primary-500" />
+        <span class="text-slate-800 font-mono text-sm">privacy@latviaguide.com</span>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

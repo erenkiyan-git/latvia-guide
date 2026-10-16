@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getActiveLanguages } from '../../../i18n/utils';
+import type { Lang } from '../../../config';
+import { Cookie, CheckCircle2, XCircle, Info } from 'lucide-react';
+
+export function getStaticPaths() {
+  const langs = getActiveLanguages();
+  return langs.map(lang => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const isTr = lang === 'tr';
+const pageTitle = isTr ? 'Çerez Politikası' : 'Cookies Policy';
+const pageDesc = isTr 
+  ? 'Latvia Guide %100 çerezsizdir. İzleme çerezi kullanmıyoruz ve sizi çerez onay pencereleriyle rahatsız etmiyoruz.'
+  : 'Latvia Guide is 100% cookieless. We do not use tracking cookies and do not interrupt your browsing with cookie consent banners.';
+const lastUpdated = isTr ? '16 Ekim 2026' : 'October 16, 2026';
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} lang={lang}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="mb-10 text-center sm:text-left">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 mb-4">
+        <Cookie className="w-4 h-4 text-emerald-600" />
+        <span>{isTr ? '%100 Çerezsiz Web Sitesi' : '100% Cookieless Website'}</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+        {pageTitle}
+      </h1>
+      <p class="text-slate-600 text-lg max-w-2xl">
+        {pageDesc}
+      </p>
+      <p class="text-xs text-slate-600 mt-3 font-mono">
+        {isTr ? 'Son güncelleme:' : 'Last updated:'} {lastUpdated}
+      </p>
+    </div>
+
+    <div class="bg-surface border border-slate-300 rounded-2xl p-6 sm:p-8 mb-10">
+      <div class="flex items-start gap-4">
+        <div class="p-3 bg-emerald-100 text-emerald-700 rounded-xl">
+          <CheckCircle2 className="w-6 h-6" />
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-slate-900 mb-2">
+            {isTr ? 'Sıfır Çerez Politikası' : 'Zero Cookie Policy'}
+          </h2>
+          <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
+            {isTr
+              ? 'Latvia Guide, birinci taraf veya üçüncü taraf hiçbir izleme, analiz veya reklam çerezi kullanmaz. Bu nedenle sitemizde can sıkıcı çerez onay pencereleri (cookie banners) görmezsiniz.'
+              : 'Latvia Guide does not set any first-party or third-party tracking, analytics, or advertising cookies. That is why you do not see intrusive cookie consent popups on our site.'}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prose prose-slate max-w-none 
+      prose-headings:text-slate-900 prose-headings:font-bold prose-headings:tracking-tight
+      prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:border-b prose-h2:border-slate-300 prose-h2:pb-3
+      prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-4
+      prose-ul:text-slate-700 prose-li:my-1">
+
+      <h2>{isTr ? '1. Çerez Kullanıyor Muyuz?' : '1. Do We Use Cookies?'}</h2>
+      <p>
+        <strong>{isTr ? 'Hayır.' : 'No.'}</strong> {isTr
+          ? 'Latvia Guide web sitesini ziyaret ettiğinizde cihazınıza hiçbir HTTP çerezi (cookie) kaydedilmez. Web sitemiz tamamen statik HTML ve istemci tarafı optimizasyonları ile çalışır.'
+          : 'When you browse Latvia Guide, no HTTP cookies are placed on your device. Our website is built as static, privacy-friendly HTML.'}
+      </p>
+
+      <h2>{isTr ? '2. Neden Çerez Bildirimi veya Onay Penceresi Yok?' : '2. Why Is There No Cookie Banner?'}</h2>
+      <p>
+        {isTr
+          ? 'Avrupa Birliği e-Gizlilik Direktifi (ePrivacy Directive) ve GDPR kurallarına göre, kullanıcıların cihazlarına izleme çerezleri veya kişisel veri toplayan analiz araçları yerleştiren siteler onay almak zorundadır. Biz hiçbir izleme çerezi veya kişisel veri toplayıcı kullanmadığımız için yasal olarak onay penceresi göstermemiz gerekmez ve sizi bu pencerelerle yormuyoruz.'
+          : 'Under the EU ePrivacy Directive and GDPR, websites are only required to display cookie consent banners if they place non-essential tracking cookies or profiling scripts on visitors\' devices. Because we do not use tracking scripts or marketing cookies, no consent banner is legally required.'}
+      </p>
+
+      <h2>{isTr ? '3. Çerez Olmayan Yerel Saklama (LocalStorage)' : '3. Non-Cookie Local Storage (LocalStorage)'}</h2>
+      <p>
+        {isTr
+          ? 'Web sitemizde yalnızca sizin kullanım kolaylığınız için tarayıcınızın yerel depolama alanından (localStorage) yararlanıyoruz:'
+          : 'We rely exclusively on standard browser local storage (localStorage) for user-requested convenience features:'}
+      </p>
+
+      <div class="not-prose my-6 overflow-hidden border border-slate-300 rounded-xl bg-surface">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-slate-100 text-slate-800 font-semibold border-b border-slate-300">
+            <tr>
+              <th class="p-3.5">{isTr ? 'Anahtar' : 'Key'}</th>
+              <th class="p-3.5">{isTr ? 'Amaç' : 'Purpose'}</th>
+              <th class="p-3.5">{isTr ? 'Süre' : 'Duration'}</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 text-slate-700">
+            <tr>
+              <td class="p-3.5 font-mono text-xs"><code>latvia_guide_checklist</code></td>
+              <td class="p-3.5">{isTr ? 'Kontrol listesinde işaretlediğiniz adımları hatırlar.' : 'Remembers which tasks you marked as done in the 30-Day Checklist.'}</td>
+              <td class="p-3.5">{isTr ? 'Siz silene kadar yerel kalır' : 'Persists until cleared by user'}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-sm text-slate-600">
+        {isTr
+          ? 'Bu veriler sunucularımıza ASLA aktarılmaz, izleme amacıyla kullanılamaz ve sadece sizin cihazınızda çalışır.'
+          : 'This data is NEVER sent to our servers, cannot be used for tracking, and exists solely on your physical device.'}
+      </p>
+
+      <h2>{isTr ? '4. Tarayıcı Verilerini Nasıl Temizlersiniz?' : '4. How to Clear Stored Data'}</h2>
+      <p>
+        {isTr
+          ? 'Kontrol listesi verilerinizi istediğiniz zaman silebilirsiniz:'
+          : 'You can clear your checklist data at any time:'}
+      </p>
+      <ul>
+        <li>{isTr ? 'Kontrol listesi sayfasında yer alan "Listeyi Sıfırla" butonuna tıklayarak,' : 'By clicking the "Reset Checklist" button directly on the checklist page,'}</li>
+        <li>{isTr ? 'Veya tarayıcınızın ayarlarından "Site Verilerini Temizle" seçeneğini kullanarak.' : 'Or via your browser\'s settings ("Clear Site Data / Storage").'}</li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

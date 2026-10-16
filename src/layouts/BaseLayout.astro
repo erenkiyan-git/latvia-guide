@@ -29,14 +29,20 @@ const navLinks = [
 ];
 
 const footerLinks = [
-  { href: `/${lang}/about/`, label: t('nav.about') },
   { href: `/${lang}/guides/`, label: t('nav.guides') },
   { href: `/${lang}/checklist/`, label: t('footer.checklist') },
+  { href: `/${lang}/map/`, label: t('nav.map') },
   { href: `/${lang}/calculators/salary/`, label: t('footer.salary') },
-  { href: `/${lang}/calculators/living-costs/`, label: t('footer.livingCosts') },
   { href: `/${lang}/useful-websites/`, label: t('footer.usefulWebsites') },
   { href: `/${lang}/phrases/`, label: t('footer.phrases') },
   { href: `/${lang}/emergency/`, label: t('footer.emergency'), isEmergency: true }
+];
+
+const legalLinks = [
+  { href: `/${lang}/about/`, label: t('nav.about') },
+  { href: `/${lang}/privacy/`, label: t('footer.privacy') },
+  { href: `/${lang}/cookies/`, label: t('footer.cookies') },
+  { href: `/${lang}/terms/`, label: t('footer.terms') }
 ];
 ---
 
@@ -71,14 +77,6 @@ const footerLinks = [
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     
-    <!-- Google Analytics -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
   </head>
   <body class="flex flex-col min-h-screen">
     <Header 
@@ -98,7 +96,9 @@ const footerLinks = [
       currentLang={lang} 
       subtitle={t('hero.subtitle')} 
       disclaimer={t('footer.disclaimer')} 
-      links={footerLinks} 
+      links={footerLinks}
+      legalLinks={legalLinks}
+      legalHeading={t('footer.legal')}
     />
   </body>
 </html>
