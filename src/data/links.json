@@ -196,29 +196,29 @@
       },
       {
         "title": {
-          "en": "Inch.lv (Rental Marketplace)",
-          "tr": "Inch.lv (Modern Kiralık Ev Portalı)"
+          "en": "SS.com (Flats for Rent in Riga)",
+          "tr": "SS.com (Riga Kiralık Daire İlanları)"
         },
-        "url": "https://inch.lv",
+        "url": "https://www.ss.com/en/real-estate/flats/riga/hand_over/",
         "description": {
-          "en": "Modern rental platform tailored for professionals and expats seeking quality apartments in Riga.",
-          "tr": "Riga'da kaliteli daire arayan profesyoneller ve expatlar için modern tasarımlı kiralama platformu."
+          "en": "The largest classifieds portal in Latvia. The primary place where private landlords list apartments for rent directly.",
+          "tr": "Letonya'nın en büyük seri ilan sitesi. Ev sahiplerinin doğrudan kiralık daire ilanı verdiği ana platform."
         },
         "isOfficial": false,
-        "languages": ["LV", "EN"]
+        "languages": ["LV", "RU", "EN"]
       },
       {
         "title": {
           "en": "Rīgas Namu Pārvaldnieks (RNP)",
           "tr": "Rīgas Namu Pārvaldnieks (Belediye Konut Yönetimi)"
         },
-        "url": "https://rnparvaldnieks.lv/en/",
+        "url": "https://rnparvaldnieks.lv/",
         "description": {
           "en": "Municipal residential property manager: submit water meter readings, pay communal bills, and report heating issues.",
           "tr": "Belediye bina yönetim kurumu: su sayaç endekslerinin girilmesi, aidat ve ısınma faturalarının ödenmesi."
         },
         "isOfficial": true,
-        "languages": ["LV", "EN"]
+        "languages": ["LV", "RU"]
       }
     ]
   },
@@ -230,7 +230,7 @@
           "en": "CV.lv (Leading Career Portal)",
           "tr": "CV.lv (Letonya'nın En Büyük İş İlanı Sitesi)"
         },
-        "url": "https://cv.lv/en",
+        "url": "https://www.cv.lv",
         "description": {
           "en": "The primary job search engine in Latvia with thousands of open vacancies across all industries, filters for English-speaking roles.",
           "tr": "Letonya'da tüm sektörlerden binlerce açık pozisyon ve İngilizce konuşulan iş filtreleri barındıran ana kariyer sitesi."
@@ -240,13 +240,13 @@
       },
       {
         "title": {
-          "en": "LikeIT.lv (Tech & IT Jobs)",
-          "tr": "LikeIT.lv (Yazılım ve Teknoloji İşleri)"
+          "en": "CV-Online Latvia",
+          "tr": "CV-Online Letonya"
         },
-        "url": "https://likeit.lv/en",
+        "url": "https://cvonline.lv",
         "description": {
-          "en": "Curated tech careers portal for software developers, QA engineers, product managers, and IT specialists in Latvia.",
-          "tr": "Yazılım geliştiriciler, QA mühendisleri ve teknoloji uzmanları için özel olarak filtrelenmiş Letonya bilişim iş ilanları."
+          "en": "Major recruitment and career portal offering specialist, corporate, and tech job vacancies across the Baltic states.",
+          "tr": "Baltık ülkelerinde kurumsal, uzman ve teknoloji açık pozisyonları sunan köklü kariyer portalı."
         },
         "isOfficial": false,
         "languages": ["LV", "EN"]
@@ -266,15 +266,15 @@
       },
       {
         "title": {
-          "en": "Your Move (International Talent)",
-          "tr": "Your Move (Uluslararası Yetenek & Expat İşleri)"
+          "en": "Work in Latvia (LIAA Official Relocation Initiative)",
+          "tr": "Work in Latvia (Resmi Yetenek Çekme & Kariyer Portalı)"
         },
-        "url": "https://yourmove.lv",
+        "url": "https://workinlatvia.com/",
         "description": {
-          "en": "Boutique recruitment board connecting international professionals and English speakers with innovative Latvian companies.",
-          "tr": "Uluslararası profesyonelleri ve İngilizce bilenleri Letonya'daki yenilikçi şirketlerle buluşturan kariyer platformu."
+          "en": "Official state portal connecting international specialists with innovative Latvian companies, relocation guides, and networking.",
+          "tr": "Uluslararası uzmanları Letonya'daki yenilikçi şirketlerle buluşturan ve taşınma desteği sağlayan resmi devlet inisiyatifi."
         },
-        "isOfficial": false,
+        "isOfficial": true,
         "languages": ["LV", "EN"]
       }
     ]
@@ -398,16 +398,16 @@
     "links": [
       {
         "title": {
-          "en": "Integration.lv (Ministry of Culture)",
-          "tr": "Integration.lv (Kültür Bakanlığı Entegrasyon Portalı)"
+          "en": "Latvija.gov.lv (State Integration & E-Services)",
+          "tr": "Latvija.gov.lv (Devlet Uyum ve Kamu Hizmetleri Portalı)"
         },
-        "url": "https://www.integration.lv/en",
+        "url": "https://latvija.gov.lv",
         "description": {
-          "en": "Official state information and support portal for foreign residents, newcomers, and third-country nationals in Latvia.",
-          "tr": "Letonya'daki yabancı ikamet sahipleri ve yeni gelenler için Kültür Bakanlığı resmi entegrasyon ve danışma portalı."
+          "en": "Official state portal providing information and digital access to all municipal and government services for residents in Latvia.",
+          "tr": "Letonya'da yaşayan yabancılar için tüm belediye ve devlet kamu hizmetlerine dijital erişim sağlayan resmi devlet portalı."
         },
         "isOfficial": true,
-        "languages": ["LV", "EN", "RU"]
+        "languages": ["LV", "EN"]
       },
       {
         "title": {
