@@ -1,0 +1,17 @@
+{
+  "name": "Latvia Guide",
+  "short_name": "Latvia Guide",
+  "description": "Practical handbook for foreigners living, studying, and working in Latvia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0c0f",
+  "theme_color": "#0b0c0f",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

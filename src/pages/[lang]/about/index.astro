@@ -36,23 +36,54 @@ const pageDesc = lang === 'tr' ? 'Latvia Guide nasıl çalışır ve bilgileri n
         decoding="async" 
       />
     </picture>
-    <div class="text-center mb-16">
+    <div class="text-center mb-10">
       <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">{pageTitle}</h1>
       <p class="text-xl text-slate-600 max-w-2xl mx-auto">{pageDesc}</p>
     </div>
 
+    {/* Prominent Independence Notice */}
+    <div class="my-8 p-5 sm:p-6 rounded-2xl bg-amber-950/20 border border-amber-500/40 text-amber-200 flex items-start gap-4 shadow-sm not-prose">
+      <AlertTriangle class="w-6 h-6 text-amber-400 shrink-0 mt-0.5" />
+      <div class="text-sm leading-relaxed">
+        <h2 class="font-bold text-amber-300 text-base mb-1">
+          {lang === 'tr' ? 'Resmi Bağımsızlık Bildirimi' : 'Independence Notice'}
+        </h2>
+        <p class="text-slate-700 m-0">
+          {lang === 'tr'
+            ? 'Latvia Guide bağımsız bir bilgilendirme projesidir ve Letonya Cumhuriyeti resmi devlet kurumu veya web sitesi değildir. Tüm resmi başvurular doğrudan ilgili devlet makamlarına (PMLP, VID, NVD vb.) yapılmalıdır.'
+            : 'Latvia Guide is an independent informational project and is not an official government website of the Republic of Latvia. All official applications, appointments, and legal filings must be completed directly with the competent state authorities (PMLP, VID, NVD, etc.).'}
+        </p>
+      </div>
+    </div>
+
     <div class="prose prose-slate max-w-none 
       prose-headings:text-slate-900 prose-headings:font-bold prose-headings:tracking-tight
-      prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-8 prose-h2:border-b border-slate-300 prose-h2:pb-4
+      prose-h2:text-3xl prose-h2:mt-14 prose-h2:mb-6 prose-h2:border-b border-slate-300 prose-h2:pb-4
       prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-6 prose-p:text-lg">
       
-      <h2>{lang === 'tr' ? 'Misyonumuz' : 'Our Mission'}</h2>
+      <h2>{lang === 'tr' ? 'Kuruluş Hikayemiz' : 'Why We Built Latvia Guide'}</h2>
       <p class="lead text-xl text-slate-700">
         {lang === 'tr' 
-          ? 'Letonya\'ya taşınmak zor olabilir. Yüzlerce farklı resmi web sitesi, değişen yasalar ve her yerde eski bilgiler var. Amacımız basit: Letonya\'daki yabancılar, uluslararası öğrenciler ve çalışanlar için en güvenilir, güncel ve pratik rehberi oluşturmak.'
-          : 'Moving to Latvia can be overwhelming. There are hundreds of different official websites, changing laws, and outdated information everywhere. Our mission is simple: to create the most reliable, up-to-date, and practical guide for foreigners, international students, and workers in Latvia.'
+          ? 'Letonya\'ya ilk taşındığımızda hissettiğimiz şeyi çok iyi biliyoruz: yüzlerce farklı resmi portal, çelişkili forum tavsiyeleri, dil bariyeri ve bilinmezlik.'
+          : 'When moving to Latvia for the first time, almost every foreigner encounters the same wall: dozens of fragmented government portals, outdated forum posts, conflicting advice, and unfamiliar bureaucratic terminology.'
         }
       </p>
+
+      <div class="my-8 p-6 sm:p-8 rounded-2xl bg-surface border border-slate-300 shadow-sm not-prose">
+        <h3 class="text-xl font-bold text-slate-900 mb-3">
+          {lang === 'tr' ? 'Yabancılar İçin, Yabancılar Tarafından' : 'Built in Riga for Foreigners, by Foreigners'}
+        </h3>
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-4">
+          {lang === 'tr'
+            ? 'PMLP randevusu almaktan ikametgah beyanına (deklarēšanās), EDS vergi kitapçığı onayından güvenilir ev bulmaya kadar her adımda "keşke elimizde tek bir derli toplu rehber olsaydı" dedik. Latvia Guide, bu eksikliği gidermek için kuruldu.'
+            : 'From booking PMLP biometrics appointments to declaring an address (deklarēšanās), registering your tax booklet on VID EDS, and avoiding apartment scams in Old Town, we wanted the single verified handbook we desperately needed on Day 1.'}
+        </p>
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed m-0">
+          {lang === 'tr'
+            ? 'Bu rehber kar amaçlı bir reklam platformu değil, tamamen bağımsız, çerezsiz (100% cookieless) ve kullanıcı gizliliğine saygılı bir kamu faydası projesidir.'
+            : 'This site is not an advertising farm. It is a 100% cookieless, privacy-first, community-driven handbook designed to help international students, digital nomads, workers, and new residents thrive in Latvia.'}
+        </p>
+      </div>
 
       <h2>{lang === 'tr' ? 'Bilgilere Neden Güvenmelisiniz?' : 'Why Trust Our Information?'}</h2>
       <p>
