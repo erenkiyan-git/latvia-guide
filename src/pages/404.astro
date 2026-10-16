@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SearchBox } from '../components/SearchBox';
+import { Compass, AlertTriangle, ArrowRight, Home, PhoneCall, BookOpen, MapPin } from 'lucide-react';
+
+const pageTitle = 'Page Not Found (404) | Sayfa Bulunamadı';
+const pageDesc = "Lost in Riga? We couldn't find the page you were looking for. Use our search or explore popular guides.";
+
+const popularGuides = [
+  {
+    enTitle: 'Residence Permit Types (PMLP)',
+    trTitle: 'Oturum İzni Türleri (PMLP)',
+    enHref: '/en/guides/documents/residence-permit-types/',
+    trHref: '/tr/guides/documents/residence-permit-types/',
+    category: 'Visas & Documents'
+  },
+  {
+    enTitle: 'Declaring Your Address (deklarēšanās)',
+    trTitle: 'İkamet Beyanı (deklarēšanās)',
+    enHref: '/en/guides/documents/address-declaration/',
+    trHref: '/tr/guides/documents/address-declaration/',
+    category: 'Documents'
+  },
+  {
+    enTitle: 'Where to Search for Apartments in Riga',
+    trTitle: 'Riga\'da Ev Arama ve Kiralama',
+    enHref: '/en/guides/housing/where-to-search/',
+    trHref: '/tr/guides/housing/where-to-search/',
+    category: 'Housing'
+  },
+  {
+    enTitle: 'Finding a Job & Foreign Worker Rights',
+    trTitle: 'İş Bulma ve Çalışan Hakları',
+    enHref: '/en/guides/work/finding-a-job/',
+    trHref: '/tr/guides/work/finding-a-job/',
+    category: 'Work'
+  },
+  {
+    enTitle: 'Healthcare System & Registering with a GP',
+    trTitle: 'Sağlık Sistemi ve Aile Hekimi Kaydı',
+    enHref: '/en/guides/healthcare/family-doctor/',
+    trHref: '/tr/guides/healthcare/family-doctor/',
+    category: 'Healthcare'
+  }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} lang="en">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center justify-center p-3.5 bg-amber-100 text-amber-700 rounded-2xl mb-4">
+        <Compass className="w-8 h-8 animate-spin-slow" />
+      </div>
+      <p class="text-xs font-mono uppercase tracking-widest text-slate-500 mb-2">Error 404 · Hata 404</p>
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+        Lost in Riga? <span class="text-slate-400 font-normal">/</span> Kayboldunuz mu?
+      </h1>
+      <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        We couldn't find the page you're looking for. It might have moved, or the link may have a typo.
+        <br />
+        <span class="text-slate-500 text-sm">
+          Aradığınız sayfa bulunamadı. Sayfa taşınmış veya adreste bir yazım hatası olabilir.
+        </span>
+      </p>
+    </div>
+
+    {/* Search Recovery */}
+    <div class="max-w-2xl mx-auto mb-12">
+      <SearchBox client:load lang="en" placeholder="Search guides, residency, rent, doctors, transport..." />
+    </div>
+
+    {/* Emergency Alert Banner */}
+    <div class="bg-rose-50 border border-rose-200 rounded-2xl p-5 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 bg-rose-100 text-rose-700 rounded-xl shrink-0">
+          <PhoneCall className="w-5 h-5" />
+        </div>
+        <div>
+          <h2 class="font-bold text-rose-950 text-sm sm:text-base">In an emergency? / Acil bir durum mu var?</h2>
+          <p class="text-xs text-rose-800">Call 112 for police, ambulance, or fire in Latvia.</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <a 
+          href="/en/emergency/" 
+          class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-rose-600 hover:bg-rose-700 text-white transition-colors"
+        >
+          EN Emergency
+        </a>
+        <a 
+          href="/tr/emergency/" 
+          class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-rose-100 hover:bg-rose-200 text-rose-900 transition-colors"
+        >
+          TR Acil Durum
+        </a>
+      </div>
+    </div>
+
+    {/* Top Popular Guides */}
+    <div class="bg-surface border border-slate-300 rounded-2xl p-6 sm:p-8 mb-10 shadow-sm">
+      <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+        <BookOpen className="w-5 h-5 text-primary-500" />
+        Top 5 Popular Guides / En Çok Aranan Rehberler
+      </h2>
+      <div class="divide-y divide-slate-200">
+        {popularGuides.map((guide) => (
+          <div class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-slate-50/80 px-2 rounded-lg transition-colors">
+            <div>
+              <span class="text-[0.65rem] font-mono uppercase tracking-wider text-primary-700 font-semibold px-2 py-0.5 rounded bg-primary-50 border border-primary-200 mr-2">
+                {guide.category}
+              </span>
+              <span class="font-semibold text-slate-900 text-sm sm:text-base">
+                {guide.enTitle}
+              </span>
+              <span class="text-xs text-slate-500 block sm:inline sm:ml-2">
+                ({guide.trTitle})
+              </span>
+            </div>
+            <div class="flex items-center gap-2 shrink-0 self-end sm:self-auto text-xs font-mono">
+              <a href={guide.enHref} class="text-primary-600 hover:text-primary-800 font-medium hover:underline">
+                Read (EN)
+              </a>
+              <span class="text-slate-300">·</span>
+              <a href={guide.trHref} class="text-primary-600 hover:text-primary-800 font-medium hover:underline">
+                Oku (TR)
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Primary Navigation Actions */}
+    <div class="flex flex-wrap items-center justify-center gap-4 text-sm font-medium">
+      <a 
+        href="/en/" 
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white font-semibold transition-colors shadow-sm"
+      >
+        <Home className="w-4 h-4" />
+        <span>Homepage (EN)</span>
+      </a>
+      <a 
+        href="/tr/" 
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold transition-colors"
+      >
+        <Home className="w-4 h-4" />
+        <span>Ana Sayfa (TR)</span>
+      </a>
+      <a 
+        href="/en/map/" 
+        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 transition-colors"
+      >
+        <MapPin className="w-4 h-4 text-slate-500" />
+        <span>Map of Places</span>
+      </a>
+    </div>
+  </div>
+</BaseLayout>

@@ -28,6 +28,20 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
   const [indexData, setIndexData] = useState<SearchIndex | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Global Cmd+K / Ctrl+K shortcut to focus search
+  useEffect(() => {
+    function handleGlobalKeyDown(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        inputRef.current?.focus();
+        loadIndex();
+      }
+    }
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, []);
 
   // Load index data on first focus or interaction
   const loadIndex = async () => {
@@ -127,6 +141,10 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
     }
   };
 
+  const suggestions = lang === 'tr'
+    ? ['PMLP', 'oturma izni', 'deklarēšanās', 'ehliyet', 'doktor', 'kira']
+    : ['PMLP', 'deklarēšanās', 'eID', 'doctor', 'rent', 'work permit'];
+
   return (
     <div className="relative w-full text-left" ref={containerRef}>
       {/* Search Input Bar */}
@@ -136,6 +154,7 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
         </div>
         
         <input
+          ref={inputRef}
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -151,24 +170,30 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
           aria-controls="search-results"
         />
 
-        {/* Clear Button & Loading Spinner */}
+        {/* Clear Button, Shortcut Indicator & Loading Spinner */}
         <div className="absolute inset-y-0 right-0 pr-3 sm:pr-4 flex items-center gap-2">
           {isLoading && (
             <div className="animate-spin h-5 w-5 border-2 border-primary-500 rounded-full border-t-transparent"></div>
           )}
-          {query.length > 0 && (
-            <button
-              type="button"
-              onClick={() => { setQuery(''); setIsOpen(false); }}
-              className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition-colors"
-              title={lang === 'tr' ? 'Temizle' : 'Clear'}
-            >
-              <X className="w-4 h-4" />
-            </button>
+          {query.length > 0 ? (
+            <>
+              <button
+                type="button"
+                onClick={() => { setQuery(''); setIsOpen(false); inputRef.current?.focus(); }}
+                className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition-colors"
+                title={lang === 'tr' ? 'Temizle' : 'Clear'}
+              >
+                <X className="w-4 h-4" />
+              </button>
+              <span className="hidden sm:inline-block px-1.5 py-0.5 text-[0.65rem] font-mono text-slate-500 border border-slate-300 rounded bg-base/80 select-none">
+                ESC
+              </span>
+            </>
+          ) : (
+            <span className="hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 text-[0.65rem] font-mono text-slate-500 border border-slate-300 rounded bg-base/80 select-none" title="Press ⌘K or Ctrl+K to search">
+              <span className="text-xs">⌘</span>K
+            </span>
           )}
-          <span className="hidden sm:inline-block px-2 py-0.5 text-[0.65rem] font-mono text-slate-500 border border-slate-300 rounded bg-base/80 select-none">
-            ESC
-          </span>
         </div>
       </div>
 
@@ -190,10 +215,10 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
               </span>
             </span>
             <span className="hidden sm:inline-flex items-center gap-1 text-[0.65rem] text-slate-500">
-              <span>↑↓ Gezin</span>
+              <span>{lang === 'tr' ? '↑↓ Gezin' : '↑↓ Navigate'}</span>
               <span>·</span>
               <CornerDownLeft className="w-3 h-3 inline" />
-              <span>Seç</span>
+              <span>{lang === 'tr' ? 'Seç' : 'Select'}</span>
             </span>
           </div>
 
@@ -246,14 +271,26 @@ export function SearchBox({ lang, placeholder }: SearchBoxProps) {
                 <Search className="w-10 h-10 text-slate-500 mx-auto mb-3" />
                 <p className="text-slate-900 text-base font-semibold mb-1">
                   {lang === 'tr' 
-                    ? `"${query}" ile ilgili bir sonuç bulunamadı.` 
-                    : `No results found for "${query}".`}
+                    ? `"${query}" ile ilgili bir rehber bulunamadı.` 
+                    : `No guides found for "${query}".`}
                 </p>
-                <p className="text-xs text-slate-600 max-w-sm mx-auto">
+                <p className="text-xs text-slate-600 max-w-sm mx-auto mb-4">
                   {lang === 'tr'
-                    ? 'İpucu: "oturma izni", "pmlp", "ehliyet", "ev kiralama", "doktor" gibi kelimeleri deneyebilirsiniz.'
-                    : 'Tip: Try searching for "permit", "pmlp", "license", "housing", or "doctor".'}
+                    ? 'Popüler aramalardan birine tıklayarak hemen arayabilirsiniz:'
+                    : 'Try searching for one of these popular topics:'}
                 </p>
+                <div className="flex flex-wrap gap-2 justify-center max-w-md mx-auto">
+                  {suggestions.map((sug) => (
+                    <button
+                      key={sug}
+                      type="button"
+                      onClick={() => setQuery(sug)}
+                      className="px-3 py-1 rounded-full text-xs font-medium bg-slate-200 text-slate-800 hover:bg-primary-100 hover:text-primary-800 transition-colors border border-slate-300/80"
+                    >
+                      {sug}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </div>

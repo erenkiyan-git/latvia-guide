@@ -4,7 +4,7 @@ import { getActiveLanguages, useTranslations } from '../../../i18n/utils';
 import type { Lang } from '../../../config';
 import { Map as MapIcon, WifiOff, ExternalLink } from 'lucide-react';
 import InteractiveMap from '../../../components/ui/InteractiveMap';
-import { getLocators } from '../../../lib/places';
+import { getLocators, getPublicPlaces } from '../../../lib/places';
 
 export function getStaticPaths() {
   const langs = getActiveLanguages();
@@ -19,6 +19,7 @@ const t = useTranslations(lang);
 const pageTitle = t('map.title');
 const pageDesc = t('map.intro');
 const locators = getLocators();
+const publicPlaces = getPublicPlaces();
 
 // Pick helper for Astro side
 function p(val: any, l: string) {
@@ -71,7 +72,46 @@ keys.forEach(k => {
       
       {/* Fallback list for no-JS and SEO. Hidden if JS loads successfully. */}
       <div id="no-js-list" class="mt-8 space-y-4">
-        {/* We keep it simple in HTML, the React component replaces this visually if JS runs */}
+        <h2 class="text-xl font-bold text-slate-900 mb-4">{t('map.viewList')}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {publicPlaces.map((place) => {
+            const name = place.name[lang] || place.name.en;
+            const osmLink = place.osmUrl || `https://www.openstreetmap.org/search?query=${encodeURIComponent(place.address + ', ' + place.city)}`;
+            return (
+              <div class="bg-surface border border-slate-300 rounded-xl p-5 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between gap-2 mb-2">
+                    <span class="text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
+                      {dict[`map.cat.${place.category}`] || place.category}
+                    </span>
+                    {place.verified && (
+                      <span class="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                        {lang === 'tr' ? 'Doğrulandı' : 'Verified'}
+                      </span>
+                    )}
+                  </div>
+                  <h3 class="text-lg font-bold text-slate-900 mb-1">{name}</h3>
+                  <p class="text-sm text-slate-600 mb-3">{place.address}, {place.city}</p>
+                  {place.phone && (
+                    <p class="text-xs text-slate-500 mb-2">
+                      <span class="font-medium text-slate-700">{t('map.phone')}:</span> {place.phone}
+                    </p>
+                  )}
+                </div>
+                <div class="flex flex-wrap items-center gap-3 pt-3 border-t border-slate-200 text-xs">
+                  <a href={place.officialUrl} target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center gap-1">
+                    {t('map.officialWebsite')}
+                    <ExternalLink class="w-3 h-3" />
+                  </a>
+                  <a href={osmLink} target="_blank" rel="noopener noreferrer" class="text-slate-600 hover:text-slate-900 inline-flex items-center gap-1">
+                    {t('map.directions')}
+                    <ExternalLink class="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
       
       {/* Script to inject Leaflet so it's not in the main bundle, and hide the fallback list */}

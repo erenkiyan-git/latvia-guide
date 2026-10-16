@@ -116,9 +116,20 @@ const breadcrumbsItems = [
             ))
           ) : (
             <div class="col-span-full py-16 text-center hud-card rounded-lg">
-              <p class="text-slate-600 text-lg">{t('section.empty')}</p>
+              <p class="text-slate-600 text-lg mb-4">{t('section.empty')}</p>
+              <a href={`/${lang}/guides/`} class="inline-flex items-center px-4 py-2 rounded-lg bg-primary-600 hover:bg-primary-700 text-white font-medium text-sm transition-colors">
+                {t('section.allGuides')}
+              </a>
             </div>
           )}
+
+          <div id="filter-empty-state" class="col-span-full py-12 text-center hidden bg-surface border border-slate-300 rounded-xl p-6">
+            <p class="text-slate-900 font-semibold mb-1">{lang === 'tr' ? 'Eşleşen rehber bulunamadı' : 'No matching guides found'}</p>
+            <p class="text-xs text-slate-500 mb-4">{lang === 'tr' ? 'Farklı bir arama terimi deneyin veya filtreyi temizleyin.' : 'Try a different search term or clear the filter.'}</p>
+            <button id="clear-filter-btn" type="button" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-200 hover:bg-slate-300 text-slate-800 transition-colors">
+              {lang === 'tr' ? 'Filtreyi Temizle' : 'Clear Filter'}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -128,12 +139,32 @@ const breadcrumbsItems = [
 <script is:inline>
   (function () {
     var input = document.getElementById('guide-filter');
+    var emptyState = document.getElementById('filter-empty-state');
+    var clearBtn = document.getElementById('clear-filter-btn');
     if (!input) return;
-    input.addEventListener('input', function () {
+
+    function applyFilter() {
       var q = input.value.trim().toLowerCase();
-      document.querySelectorAll('#guide-list [data-filter]').forEach(function (el) {
-        el.style.display = !q || el.getAttribute('data-filter').indexOf(q) !== -1 ? '' : 'none';
+      var visibleCount = 0;
+      var items = document.querySelectorAll('#guide-list [data-filter]');
+      items.forEach(function (el) {
+        var match = !q || el.getAttribute('data-filter').indexOf(q) !== -1;
+        el.style.display = match ? '' : 'none';
+        if (match) visibleCount++;
       });
-    });
+      if (emptyState) {
+        emptyState.style.display = (items.length > 0 && visibleCount === 0) ? 'block' : 'none';
+      }
+    }
+
+    input.addEventListener('input', applyFilter);
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function () {
+        input.value = '';
+        applyFilter();
+        input.focus();
+      });
+    }
   })();
 </script>

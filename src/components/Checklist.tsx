@@ -21,13 +21,15 @@ interface ChecklistProps {
   pageDesc: string;
   resetText: string;
   printText: string;
+  lang?: string;
 }
 
 const STORAGE_KEY = 'latviaguide_checklist';
 
-export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }: ChecklistProps) {
+export function Checklist({ groups, pageTitle, pageDesc, resetText, printText, lang = 'en' }: ChecklistProps) {
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showResetModal, setShowResetModal] = useState(false);
 
   const totalItems = groups.reduce((acc, group) => acc + group.items.length, 0);
   const completedItems = Object.values(checkedItems).filter(Boolean).length;
@@ -45,6 +47,16 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
     setIsLoaded(true);
   }, []);
 
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape' && showResetModal) {
+        setShowResetModal(false);
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showResetModal]);
+
   const toggleItem = (id: string) => {
     const newState = { ...checkedItems, [id]: !checkedItems[id] };
     setCheckedItems(newState);
@@ -55,13 +67,12 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
     }
   };
 
-  const handleReset = () => {
-    if (window.confirm('Are you sure you want to reset all your progress?')) {
-      setCheckedItems({});
-      try {
-        localStorage.removeItem(STORAGE_KEY);
-      } catch (err) {}
-    }
+  const confirmReset = () => {
+    setCheckedItems({});
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (err) {}
+    setShowResetModal(false);
   };
 
   if (!isLoaded) {
@@ -87,7 +98,7 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
             ></div>
           </div>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Button variant="secondary" onClick={handleReset}>
+            <Button variant="secondary" onClick={() => setShowResetModal(true)}>
               <RotateCcw className="w-4 h-4 mr-2" />
               {resetText}
             </Button>
@@ -98,6 +109,39 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText }:
           </div>
         </div>
       </div>
+
+      {/* Reset Confirmation Modal */}
+      {showResetModal && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm animate-in fade-in duration-200"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="reset-modal-title"
+        >
+          <div className="bg-surface border border-slate-300 rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95 duration-150">
+            <h3 id="reset-modal-title" className="text-xl font-bold text-slate-900 mb-2">
+              {lang === 'tr' ? 'Kontrol listesini sıfırla?' : 'Reset checklist progress?'}
+            </h3>
+            <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+              {lang === 'tr'
+                ? 'Bu işlem cihazınızda işaretlediğiniz tüm adımları temizler. İlerlemeniz kaybolacaktır. Bu işlem geri alınamaz.'
+                : 'This will uncheck all completed items on this device. Your progress will be erased. This action cannot be undone.'}
+            </p>
+            <div className="flex items-center justify-end gap-3">
+              <Button variant="outline" onClick={() => setShowResetModal(false)}>
+                {lang === 'tr' ? 'Vazgeç' : 'Cancel'}
+              </Button>
+              <button
+                type="button"
+                onClick={confirmReset}
+                className="px-4 py-2.5 rounded-xl font-semibold text-sm bg-rose-600 hover:bg-rose-700 text-white transition-colors shadow-sm"
+              >
+                {lang === 'tr' ? 'Tümünü Sıfırla' : 'Reset Everything'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Print Only Header */}
       <div className="hidden print:block mb-8">
