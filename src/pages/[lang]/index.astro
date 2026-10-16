@@ -55,6 +55,34 @@ const webSiteSchema = {
     'query-input': 'required name=search_term_string'
   }
 };
+
+const quickActions = [
+  {
+    icon: '🛬',
+    label: lang === 'tr' ? 'İlk 24 Saat' : 'First 24 Hours',
+    href: `/${lang}/guides/new-to-latvia/first-24-hours/`
+  },
+  {
+    icon: '📋',
+    label: lang === 'tr' ? '30 Günlük Liste' : '30-Day Checklist',
+    href: `/${lang}/checklist/`
+  },
+  {
+    icon: '🛂',
+    label: lang === 'tr' ? 'Oturma İzni' : 'Residence Permits',
+    href: `/${lang}/guides/documents/residence-permit-types/`
+  },
+  {
+    icon: '🏠',
+    label: lang === 'tr' ? 'Ev & Kiralama' : 'Housing',
+    href: `/${lang}/guides/housing/`
+  },
+  {
+    icon: '🚨',
+    label: lang === 'tr' ? 'Acil Durum' : 'Emergency',
+    href: `/${lang}/emergency/`
+  }
+];
 ---
 
 <BaseLayout title={t('hero.title')} description={t('hero.subtitle')} lang={lang}>
@@ -102,6 +130,22 @@ const webSiteSchema = {
       {/* Wide Search Container */}
       <div class="max-w-2xl sm:max-w-3xl mx-auto relative z-30">
         <SearchBox client:load lang={lang} placeholder={t('hero.search')} />
+
+        {/* Primary 1-Tap Action Chips */}
+        <div class="mt-4 sm:mt-5 flex flex-wrap justify-center items-center gap-2 sm:gap-2.5 max-w-3xl mx-auto">
+          <span class="text-xs text-slate-500 font-mono uppercase tracking-wider hidden sm:inline-block mr-1">
+            {lang === 'tr' ? 'Popüler:' : 'Quick links:'}
+          </span>
+          {quickActions.map(action => (
+            <a
+              href={action.href}
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-surface/85 hover:bg-surface-elevated text-slate-800 hover:text-primary-300 border border-slate-300/80 hover:border-primary-500/50 shadow-sm backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <span aria-hidden="true">{action.icon}</span>
+              <span>{action.label}</span>
+            </a>
+          ))}
+        </div>
       </div>
 
       {/* Smooth Scroll Button to Help Section */}
