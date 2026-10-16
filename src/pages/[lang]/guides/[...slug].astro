@@ -53,10 +53,10 @@ export async function getStaticPaths() {
 }
 
 const { guide, isFallback = false, currentLang } = Astro.props;
-const { Content } = await render(guide);
+const { Content, headings } = await render(guide);
 ---
 
-<GuideLayout guide={guide} isFallback={isFallback} currentLang={currentLang}>
+<GuideLayout guide={guide} isFallback={isFallback} currentLang={currentLang} headings={headings}>
   <Content />
 </GuideLayout>
 

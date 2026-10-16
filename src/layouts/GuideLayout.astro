@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import GuidesSidebar from '../components/GuidesSidebar.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
 import { TrustBadge } from '../components/ui/TrustBadge';
 import { SourceBox } from '../components/ui/SourceBox';
@@ -14,9 +15,10 @@ interface Props {
   guide: CollectionEntry<'guides'>;
   isFallback?: boolean;
   currentLang?: string;
+  headings?: { depth: number; slug: string; text: string }[];
 }
 
-const { guide, isFallback = false, currentLang } = Astro.props;
+const { guide, isFallback = false, currentLang, headings = [] } = Astro.props;
 const { title, description, badge, officialSource, lastChecked, verified, section } = guide.data;
 const lang = currentLang || guide.id.split('/')[0];
 const t = useTranslations(lang as any);
@@ -229,8 +231,11 @@ const activeNextStep = nextStepRules[section] || defaultNextStep;
       </div>
     )}
 
+    {/* Mobile & Tablet Collapsible Table of Contents */}
+    <TableOfContents headings={headings} lang={lang} variant="mobile" />
+
     <div class="guide-content prose prose-slate max-w-none 
-      prose-headings:text-slate-900 prose-headings:font-bold prose-headings:tracking-tight
+      prose-headings:text-slate-900 prose-headings:font-bold prose-headings:tracking-tight prose-headings:scroll-mt-24
       prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-2 prose-h2:border-b prose-h2:border-slate-300
       prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
       prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-6
@@ -333,6 +338,9 @@ const activeNextStep = nextStepRules[section] || defaultNextStep;
       </a>
     </footer>
   </article>
+
+  {/* Desktop Floating/Sticky Table of Contents */}
+  <TableOfContents headings={headings} lang={lang} variant="desktop" />
   </div>
 </BaseLayout>
 
