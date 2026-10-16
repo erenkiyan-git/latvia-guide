@@ -31,9 +31,35 @@ const problemTranslations = {
   'home.problem.transport': t('home.problem.transport'),
   'home.problem.emergency': t('home.problem.emergency'),
 };
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://latviaguide.com';
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  'name': 'Latvia Guide',
+  'url': siteUrl,
+  'logo': `${siteUrl}/favicon.svg`,
+  'description': t('hero.subtitle')
+};
+
+const webSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  'name': 'Latvia Guide',
+  'url': siteUrl,
+  'inLanguage': lang,
+  'potentialAction': {
+    '@type': 'SearchAction',
+    'target': `${siteUrl}/${lang}/?q={search_term_string}`,
+    'query-input': 'required name=search_term_string'
+  }
+};
 ---
 
 <BaseLayout title={t('hero.title')} description={t('hero.subtitle')} lang={lang}>
+  <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
   {/* Full-width Hero Section: extends upward to tuck under the frosted navbar with zero horizontal overflow */}
   <section class="relative -mt-8 w-full mb-10 sm:mb-12 py-14 sm:py-24 md:py-32 text-center border-b border-slate-300">
     {/* Background Image Container with overflow hidden */}

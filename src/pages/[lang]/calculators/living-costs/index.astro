@@ -17,7 +17,9 @@ const { lang } = Astro.params as { lang: Lang };
 const t = useTranslations(lang);
 
 const pageTitle = lang === 'tr' ? 'Yaşam Maliyeti Hesaplayıcı' : 'Living Costs Calculator';
-const pageDesc = lang === 'tr' ? 'Riga\'daki tahmini aylık harcamalarınızı planlayın.' : 'Plan your estimated monthly expenses in Riga.';
+const pageDesc = lang === 'tr' 
+  ? 'Riga\'da kira, faturalar, market ve ulaşım dahil aylık tahmini yaşam masraflarınızı hesaplayın.' 
+  : 'Calculate your estimated monthly expenses in Riga, including rent, utilities, food, and transit.';
 
 const labels = {
   housing: lang === 'tr' ? '🏠 Konut (Kira)' : '🏠 Housing (Rent)',

@@ -20,7 +20,9 @@ const t = useTranslations(lang);
 const groups = checklistData[lang] || checklistData['en'];
 
 const pageTitle = lang === 'tr' ? 'Yeni Gelenler İçin 30 Günlük Kontrol Listesi' : 'New to Latvia: 30-Day Checklist';
-const pageDesc = lang === 'tr' ? 'Taşınmanızın ilk ayı için adım adım rehberiniz.' : 'Your step-by-step guide for the first month of your relocation.';
+const pageDesc = lang === 'tr' 
+  ? 'Letonya\'ya taşınmanızın ilk 30 gününde tamamlamanız gereken resmi işlemler ve pratik kontrol listesi.' 
+  : 'Your step-by-step practical checklist for all essential tasks during your first 30 days in Latvia.';
 const resetText = lang === 'tr' ? 'İlerlemeyi Sıfırla' : 'Reset Progress';
 const printText = lang === 'tr' ? 'Listeyi Yazdır' : 'Print Checklist';
 ---

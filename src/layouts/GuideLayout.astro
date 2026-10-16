@@ -28,9 +28,52 @@ const breadcrumbsItems = [
   { label: getSectionName(section, lang as any), href: `/${lang}/guides/${section}/` },
   { label: title }
 ];
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://latviaguide.com';
+const currentUrl = new URL(Astro.url.pathname, siteUrl).toString();
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': breadcrumbsItems.map((item, idx) => ({
+    '@type': 'ListItem',
+    'position': idx + 1,
+    'name': item.label,
+    'item': item.href ? new URL(item.href, siteUrl).toString() : currentUrl
+  }))
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': title,
+  'description': description,
+  'inLanguage': lang,
+  'mainEntityOfPage': {
+    '@type': 'WebPage',
+    '@id': currentUrl
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Latvia Guide',
+    'url': siteUrl,
+    'logo': {
+      '@type': 'ImageObject',
+      'url': `${siteUrl}/favicon.svg`
+    }
+  },
+  'author': {
+    '@type': 'Organization',
+    'name': 'Latvia Guide Editorial Team'
+  },
+  ...(verified && lastChecked ? { 'dateModified': lastChecked } : {})
+};
 ---
 
 <BaseLayout title={title} description={description} lang={lang}>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 flex flex-col lg:flex-row gap-6 lg:gap-8">
   <GuidesSidebar lang={lang} activeSection={section} activeSlug={guideSlug} />
   <article class="flex-1 min-w-0 max-w-3xl">
