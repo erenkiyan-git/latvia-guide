@@ -1,50 +1,47 @@
-# Latvia Guide
+# Latvia Guide (latviaguide.com)
 
-A practical, trustworthy, mobile-first information website for foreigners in Latvia (international students, foreign workers, tourists, and new residents).
+A practical, trustworthy, mobile-first handbook for foreigners living, studying, and working in Latvia (students, workers, digital nomads, and new residents).
 
 ## Project Architecture
-- **Framework**: [Astro](https://astro.build/) (Static Site Generation)
-- **Content**: Markdown/MDX with Astro Content Collections
-- **Styling**: Tailwind CSS 4 (design tokens in `src/styles/global.css`)
-- **JavaScript**: React "islands" only where interaction is needed
-- **i18n**: Sub-path routing (e.g., `/en/`, `/tr/`) based on static JSON dictionaries.
+- **Framework**: [Astro 5](https://astro.build/) (Static Site Generation)
+- **Content**: Markdown/MDX with Astro Content Collections & strict Zod schemas
+- **Styling**: Tailwind CSS 4 with custom "Riga Noir" soft cyberpunk theme (`src/styles/global.css`)
+- **Interactive Islands**: React 19 hydrated islands loaded strictly on-demand
+- **i18n**: Multilingual sub-path routing (`/en/`, `/tr/` active; `/ru/`, `/lv/` config-ready)
+- **Privacy & Legal**: 100% Cookieless, zero tracking scripts, full GDPR/ePrivacy compliance with plain-language legal pages
 
 ## Core Features
-1. **Content System**: Strict Markdown validation via Zod schemas. Every guide requires a trust badge, verified status, and category.
-2. **Interactive Checklist**: 30-day relocation checklist with `localStorage` persistence (no database required).
-3. **Calculators**: Client-side Net Salary and Living Costs estimators.
-4. **Instant Search**: Build-time generated JSON search index for ultra-fast, serverless searching with synonym support.
-5. **SEO Ready**: Auto-generated XML sitemaps, OpenGraph social tags, and Google Analytics snippet included.
+1. **Curated & Verified Guides**: Categorized into 9 essential pillars with trust badges (Official, Verified, Draft) and human verification dates.
+2. **Instant Search & Command Bar**: Build-time indexed client-side search with `Cmd+K` / `Ctrl+K` shortcuts, category filtering, and empty-state smart pills.
+3. **Interactive 30-Day Checklist**: Relocation milestone tracker with client-side `localStorage` persistence, category filters, and print stylesheet.
+4. **Interactive Places Map**: Leaflet map loaded on-demand on `/map` with OpenStreetMap tiles, geolocation ("Near Me"), category filters, and full no-JS static fallback.
+5. **Responsive Table of Contents**: Collapsible mobile accordion and sticky desktop rail with active heading indicators.
+6. **Technical SEO & Structured Data**: Complete Schema.org JSON-LD (`Article`, `BreadcrumbList`, `Organization`, `WebSite`), bidirectional `hreflang` tags, canonical tags, automated XML sitemaps, and optimized WebP/JPEG responsive images.
 
 ## Scripts
 
 ```bash
-# Start the local development server at localhost:4321
+# Start local development server (Node >= 22.12.0 required)
 npm run dev
 
-# Build the production static site into the /dist folder
+# Build the complete production static site into /dist
 npm run build
 
 # Preview the built production site locally
 npm run preview
 
-# Check the places data and write PLACES_REPORT.md
+# Verify places data and write PLACES_REPORT.md
 npm run check-places
+
+# Crawl all 269 pages for broken internal and external links
+node scripts/check-links.mjs
 ```
 
-## Map of Useful Places
+## Key Documentation
+- `FOUNDER_TODO.md`: Final action items and decisions for the founder before public launch.
+- `USER_TEST_KIT.md`: Guided 5-second test and 6 scenario tasks for real expat testing.
+- `CONTENT_GUIDE.md`: Editorial rules, badge criteria, and style guidelines for contributors.
+- `SOURCES.md`: Master directory of verified Latvian government sources (PMLP, VID, NVD, VSAA).
+- `PRELAUNCH_RESULTS.md`: Detailed before/after quality audit and performance results.
 
-Page: `/en/map/` and `/tr/map/`. Data: `src/data/places.json` (places) and `src/data/place-locators.json` (links to official "find a branch" pages). Only places with `verified: true`, a `sourceUrl` and a `SOURCES.md` entry are shown. How to add a place: see `CONTENT_GUIDE.md`.
-
-### Added dependencies (and why)
-- **leaflet** — the free, open-source map library the founder approved; installed via npm so nothing loads from a third-party CDN.
-- **@types/leaflet** (development only) — type descriptions so the editor catches mistakes in map code; it is not shipped to visitors.
-
-## Folder Structure
-* `src/content/guides/` - Markdown articles organized by language.
-* `src/data/` - JSON data files for checklists, phrases, and links.
-* `src/i18n/` - Translation dictionaries for the UI.
-* `src/components/` - Reusable Astro UI components.
-* `src/pages/` - Page templates and routing logic.
-
-Built by Antigravity.
+Built with care for newcomers in Latvia.

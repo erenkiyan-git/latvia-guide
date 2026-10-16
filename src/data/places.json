@@ -123,14 +123,14 @@
     "city": "Rīga",
     "lat": 56.950759,
     "lng": 24.116276,
-    "officialUrl": "https://www.lu.lv/en/about-us/contact-us/",
+    "officialUrl": "https://www.lu.lv/en/",
     "phone": "+371 67034444",
     "notes": {
       "en": "Main administrative building and some faculties of the largest university in Latvia.",
       "tr": "Letonya'nın en büyük üniversitesinin ana idari binası ve bazı fakülteleri."
     },
     "tags": ["university", "study", "lu"],
-    "sourceUrl": "https://www.lu.lv/en/about-us/contact-us/",
+    "sourceUrl": "https://www.lu.lv/en/",
     "osmUrl": "https://www.openstreetmap.org/relation/1297961",
     "lastChecked": "2026-10",
     "verified": true
@@ -146,13 +146,13 @@
     "city": "Rīga",
     "lat": 56.952642,
     "lng": 24.080680,
-    "officialUrl": "https://www.rtu.lv/en/university/for-visitors",
+    "officialUrl": "https://www.rtu.lv/en",
     "notes": {
       "en": "Main engineering campus on Ķīpsala island.",
       "tr": "Ķīpsala adasındaki ana mühendislik kampüsü."
     },
     "tags": ["university", "study", "engineering", "rtu"],
-    "sourceUrl": "https://www.rtu.lv/en/university/for-visitors",
+    "sourceUrl": "https://www.rtu.lv/en",
     "osmUrl": "https://www.openstreetmap.org/way/221635286",
     "lastChecked": "2026-10",
     "verified": true
@@ -325,13 +325,13 @@
     "city": "Rīga",
     "lat": 56.951509,
     "lng": 24.113378,
-    "officialUrl": "https://www.liveriga.com/en/968-freedom-monument",
+    "officialUrl": "https://www.latvia.travel/en/sight/freedom-monument",
     "notes": {
       "en": "The most important symbol of Latvia's independence. Guard of Honor changes here.",
       "tr": "Letonya'nın bağımsızlığının en önemli sembolü. Şeref Kıtası değişimi burada yapılıyor."
     },
     "tags": ["tourism", "monument", "milda", "freedom"],
-    "sourceUrl": "https://www.liveriga.com/en/968-freedom-monument",
+    "sourceUrl": "https://www.latvia.travel/en/sight/freedom-monument",
     "osmUrl": "https://www.openstreetmap.org/way/87182656",
     "lastChecked": "2026-10",
     "verified": true
