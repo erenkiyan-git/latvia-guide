@@ -13,6 +13,8 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const langMenuRef = useRef<HTMLDivElement>(null);
+  const langButtonRef = useRef<HTMLButtonElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -20,9 +22,25 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
         setIsLangOpen(false);
       }
     }
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        if (isMenuOpen) {
+          setIsMenuOpen(false);
+          menuButtonRef.current?.focus();
+        }
+        if (isLangOpen) {
+          setIsLangOpen(false);
+          langButtonRef.current?.focus();
+        }
+      }
+    }
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMenuOpen, isLangOpen]);
 
   const getSwitchUrl = (targetLang: string) => {
     if (typeof window === 'undefined') return `/${targetLang}/`;
@@ -66,21 +84,25 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
           {/* Language Switcher */}
           <div className="relative" ref={langMenuRef}>
             <button
+              ref={langButtonRef}
               onClick={() => setIsLangOpen(!isLangOpen)}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-300 bg-surface text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
               aria-expanded={isLangOpen}
+              aria-haspopup="true"
+              aria-label={currentLang === 'tr' ? 'Dil seçimi' : 'Select language'}
             >
               {langLabels[currentLang]}
               <ChevronDown className="w-4 h-4 text-slate-500" />
             </button>
 
             {isLangOpen && (
-              <ul className="absolute right-0 mt-2 w-36 bg-surface/98 backdrop-blur-xl rounded-xl border border-slate-300 py-1.5 z-50 shadow-2xl overflow-hidden">
+              <ul className="absolute right-0 mt-2 w-36 bg-surface/98 backdrop-blur-xl rounded-xl border border-slate-300 py-1.5 z-50 shadow-2xl overflow-hidden" role="menu">
                 {activeLangs.map((lang) => (
-                  <li key={lang}>
+                  <li key={lang} role="none">
                     <a
                       href={getSwitchUrl(lang)}
                       onClick={() => handleLangClick(lang)}
+                      role="menuitem"
                       className={`block px-4 py-2 text-sm ${
                         lang === currentLang
                           ? 'bg-primary-950/80 text-primary-300 border-l-2 border-primary-500 font-semibold'
@@ -98,10 +120,12 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
 
         {/* Mobile Menu Button */}
         <button
+          ref={menuButtonRef}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2.5 rounded-xl text-slate-400 hover:text-slate-100 hover:bg-slate-100/80 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
-          aria-label="Toggle menu"
+          className="md:hidden p-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100/80 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
+          aria-label={isMenuOpen ? (currentLang === 'tr' ? 'Menüyü kapat' : 'Close navigation menu') : (currentLang === 'tr' ? 'Menüyü aç' : 'Open navigation menu')}
           aria-expanded={isMenuOpen}
+          aria-controls="mobile-nav-drawer"
         >
           {isMenuOpen ? <X className="w-6 h-6 text-primary-400" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -109,7 +133,7 @@ export default function Header({ currentLang, activeLangs, langLabels, navLinks,
 
       {/* Mobile Nav Drawer */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 border-t border-b border-slate-300 bg-surface/98 backdrop-blur-2xl shadow-2xl z-50">
+        <div id="mobile-nav-drawer" className="md:hidden absolute top-full left-0 right-0 border-t border-b border-slate-300 bg-surface/98 backdrop-blur-2xl shadow-2xl z-50">
           <div className="px-4 py-4 space-y-1">
             {navLinks.map((link) => (
               <a

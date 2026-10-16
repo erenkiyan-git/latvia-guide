@@ -20,7 +20,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
 
           return (
             <li key={index} className="inline-flex items-center">
-              {!isFirst && <ChevronRight className="w-4 h-4 text-slate-400 mx-1" />}
+              {!isFirst && <ChevronRight className="w-4 h-4 text-slate-500 mx-1" />}
               {isLast ? (
                 <span className="text-slate-700 font-medium">{item.label}</span>
               ) : (

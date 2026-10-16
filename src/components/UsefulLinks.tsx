@@ -279,7 +279,7 @@ export function UsefulLinks({ data, filterLabel, lang = 'en' }: UsefulLinksProps
                             {link.languages.map((l) => (
                               <span 
                                 key={l} 
-                                className="text-[0.65rem] font-mono font-bold text-slate-400 bg-base/80 px-2 py-0.5 rounded border border-slate-300/60"
+                                className="text-[0.65rem] font-mono font-bold text-slate-600 bg-base/80 px-2 py-0.5 rounded border border-slate-300/80"
                               >
                                 {l}
                               </span>

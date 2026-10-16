@@ -200,7 +200,7 @@ export function Checklist({ groups, pageTitle, pageDesc, resetText, printText, l
                       <h3 className={`text-base sm:text-lg font-bold mb-1 transition-colors print:text-black ${isChecked ? 'text-slate-500 line-through print:no-underline print:text-gray-700' : 'text-slate-800'}`}>
                         {item.title}
                       </h3>
-                      <p className={`text-sm mb-3 print:text-gray-600 print:mb-0 ${isChecked ? 'text-slate-400' : 'text-slate-600'}`}>
+                      <p className={`text-sm mb-3 print:text-gray-600 print:mb-0 ${isChecked ? 'text-slate-500' : 'text-slate-700'}`}>
                         {item.description}
                       </p>
                       

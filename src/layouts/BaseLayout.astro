@@ -101,6 +101,12 @@ if (pathname.startsWith('/en/') || pathname.startsWith('/tr/')) {
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body class="flex flex-col min-h-screen">
+    <a 
+      href="#main-content" 
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:bg-primary-600 focus:text-white focus:font-semibold focus:rounded-xl focus:shadow-2xl focus:outline-none focus:ring-2 focus:ring-white"
+    >
+      {lang === 'tr' ? 'Ana içeriğe atla' : 'Skip to main content'}
+    </a>
     <Header 
       client:load 
       currentLang={lang} 
@@ -110,7 +116,7 @@ if (pathname.startsWith('/en/') || pathname.startsWith('/tr/')) {
       logoText="Latvia Guide" 
     />
     
-    <main class="flex-1 py-8">
+    <main id="main-content" class="flex-1 py-8">
       <slot />
     </main>
     
