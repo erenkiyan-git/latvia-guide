@@ -7,20 +7,20 @@ interface ComparisonTableProps {
 
 export function ComparisonTable({ headers, rows }: ComparisonTableProps) {
   return (
-    <div className="my-8 overflow-x-auto rounded-xl border border-slate-300 shadow-sm">
-      <table className="w-full text-left text-sm whitespace-nowrap sm:whitespace-normal">
-        <thead className="bg-surface border-b border-slate-300 text-slate-700 font-semibold">
+    <div className="my-8 overflow-x-auto rounded-xl border border-slate-300 shadow-sm not-prose custom-scrollbar bg-surface">
+      <table className="w-full text-left text-sm whitespace-nowrap sm:whitespace-normal min-w-[600px] border-collapse">
+        <thead className="bg-slate-100 border-b-2 border-primary-500/50 text-primary-400 font-semibold font-mono text-xs uppercase tracking-wider">
           <tr>
             {headers.map((header, idx) => (
-              <th key={idx} className="px-6 py-4">{header}</th>
+              <th key={idx} className="px-5 py-3.5">{header}</th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-200 bg-slate-50">
+        <tbody className="divide-y divide-slate-300/40 text-slate-200">
           {rows.map((row, rowIdx) => (
-            <tr key={rowIdx} className="hover:bg-surface transition-colors">
+            <tr key={rowIdx} className="hover:bg-slate-200/40 transition-colors">
               {row.map((cell, cellIdx) => (
-                <td key={cellIdx} className={`px-6 py-4 text-slate-600 ${cellIdx === 0 ? 'font-medium text-slate-700' : ''}`}>
+                <td key={cellIdx} className={`px-5 py-3.5 ${cellIdx === 0 ? 'font-bold text-white' : 'text-slate-200'}`}>
                   {cell}
                 </td>
               ))}
@@ -31,3 +31,6 @@ export function ComparisonTable({ headers, rows }: ComparisonTableProps) {
     </div>
   );
 }
+
+export default ComparisonTable;
+

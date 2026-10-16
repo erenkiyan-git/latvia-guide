@@ -84,20 +84,20 @@ const lastUpdated = isTr ? '16 Ekim 2026' : 'October 16, 2026';
           : 'We rely exclusively on standard browser local storage (localStorage) for user-requested convenience features:'}
       </p>
 
-      <div class="not-prose my-6 overflow-hidden border border-slate-300 rounded-xl bg-surface">
-        <table class="w-full text-left text-sm">
-          <thead class="bg-slate-100 text-slate-800 font-semibold border-b border-slate-300">
+      <div class="not-prose my-6 overflow-x-auto border border-slate-300 rounded-xl bg-surface custom-scrollbar">
+        <table class="w-full text-left text-sm min-w-[550px] border-collapse">
+          <thead class="bg-slate-100 border-b-2 border-primary-500/50">
             <tr>
-              <th class="p-3.5">{isTr ? 'Anahtar' : 'Key'}</th>
-              <th class="p-3.5">{isTr ? 'Amaç' : 'Purpose'}</th>
-              <th class="p-3.5">{isTr ? 'Süre' : 'Duration'}</th>
+              <th class="p-3.5 text-primary-400 font-mono text-xs uppercase tracking-wider">{isTr ? 'Anahtar' : 'Key'}</th>
+              <th class="p-3.5 text-primary-400 font-mono text-xs uppercase tracking-wider">{isTr ? 'Amaç' : 'Purpose'}</th>
+              <th class="p-3.5 text-primary-400 font-mono text-xs uppercase tracking-wider">{isTr ? 'Süre' : 'Duration'}</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-slate-200 text-slate-700">
+          <tbody class="divide-y divide-slate-300/40 text-slate-200">
             <tr>
-              <td class="p-3.5 font-mono text-xs"><code>latvia_guide_checklist</code></td>
-              <td class="p-3.5">{isTr ? 'Kontrol listesinde işaretlediğiniz adımları hatırlar.' : 'Remembers which tasks you marked as done in the 30-Day Checklist.'}</td>
-              <td class="p-3.5">{isTr ? 'Siz silene kadar yerel kalır' : 'Persists until cleared by user'}</td>
+              <td class="p-3.5 font-mono text-xs text-primary-300"><code>latvia_guide_checklist</code></td>
+              <td class="p-3.5 text-slate-200">{isTr ? 'Kontrol listesinde işaretlediğiniz adımları hatırlar.' : 'Remembers which tasks you marked as done in the 30-Day Checklist.'}</td>
+              <td class="p-3.5 text-slate-300">{isTr ? 'Siz silene kadar yerel kalır' : 'Persists until cleared by user'}</td>
             </tr>
           </tbody>
         </table>

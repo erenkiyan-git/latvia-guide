@@ -7,9 +7,17 @@ const {
   headers = ["Document", "Who issues it", "Original/copy", "Translation needed?", "Apostille/legalisation?", "Validity / notes", "Type"],
   title = "Verified Document Checklist"
 } = Astro.props;
+
+const lang = (Astro.params.lang || 'en') as string;
+const isTr = lang === 'tr';
+const isCompact = headers.length <= 4;
+const minTableWidth = isCompact ? 'min-w-[650px]' : 'min-w-[980px] lg:min-w-[1100px]';
+
+const scrollHint = isTr ? 'KAYDIRARAK İNCELEYİN →' : 'SCROLL TO EXPLORE →';
+const sourceNote = isTr ? 'Doğrulanmış resmi kaynaklar temel alınmıştır' : 'Based on official verified government sources';
 ---
 
-<div class="my-8 document-table-wrapper">
+<div class="my-8 document-table-wrapper not-prose">
   {/* Card Container */}
   <div class="hud-card rounded-2xl border border-slate-300/80 bg-surface/95 shadow-2xl overflow-hidden">
     
@@ -21,79 +29,133 @@ const {
           // {title}
         </h4>
       </div>
-      <span class="text-[0.7rem] font-mono text-slate-500 uppercase tracking-widest hidden sm:inline-flex items-center gap-1">
-        <span>KAYDIRARAK İNCELEYİN</span>
-        <span>→</span>
+      <span class="text-[0.68rem] sm:text-xs font-mono text-primary-400 font-semibold uppercase tracking-wider inline-flex items-center gap-1.5 bg-primary-950/60 border border-primary-800/60 px-2.5 py-0.5 rounded-full">
+        <span>{scrollHint}</span>
       </span>
     </div>
 
-    {/* Scrollable Table Wrapper */}
-    <div class="overflow-x-auto custom-scrollbar">
-      <table class="w-full text-left border-collapse min-w-[700px]">
+    {/* Scrollable Table Wrapper: SINGLE scrollbar container */}
+    <div class="table-scroll-container overflow-x-auto custom-scrollbar">
+      <table class={`w-full text-left border-collapse ${minTableWidth}`}>
         <thead>
-          <tr class="bg-slate-100/60 border-b-2 border-primary-500/40">
-            {headers.map((header, idx) => (
-              <th 
-                scope="col" 
-                class={`py-3.5 px-4 sm:px-5 text-xs font-mono font-bold uppercase tracking-wider text-primary-400 whitespace-nowrap ${
-                  idx === 0 ? 'min-w-[180px]' : idx === 5 ? 'min-w-[220px]' : 'min-w-[120px]'
-                }`}
-              >
-                {header}
-              </th>
-            ))}
+          <tr class="bg-slate-100/80 border-b-2 border-primary-500/50">
+            {headers.map((header, idx) => {
+              let widthClass = 'min-w-[130px]';
+              if (!isCompact) {
+                if (idx === 0) widthClass = 'min-w-[190px] w-[20%]';
+                else if (idx === 1) widthClass = 'min-w-[150px] w-[14%]';
+                else if (idx === 2) widthClass = 'min-w-[130px] w-[12%]';
+                else if (idx === 3) widthClass = 'min-w-[130px] w-[12%]';
+                else if (idx === 4) widthClass = 'min-w-[140px] w-[12%]';
+                else if (idx === 5) widthClass = 'min-w-[260px] w-[20%]';
+                else if (idx === 6) widthClass = 'min-w-[140px] w-[10%]';
+              } else {
+                if (idx === 0) widthClass = 'min-w-[260px] w-[45%]';
+                else if (idx === 1) widthClass = 'min-w-[160px] w-[30%]';
+                else widthClass = 'min-w-[140px] w-[25%]';
+              }
+
+              return (
+                <th 
+                  scope="col" 
+                  class={`py-3.5 px-4 sm:px-5 text-xs font-mono font-bold uppercase tracking-wider text-primary-400 whitespace-nowrap ${widthClass}`}
+                >
+                  {header}
+                </th>
+              );
+            })}
           </tr>
         </thead>
-        <tbody class="divide-y divide-slate-300/40 text-sm text-slate-700">
+        <tbody class="divide-y divide-slate-300/40 text-sm">
           <slot />
         </tbody>
       </table>
     </div>
 
     {/* Table Footer Bar */}
-    <div class="px-5 py-2.5 bg-base/60 border-t border-slate-300/60 flex items-center justify-between text-[0.7rem] font-mono text-slate-500">
+    <div class="px-5 py-2.5 bg-base/60 border-t border-slate-300/60 flex items-center justify-between text-[0.7rem] font-mono text-slate-400">
       <span class="flex items-center gap-1.5">
         <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-        <span>Doğrulanmış resmi kaynaklar temel alınmıştır</span>
+        <span>{sourceNote}</span>
       </span>
-      <span>PMLP / Valsts pārvalde</span>
+      <span class="text-slate-500">PMLP / Valsts pārvalde</span>
     </div>
   </div>
 </div>
 
 <style is:global>
-  /* Custom table styling for DocumentChecklistTable */
+  /* Reset table inside DocumentChecklistTable to eliminate double scrollbars and duplicate borders */
+  .document-table-wrapper table {
+    display: table !important;
+    width: 100% !important;
+    max-width: none !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+  }
+  .document-table-wrapper thead {
+    background-color: transparent !important;
+  }
   .document-table-wrapper tbody tr {
     transition: background-color 0.15s ease;
   }
   .document-table-wrapper tbody tr:nth-child(even) {
-    background-color: rgba(23, 26, 31, 0.4);
+    background-color: rgba(23, 26, 31, 0.45);
   }
   .document-table-wrapper tbody tr:hover {
     background-color: rgba(33, 37, 44, 0.75);
   }
   .document-table-wrapper tbody td {
-    padding: 1rem 1.25rem;
-    vertical-align: top;
-    line-height: 1.6;
-    color: var(--color-slate-700);
-    border-bottom: 1px solid rgba(45, 50, 59, 0.35);
+    padding: 1rem 1.25rem !important;
+    vertical-align: middle !important;
+    line-height: 1.6 !important;
+    color: #d1d5db !important;
+    border-bottom: 1px solid rgba(45, 50, 59, 0.4) !important;
+    font-size: 0.875rem !important;
   }
-  /* First column bold and bright */
+  /* First column: bold and bright white */
   .document-table-wrapper tbody td:first-child {
-    font-weight: 700;
-    color: var(--color-slate-900);
+    font-weight: 700 !important;
+    color: #ffffff !important;
     white-space: normal;
   }
   /* Notes column */
   .document-table-wrapper tbody td:nth-child(6) {
-    color: var(--color-slate-800);
-    line-height: 1.5;
+    color: #e5e7eb !important;
+    line-height: 1.5 !important;
+  }
+  .document-table-wrapper tbody td a {
+    color: var(--color-primary-400) !important;
+    text-decoration: underline !important;
+    font-weight: 600 !important;
+  }
+  .document-table-wrapper tbody td a:hover {
+    color: var(--color-primary-300) !important;
+  }
+  
+  /* Single smooth custom scrollbar on table-scroll-container */
+  .table-scroll-container::-webkit-scrollbar {
+    height: 8px;
+  }
+  .table-scroll-container::-webkit-scrollbar-track {
+    background: #0f1115;
+    border-radius: 4px;
+  }
+  .table-scroll-container::-webkit-scrollbar-thumb {
+    background: #3b4252;
+    border-radius: 4px;
+    border: 1px solid #21252c;
+  }
+  .table-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #c4343f;
   }
 </style>
 
 <script>
-  // Enhance table cell keywords into crisp UI status badges
+  // Enhance table cell keywords into crisp, high-contrast UI status badges
   document.querySelectorAll('.document-table-wrapper tbody tr').forEach(row => {
     row.querySelectorAll('td').forEach((td, idx) => {
       const text = td.textContent?.trim();
@@ -101,24 +163,29 @@ const {
 
       // Type column: "Official requirement" / "Resmi Gereksinim"
       if (text === 'Official requirement' || text === 'Resmi Gereksinim') {
-        td.innerHTML = `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-emerald-950/70 text-emerald-400 border border-emerald-800/60 shadow-sm"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>${text}</span>`;
+        td.innerHTML = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-emerald-950/80 text-emerald-300 border border-emerald-600/70 shadow-sm"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>${text}</span>`;
       } 
       // Boolean columns: Yes / Evet
       else if (text === 'Yes' || text === 'Evet') {
-        td.innerHTML = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono font-bold bg-amber-950/60 text-amber-300 border border-amber-800/60">${text}</span>`;
+        td.innerHTML = `<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-mono font-bold bg-amber-950/70 text-amber-300 border border-amber-600/70">${text}</span>`;
       } 
-      // Boolean columns: No / Hayır
+      // Conditional Yes: "Yes (if not EN)", "Yes (if state issued)", "Evet (İngilizce değilse)", etc.
+      else if (text.startsWith('Yes (') || text.startsWith('Evet (')) {
+        td.innerHTML = `<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-mono font-bold bg-amber-950/70 text-amber-300 border border-amber-600/70">${text}</span>`;
+      }
+      // Boolean columns: No / Hayır (High contrast readable slate badge)
       else if (text === 'No' || text === 'Hayır') {
-        td.innerHTML = `<span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-mono font-medium bg-slate-100 text-slate-500 border border-slate-300/80">${text}</span>`;
+        td.innerHTML = `<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-slate-800/90 text-slate-200 border border-slate-600/70">${text}</span>`;
       }
       // "Free" / "Ücretsiz"
       else if (text === 'Free' || text === 'Ücretsiz') {
-        td.innerHTML = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono font-bold bg-emerald-950/70 text-emerald-300 border border-emerald-800/60">${text}</span>`;
+        td.innerHTML = `<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-mono font-bold bg-emerald-950/80 text-emerald-300 border border-emerald-600/70">${text}</span>`;
       }
-      // "Original + Copy" / "Orijinal + Fotokopi"
+      // "Original + Copy" / "Orijinal + Fotokopi" / "Original" / "Orijinal"
       else if (text === 'Original + Copy' || text === 'Orijinal + Fotokopi' || text === 'Original' || text === 'Orijinal') {
-        td.innerHTML = `<span class="text-slate-800 font-medium">${text}</span>`;
+        td.innerHTML = `<span class="text-slate-100 font-medium">${text}</span>`;
       }
     });
   });
 </script>
+
