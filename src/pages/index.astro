@@ -1,5 +1,5 @@
 ---
-// Root entry point: intelligently redirect based on user preference or browser language
+// Root entry point: Always default to English (/en/) as main language
 ---
 <!doctype html>
 <html lang="en">
@@ -8,21 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Latvia Guide — Living, Working & Studying in Latvia</title>
     <meta name="description" content="A practical, trustworthy guide for foreigners in Latvia. Step-by-step verified advice on visas, residence permits, housing, healthcare, and daily life." />
+    <link rel="canonical" href="https://latviaguide.com/en/" />
+    <meta http-equiv="refresh" content="0;url=/en/" />
     <script is:inline>
-      try {
-        var saved = localStorage.getItem('preferred_lang');
-        var browserLang = (navigator.languages && navigator.languages[0]) || navigator.language || '';
-        var isTurkish = browserLang.toLowerCase().indexOf('tr') === 0;
-        var target = saved || (isTurkish ? 'tr' : 'en');
-        window.location.replace('/' + target + '/');
-      } catch (e) {
-        window.location.replace('/en/');
-      }
+      window.location.replace('/en/');
     </script>
     <noscript>
       <meta http-equiv="refresh" content="0;url=/en/" />
     </noscript>
   </head>
-  <body style="background:#EDEFF2;">
+  <body style="background:#0b0c0f;">
   </body>
 </html>
+
