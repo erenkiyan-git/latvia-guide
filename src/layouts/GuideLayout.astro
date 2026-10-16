@@ -65,8 +65,13 @@ const breadcrumbsItems = [
     )}
 
     <header class="mb-10 sm:mb-12">
-      <div class="mb-4">
-        <TrustBadge type={badge} />
+      <div class="mb-4 flex flex-wrap items-center gap-3">
+        <TrustBadge type={badge} lang={lang} />
+        {verified && lastChecked && (
+          <span class="text-xs text-slate-500 font-mono tracking-wide">
+            {lang === 'tr' ? 'Son kontrol:' : 'Last checked:'} {lastChecked}
+          </span>
+        )}
       </div>
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 leading-tight">
         {title}

@@ -192,3 +192,40 @@ Every verified fact in the guides must have a corresponding entry here.
 - **Fact Verified:** Riga 3rd Division address, phone and contacts
 - **Used in Guide:** Map (gov-pmlp-3)
 
+- **Date Accessed:** 2026-10-16
+- **Source Name:** PMLP (Office of Citizenship and Migration Affairs)
+- **URL:** https://www.pmlp.gov.lv/en/loss-identification-document
+- **Fact Verified:** Procedures and steps for lost or stolen identity documents
+- **Used in Guide:** scenario-lost-id.mdx
+
+- **Date Accessed:** 2026-10-16
+- **Source Name:** State Fire and Rescue Service (VUGD)
+- **URL:** https://www.112.lv
+- **Fact Verified:** General single emergency number 112 in Latvia
+- **Used in Guide:** emergencies.mdx
+
+- **Date Accessed:** 2026-10-16
+- **Source Name:** CSDD (Road Traffic Safety Directorate)
+- **URL:** https://www.csdd.lv/en/driving-licence/
+- **Fact Verified:** Driving licence validity, renewal and exchange rules for foreigners
+- **Used in Guide:** driving-licence.mdx
+
+- **Date Accessed:** 2026-10-16
+- **Source Name:** VID (State Revenue Service)
+- **URL:** https://eds.vid.gov.lv/
+- **Fact Verified:** Electronic Declaration System (EDS) registration and tax payroll booklet setup
+- **Used in Guide:** freelancing.mdx, tax-booklet.mdx
+
+- **Date Accessed:** 2026-10-16
+- **Source Name:** ISIC Latvia
+- **URL:** https://isic.lv/en/
+- **Fact Verified:** Student card application and discount usage
+- **Used in Guide:** isic-card.mdx
+
+- **Date Accessed:** 2026-10-16
+- **Source Name:** Vivi (Passenger Train Latvia)
+- **URL:** https://vivi.lv/lv/
+- **Fact Verified:** Domestic train travel routes and schedules from Riga
+- **Used in Guide:** day-trips.mdx
+
+
