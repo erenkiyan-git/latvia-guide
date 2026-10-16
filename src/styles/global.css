@@ -342,6 +342,56 @@
   color: var(--color-slate-800) !important;
 }
 
+/* Universal Warning & Callout Text Contrast (forces high-contrast readable white/off-white) */
+.warning-box-body,
+.warning-box-body p,
+.warning-box-body span,
+.warning-box-body li {
+  color: #f3f4f6 !important;
+  line-height: 1.625 !important;
+}
+
+.warning-box-body strong {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.warning-box-body a {
+  color: #fbbf24 !important;
+  text-decoration: underline !important;
+  font-weight: 600 !important;
+}
+
+.warning-box-body a:hover {
+  color: #fde68a !important;
+}
+
+.warning-box-body code {
+  background: #1e222b !important;
+  color: #fde68a !important;
+  padding: 0.15rem 0.35rem !important;
+  border-radius: 4px !important;
+}
+
+.info-box-body,
+.info-box-body p,
+.info-box-body span,
+.info-box-body li {
+  color: #f3f4f6 !important;
+  line-height: 1.625 !important;
+}
+
+.info-box-body strong {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.info-box-body a {
+  color: #38bdf8 !important;
+  text-decoration: underline !important;
+}
+
+
 /* Accessibility: Support prefers-reduced-motion across all animations, smooth scrolling, and transitions */
 @media (prefers-reduced-motion: reduce) {
   *,
