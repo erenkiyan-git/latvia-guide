@@ -11,7 +11,15 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://latviaguide.com',
-  integrations: [mdx(), sitemap(), react()],
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) =>
+        !page.includes('/design-system') &&
+        !page.includes('/palette-preview')
+    }),
+    react()
+  ],
 
   vite: {
     plugins: [tailwindcss()]

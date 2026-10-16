@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /design-system/
+Disallow: /palette-preview/
 
 Sitemap: https://latviaguide.com/sitemap-index.xml
+
